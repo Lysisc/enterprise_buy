@@ -1,0 +1,56 @@
+{
+  "SellSort": [{
+    "SellSortId": 1,
+    "SellSortName": "套餐"
+  }, {
+    "SellSortId": 2,
+    "SellSortName": "消费返现"
+  }, {
+    "SellSortId": 3,
+    "SellSortName": "热门团购"
+  }],
+  "PriceSort": [{
+    "PriceSortId": 0,
+    "PriceSortName": "不限"
+  }, {
+    "PriceSortId": 1,
+    "PriceSortName": "100以内"
+  }, {
+    "PriceSortId": 2,
+    "PriceSortName": "100-200"
+  }, {
+    "PriceSortId": 3,
+    "PriceSortName": "200-300"
+  }, {
+    "PriceSortId": 4,
+    "PriceSortName": "300以上"
+  }],
+  "SceneSort": [{
+    "SceneSortId": 1,
+    "SceneSortName": "美食街"
+  }, {
+    "SceneSortId": 2,
+    "SceneSortName": "老字号"
+  }, {
+    "SceneSortId": 3,
+    "SceneSortName": "酒店餐厅"
+  }, {
+    "SceneSortId": 4,
+    "SceneSortName": "套餐"
+  }, {
+    "SceneSortId": 5,
+    "SceneSortName": "深夜营业"
+  }, {
+    "SceneSortId": 6,
+    "SceneSortName": "下午茶"
+  }, {
+    "SceneSortId": 7,
+    "SceneSortName": "套餐"
+  }, {
+    "SceneSortId": 8,
+    "SceneSortName": "深夜营业"
+  }, {
+    "SceneSortId": 9,
+    "SceneSortName": "下午茶"
+  }]
+}

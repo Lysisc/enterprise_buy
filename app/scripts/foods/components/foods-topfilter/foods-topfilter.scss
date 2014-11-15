@@ -1,0 +1,249 @@
+.choosebg {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.top_filter_header {
+    position: absolute;
+    z-index: 5;
+    top: 44px;
+    width: 100%;
+    height: 44px;
+    background: #F5F5F5;
+    @include border_line;
+    border-bottom-width: 1px;
+    .tf_headtab {
+        float: left;
+        width: 33.33333%;
+        text-align: center;
+        height: 44px;
+        line-height: 44px;
+        color: #666;
+        overflow: hidden;
+        span{
+            display: inline-block;
+            max-width: 75%;
+            height: 44px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .ion-arrow-down-b {
+            color: #D6D6D6;
+            margin-left: 4px;
+            display: inline-block;
+            vertical-align: top;
+            &:before {
+                -webkit-transform: rotate(0);
+                -moz-transform: rotate(0);
+                -o-transform: rotate(0);
+                transform: rotate(0);
+                -webkit-transition: all linear 0.15s;
+                -moz-transition: all linear 0.15s;
+                -o-transition: all linear 0.15s;
+                transition: all linear 0.15s;
+            }
+        }
+    }
+    .tf_headtab.current {
+        color: #099FDE;
+        .ion-arrow-down-b {
+            color: #D6D6D6;
+            &:before {
+                -webkit-transform: rotate(180deg);
+                -moz-transform: rotate(180deg);
+                -o-transform: rotate(180deg);
+                transform: rotate(180deg);
+                -webkit-transition: all linear 0.15s;
+                -moz-transition: all linear 0.15s;
+                -o-transition: all linear 0.15s;
+                transition: all linear 0.15s;
+            }
+        }
+    }
+}
+
+.tf_popblock {
+    position: absolute;
+    z-index: 5;
+    top: 88px;
+    width: 100%;
+    overflow: hidden;
+    .ajaxloading{
+      height: 280px !important;
+      padding-top: 134px !important;
+      margin-bottom: 0 !important;
+    }
+    .tf_popblock_tabblock {
+        background: #fff;
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        -o-transform: translateY(0);
+        transform: translateY(0);
+        .areatop_bar {
+            height: 44px;
+            background: #F5F5F5;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            @include border_line;
+            border-bottom-width: 1px;
+            a {
+                -webkit-box-flex: 1;
+                -ms-flex: 1;
+                -webkit-flex: 1;
+                flex: 1;
+                text-align: center;
+                height: 44px;
+                line-height: 44px;
+                display: block;
+                color: #666;
+                font-size: 14px;
+                .icon_area{
+                    width: 15px;
+                    height: 18.5px;
+                    background:url(../images/icon_area.png) no-repeat;
+                    background-size: 15px 18.5px;
+                    display: inline-block;
+                    margin-right:7px;
+                    vertical-align: -3px;
+                }
+                .icon_subway{
+                    width: 15px;
+                    height: 18.5px;
+                    background:url(../images/icon_subway.png) no-repeat;
+                    background-size: 15px 18.5px;
+                    display: inline-block;
+                    margin-right:7px;
+                    vertical-align: -3px;
+                }
+            }
+            .current {
+                color: #099FDE;
+                .icon_area{
+                    background:url(../images/icon_area_current.png) no-repeat;
+                    background-size: 15px 18.5px;
+                }
+                .icon_subway{
+                    background:url(../images/icon_subway_current.png) no-repeat;
+                    background-size: 15px 18.5px;
+                }
+            }
+        }
+        .tf_half1 {
+            float: left;
+            width: 40%;
+            background: #F5F5F5;
+            .tf_iscroll {
+                margin-top: 0;
+                height: 280px;
+                li {
+                    height: 40px;
+                    line-height: 40px;
+                    width: 100%;
+                    padding: 0 15px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    position: relative;
+                    font-size: 14px;
+                    color: #666;
+                    text-overflow: ellipsis;
+                    a {
+                        color: #666;
+                        text-decoration: none;
+                        font-size: 14px;
+                        display: block;
+                    }
+                }
+                .ion-chevron-right:before {
+                    position: absolute;
+                    right: 15px;
+                    top: 14px;
+                    color: #ccc;
+                }
+                .current {
+                    background: #fff;
+                    border-right: 0;
+                }
+            }
+        }
+        .tf_half2 {
+            float: left;
+            width: 60%;
+            .tf_iscroll {
+                margin-top: 0;
+                height: 280px;
+                li {
+                    height: 40px;
+                    line-height: 40px;
+                    width: 100%;
+                    padding: 0 15px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    a {
+                        width: 100%;
+                        color: #666;
+                        text-decoration: none;
+                        font-size: 14px;
+                        display: block;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                }
+                .hasbottomboeder {
+                    @include border_line;
+                    border-bottom-width: 1px;
+                }
+            }
+        }
+    }
+    .tf_order_list{
+        li{
+            height: 40px;
+            line-height: 40px;
+            width: 100%;
+            padding: 0 15px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-align: center;
+            background:#F5F5F5;
+            a{
+                color: #666;
+                text-decoration: none;
+                font-size: 14px;
+                display: block;
+            }
+        }
+    }
+}
+
+.tf_popblock_tabblock.ng-hide {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    -o-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+// .tf_popblock_tabblock.animate-show-hide.ng-hide-add {
+//     -webkit-transition: none;
+//     -moz-transition: none;
+//     -o-transition: none;
+//     transition: none;
+// }
+
+.tf_popblock_tabblock.animate-show-hide.ng-hide-remove {
+    -webkit-transition: all linear 0.15s;
+    -moz-transition: all linear 0.15s;
+    -o-transition: all linear 0.15s;
+    transition: all linear 0.15s;
+    display: block !important;
+}

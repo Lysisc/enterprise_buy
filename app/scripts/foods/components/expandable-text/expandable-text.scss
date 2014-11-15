@@ -1,0 +1,10 @@
+expandable-text {
+  @include clear-float;
+  display: block;
+  font-size: 13px;
+
+  .more {
+    float: right;
+    color: #099FDE;
+  }
+}

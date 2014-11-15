@@ -1,0 +1,3 @@
+<span ng-bind-html="gsContent | ellipsis:currCount"></span>
+<span class="more" ng-click="goInfinity($event);" ng-show="gsContent.length > currCount">更多</span>
+<span class="more" ng-click="goGsCount($event);" ng-show="currCount == Infinity">收起</span>

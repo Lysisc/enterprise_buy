@@ -1,0 +1,13 @@
+.#{$ionicons-prefix}arrow-down-b:before,  
+.#{$ionicons-prefix}close-round:before, 
+.#{$ionicons-prefix}search:before, 
+.#{$ionicons-prefix}record:before, 
+.#{$ionicons-prefix}arrow-left-c:before, 
+.#{$ionicons-prefix}chevron-right:before {@extend .ion;}
+
+.#{$ionicons-prefix}arrow-down-b:before { content: $ionicon-var-arrow-down-b; }
+.#{$ionicons-prefix}close-round:before { content: $ionicon-var-close-round; }
+.#{$ionicons-prefix}search:before { content: $ionicon-var-search; }
+.#{$ionicons-prefix}record:before { content: $ionicon-var-record; }
+.#{$ionicons-prefix}arrow-left-c:before { content: $ionicon-var-arrow-left-c; }
+.#{$ionicons-prefix}chevron-right:before { content: $ionicon-var-chevron-right; }

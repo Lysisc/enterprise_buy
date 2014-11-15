@@ -1,0 +1,23 @@
+// Ionicons Font Path
+// --------------------------
+
+@font-face {
+ font-family: $ionicons-font-family;
+ src:url("http://m.ctrip.com/you/statics/fonts/ionicons.svg?v=#{$ionicons-version}#Ionicons") format("svg"),
+    url("http://m.ctrip.com/you/statics/fonts/ionicons.ttf?v=#{$ionicons-version}") format("truetype");
+ font-weight: normal;
+ font-style: normal;
+}
+
+.ion {
+  display: inline-block;
+  font-family: $ionicons-font-family;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}

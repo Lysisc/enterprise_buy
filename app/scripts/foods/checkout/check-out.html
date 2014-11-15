@@ -1,0 +1,18 @@
+<ion-view title="我要结账" class="checkout">
+    <ion-content>
+        <h1>{{restName}}</h1>
+        <div class="amount">
+            <i>金额￥</i>
+            <input type="number" ng-keyup="clearNoNum($event)" ng-model="info.amount" placeholder="请输入金额" />
+        </div>
+        <div class="contact">
+            <i>联系手机</i>
+            <input type="tel" ng-model="info.contact" />
+        </div>
+        <ul class="desc">
+            <li>1.使用任我行礼品卡，支付更快，同时享受返现</li>
+            <li>2.如需发票请向商户索取</li>
+        </ul>
+        <button ng-click="checkout()">去支付</button>
+    </ion-content>
+</ion-view>

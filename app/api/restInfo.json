@@ -1,0 +1,133 @@
+{
+  "RestaurantViewModel": {
+    "IsSuperior": true,
+    "RestaurantId": 0,
+    "RestaurantName": "菁英会(淞虹路店)",
+    "Alias": "创意餐厅",
+    "Address": "东京都新宿区四谷1-23 上野东京都新宿区四谷1-23 上野",
+    "BookTelList": ["03-3351-1756", "03-3351-1753", "03-3351-1253"],
+    "ImageUrl": "images/.tmp/t1.jpg",
+    "CommentScore": 4.6,
+    "EnvironmentStar": 5.1,
+    "TasteStar": 4.2,
+    "ServiceStar": 4.7,
+    "AveragePrice": 320,
+    "CurrencyUnit": "RMB",
+    "PoiId": 123,
+    "CommentCount": 20,
+    "Description": "吉彩定位于中高端都市追求时尚品味健康的人士，精选各地奢华高档食材，采用日式醇正做法，为你打造精致日本料理。",
+    "OpenTime": "9:00 - 22:00",
+    "FacilityNameList": ["免费停车", "代课泊车", "免费WIFI", "中文菜单", "现场表演", "中文服务", "可预订", "有吸烟区", "可带宠物", "可自带酒水"],
+    "PaymentCardNameList": ["Master", "VISA", "银联"],
+    "TrafficInfo": "2号线中山公园站下车步行10分钟",
+    "Prompt": "1.使用时间：14:00-18:00，19:00-关店<br/>2.消费前需提前预约，咨询请致电商家<br/>3.可用门店以分店信息为主",
+    "SpecialTips": "震旦大厦进门左转"
+  },
+  "FoodNameList": [
+    "切片肉", "日式各种鲍鱼", "新鞋烤鱼", "九州拉面", "小烤肉馒头", "水果沙拉", "牛肉粉丝",
+    "酱油饼干", "面条烤饭", "日式火锅", "剁手寿司", "照烧银鳕鱼", "火焰冰淇淋"
+  ],
+  "CommentList": [
+    {
+      "IsExpert": true,
+      "UserId": 0,
+      "UserName": "麦鲸",
+      "Medal": "美食家",
+      "Content": "总体来说环境还是可以的，还有好多帅哥美女服务员呢，很开心。吃的方面更靠谱了，特别是鲍鱼。下次必须再来。",
+      "AverageCost": 780,
+      "PublishTime": 1408069354212,
+      "Score": 5.0
+    },
+    {
+      "UserId": 0,
+      "UserName": "大娘",
+      "Medal": "食神",
+      "Content": "很不错，让年纪大的我也很好下咽。很不错，让年纪大的我也很好下咽。很不错，让年纪大的我也很好下咽。很不错，让年纪大的我也很好下咽。",
+      "AverageCost": 180,
+      "PublishTime": 1406616622885,
+      "Score": 5.0,
+      "ImageUrlList": [
+        "images/.tmp/a1.jpg", "images/.tmp/a2.jpg", "images/.tmp/a3.jpg", "images/.tmp/a4.jpg", "images/.tmp/a5.jpg"
+      ]
+    }
+  ],
+  "GrouponProductList": [
+    {
+      "GrouponProductId": 0,
+      "SupplierType": 0,
+      "SupplierProductId": "String",
+      "ProductName": "夏至清凉情侣双人套餐",
+      "CurrencyUnit": "RMB",
+      "Price": 780,
+      "HybridUrl": "http://www.baidu.com/"
+    },
+    {
+      "GrouponProductId": 0,
+      "SupplierType": 0,
+      "SupplierProductId": "String",
+      "ProductName": "夏至清凉情侣双人套餐",
+      "CurrencyUnit": "AMD",
+      "Price": 180,
+      "HybridUrl": "http://www.hao123.com/"
+    }
+  ],
+
+  "GMMerchant": {
+    "Gift": "进店即送价值30元草本茶一杯",
+    "MerchantId": 0,
+    "RebateByAmountInfo": {
+      "Amount": 10,
+      "Flag": 100,
+      "Type": 0
+    },
+    "RebateByPercentInfo": {
+      "RebateByPercent": "10%",
+      "Type": 0
+    },
+    "ProductList": [
+      {
+        "Id": 0,
+        "Name": "进店即送SPA精选套餐",
+        "Price": 10,
+        "HybridUrl": "http://www.baidu.com/"
+      },
+      {
+        "Id": 0,
+        "Name": "进店即送SPA精选套餐",
+        "Price": 10,
+        "HybridUrl": "http://www.baidu.com/"
+      }
+    ]
+  },
+
+  "ResponseStatus": {
+    "Timestamp": "/Date(-62135596800000-0000)/",
+    "Ack": "Success",
+    "Errors": [
+      {
+        "Message": "String",
+        "ErrorCode": "String",
+        "StackTrace": "String",
+        "SeverityCode": "Error",
+        "ErrorFields": [
+          {
+            "FieldName": "String",
+            "ErrorCode": "String",
+            "Message": "String"
+          }
+        ],
+        "ErrorClassification": "ServiceError"
+      }
+    ],
+    "Build": "String",
+    "Version": "String",
+    "Extension": [
+      {
+        "Id": "String",
+        "Version": "String",
+        "ContentType": "String",
+        "Value": "String"
+      }
+    ]
+  }
+}

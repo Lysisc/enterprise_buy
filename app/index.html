@@ -1,0 +1,52 @@
+<!doctype html>
+<html class="no-js" ng-app="GSH5">
+<head>
+    <meta charset="utf-8">
+    <title>GSH5</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+
+    <!-- build:css({.tmp,app}) styles/vendor.css -->
+    <link rel="stylesheet" href="styles/vendor.css">
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+
+<div id="wrap" ui-view></div>
+
+<input type="hidden" data-static-resource-url="" />
+
+<!-- #page_id input is required by UBT -->
+<input type="hidden" id="page_id" value="wait">
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-bindonce/bindonce.js"></script>
+<script src="bower_components/ionic/js/ionic.js"></script>
+<script src="bower_components/ionic/js/ionic-angular.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+
+<!-- build:js({app,.tmp}) scripts/main.js -->
+<!-- inject:js -->
+<!-- endinject -->
+<!-- inject:partials -->
+<!-- endinject -->
+<!-- endbuild -->
+
+</body>
+</html>

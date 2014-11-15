@@ -1,0 +1,153 @@
+.restitem {
+    display: block;
+    @include border_line;
+    border-bottom-width: 1px;
+    padding: 10px 10px 10px 98px;
+    position: relative;
+    height: 101px;
+    overflow: hidden;
+    width: 100%;
+    text-decoration: none;
+    color: #666;
+    background: #fff;
+    .restimg {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        height: 80px;
+        width: 80px;
+        i{
+            display: block;
+            width: 60px;
+            height: 21px;
+            position: absolute;
+            left: -4px;
+            top: 4px;
+        }
+        .icon_resttype1 {
+            background: url(../images/tag_type1.png) no-repeat;
+            background-size: 60px 21px;
+        }
+        .icon_resttype2 {
+            background: url(../images/tag_type2.png) no-repeat;
+            background-size: 60px 21px;
+        }
+        .icon_resttype3 {
+            background: url(../images/tag_type3.png) no-repeat;
+            background-size: 60px 21px;
+        }
+        img {
+            display: block;
+            height: 80px;
+            width: 80px;
+        }
+    }
+    .restintro {
+        .restnameline {
+            line-height: 19px;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            position: relative;
+            .restname {
+                font-size: 16px;
+                color: #333;
+                float: left;
+                max-width: 66%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .icon_tuan {
+                float: right;
+                margin-left: 3px;
+                margin-top: 3px;
+                width: 15px;
+                height: 15px;
+                background: url(../images/icon_tuan.png) 0 0 no-repeat;
+                background-size: 15px 15px;
+                text-indent: -999em;
+            }
+            .icon_gaoduan{
+                float: right;
+                margin-left: 3px;
+                margin-top: 3px;
+                width: 55px;
+                height: 15px;
+                background: url(../images/icon_gaoduan.png) 0 0 no-repeat;
+                background-size: 55px 15px;
+                text-indent: -999em;
+            }
+        }
+        .rateline {
+            line-height: 20px;
+            .rate_block {
+                float: left;
+                width: 80px;
+                height: 15px;
+                background: url(../images/un_level@2x.png) -80px 0 no-repeat;
+                background-size: 160px 15px;
+                position: relative;
+                margin: 5px 0 0;
+                b {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    height: 15px;
+                    display: block;
+                    background: url(../images/un_level@2x.png) 0 0 no-repeat;
+                    background-size: 160px 15px;
+                }
+            }
+            .price {
+                color: #FF9A14;
+                font-size: 13px;
+                float: right;
+                margin-top: 2px;
+                b {
+                    font-size: 18px;
+                    font-weight: normal;
+                    padding:0 2px;
+                }
+            }
+        }
+        .iconline {
+            line-height: 19px;
+            .rate_score {
+                color: #099FDE;
+                font-size: 12px;
+                padding-right: 2px;
+                b {
+                    font-weight: normal;
+                    font-size: 14px;
+                }
+            }
+            .resticon {
+                color: #FF9A14;
+                font-size: 9px;
+                text-align: center;
+                border: 1px solid #FF9A14;
+                margin: 3px 0  0 4px;
+                float: right;
+                height: 13px;
+                line-height: 11px;
+                padding: 0 3px;
+            }
+        }
+        .resttagline {
+            line-height: 19px;
+            .resttag {
+                font-size: 12px;
+                color: #999;
+                margin-right: 5px;
+            }
+            .distance {
+                float: right;
+                font-size: 12px;
+                color: #999;
+            }
+        }
+    }
+}
