@@ -1,3 +1,4 @@
+'use strict';
 angular.module('GSH5', ['ionic', 'pasvaz.bindonce']).config(function($stateProvider, $urlRouterProvider) {
     /**
      * GSH5 状态路由配置

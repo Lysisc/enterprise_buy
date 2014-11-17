@@ -1,6 +1,6 @@
 {
-  "name": "GSH5",
-  "version": "0.0.1",
+  "name": "enterprise_buy",
+  "version": "1.0.0",
   "dependencies": {
     "modernizr": "2.8.x",
     "angular": "1.2.x",
