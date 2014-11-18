@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('GSH5').factory('pageStatus', function ($location, $state) {
+angular.module('EPBUY').factory('pageStatus', function ($location, $state) {
 
     /*
      * 调用方式：引入pageStatus和$scope, $compile, $stateParams依赖参数;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('GSH5').factory('$userService', function ($location, ENV) {
+angular.module('EPBUY').factory('$userService', function ($location, ENV) {
 
     var LOGIN_URL_MAP = {
             waptest: 'https://accounts.fat49.qa.nt.ctripcorp.com/H5Login/#login',

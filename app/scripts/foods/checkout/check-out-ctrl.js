@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('GSH5')
+angular.module('EPBUY')
     .controller('CheckoutCtrl', function ($scope, $http, $location, $stateParams, $timeout, $userService, $compile, pageStatus, ENV, Notification) {
         $scope.restName = $stateParams.RestaurantName;
         $scope.info = {};

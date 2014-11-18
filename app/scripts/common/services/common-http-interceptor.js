@@ -24,50 +24,50 @@
 
 'use strict';
 
-angular.module('GSH5').config(function ($provide, $httpProvider) {
+angular.module('EPBUY').config(function ($provide, $httpProvider) {
 
-  $provide.factory('gsHttpInterceptor', function ($q, ENV) {
+    $provide.factory('gsHttpInterceptor', function ($q, ENV) {
 
-    var gsHttpInterceptor = {
+        var gsHttpInterceptor = {
 
-      request: function (config) {
-        var raw = config.url;
+            request: function (config) {
+                var raw = config.url;
 
-        if (raw.indexOf('$api') === 0) {
-          config.url = raw.replace('$api', ENV.getDomain());
-        }
+                if (raw.indexOf('$api') === 0) {
+                    config.url = raw.replace('$api', ENV.getDomain());
+                }
 
-        if (raw.indexOf('$static') === 0) {
-          config.url = raw.replace('$static', ENV.staticResourceUrl);
-        }
+                if (raw.indexOf('$static') === 0) {
+                    config.url = raw.replace('$static', ENV.staticResourceUrl);
+                }
 
-        return config || $q.when(config);
-      },
+                return config || $q.when(config);
+            },
 
-      requestError: function (rejection) {
-        return $q.reject(rejection);
-      },
+            requestError: function (rejection) {
+                return $q.reject(rejection);
+            },
 
-      response: function (response) {
+            response: function (response) {
 
-        if (response.data && response.data.ResponseStatus) {
+                if (response.data && response.data.ResponseStatus) {
 
-          if (response.data.ResponseStatus.Ack !== 'Success') {
+                    if (response.data.ResponseStatus.Ack !== 'Success') {
 
-            return $q.reject(response);
-          }
-        }
+                        return $q.reject(response);
+                    }
+                }
 
-        return response || $q.when(response);
-      },
+                return response || $q.when(response);
+            },
 
-      responseError: function (rejection) {
-        return $q.reject(rejection);
-      }
-    };
+            responseError: function (rejection) {
+                return $q.reject(rejection);
+            }
+        };
 
-    return gsHttpInterceptor;
-  });
+        return gsHttpInterceptor;
+    });
 
-  $httpProvider.interceptors.push('gsHttpInterceptor');
+    $httpProvider.interceptors.push('gsHttpInterceptor');
 });

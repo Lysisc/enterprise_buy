@@ -1,5 +1,7 @@
 'use strict';
 
-angular.module('GSH5').factory('FoodsENV', function(){
-  return {aa:'123'};
+angular.module('EPBUY').factory('FoodsENV', function () {
+    return {
+        aa: '123'
+    };
 });
