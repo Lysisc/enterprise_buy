@@ -3,7 +3,7 @@
   /**
    * H5 UBT 统计 service
    *
-   * 使用时需要引入 $ubt 
+   * 使用时需要引入 $ubt
    *
    * 用法示例:
    *
@@ -11,34 +11,34 @@
    *   hybrid: 10086,
    *   browser: 95555
    * });
-   * 
+   *
    * .....
-   * 
+   *
    * $ubt.send();
    *
    * 提供的方法:
-   * 
+   *
    * setPageId
-   * 
+   *
    * 设置当前页面或视图的 page_id
    * arg: Object 类型,
    * arg.hybrid: Number 类型, 用于 Hybrid 的 page_id,
    * arg.browser: Number 类型, 用于 Mobile Browser 的 page_id
-   * 
+   *
    * send
-   * 
+   *
    * 需要先 setPageId
    * 开始发送 UBT 统计数据
    *
    * reset
-   * 
+   *
    * 重置统计参数, UBT 这坑爹货没有提供停止统计的方法, 目前路由变化时会自动执行
    */
- 
+
   /**
    * @source  http://webresint.sh.ctriptravel.com/code/ubt/_bfa.min.js
    * @doc     http://cdataportal.sh.ctripcorp.com/fx/ubtcheck/doc_yw.html
-   * 
+   *
    * 包含的 UBT 脚本不定期更新
    * ugly, stable, fast.
    */
@@ -110,13 +110,13 @@ function(){r._checkSend(!0)})}})(f)}}catch(L){}})(window);
 
   // angular service wrapper
 
-  angular.module('GSH5').factory('$ubt', ['$rootScope', 'ENV', function ($rootScope, ENV) {
+  angular.module('EPBUY').factory('$ubt', ['$rootScope', 'ENV', function ($rootScope, ENV) {
 
     var service = {};
 
     var $ = function (selector) {
       if (document.querySelector) {
-        return angular.element(document.querySelector(selector)); 
+        return angular.element(document.querySelector(selector));
       }
     };
 
@@ -192,7 +192,7 @@ function(){r._checkSend(!0)})}})(f)}}catch(L){}})(window);
      * 路由变化时会自动重置统计参数
      * @return {void}
      */
-    $rootScope.$on('$stateChangeStart', function () { 
+    $rootScope.$on('$stateChangeStart', function () {
       service.reset();
     });
 
