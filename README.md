@@ -8,9 +8,8 @@
 
 初始化项目目录：
 
-1. `git clone git@github.com:Lysisc/enterprise_bug.git`
-2. `bower install`
-3. `npm install`
+1. `bower install`
+2. `npm install`
 
 ### 开发命令
 

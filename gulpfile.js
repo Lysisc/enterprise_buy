@@ -9,5 +9,5 @@ require('./gulp/server.js')(gulp, $);
 require('./gulp/watch.js')(gulp, $);
 
 gulp.task('default', function () {
-  return gulp.start('cleanbuild');
+    return gulp.start('cleanbuild');
 });
