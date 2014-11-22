@@ -8,8 +8,8 @@
 
 初始化项目目录：
 
-1. `bower install`
-2. `npm install`
+1. `npm install`
+2. `bower install`
 
 ### 开发命令
 
@@ -22,9 +22,9 @@
 ### 编译过程说明
 
 1. 压缩 CSS 和 JS 和图片
-1. 所有 CSS 和 JS 都会自动在文件名中添加校验码签名（解决缓存刷新问题，另外分离 vendor.css 和 main.css 则是为了提高缓存效率）
-1. 自动添加浏览器特征前缀（-webkit- 等）
-1. 对于 Angular 添加了 ng-annotate 过程，依赖注入可以简化 `[$http, ..., function($http, ...){}]` 的数组写法
+2. 所有 CSS 和 JS 都会自动在文件名中添加校验码签名（解决缓存刷新问题，另外分离 vendor.css 和 main.css 则是为了提高缓存效率）
+3. 自动添加浏览器特征前缀（-webkit- 等）
+4. 对于 Angular 添加了 ng-annotate 过程，依赖注入可以简化 `[$http, ..., function($http, ...){}]` 的数组写法
 
 ### 关于 dist 分支
 
