@@ -1,17 +1,17 @@
 'use strict';
-module.exports = function (gulp, $) {
+module.exports = function(gulp, $) {
     var saveLicense = require('uglify-save-license');
-    gulp.task('styles', function () {
+    gulp.task('styles', function() {
         return gulp.src('app/styles/*.scss').pipe($.plumber()).pipe($.sass()).pipe($.autoprefixer('last 3 version')).pipe(gulp.dest('.tmp/styles')).pipe($.size({
             title: '------------------------- [ Styles ]'
         }));
     });
-    gulp.task('scripts', function () {
+    gulp.task('scripts', function() {
         return gulp.src('app/scripts/**/*.js').pipe($.jshint()).pipe($.jshint.reporter('jshint-stylish')).pipe($.jshint.reporter('fail')).pipe($.size({
             title: '------------------------- [ Scripts ]'
         }));
     });
-    gulp.task('partials', function () {
+    gulp.task('partials', function() {
         return gulp.src('app/scripts/**/*.html').pipe($.minifyHtml({
             empty: true,
             spare: true,
@@ -23,7 +23,7 @@ module.exports = function (gulp, $) {
             title: '------------------------- [ Templates ]'
         }));
     });
-    gulp.task('html', ['styles', 'scripts', 'partials'], function () {
+    gulp.task('html', ['styles', 'scripts', 'partials'], function() {
         var jsFilter = $.filter('**/*.js');
         var cssFilter = $.filter('**/*.css');
         var assets = $.useref.assets();
@@ -42,7 +42,7 @@ module.exports = function (gulp, $) {
             title: '------------------------- [ Full Size ]'
         }));
     });
-    gulp.task('images', function () {
+    gulp.task('images', function() {
         return gulp.src('app/images/**/*').pipe($.cache($.imagemin({
             optimizationLevel: 6,
             progressive: true,
@@ -51,18 +51,18 @@ module.exports = function (gulp, $) {
             title: '------------------------- [ Images ]'
         }));
     });
-    gulp.task('fonts', function () {
+    gulp.task('fonts', function() {
         return gulp.src('app/fonts/*.{ttf,woff}').pipe($.flatten()).pipe(gulp.dest('dist/fonts')).pipe(gulp.dest('.tmp/fonts')).pipe($.size({
             title: '------------------------- [ Fonts ]'
         }));
     });
-    gulp.task('clean', function () {
+    gulp.task('clean', function() {
         return gulp.src(['.tmp', 'dist/*', '!dist/.git*'], {
             read: false
         }).pipe($.rimraf());
     });
     gulp.task('build', ['html', 'partials', 'images', 'fonts']);
-    gulp.task('cleanbuild', ['clean'], function () {
+    gulp.task('cleanbuild', ['clean'], function() {
         return gulp.start('build');
     });
     gulp.task('jshint', ['scripts']);

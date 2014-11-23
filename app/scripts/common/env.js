@@ -15,12 +15,10 @@ angular.module('EPBUY').factory('ENV', function () {
         'preProduction'
     ];
 
-
-
     var domainMap = {
         // todo: use gateway domain with service code.
         // waptest: 'http://ws.you.fat61.qa.nt.ctripcorp.com/mobilefood',
-        waptest: 'http://gateway.m.fws.qa.nt.ctripcorp.com/restapi/soa2/10332',
+        waptest: '/api',
         uat: 'http://gateway.m.uat.qa.nt.ctripcorp.com/restapi/soa2/10332',
         baolei: 'http://m.ctrip.com/restapi/soa2/10332',
         preProduction: 'http://m.ctrip.com/restapi/soa2/10332'

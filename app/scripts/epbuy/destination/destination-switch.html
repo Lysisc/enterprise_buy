@@ -1,0 +1,59 @@
+<ion-view title="{{pageTitle}}" class="destination" ng-class="{searching:searching}">
+    <ion-nav-bar class="bar-positive">
+        <button class="button button-icon cancel-btn" side="left" ng-click="goBack()">取消</button>
+    </ion-nav-bar>
+
+    <ion-content has-bouncing="false" scroll="false">
+        <!-- 右边的滑动定位控件 -->
+        <ul class="slide-locate" gs-touch-move="sliderTouchMove($event)" ng-if="internal && external && !searching">
+            <li ng-repeat="(id, cities) in internal" idx="{{$index + 1}}" ng-class="{'ion-search': $first}" ng-if="tabIndex == 0">{{$first ? '' : id}}</li>
+            <li ng-repeat="(id, cities) in external" idx="{{$index + 1}}" ng-class="{'ion-search': $first}" ng-if="tabIndex == 1">{{$first ? '' : id}}</li>
+        </ul>
+
+        <!-- 搜索 -->
+        <div class="search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <i class="icon ion-close-round" ng-click="clearSearch()"></i>
+            <div class="cancel-btn" ng-click="doSearchBack()" ng-if="searching">取消</div>
+            <form>
+                <input type="text" ng-click="onSearch()" ng-model="searchObj.key" ng-change="onInput()" ng-keydown="onKeydown($event)" placeholder="中文/拼音/首字母/英文">
+            </form>
+        </div>
+
+        <!-- 国际/国内切换 -->
+        <div class="switch-tabs" ng-show="!searching">
+            <i class="internal" ng-class="{current: tabIndex == 0}" ng-click="switchTab(0)">国内</i>
+            <i class="external" ng-class="{current: tabIndex == 1}" ng-click="switchTab(1)">海外</i>
+            <span ng-class="{'i-city': tabIndex == 0, 'e-city': tabIndex == 1}"></span>
+        </div>
+
+        <ion-scroll bindonce class="city-list" scrollbar-y="false" on-scroll="onScroll()" delegate-handle="scrollContent" ng-show="!searching">
+            <div ng-class="{'i-city': tabIndex == 0, 'e-city': tabIndex == 1}">
+                <h2>当前城市</h2>
+                <div class="city-item" ng-class="{'no-location': !CurrentDest.id}" ng-click="backMainPage(CurrentDest.id, CurrentDest.name)">{{CurrentDest.name}}</div>
+            </div>
+            <!-- 城市列表 -->
+            <div id="internalWrapper" ng-show="tabIndex == 0">
+                <!--<div class="i-city" ng-repeat="(id, cities) in internal">
+                    <h2 bo-text="id == 0 ? '热门城市' : id"></h2>
+                    <div class="city-item" ng-repeat="city in cities" bo-text="city.name" ng-click="backMainPage(city.dstrId, city.name)"></div>
+                </div>-->
+            </div>
+            <div id="externalWrapper" ng-show="tabIndex == 1">
+                <!--<div class="e-city" ng-repeat="(id, cities) in external">
+                    <h2 bo-text="id == 0 ? '热门城市' : id"></h2>
+                    <div class="city-item" ng-repeat="city in cities" bo-text="city.name" ng-click="backMainPage(city.dstrId, city.name)"></div>
+                </div>-->
+            </div>
+        </ion-scroll>
+    </ion-content>
+
+    <!-- 搜素面板 -->
+    <ion-scroll class="search-panel" ng-if="searching" ng-class="{fill:searchObj.list.length > 0}" delegate-handle="searchScroll">
+        <ul ng-if="searchObj.list">
+            <li ng-repeat="item in searchObj.list" class="ion-chevron-right" ng-click="backMainPage(item.id, item.name)">
+                <div class="detail" ng-bind="item.name"></div>
+            </li>
+        </ul>
+    </ion-scroll>
+</ion-view>

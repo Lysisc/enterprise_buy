@@ -1,0 +1,422 @@
+.restaurant {
+  $border: 1px solid #DDD;
+  $hColor: #333;
+  $pColor: #666;
+  $dColor: #666;
+  $gColor: #999;
+  $lColor: #099FDE;
+  $oColor: #FF9A14;
+  font-family: Helvetica, Arial, Sans-Serif;
+  font-size: 14px;
+  color: $pColor;
+  background-color: #F5F5F5;
+  ion-content > .scroll {
+    padding-bottom: 15px;
+  }
+  h1 {
+    font-size: 15px;
+    padding: 15px 15px 10px;
+    margin: 0;
+    color: $hColor;
+    background-color: #FFF;
+  }
+  h2 {
+    border-bottom: $border;
+    font-size: 15px;
+    padding: 15px;
+    margin: 0;
+    color: $hColor;
+  }
+  h3 {
+    font-size: 14px;
+    color: $hColor;
+  }
+  expandable-text {
+    font-size: 14px;
+  }
+  .ion-chevron-right:before {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -6px;
+    font-size: 13px;
+    color: #CCC;
+  }
+  .ion-chevron-down:before {
+    position: absolute;
+    right: -15px;
+    top: 2px;
+    font-size: 13px;
+    color: #CCC;
+  }
+  .view-block {
+    background-color: #FFF;
+    margin-top: 10px;
+    border-top: $border;
+    border-bottom: $border;
+  }
+  .rate_block {
+    width: 80px;
+    height: 15px;
+    background: url(../images/un_level@2x.png) -80px 0 no-repeat;
+    background-size: 160px 15px;
+    position: relative;
+    margin: 5px 0;
+    b {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 15px;
+      display: block;
+      background: url(../images/un_level@2x.png) 0 0 no-repeat;
+      background-size: 160px 15px;
+    }
+  }
+  .detail {
+    @include clear-float;
+    border-bottom: $border;
+    padding: 0 0 10px 15px;
+    font-size: 13px;
+    color: $dColor;
+    background-color: #FFF;
+    img {
+      width: 100px;
+      height: 100px;
+      float: left;
+      margin-right: 10px;
+    }
+    .detail-info {
+      padding: 10px 0 0 110px;
+      position: relative;
+      .score {
+        b{font-weight: normal;
+          font-size: 18px;
+          color: $lColor;
+        }
+      }
+      .typeScores {
+        position: absolute;
+        top: 80px;
+        span {
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+  .contact {
+    background-color: #FFF;
+    .address, .phones {
+      padding: 15px 37px;
+      border-bottom: $border;
+      position: relative;
+      background: no-repeat 15px center;
+      background-size: 16px 16px;
+    }
+    .address {
+      background-image: url(../images/location_icon.png);
+    }
+    .phones {
+      background-image: url(../images/phone_icon.png);
+      .has-phone {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .activities {
+    li {
+      padding: 15px;
+      border-bottom: $border;
+      position: relative;
+      &:last-child {
+        border: none;
+      }
+      span {
+        display: block;
+      }
+      .extra {
+        float: right;
+        color: $oColor;
+        font-size: 13px;
+        margin-left: 5px;
+        margin-right: 17px;
+      }
+      .type {
+        float: left;
+        font-size: 13px;
+        background-color: $oColor;
+        color: #FFF;
+        width: 30px;
+        text-align: center;
+        border-radius: 2px;
+        margin-right: 5px;
+      }
+      .message {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-right: 15px;
+      }
+    }
+    .more {
+      padding: 15px;
+      color: $lColor;
+      text-align: center;
+      border-top: $border;
+      span {
+        position: relative;
+      }
+    }
+  }
+  .recommends {
+    padding: 15px;
+    span {
+      margin-right: 10px;
+    }
+  }
+  h2.ion-chevron-right {
+    position: relative;
+  }
+  .comment {
+    padding: 15px;
+    border-bottom: $border;
+    &:last-child {
+      border: none;
+    }
+    .name {
+      color: $hColor;
+      i {
+        display: inline-block;
+        position: relative;
+        top: 3px;
+        left: 5px;
+        width: 16px;
+        height: 16px;
+        background: no-repeat;
+        background-size: 16px 16px;
+      }
+      .metal1 {
+        background-image: url(../images/metal1.png);
+      }
+      .metal2 {
+        background-image: url(../images/metal2.png);
+      }
+      .metal3 {
+        background-image: url(../images/metal3.png);
+      }
+    }
+    .level {
+      display: none;
+    }
+    .date {
+      float: right;
+      color: $gColor;
+      font-size: 12px;
+      padding-top: 5px;
+    }
+    .reviews {
+      float: left;
+      margin: 7px 10px 0 0;
+      width: 80px;
+      height: 15px;
+      background: url(../images/un_level@2x.png) -80px 0 no-repeat;
+      background-size: 160px 15px;
+      position: relative;
+      b {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 15px;
+        display: block;
+        background: url(../images/un_level@2x.png) 0 0 no-repeat;
+        background-size: 160px 15px;
+      }
+    }
+    .specialist {
+      float: left;
+      margin-right: 10px;
+      margin-top: 4px;
+      color: #FFF;
+      background-color: #43B300;
+      font-size: 12px;
+      padding: 0 2px;
+      border-radius: 2px;
+    }
+    .price {
+      font-size: 13px;
+      padding: 5px 0;
+    }
+    .content {
+      clear: both;
+      margin-bottom: 10px;
+    }
+    .pic-region {
+      white-space: nowrap;
+      img {
+        width: 90px;
+        margin-right: 5px;
+      }
+    }
+  }
+  .rest-detail {
+    .item-col {
+      padding: 10px 15px;
+      border-bottom: $border;
+      position: relative;
+      &:last-child {
+        border: none;
+      }
+      &.facility {
+        span {
+          margin-right: 10px;
+        }
+      }
+      p {
+        margin: 0;
+      }
+    }
+  }
+  .comsume-tips {
+    padding: 10px 15px;
+  }
+  .manage-cmds {
+    color: $lColor;
+    padding: 5px 0;
+    text-align: center;
+    display: -webkit-box;
+    .cmd {
+      width: 100%;
+      padding: 5px;
+    }
+    // .cmd {
+    //   width: 50%;
+    //   padding: 5px;
+    //   &:first-child {
+    //     border-right: $border;
+    //   }
+    // }
+  }
+  ion-footer-bar {
+    background: #FFF;
+    padding: 0;
+    font-size: 16px;
+    text-align: center;
+    border-top: 1px solid #BCBCBC;
+    padding: 5px;
+    a {
+      text-decoration: none;
+      color: $lColor;
+      display: block;
+      padding: 8px;
+      width: 50%;
+      &.single {
+        width: 100%;
+      }
+      span {
+        display: inline-block;
+        padding-left: 30px;
+        height: 22px;
+      }
+      &.review-btn {
+        span {
+          background: url(../images/edit_icon.png) no-repeat 0 -1px;
+          background-size: 22px 22px;
+        }
+      }
+      &.checkout-btn {
+        border-left: 1px solid #E5E5E5;
+        span {
+          background: url(../images/check_out.png) no-repeat 0 -1px;
+          background-size: 26px 19px;
+        }
+      }
+    }
+  }
+}
+.button.button-icon {
+  margin-right: 10px;
+  &.favorite {
+    background: url(../images/fav.png) no-repeat center;
+    background-size: 23px auto;
+    width: 23px;
+    &.isFav {
+      background-image: url(../images/fav2.png);
+    }
+  }
+  &.share {
+    background: url(../images/share_icon.png) no-repeat center;
+    background-size: 17px auto;
+    width: 17px;
+  }
+}
+.action-sheet-backdrop.active {
+  background-color: rgba(0, 0, 0, 0.7);
+  .action-sheet {
+    margin: 0 10px;
+  }
+  .action-sheet-group {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    button {
+      color: #099FDE;
+      &:first-child {
+        border-width: 0;
+      }
+    }
+  }
+}
+.tel_phone {
+  position: absolute;
+  z-index: 1;
+  text-decoration: none;
+  color: #099FDE;
+  display: block;
+  width: 100%;
+  height: 47px;
+  line-height: 47px;
+  top: 0;
+  left: 0;
+}
+.rest-footer-bar.bar.bar-footer {
+  $lColor: #099FDE;
+  background: #FFF;
+  padding: 0;
+  font-size: 16px;
+  text-align: center;
+  border-top: 1px solid #BCBCBC;
+  padding: 5px;
+  position: fixed;
+  z-index: 2;
+  a {
+    text-decoration: none;
+    color: $lColor;
+    display: block;
+    padding: 8px;
+    width: 50%;
+    &.single {
+      width: 100%;
+    }
+    span {
+      display: inline-block;
+      padding-left: 30px;
+      height: 22px;
+    }
+    &.review-btn {
+      span {
+        background: url(../images/edit_icon.png) no-repeat 0 -1px;
+        background-size: 22px 22px;
+      }
+    }
+    &.checkout-btn {
+      border-left: 1px solid #E5E5E5;
+      span {
+        background: url(../images/check_out.png) no-repeat 0 -1px;
+        background-size: 26px 19px;
+      }
+    }
+  }
+}

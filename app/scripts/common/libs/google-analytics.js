@@ -1,3 +1,5 @@
+'use strict';
+
 ;(function () {
   var _gaq = window._gaq || [];
   _gaq.push(['_setAccount', 'UA-3748357-1']);

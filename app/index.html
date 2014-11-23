@@ -2,7 +2,7 @@
 <html class="no-js" ng-app="EPBUY">
 <head>
     <meta charset="utf-8">
-    <title>EPBUY</title>
+    <title>企福会</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="format-detection" content="telephone=no">
@@ -19,12 +19,7 @@
 </head>
 <body>
 
-<div id="wrap" ui-view></div>
-
-<input type="hidden" data-static-resource-url="">
-
-<!-- #page_id input is required by UBT -->
-<input type="hidden" id="page_id" value="wait">
+<div ui-view></div>
 
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
@@ -39,7 +34,6 @@
 <script src="bower_components/ionic/js/ionic-angular.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
-
 
 <!-- build:js({app,.tmp}) scripts/main.js -->
 <!-- inject:js -->
