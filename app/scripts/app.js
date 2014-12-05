@@ -56,5 +56,11 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             });
 
         // 处理在状态配置中指定的路由之外的 url 请求
-        $urlRouterProvider.otherwise('/epbuy/guide');
+        var isShowGuide = localStorage.getItem('EPBUY_SHOW_GUIDE') || 1;
+        if (parseInt(isShowGuide, 0) === 1) {
+            $urlRouterProvider.otherwise('/epbuy/guide');
+        } else {
+            $urlRouterProvider.otherwise('/epbuy/home');
+        }
+
     });

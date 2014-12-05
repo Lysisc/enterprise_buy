@@ -21,6 +21,7 @@
         "angular": false,
         "window": true,
         "document": true,
+        "localStorage": true,
         "Internal": true,
         "app": true
     }
