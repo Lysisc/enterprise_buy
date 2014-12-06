@@ -1,0 +1,115 @@
+.ep-login {
+    .ep-header-bg {
+        h1 {
+            color: #fff;
+            font-size: 24px;
+            text-align: center;
+            padding-top: 30px;
+        }
+        .user-cover {
+            @include icon-bg(208px, 208px, url(../images/user_default.png));
+            background-origin: border;
+            border: 10px solid transparent;
+            border-radius: 33px;
+            -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+            position: absolute;
+            left: 50%;
+            bottom: -15%;
+            z-index: 1;
+            margin-left: -52px;
+            overflow: hidden;
+            img {
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+                display: none;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin: -50px 0 0 -50px;
+                width: 100px;
+                height: 100px;
+            }
+        }
+    }
+    .ep-login-ctrl {
+        background-color: #fff;
+        height: 100%;
+        padding-top: 10%;
+        ul {
+            position: relative;
+            z-index: 1;
+            width: 224px;
+            margin: 0 auto;
+        }
+        li {
+            margin-bottom: 16px;
+            a {
+                color: #625548;
+            }
+            .ion-person {
+                font-family: "Ionicons";
+                margin-top: 2px;
+                margin-left: -4px;
+                margin-right: 4px;
+            }
+            .ion-person:before {
+                content: "\f213";
+            }
+            .ion-key {
+                font-family: "Ionicons";
+            }
+            .ion-key:before {
+                display: inline-block;
+                -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
+                content: "\f296";
+            }
+        }
+        .item-input {
+            border: 1px solid #999;
+            border-radius: 5px;
+            &.focus {
+                border-color: #4c97d8;
+                box-shadow: 0 0 1px 0 #4c97d8;
+            }
+        }
+        .forget-password {
+            text-decoration: underline;
+            float: right;
+            margin-right: 3px;
+            color: #625548;
+        }
+        .checkbox {
+            float: left;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            margin: 0 15px 16px 10px;
+            input {
+                width: 20px;
+                height: 20px;
+            }
+            input:before {
+                border-radius: 4px;
+                border-color: #999;
+                border-width: 1px;
+                background-color: #fff;
+            }
+            input:after {
+                width: 10px;
+                height: 6px;
+                border-width: 2px;
+                border-color: #4c97d8;
+            }
+        }
+        .button {
+            margin-top: 0;
+            border-radius: 5px;
+        }
+        .checkbox-li {
+            margin-top: 4px;
+            line-height: 20px;
+        }
+    }
+}

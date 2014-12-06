@@ -29,7 +29,7 @@
       }
     }
     .hot_label {
-      @include icon_bg(119px, 42px);
+      @include icon-bg(119px, 42px);
       position: absolute;
       top: 6px;
       left: -4px;

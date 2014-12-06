@@ -1,0 +1,35 @@
+<ion-view title="企福惠" class="ep-login" hide-nav-bar="true">
+    <ion-content scroll="false">
+        <div class="ep-header-bg">
+            <h1>企福惠</h1>
+            <div class="user-cover">
+                <img ng-src="images/header_bg.png"></div>
+        </div>
+        <div class="ep-login-ctrl">
+            <ul>
+                <li>
+                    <label class="item-input"> <i class="icon placeholder-icon ion-person"></i>
+                        <input ng-focus="focusInputStyle($event);" ng-blur="focusInputStyle($event);" type="text" placeholder="用户名"></label>
+                </li>
+                <li>
+                    <label class="item-input"> <i class="icon placeholder-icon ion-key"></i>
+                        <input ng-focus="focusInputStyle($event);" ng-blur="focusInputStyle($event);" type="password" placeholder="密码"></label>
+                </li>
+                <li class="checkbox-li">
+                    <label class="checkbox">
+                        <input type="checkbox"></label>
+                    记住我
+                    <a class="forget-password" ng-href="#">忘记密码</a>
+                </li>
+                <li>
+                    <button class="button button-block button-positive">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+                </li>
+                <li>
+                    <a ng-href="/#/epbuy/registered">还没有账号，马上注册</a>
+                </li>
+            </ul>
+            
+        </div>
+        <div class="bottom-bg"><img ng-src="images/bottom_bg.png"></div>
+    </ion-content>
+</ion-view>

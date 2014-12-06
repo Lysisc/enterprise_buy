@@ -1,32 +1,30 @@
-<!-- <ion-view title="引导页" class="homefront">
--->
-<ion-content scroll="false" class="guide">
+ <ion-view title="引导页" hide-nav-bar="true">
 
-    <!-- 引导页 -->
+     <ion-content scroll="false" class="ep-guide">
 
-    <ion-slide-box class="slide-box" on-slide-changed="slideHasChanged($index)">
-        <ion-slide>
-            <div class="slide-page">
-                <img ng-src="images/guide_page_01.png"></div>
-        </ion-slide>
-        <ion-slide>
-            <div class="slide-page">
-                <img ng-src="images/guide_page_02.png"></div>
-        </ion-slide>
-        <ion-slide>
-            <div class="slide-page">
-                <img ng-src="images/guide_page_03.png">
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <div class="slide-page">
-                <img ng-src="images/guide_page_04.png">
-                <a nav-clear ng-click="goHome();"></a>
-            </div>
-        </ion-slide>
-    </ion-slide-box>
+         <!-- 引导页 --> 
 
-</ion-content>
+         <ion-slide-box class="slide-box" on-slide-changed="slideHasChanged($index)">
+             <ion-slide>
+                 <div class="slide-page">
+                     <img ng-src="images/guide_page_01.png"></div>
+             </ion-slide>
+             <ion-slide>
+                 <div class="slide-page">
+                     <img ng-src="images/guide_page_02.png"></div>
+             </ion-slide>
+             <ion-slide>
+                 <div class="slide-page">
+                     <img ng-src="images/guide_page_03.png"></div>
+             </ion-slide>
+             <ion-slide>
+                 <div class="slide-page">
+                     <img ng-src="images/guide_page_04.png"> 
+                     <a nav-clear ng-click="goLogin();"></a>
+                 </div>
+             </ion-slide>
+         </ion-slide-box>
 
-<!-- </ion-view>
--->
+     </ion-content>
+
+ </ion-view>

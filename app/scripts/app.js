@@ -12,11 +12,23 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 url: '/epbuy',
                 templateUrl: 'scripts/epbuy/main.html'
             })
-            // 首页前置页面
+            // 引导页
             .state('epbuy.guide', {
                 url: '/guide',
                 templateUrl: 'scripts/epbuy/guide/guide.html',
                 controller: 'GuideCtrl'
+            })
+            // 登陆页
+            .state('epbuy.login', {
+                url: '/login',
+                templateUrl: 'scripts/epbuy/login/login.html',
+                controller: 'LoginCtrl'
+            })
+            // 注册页
+            .state('epbuy.registered', {
+                url: '/registered',
+                templateUrl: 'scripts/epbuy/registered/registered.html',
+                controller: 'RegisteredCtrl'
             })
             // 首页
             .state('epbuy.home', {
@@ -60,7 +72,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
         if (parseInt(isShowGuide, 0) === 1) {
             $urlRouterProvider.otherwise('/epbuy/guide');
         } else {
-            $urlRouterProvider.otherwise('/epbuy/home');
+            $urlRouterProvider.otherwise('/epbuy/login');
         }
 
     });

@@ -12,15 +12,15 @@ angular.module('EPBUY').factory('pageStatus', function ($location, $state) {
 
     var pageStatusInit = function (scope, compile, stateParams) { //初始化页面
 
-        var isLoadingTpl = compile('<div class="backdrop visible active" ng-show="isLoading"><div class="loading"><span class="logo_white"><i class="loading_ring"></i></span></div></div>'),
-            noNetworkTpl = compile('<div class="no_network" ng-show="isNoNetwork"><i class="icon_no_network"></i><div>数据加载失败，请检查是否联网</div><span ng-click="refreshPage();">重新加载</span></div>'),
-            noResultTpl = compile('<div class="no_result" ng-show="isNoResult"><i class="icon_search"></i><div>该地区暂无数据，敬请期待。</div></div>'),
+        var isLoadingTpl = compile('<div class="backdrop visible active" ng-show="isLoading"><div class="loading"><span class="logo-white"><i class="loading-ring"></i></span></div></div>'),
+            noNetworkTpl = compile('<div class="no-network" ng-show="isNoNetwork"><i class="icon-no-network"></i><div>数据加载失败，请检查是否联网</div><span ng-click="refreshPage();">重新加载</span></div>'),
+            noResultTpl = compile('<div class="no-result" ng-show="isNoResult"><i class="icon-search"></i><div>该地区暂无数据，敬请期待。</div></div>'),
             angularBox = angular.element(window.document.getElementsByTagName('ion-nav-view')[0]),
             goBackBtn = angular.element(window.document.getElementsByTagName('ion-nav-back-button')[0]),
             removeDom = function () {
                 angular.element(window.document.querySelector('.isLoading')).remove();
-                angular.element(window.document.querySelector('.no_network')).remove();
-                angular.element(window.document.querySelector('.no_result')).remove();
+                angular.element(window.document.querySelector('.no-network')).remove();
+                angular.element(window.document.querySelector('.no-result')).remove();
             },
             hashVal = $location.$$url;
 

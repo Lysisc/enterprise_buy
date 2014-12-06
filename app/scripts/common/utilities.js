@@ -92,9 +92,29 @@ angular.module('EPBUY').factory('Util', function () {
         return name;
     };
 
+    /**
+     * input焦点样式
+     * @param scope
+     */
+    var focusInput = function (scope) {
+        if (!scope) {
+            return;
+        } else {
+            scope.focusInputStyle = function (e) {
+                var labelObj = angular.element(e.path[1]);
+                if (e.type === 'focus') {
+                    labelObj.addClass('focus');
+                } else {
+                    labelObj.removeClass('focus');
+                }
+            };
+        }
+    };
+
     return {
         safeApply: safeApply,
         stickyTopScroll: stickyTopScroll,
-        formatRestaurantName: formatRestaurantName
+        formatRestaurantName: formatRestaurantName,
+        focusInput: focusInput
     };
 });

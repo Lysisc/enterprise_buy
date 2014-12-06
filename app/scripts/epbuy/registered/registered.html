@@ -1,0 +1,74 @@
+<ion-view title="新用户注册" class="ep-registered">
+    <ion-content scroll="false">
+
+        <div class="ep-registered-search" ng-show="searching">
+            <div class="bar bar-header item-input-inset">
+                <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
+                    <input type="search" placeholder="请输入企业名/企业码"></label>
+                <button class="button button-clear" ng-click="showSearch();">取消</button>
+            </div>
+            <ion-scroll class="list">
+                <label class="item search-item cur" ng-click="chooseItemSearch($event, 'a0001')"> <i class="icon ion-checkmark"></i>
+                    上海通用汽车 - a0001
+                </label>
+                <label class="item search-item" ng-click="chooseItemSearch($event, 'a0002')">
+                    <i class="icon ion-checkmark"></i>
+                    上海一汽大众 - a0002
+                </label>
+                <label class="item search-item" ng-click="chooseItemSearch($event, 'a0002')">
+                    <i class="icon ion-checkmark"></i>
+                    上海一汽大众 - a0002
+                </label>
+                <label class="item search-item" ng-click="chooseItemSearch($event, 'a0002')">
+                    <i class="icon ion-checkmark"></i>
+                    上海一汽大众 - a0002
+                </label>
+                <!-- <button class="button button-block button-positive" ng-click="confirmSearch();">确认企业代码</button>
+            -->
+        </ion-scroll>
+    </div>
+
+    <div class="ep-registered-step" ng-show="stepInit">
+        <ul>
+            <li>
+                <button class="button button-positive" ng-click="showSearch();">
+                    <i class="icon ion-search"></i>
+                </button>
+                <label class="item-input short-one">
+                    <i class="icon placeholder-icon ion-key"></i>
+                    <input ng-change="inputChange(enterpriseCode);" ng-focus="focusInputStyle($event);" ng-blur="focusInputStyle($event);" ng-model="enterpriseCode" type="text" placeholder="企业码" maxlength="10"></label>
+            </li>
+            <li>
+                <button class="button button-block button-positive" ng-click="goStepTwo();" ng-class="{disabled: stepOneDisabled}">下一步</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ep-registered-step" ng-show="stepOnePass">
+        <ul>
+            <li>
+                <label class="item-input">
+                    <i class="icon placeholder-icon ion-iphone"></i>
+                    <input ng-focus="focusInputStyle($event);" ng-blur="focusInputStyle($event);" type="text" placeholder="手机号"></label>
+            </li>
+            <li>
+                <button class="button button-positive validation-button" ng-click="fun();">获取验证码</button>
+                <label class="item-input short-two">
+                    <i class="icon placeholder-icon ion-key"></i>
+                    <input ng-change="inputChange(validationCode);" ng-focus="focusInputStyle($event);" ng-blur="focusInputStyle($event);" ng-model="validationCode" type="text" placeholder="验证码" maxlength="10"></label>
+            </li>
+            <li>
+                <label class="item-input">
+                    <i class="icon placeholder-icon ion-key"></i>
+                    <input ng-focus="focusInputStyle($event);" ng-blur="focusInputStyle($event);" ng-model="passWord" type="password" placeholder="密&nbsp;&nbsp;&nbsp;码"></label>
+            </li>
+            <li>
+                <button class="button button-block button-positive" ng-click="goStepThree();" ng-class="{disabled: stepTwoDisabled}">注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="bottom-bg">
+        <img ng-src="images/bottom_bg.png"></div>
+</ion-content>
+</ion-view>
