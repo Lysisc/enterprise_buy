@@ -7,13 +7,9 @@ angular.module('EPBUY')
             link: function (scope, element) {
                 element.on('click', function () {
 
-                    if (!ENV.isHybrid && $state.is('epbuy.guide')) {
+                    if ($state.is('epbuy.home')) {
 
-                        window.location.href = 'http://m.ctrip.com';
-
-                    } else if (!ENV.isHybrid && $state.is('epbuy.home')) {
-
-                        window.location.href = '#/epbuy/homefornt';
+                        window.location.href = '#/epbuy/guide';
 
                     } else if ($state.is('epbuy.findepbuy')) {
 

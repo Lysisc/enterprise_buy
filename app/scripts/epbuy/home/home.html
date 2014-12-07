@@ -1,0 +1,66 @@
+<ion-view class="home" hide-nav-bar="true">
+
+    <ion-content scroll="false" ng-class="{searching:searching}">
+
+        <div class="nav-title-slide-ios7 bar-positive bar bar-header nav-bar disable-user-behavior">
+            <h1 class="title">企福惠</h1>
+        </div>
+
+        <!-- 搜索 -->
+        <div class="item-input-inset">
+            <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
+                <input ng-change="searchChange();" ng-model="inputVal.searchVal" type="search" placeholder="请输入企业名/企业码"></label>
+        </div>
+
+        <ion-slide-box class="slide-box" auto-play="true" does-continue="true">
+            <ion-slide>
+                <div class="slide-page">
+                    <img ng-src="images/header_bg.png"></div>
+            </ion-slide>
+            <ion-slide>
+                <div class="slide-page">
+                    <img ng-src="images/header_bg.png"></div>
+            </ion-slide>
+            <ion-slide>
+                <div class="slide-page">
+                    <img ng-src="images/header_bg.png"></div>
+            </ion-slide>
+            <ion-slide>
+                <div class="slide-page">
+                    <img ng-src="images/header_bg.png">
+                </div>
+            </ion-slide>
+        </ion-slide-box>
+
+        <!-- <foods-restlist></foods-restlist>
+    -->
+    <ion-tabs class="tabs-positive tabs-icon-only" style="display:none;">
+
+        <ion-tab title="Home" icon-on="ion-ios7-filing" icon-off="ion-ios7-filing-outline">
+            <!-- Tab 1 content --> </ion-tab>
+
+        <ion-tab title="About" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
+            <!-- Tab 2 content --> </ion-tab>
+
+        <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
+            <!-- Tab 3 content --> </ion-tab>
+
+    </ion-tabs>
+    
+</ion-content>
+
+<!-- 搜素面板 -->
+<ion-scroll class="search-panel" ng-if="searching" on-scroll="onScroll()">
+    <div class="search-list" ng-if="searchObj.list">
+        <a href="{{item.Href}}" ng-repeat="item in searchObj.list">
+            <div class="count" ng-if="item.Count">{{item.Count}}结果</div>
+            <div class="detail" ng-bind-html="item.Name"></div>
+        </a>
+    </div>
+    <div class="search-near" ng-if="searchObj.near">
+        <a href="{{near.Href}}" ng-repeat="near in searchObj.near" ng-bind-html="near.Name"></a>
+    </div>
+    <div class="search-none" ng-if="showNoResult">抱歉，没有找到“{{searchObj.key}}”相关信息</div>
+</ion-scroll>
+
+</ion-view>

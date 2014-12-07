@@ -6,7 +6,6 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
          * EPBUY 状态路由配置
          */
         $stateProvider
-        /* 美食新前端 */
             .state('epbuy', {
                 abstract: true, // 为子状态提供一个 base url，其下所有子状态的 url 都是相对父状态的
                 url: '/epbuy',
@@ -33,8 +32,8 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             // 首页
             .state('epbuy.home', {
                 url: '/home',
-                templateUrl: 'scripts/epbuy/home/foods-home.html',
-                controller: 'FoodsHomeCtrl'
+                templateUrl: 'scripts/epbuy/home/home.html',
+                controller: 'HomeCtrl'
             })
             // 目的地切换
             .state('epbuy.destinationSwitch', {

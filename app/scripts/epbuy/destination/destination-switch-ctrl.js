@@ -226,7 +226,7 @@ angular.module('EPBUY')
         };
 
         $scope.onScroll = function () {
-            Util.stickyTopScroll($scope, $compile, titleEles, handler);
+            Util.stickyTopScroll($scope, titleEles, handler);
         };
 
         $scope.sliderTouchMove = function (event) {

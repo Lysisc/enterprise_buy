@@ -22,7 +22,7 @@ angular.module('EPBUY')
         var handler = $ionicScrollDelegate.$getByHandle('scrollContent');
         var titleEles;
 
-        var pageStatusInit = pageStatus.pageStatusInit($scope, $compile, $stateParams);
+        var pageStatusInit = pageStatus.pageStatusInit($scope, $stateParams);
 
         pageStatusInit.loading(false);
 
@@ -49,7 +49,7 @@ angular.module('EPBUY')
         }
 
         $scope.onScroll = function () {
-            Util.stickyTopScroll($scope, $compile, titleEles, handler);
+            Util.stickyTopScroll($scope, titleEles, handler);
         };
 
         $ubt.setPageId({

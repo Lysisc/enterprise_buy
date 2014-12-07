@@ -1,3 +1,20 @@
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
+}
+//icon style
+.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key {
+    font-family: "Ionicons";
+}
+.item-input-inset {
+    background-color: #eee;
+    padding: 8px 11px;
+    .item-input-wrapper {
+        background-color: #fff;
+    }
+    .ion-search:before {
+        content: "\f4a4";
+    }
+}
 //后退按钮
 .back-button + .back-button {
     display: none;
@@ -25,9 +42,6 @@
     img.pull-right {
         width: 50px;
     }
-}
-.backdrop {
-    z-index: 9;
 }
 .loading {
     width: 80px;
@@ -188,7 +202,7 @@
 }
 
 /** 从下往上切换页面 **/
-.slide-bottom-top > .ng-enter, .slide-bottom-top > .ng-leave {
+/** .slide-bottom-top > .ng-enter, .slide-bottom-top > .ng-leave {
     -webkit-transition: all ease-out 400ms;
 }
 .slide-bottom-top > .ng-enter {
@@ -199,6 +213,20 @@
 }
 .slide-bottom-top > .ng-leave.ng-leave-active {
     -webkit-transform: translate3d(0, 0, 0);
+}
+**/
+
+/** 从下往上切换页面 **/
+.slide-bottom-top {
+    -webkit-transform: translate3d(0, 100%, 0);
+}
+.slide-bottom-top.enter {
+    -webkit-transition: all ease-out 300ms;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.slide-bottom-top.leave {
+    -webkit-transition: all ease-out 300ms;
+    -webkit-transform: translate3d(0, 100%, 0);
 }
 
 /** 从上往下切换页面 **/
@@ -238,6 +266,68 @@
     height: $height / 2;
     background: $url no-repeat 50% 50%;
     background-size: $width / 2 $height / 2;
+}
+//弹出层样式
+.popup {
+    border-radius: 5px;
+    width: 270px;
+    background: #fff;
+    .popup-head {
+        padding: 0;
+        border-radius: 5px 5px 0 0;
+        display: none;
+    }
+    .popup-body {
+        padding: 28px 10px 22px;
+        text-align: center;
+        h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        h4 {
+            font-weight: bold;
+            text-align: left;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-left: 5px;
+        }
+        ion-scroll {
+            text-align: left;
+            font-size: 12px;
+            height: 100px;
+            padding: 0 5px;
+            overflow-y: scroll;
+        }
+    }
+    .popup-buttons.row {
+        padding: 0;
+        overflow: hidden;
+        .button:first-child {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-top: 1px solid #B2B2B2;
+            background: #fff;
+            height: 44px;
+            min-height: 44px;
+            border-radius: 0 0 0 5px;
+            color: #099FDE;
+        }
+        .button:last-child {
+            color: #099FDE;
+            border-radius: 0 0 5px 5px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            height: 44px;
+            min-height: 44px;
+            border-top: 1px solid #B2B2B2;
+            border-left: 1px solid #B2B2B2;
+            margin-left: -1px;
+            background: #fff;
+        }
+    }
 }
 //兼容hybird模式IOS7版本
 .hybirdIOS7 {

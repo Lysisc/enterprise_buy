@@ -7,7 +7,7 @@ angular.module('EPBUY')
 
         var titleEles, handler = $ionicScrollDelegate.$getByHandle('scrollContent');
 
-        var pageStatusHandler = pageStatus.pageStatusInit($scope, $compile, $stateParams);
+        var pageStatusHandler = pageStatus.pageStatusInit($scope, $stateParams);
 
         pageStatusHandler.loading(false);
         $http.get(ENV.getDomain() + '/GetSpecialFoodPageViewModel?DestinationId=' + $stateParams.DestinationId).success(function (specialFood) {
@@ -52,7 +52,7 @@ angular.module('EPBUY')
         });
 
         $scope.onScroll = function () {
-            Util.stickyTopScroll($scope, $compile, titleEles, handler);
+            Util.stickyTopScroll($scope, titleEles, handler);
         };
 
         // 跳转餐馆详情页

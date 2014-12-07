@@ -8,7 +8,7 @@ angular.module('EPBUY')
         $scope.grouponNum = 3;
         $scope.productCount = 0;
 
-        var pageStatusHandler = pageStatus.pageStatusInit($scope, $compile, $stateParams);
+        var pageStatusHandler = pageStatus.pageStatusInit($scope, $stateParams);
 
         pageStatusHandler.loading(false);
 

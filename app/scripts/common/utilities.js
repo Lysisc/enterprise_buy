@@ -1,6 +1,52 @@
 'use strict';
 
-angular.module('EPBUY').factory('Util', function () {
+//公有方法
+angular.module('EPBUY').factory('Util', function ($rootScope, $http, $state, $compile, $ionicBackdrop, $ionicLoading, $timeout, ENV) {
+
+    //重写$ionicBackdrop.release();效果
+    var backDrop = function (status) {
+        var backDropDom = angular.element(document.querySelector('.backdrop'));
+        if (status && backDropDom) {
+            $timeout(function () {
+                backDropDom.addClass('visible');
+            }, 100);
+        } else {
+            $timeout(function () {
+                backDropDom.removeClass('visible');
+            }, 100);
+        }
+    };
+
+    var toastTimer = null,
+        toastTpl = null;
+
+    $rootScope.$on('$locationChangeStart', function () { //切换页面时清除dom
+        backDrop();
+        toastTpl = null;
+    });
+
+    /**
+     * toast提示层
+     * @param scope, msg, time
+     */
+    var msgToast = function (scope, msg, time) {
+
+        if (!toastTpl) {
+            toastTpl = $compile('<div class="notifier" ng-if="notification"><span>{{notification}}</span></div>');
+            angular.element(window.document.getElementsByTagName('ion-nav-view')[0]).append(toastTpl(scope));
+        }
+
+        scope.notification = msg;
+
+        $timeout.cancel(toastTimer);
+
+        toastTimer = $timeout(function () {
+            scope.notification = '';
+            $timeout.cancel(toastTimer);
+        }, time || 2000);
+
+    };
+
     /**
      * 安全的使用angular apply方法，以保证不会因为产生循环调用而抛出“$digest already in progress”
      * @param scope
@@ -24,7 +70,7 @@ angular.module('EPBUY').factory('Util', function () {
      * @param sticker
      * @param handler
      */
-    var stickyTopScroll = function (scope, compile, titleEles, handler) {
+    var stickyTopScroll = function (scope, titleEles, handler) {
         if (!scope || !titleEles || !titleEles.length || !handler || !handler.getScrollPosition()) {
             return;
         }
@@ -33,7 +79,7 @@ angular.module('EPBUY').factory('Util', function () {
             scrollTop = handler.getScrollPosition().top;
 
         if (scope.stickyContent === undefined) {
-            var tpl = compile('<h2 class="sticker" ng-show="stickyContent != null">{{stickyContent}}</h2>');
+            var tpl = $compile('<h2 class="sticker" ng-if="stickyContent != null">{{stickyContent}}</h2>');
             sticker = tpl(scope);
             sticker.css({
                 position: 'absolute',
@@ -93,28 +139,77 @@ angular.module('EPBUY').factory('Util', function () {
     };
 
     /**
-     * input焦点样式
-     * @param scope
+     * ajax请求
+     * @param param
      */
-    var focusInput = function (scope) {
-        if (!scope) {
-            return;
-        } else {
-            scope.focusInputStyle = function (e) {
-                var labelObj = angular.element(e.path[1]);
-                if (e.type === 'focus') {
-                    labelObj.addClass('focus');
-                } else {
-                    labelObj.removeClass('focus');
-                }
-            };
+    var ajaxRequest = function (param) {
+        var method = param && param.method || 'GET',
+            url = param && param.url || '',
+            success = param && param.success,
+            error = param && param.error,
+            effect = param && param.effect,
+            postData = param && param.data || {};
+
+        if (effect !== 'false') {
+            $ionicBackdrop.retain();
+            $ionicLoading.show({
+                template: '<span style="color:red;">loading...</span>'
+            });
         }
+
+        $http({
+            method: method,
+            url: ENV.getDomain() + url,
+            data: postData
+        }).success(function (data) {
+            console.log(data);
+
+            $ionicBackdrop.release();
+            $ionicLoading.hide();
+
+            if (typeof success === 'function') {
+                success(data);
+            }
+
+        }).error(function (data) {
+
+            $ionicBackdrop.release();
+            $ionicLoading.hide();
+
+            //todo... 判断错误信息
+            if (typeof error === 'function') {
+                error(data);
+            } else {
+                console.log('网络问题请重试');
+            }
+
+        });
+
     };
 
     return {
         safeApply: safeApply,
         stickyTopScroll: stickyTopScroll,
         formatRestaurantName: formatRestaurantName,
-        focusInput: focusInput
+        msgToast: msgToast,
+        ajaxRequest: ajaxRequest
     };
 });
+
+//公有工具
+angular.module('EPBUY')
+    .directive('focusEffect', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element) {
+                element.on('focus blur', function (e) {
+                    var labelObj = angular.element(e.path[1]);
+                    if (e.type === 'focus') {
+                        labelObj.addClass('focus');
+                    } else {
+                        labelObj.removeClass('focus');
+                    }
+                });
+            }
+        };
+    });

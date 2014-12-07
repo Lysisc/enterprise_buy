@@ -1,0 +1,31 @@
+.home {
+    .bar {
+        position: static;
+        height: 45px;
+    }
+    .slide-box {
+        width: 100%;
+        overflow: hidden;
+        .slide-page img {
+            width: 100%;
+
+        }
+    }
+    &.searching {
+        background-color: #000;
+    }
+}
+.hybirdIOS7 .searching {
+    .search {
+        padding-top: 28px;
+        .placeholder-icon {
+            top: 36px;
+        }
+        .ion-close-round {
+            top: 28px;
+        }
+    }
+    .search-panel {
+        top: 67px;
+    }
+}

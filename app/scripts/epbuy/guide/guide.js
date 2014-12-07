@@ -42,18 +42,4 @@ angular.module('EPBUY')
         $scope.ShoppingBanner.linksrc = '';
         $scope.ShoppingBanner.img = '';
 
-        if (!$scope.isHybrid) {
-            //左侧图片
-            $http({
-                method: 'GET',
-                url: ENV.getDomain() + '/GetHomeRestaurantBannerInfo.json'
-            }).success(function (data) {
-                console.log(data);
-                if (data && data.BannerViewModelList && data.BannerViewModelList.length > 0) {
-                    $scope.RestaurantBanner.linksrc = data.BannerViewModelList[0].HybridUrl;
-                    $scope.RestaurantBanner.img = data.BannerViewModelList[0].PicUrl;
-                }
-            }).error(function () {});
-        }
-
     });

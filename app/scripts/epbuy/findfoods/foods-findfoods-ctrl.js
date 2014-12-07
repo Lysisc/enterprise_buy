@@ -11,7 +11,7 @@ angular.module('EPBUY')
             $scope.findfoodsTitle = locationObj.title;
         }
         //定义status组件
-        var pageStatusInit = pageStatus.pageStatusInit($scope, $compile, $stateParams);
+        var pageStatusInit = pageStatus.pageStatusInit($scope, $stateParams);
         //加载动画
         pageStatusInit.loading(false);
 
