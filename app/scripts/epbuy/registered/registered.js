@@ -3,7 +3,6 @@
 angular.module('EPBUY')
     .controller('RegisteredCtrl', function ($scope, $state, $ionicPopup, $timeout, Util) {
 
-        $scope.searchResultList = false; //search view
         $scope.stepInit = true; //step1 view
         $scope.stepOneDisabled = true; //step1 submit
         $scope.stepOnePass = false; //step2 view
@@ -44,11 +43,10 @@ angular.module('EPBUY')
                     url: '/GetHomeRestaurantBannerInfo.json',
                     effect: 'false',
                     success: function (data) {
-                        $scope.searchResultList = data.BannerViewModelList; //取数据 todo...
-
+                        $scope.searchResultList = data.commentList; //取数据 todo...
                     },
                     error: function (data) {
-                        $scope.searchResultListList = false;
+                        $scope.searchResultList = false;
                     }
                 });
 

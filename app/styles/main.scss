@@ -1,10 +1,60 @@
+/********************************** 工具组件 **********************************/
+// 清楚浮动
+// 调用方式：@include clear-float;
+@mixin clear-float {
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+}
+// 边框组件：用于native源生边框统一样式
+// 调用方式：@include border-line;
+//           border-bottom-width: 1px;
+@mixin border-line {
+    border-width: 0;
+    border-image: url(../images/icon_border_half.png) 2 stretch;
+    -webkit-border-image: url(../images/icon_border_half.png) 2 stretch;
+    border-style: solid\9\0;
+    border-color: #c8c8c8\9\0;
+}
+// 截字变量:用于单行截字
+@mixin cutting-word ($width:100%) {
+    width: $width;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+// 背景图变量：用于icon配置
+@mixin icon-bg ($width:0, $height:0, $url:url(''), $display:block) {
+    display: $display;
+    width: $width / 2;
+    height: $height / 2;
+    background: $url no-repeat 50% 50%;
+    background-size: $width / 2 $height / 2;
+}
+// 旋转
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+.rotate {
+    -webkit-animation: rotate 1s infinite linear;
+}
+
+/********************************** 公用样式 **********************************/
 input::-webkit-inner-spin-button {
     -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
 }
-//icon style
-.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key {
+// icon字体
+.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d {
     font-family: "Ionicons";
 }
+// 搜索框
 .item-input-inset {
     background-color: #eee;
     padding: 8px 11px;
@@ -31,20 +81,9 @@ input::-webkit-inner-spin-button {
 .scroll-content {
     background-color: #f5f5f5;
 }
-.browsehappy {
-    margin: 0.2em 0;
-    background-color: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
-.thumbnail {
-    height: 200px;
-    img.pull-right {
-        width: 50px;
-    }
-}
+// 加载中样式
 .loading {
-    width: 80px;
+    width: 70px;
     height: 70px;
     border-radius: 5px;
     background: rgba(0, 0, 0, 0.7);
@@ -54,35 +93,31 @@ input::-webkit-inner-spin-button {
     left: 50%;
     margin: -20px 0 0 -40px;
     z-index: 10;
-}
-.logo-white {
-    position: absolute;
-    width: 24px;
-    height: 27px;
-    left: 50%;
-    top: 50%;
-    z-index: 9;
-    margin: -15px 0 0 -15px;
-    background: url(../images/ctrip_loading_big@2x.png) no-repeat;
-    background-size: 24px 27px;
-}
-.logo-white .loading-ring {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    left: 15px;
-    top: 15px;
-    margin: -25px 0 0 -25px;
-    background: url(../images/ctrip_loading_big_circle@2x.png) no-repeat;
-    background-size: 48px 48px;
-    -webkit-animation: cui-loading 1.58s linear infinite;
-    -moz-animation: cui-loading 1.58s linear infinite;
-    -ms-animation: cui-loading 1.58s linear infinite;
-    animation: cui-loading 1.58s linear infinite;
-    -webkit-transform-origin: 50% 49%;
-    -moz-transform-origin: 50% 49%;
-    -ms-transform-origin: 50% 49%;
-    transform-origin: 50% 49%;
+    .ion-load-d {
+        color: #fff;
+        position: absolute;
+        font-size: 50px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        left: 50%;
+        top: 50%;
+        margin: -25px 0 0 -25px;
+        // background: url(../images/send_loading.png) no-repeat;
+        // background-size: 48px 48px;
+        -webkit-animation: cui-loading 1.58s linear infinite;
+        -moz-animation: cui-loading 1.58s linear infinite;
+        -ms-animation: cui-loading 1.58s linear infinite;
+        animation: cui-loading 1.58s linear infinite;
+        -webkit-transform-origin: 50% 50%;
+        -moz-transform-origin: 50% 50%;
+        -ms-transform-origin: 50% 50%;
+        transform-origin: 50% 50%;
+    }
+    .ion-load-d:before {
+        content: "\f29d";
+    }
 }
 @-webkit-keyframes cui-loading {
     to {
@@ -104,6 +139,7 @@ input::-webkit-inner-spin-button {
         transform: rotate(360deg);
     }
 }
+// 无数据&无网络
 .no-result, .no-network {
     margin-top: -5%;
     width: 100%;
@@ -120,8 +156,7 @@ input::-webkit-inner-spin-button {
     display: inline-block;
     width: 38px;
     height: 38px;
-    // background: url(../images/no-network.png) no-repeat 50% 50%;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAYAAADHl1ErAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyBpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkE4N0ZBOTkwMTBDMjExRTQ5RjIyRDNGM0YwRTFCRDNGIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkE4N0ZBOTkxMTBDMjExRTQ5RjIyRDNGM0YwRTFCRDNGIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QTg3RkE5OEUxMEMyMTFFNDlGMjJEM0YzRjBFMUJEM0YiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QTg3RkE5OEYxMEMyMTFFNDlGMjJEM0YzRjBFMUJEM0YiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5ftX7SAAAHrklEQVR42uxcaVPbSBAd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) no-repeat 50% 50%;
+    background: url(../images/no-network.png) no-repeat 50% 50%;
     background-size: 38px 38px;
     vertical-align: 0;
     margin-bottom: 12px;
@@ -182,24 +217,6 @@ input::-webkit-inner-spin-button {
         background-color: rgba(0, 0, 0, .6);
     }
 }
-@mixin clear-float() {
-    &:after {
-        content: "";
-        display: block;
-        clear: both;
-    }
-}
-@-webkit-keyframes rotate {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
-.rotate {
-    -webkit-animation: rotate 1s infinite linear;
-}
 
 /** 从下往上切换页面 **/
 /** .slide-bottom-top > .ng-enter, .slide-bottom-top > .ng-leave {
@@ -216,7 +233,7 @@ input::-webkit-inner-spin-button {
 }
 **/
 
-/** 从下往上切换页面 **/
+// 从下往上切换页面
 .slide-bottom-top {
     -webkit-transform: translate3d(0, 100%, 0);
 }
@@ -228,8 +245,7 @@ input::-webkit-inner-spin-button {
     -webkit-transition: all ease-out 300ms;
     -webkit-transform: translate3d(0, 100%, 0);
 }
-
-/** 从上往下切换页面 **/
+// 从上往下切换页面
 .slide-bottom-top.reverse > .ng-enter, .slide-bottom-top.reverse > .ng-leave {
     -webkit-transition: all ease-out 400ms 300ms;
 }
@@ -242,32 +258,7 @@ input::-webkit-inner-spin-button {
 .slide-bottom-top.reverse > .ng-leave.ng-leave-active {
     -webkit-transform: translate3d(0, 100%, 0);
 }
-// 边框组件：用于native源生边框统一样式
-// 调用方式：@include border-line;
-//           border-bottom-width: 1px;
-@mixin border-line {
-    border-width: 0;
-    border-image: url(../images/icon_border_half.png) 2 stretch;
-    -webkit-border-image: url(../images/icon_border_half.png) 2 stretch;
-    border-style: solid\9\0;
-    border-color: #c8c8c8\9\0;
-}
-// 截字变量:用于单行截字
-@mixin cutting-word ($width:100%) {
-    width: $width;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-// 背景图变量：用于icon配置
-@mixin icon-bg ($width:0, $height:0, $url:url(''), $display:block) {
-    display: $display;
-    width: $width / 2;
-    height: $height / 2;
-    background: $url no-repeat 50% 50%;
-    background-size: $width / 2 $height / 2;
-}
-//弹出层样式
+// 弹出层样式
 .popup {
     border-radius: 5px;
     width: 270px;
@@ -329,7 +320,92 @@ input::-webkit-inner-spin-button {
         }
     }
 }
-//兼容hybird模式IOS7版本
+// 头部背景
+.ep-header-bg {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 155px;
+    background: url(../images/header_bg.png) top center no-repeat;
+    background-size: cover;
+}
+// 底部背景
+.bottom-bg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: auto;
+    img {
+        width: 100%;
+    }
+}
+// 列表样式
+.product-list {
+    width: 100%;
+}
+.product-list-double {
+    width: 100%;
+    .product-item {
+        float: left;
+        width: 50%;
+        overflow: hidden;
+        padding: 6px 5px 4px;
+        .img {
+            position: relative;
+            z-index: 1;
+            min-height: 150px;
+            @include border-line;
+            border-width: 1px;
+            background: #f8f8f8 url(../images/default_image.png) center center no-repeat;
+            background-size: 150px 150px;
+            .mask {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, .5);
+                width: 100%;
+                height: 40px;
+                color: #fff;
+                font-size: 13px;
+                padding: 3px 5px 0;
+                line-height: 18px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+        }
+        .price {
+            @include border-line;
+            border-width: 1px;
+            border-top-width: 0;
+            padding: 0 6px;
+            line-height: 30px;
+            .p-discount {
+                float: right;
+                width: 36px;
+                height: 18px;
+                line-height: 18px;
+                text-align: center;
+                margin-top: 6px;
+                background-color: #ef742f;
+                color: #fff;
+                font-size: 12px;
+            }
+            .p-red {
+                color: #ff0000;
+                font-size: 18px;
+                margin-right: 5px;
+            }
+            .p-gray {
+                color: #999;
+            }
+        }
+    }
+}
+// 兼容hybird模式IOS7版本
 .hybirdIOS7 {
     .bar-header {
         height: 64px;
@@ -345,27 +421,6 @@ input::-webkit-inner-spin-button {
     }
     .tf-popblock, .findfoods .current-location {
         top: 108px;
-    }
-}
-//头部背景
-.ep-header-bg {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: 155px;
-    background: url(../images/header_bg.png) top center no-repeat;
-    background-size: cover;
-}
-//底部背景
-.bottom-bg {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
-    height: auto;
-    img {
-        width: 100%;
     }
 }
 //page style

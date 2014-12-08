@@ -1,16 +1,69 @@
 .home {
     .bar {
-        position: static;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 2;
         height: 45px;
-    }
-    .slide-box {
-        width: 100%;
-        overflow: hidden;
-        .slide-page img {
-            width: 100%;
-
+        .shopping-cart {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            font-size: 20px;
+            text-decoration: none;
+            color: #fff;
+            width: 50px;
+            height: 44px;
+            padding-left: 5px;
+            margin-right: 3px;
+            .ion-cart {
+                display: inline-block;
+                margin-top: 12px;
+            }
+            .ion-cart:before {
+                font-size: 18px;
+                content: "\f3f7";
+            }
+            span {
+                font-size: 16px;
+                margin-left: 5px;
+            }
         }
     }
+    .item-input-inset {
+        position: fixed;
+        width: 100%;
+        top: 45px;
+        left: 0;
+        z-index: 1;
+    }
+    .scroll-content {
+        background-color: #fff;
+    }
+    .scroll {
+        background-color: #fff;
+        @include clear-float;
+        .slide-box {
+            width: 100%;
+            overflow: hidden;
+            margin-top: 93px;
+            .slide-page img {
+                width: 100%;
+            }
+        }
+        .hot-product {
+            margin: 0;
+            padding: 5px 15px 3px;
+            font-size: 14px;
+            color: #476681;
+            a {
+                float: right;
+                text-decoration: none;
+                color: #476681;
+            }
+        }
+    }
+
     &.searching {
         background-color: #000;
     }

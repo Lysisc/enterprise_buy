@@ -142,7 +142,7 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
         if (effect !== 'false') {
 
             $ionicLoading.show({
-                template: '<span style="color:red;">loading...</span>'
+                template: '<span class="ion-load-d"></span>'
             });
 
             backDrop.retain();

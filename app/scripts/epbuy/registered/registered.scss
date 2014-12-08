@@ -35,10 +35,13 @@
                 }
             }
         }
-        .button-block {
-            border-radius: 5px;
-            width: 224px;
-            margin: 30px auto 0;
+        .button-clear {
+            padding-right: 0;
+            margin-left: 5px;
+            color: #999;
+        }
+        .list {
+            height: 100%;
         }
         .no-results {
             text-align: center;
