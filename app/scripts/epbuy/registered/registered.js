@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('RegisteredCtrl', function ($scope, $state, $ionicLoading, $ionicPopup, $ionicBackdrop, $timeout, Util) {
+    .controller('RegisteredCtrl', function ($scope, $state, $ionicPopup, $timeout, Util) {
 
-        $scope.searchResults = false; //search view
-        $scope.searchNoResults = false; //search no results
+        $scope.searchResultList = false; //search view
         $scope.stepInit = true; //step1 view
         $scope.stepOneDisabled = true; //step1 submit
         $scope.stepOnePass = false; //step2 view
@@ -14,10 +13,10 @@ angular.module('EPBUY')
         $scope.inputVal = {}; //ng-model变量容器
 
         $scope.showSearch = function () { //显示隐藏企业码搜索
+            $scope.inputVal.searchVal = null;
+            $scope.searchResultList = false;
             if ($scope.searching) {
                 $scope.searching = false;
-                $scope.inputVal.searchVal = null;
-                $scope.searchResults = false;
             } else {
                 $scope.searching = true;
             }
@@ -39,22 +38,22 @@ angular.module('EPBUY')
         $scope.searchChange = function () { //监听搜索输入框的值
             if ($scope.inputVal.searchVal) {
 
+                $scope.searchResultList = true;
+
                 Util.ajaxRequest({
                     url: '/GetHomeRestaurantBannerInfo.json',
                     effect: 'false',
                     success: function (data) {
-                        $scope.searchResults = true;
-                        $scope.searchNoResults = false;
+                        $scope.searchResultList = data.BannerViewModelList; //取数据 todo...
+
                     },
                     error: function (data) {
-                        $scope.searchResults = false;
-                        $scope.searchNoResults = true;
+                        $scope.searchResultListList = false;
                     }
                 });
 
             } else {
-                $scope.searchNoResults = false;
-                $scope.searchResults = false;
+                $scope.searchResultList = false;
             }
         };
 
@@ -77,7 +76,6 @@ angular.module('EPBUY')
                 success: function (data) {
                     $scope.stepInit = false;
                     $scope.stepOnePass = true;
-
                     //todo...
                 },
                 error: function (data) {
@@ -155,8 +153,9 @@ angular.module('EPBUY')
             Util.ajaxRequest({
                 // method: 'POST',
                 url: '/GetHomeRestaurantBannerInfo.json',
+                popup: 'false',
                 data: {
-                    enterpriseCode: $scope.inputVal.enterpriseCode,
+                    passCode: $scope.passCode, //验证企业码返回的passCode
                     phoneNumber: $scope.inputVal.phoneNumber,
                     validationCode: $scope.inputVal.validationCode,
                     passWord: $scope.inputVal.passWord
@@ -164,8 +163,6 @@ angular.module('EPBUY')
                 success: function (data) {
 
                     localStorage.setItem('EPBUY_USERINFO', 0 || data);
-
-                    $ionicBackdrop.retain();
 
                     $ionicPopup.alert({
                         template: '<h4>免责声明</h4><ion-scroll>我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明</ion-scroll><h3>恭喜您，注册成功</h3>',
@@ -184,7 +181,7 @@ angular.module('EPBUY')
                     $ionicPopup.alert({
                         template: '抱歉，注册失败',
                         buttons: [{
-                            text: '开始购物吧',
+                            text: '请重试',
                             type: 'button-positive',
                             onTap: function () {
                                 // alert(1);

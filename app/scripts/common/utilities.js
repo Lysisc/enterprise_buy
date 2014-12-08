@@ -1,39 +1,42 @@
 'use strict';
 
 //公有方法
-angular.module('EPBUY').factory('Util', function ($rootScope, $http, $state, $compile, $ionicBackdrop, $ionicLoading, $timeout, ENV) {
+angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $ionicLoading, $timeout, ENV) {
 
-    //重写$ionicBackdrop.release();效果
-    var backDrop = function (status) {
-        var backDropDom = angular.element(document.querySelector('.backdrop'));
-        if (status && backDropDom) {
-            $timeout(function () {
-                backDropDom.addClass('visible');
-            }, 100);
-        } else {
+    var backDropDom = angular.element(document.querySelector('.backdrop'));
+
+    if (!backDropDom) {
+        angular.element(document.getElementsByTagName('body')).append('<div class="backdrop"></div>');
+    }
+
+    var backDrop = { //重写遮罩层显示隐藏
+        retain: function () {
+            backDropDom.addClass('visible active');
+        },
+        release: function () {
+            backDropDom.removeClass('active');
             $timeout(function () {
                 backDropDom.removeClass('visible');
             }, 100);
         }
     };
 
-    var toastTimer = null,
-        toastTpl = null;
-
-    $rootScope.$on('$locationChangeStart', function () { //切换页面时清除dom
-        backDrop();
-        toastTpl = null;
-    });
-
     /**
      * toast提示层
      * @param scope, msg, time
      */
+    var toastTimer = null,
+        toastTpl = null;
+
+    $rootScope.$on('$locationChangeStart', function () {
+        toastTpl = null;
+    });
+
     var msgToast = function (scope, msg, time) {
 
         if (!toastTpl) {
             toastTpl = $compile('<div class="notifier" ng-if="notification"><span>{{notification}}</span></div>');
-            angular.element(window.document.getElementsByTagName('ion-nav-view')[0]).append(toastTpl(scope));
+            angular.element(document.getElementsByTagName('ion-nav-view')[0]).append(toastTpl(scope));
         }
 
         scope.notification = msg;
@@ -124,21 +127,6 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $state, $co
     };
 
     /**
-     * 格式化餐馆名称, Format：name·alias
-     * @param name
-     * @param alias
-     */
-    var formatRestaurantName = function (name, alias) {
-        if (!name) {
-            return '';
-        }
-        if (alias) {
-            name += ' • ' + alias;
-        }
-        return name;
-    };
-
-    /**
      * ajax请求
      * @param param
      */
@@ -148,13 +136,16 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $state, $co
             success = param && param.success,
             error = param && param.error,
             effect = param && param.effect,
+            popup = param && param.popup,
             postData = param && param.data || {};
 
         if (effect !== 'false') {
-            $ionicBackdrop.retain();
+
             $ionicLoading.show({
                 template: '<span style="color:red;">loading...</span>'
             });
+
+            backDrop.retain();
         }
 
         $http({
@@ -164,8 +155,11 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $state, $co
         }).success(function (data) {
             console.log(data);
 
-            $ionicBackdrop.release();
             $ionicLoading.hide();
+
+            if (popup !== 'false') {
+                backDrop.release();
+            }
 
             if (typeof success === 'function') {
                 success(data);
@@ -173,8 +167,11 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $state, $co
 
         }).error(function (data) {
 
-            $ionicBackdrop.release();
             $ionicLoading.hide();
+
+            if (popup !== 'false') {
+                backDrop.release();
+            }
 
             //todo... 判断错误信息
             if (typeof error === 'function') {
@@ -188,9 +185,9 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $state, $co
     };
 
     return {
+        backDrop: backDrop,
         safeApply: safeApply,
         stickyTopScroll: stickyTopScroll,
-        formatRestaurantName: formatRestaurantName,
         msgToast: msgToast,
         ajaxRequest: ajaxRequest
     };

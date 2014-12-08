@@ -7,7 +7,7 @@
                     <input ng-change="searchChange();" ng-model="inputVal.searchVal" type="search" placeholder="请输入企业名/企业码"></label>
                 <button class="button-clear" ng-click="showSearch();">取消</button>
             </div>
-            <ion-scroll class="list" ng-if="searchResults">
+            <ion-scroll class="list" ng-if="searchResultList" ng-repeat="(key, value) in searchResultList">
                 <label class="item search-item cur" ng-click="chooseItemSearch($event, 'a0001')"> <i class="icon ion-checkmark"></i>
                     上海通用汽车 - a0001
                 </label>
@@ -24,7 +24,7 @@
                     上海一汽大众 - a0002
                 </label>
             </ion-scroll>
-            <div class="item no-results" ng-if="searchNoResults">抱歉，没有结果</div>
+            <div class="item no-results" ng-if="!searchResultList && inputVal.searchVal">抱歉，没有结果</div>
         </div>
 
         <div class="ep-registered-step" ng-if="stepInit">
