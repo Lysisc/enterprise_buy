@@ -1,25 +1,23 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('HomeCtrl', function ($scope, $cacheFactory, $state, $timeout, Util) {
+    .controller('ListCtrl', function ($scope, $cacheFactory, $state, $timeout, $q, Util) {
 
         $scope.bottomBarCur = 'home';
         $scope.searchObj = {};
 
-        var homeData = $cacheFactory.get('homeData');
+        var listData = $cacheFactory.get('listData');
 
-        if (homeData && homeData.info().commentList) {
-            $scope.hasActivity = true;
-            $scope.productList = homeData.info().commentList; //取缓存数据
+        if (listData && listData.info().commentList) {
+            $scope.productList = listData.info().commentList; //取缓存数据
         } else {
             Util.ajaxRequest({
                 url: 'GetHomeRestaurantBannerInfo',
                 success: function (data) {
 
                     if (data.commentList && data.commentList.length > 0) {
-                        $scope.hasActivity = true;
 
-                        $cacheFactory('homeData', data);
+                        $cacheFactory('listData', data);
 
                         $scope.productList = data.commentList; //取数据 todo...
                     }

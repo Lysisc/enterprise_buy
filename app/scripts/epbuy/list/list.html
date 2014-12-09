@@ -1,0 +1,32 @@
+<ion-view title="所有商品" class="ep-list">
+
+    <ion-content scroll="false">
+
+        <ion-scroll>
+
+            <div class="product-list-double">
+                <a class="product-item" ng-href="#/epbuy/home?index={{index}}" ng-repeat="(index, item) in productList">
+                    <div class="img">
+                        <img ng-src="">
+                        <div class="mask" style="display:-webkit-box;">
+                            水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="p-discount">5.5折</span>
+                        <span class="p-red">&yen;148</span>
+                        <s class="p-gray">&yen;260</s>
+                    </div>
+                </a>
+            </div>
+        </ion-scroll>
+
+    </ion-content>
+
+    <bottom-bar></bottom-bar>
+
+</ion-view>
+
+<ion-nav-buttons side="right">
+    <shopping-cart></shopping-cart>
+</ion-nav-buttons>

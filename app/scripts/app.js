@@ -35,6 +35,14 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/home/home.html',
                 controller: 'HomeCtrl'
             })
+            // 列表页
+            .state('epbuy.list', {
+                url: '/list',
+                templateUrl: 'scripts/epbuy/list/list.html',
+                controller: 'ListCtrl'
+            })
+
+            
             // 目的地切换
             .state('epbuy.destinationSwitch', {
                 url: '/destinationSwitch',
@@ -46,18 +54,6 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 url: '/rest/:RestaurantId',
                 templateUrl: 'scripts/epbuy/rest/foods-restaurant.html',
                 controller: 'FoodsRestaurantCtrl'
-            })
-            // 特色美食页
-            .state('epbuy.specialfood', {
-                url: '/spec/:DestinationId',
-                templateUrl: 'scripts/epbuy/spec/foods-specialfood.html',
-                controller: 'FoodsSpecialFoodCtrl'
-            })
-            // 人气排行页
-            .state('epbuy.hot', {
-                url: '/hot/:DestinationId',
-                templateUrl: 'scripts/epbuy/hot/foods-hot.html',
-                controller: 'FoodsHotCtrl'
             })
             // 搜索结果页 & 发现美食页
             .state('epbuy.findfoods', {

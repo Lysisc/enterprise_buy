@@ -181,7 +181,6 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
                 error(data);
             } else {
                 $rootScope.noNetwork = true;
-                console.log($rootScope);
             }
 
         });

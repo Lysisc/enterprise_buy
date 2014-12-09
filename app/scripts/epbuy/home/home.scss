@@ -1,30 +1,7 @@
-.home {
+.ep-home {
     .bar {
         position: static;
         height: 45px;
-        .shopping-cart {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            font-size: 20px;
-            text-decoration: none;
-            color: #fff;
-            width: 50px;
-            height: 44px;
-            padding-left: 5px;
-            margin-right: 3px;
-            .ion-cart {
-                display: inline-block;
-                margin-top: 12px;
-            }
-            .ion-cart:before {
-                font-size: 18px;
-                content: "\f3f7";
-            }
-            span {
-                font-size: 16px;
-            }
-        }
     }
     .slide-box {
         width: 100%;
@@ -62,10 +39,20 @@
             width: 239px;
         }
     }
-    .search-panel {
+    .list {
         display: none;
         width: 100%;
         height: 100%;
+        .scroll {
+            background-color: #f5f5f5;
+            margin-top: 4px;
+        }
+        .search-item {
+            background-color: #fff;
+        }
+        .no-results {
+            text-align: center;
+        }
     }
     .button-clear {
         display: none;
@@ -78,7 +65,7 @@
             z-index: 1;
             width: 100%;
         }
-        .search-panel, .button-clear {
+        .list, .button-clear {
             display: block;
         }
     }

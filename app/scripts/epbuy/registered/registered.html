@@ -5,14 +5,14 @@
             <div class="item-input-inset">
                 <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
                     <input ng-change="searchChange();" ng-model="inputVal.searchVal" type="search" placeholder="请输入企业名/企业码"></label>
-                <button class="button-clear" ng-click="showSearch();">取消</button>
+                <button class="button-clear" ng-click="hideSearch();">取消</button>
             </div>
-            <ion-scroll class="list" ng-if="searchResultList">
+            <ion-scroll class="list" ng-if="searching">
                 <label ng-repeat="(index, item) in searchResultList" class="item search-item" ng-class="{cur: index == 0}" ng-click="chooseItemSearch($event, {{item.commentPrize}})"> <i class="icon ion-checkmark"></i>
                     上海通用汽车 - {{item.commentPrize}}
                 </label>
+                <div class="item no-results" ng-if="!searchResultList && inputVal.searchVal">抱歉，没有结果</div>
             </ion-scroll>
-            <div class="item no-results" ng-if="!searchResultList && inputVal.searchVal">抱歉，没有结果</div>
         </div>
 
         <div class="ep-registered-step" ng-if="stepInit">

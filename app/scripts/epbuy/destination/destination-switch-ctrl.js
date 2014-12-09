@@ -196,27 +196,6 @@ angular.module('EPBUY')
                 $scope.searchObj.list = [];
             });
 
-
-            /*var cities, city, i, len, list = [];
-             if ($scope.searchObj.key) {
-             for (var key in cityModel) {
-             for (var letter in cityModel[key]) {
-             if (letter === '0') {
-             continue;
-             }
-             cities = cityModel[key][letter];
-             for (i = 0, len = cities.length; i < len; i++) {
-             city = cities[i];
-             if ((city.ename + '|' + city.py + '|' + city.name).indexOf($scope.searchObj.key) !== -1) {
-             list.push(city.name);
-             }
-             }
-             }
-             }
-             $scope.searchObj.list = list;
-             } else {
-             $scope.searchObj.list = [];
-             }*/
         };
 
         $scope.onKeydown = function (e) {

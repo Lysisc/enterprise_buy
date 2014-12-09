@@ -11,14 +11,15 @@ angular.module('EPBUY')
         $scope.validationEnable = true; //验证码可用
         $scope.inputVal = {}; //ng-model变量容器
 
-        $scope.showSearch = function () { //显示隐藏企业码搜索
+        $scope.showSearch = function () {
+            $scope.searching = true;
+            $scope.searchResultList = true;
+        };
+
+        $scope.hideSearch = function () {
             $scope.inputVal.searchVal = null;
             $scope.searchResultList = false;
-            if ($scope.searching) {
-                $scope.searching = false;
-            } else {
-                $scope.searching = true;
-            }
+            $scope.searching = false;
         };
 
         $scope.chooseItemSearch = function (e, itemId) { //选择企业
@@ -27,6 +28,7 @@ angular.module('EPBUY')
             angular.element(e.target).addClass('cur');
             if (itemId) {
                 $scope.inputVal.enterpriseCode = itemId;
+                $scope.inputVal.searchVal = null;
                 $scope.stepOneDisabled = false;
                 $scope.searching = false;
             } else {
@@ -34,23 +36,32 @@ angular.module('EPBUY')
             }
         };
 
+        var searchTimer = null;
         $scope.searchChange = function () { //监听搜索输入框的值
+
             if ($scope.inputVal.searchVal) {
 
-                $scope.searchResultList = true;
+                $timeout.cancel(searchTimer);
 
-                Util.ajaxRequest({
-                    url: 'GetHomeRestaurantBannerInfo',
-                    effect: 'false',
-                    success: function (data) {
-                        $scope.searchResultList = data.commentList; //取数据 todo...
-                    },
-                    error: function (data) {
-                        $scope.searchResultList = false;
-                    }
-                });
+                searchTimer = $timeout(function () {
+                    Util.ajaxRequest({
+                        url: 'GetHomeRestaurantBannerInfo',
+                        effect: 'false',
+                        success: function (data) {
+                            if (data.commentList && data.commentList.length > 0) {
+                                $scope.searchResultList = data.commentList; //取数据 todo...
+                            } else {
+                                $scope.searchResultList = false;
+                            }
+                        },
+                        error: function (data) {
+                            $scope.searchResultList = false;
+                        }
+                    });
+                }, 300);
 
             } else {
+                $timeout.cancel(searchTimer);
                 $scope.searchResultList = false;
             }
         };

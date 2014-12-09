@@ -1,23 +1,24 @@
-<ion-view class="home" hide-nav-bar="true" ng-class="{searching:searching}">
+<ion-view class="ep-home" hide-nav-bar="true" ng-class="{searching:searching}">
 
     <ion-content scroll="false">
 
         <!-- 头部 -->
         <div class="nav-title-slide-ios7 bar-positive bar bar-header nav-bar disable-user-behavior">
             <h1 class="title">企福惠</h1>
-            <a class="shopping-cart" ng-href="#" ng-if="hasActivity"> <i class="ion-cart"></i>
-                <span>{{shoppingCart}}</span>
-            </a>
+            <shopping-cart ng-if="hasActivity"></shopping-cart>
         </div>
 
         <!-- 搜索 -->
         <div class="item-input-inset" ng-if="!noNetwork && hasActivity">
             <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
-                <input ng-change="searchChange();" ng-focus="showSearch();" ng-model="searchObj.searchVal" type="search" placeholder="请输入关键字"></label>
-            <button class="button-clear" ng-click="showSearch();">取消</button>
+                <input ng-change="searchChange();" ng-click="showSearch();" ng-model="searchObj.searchVal" type="search" placeholder="请输入关键字"></label>
+            <button class="button-clear" ng-click="hideSearch();">取消</button>
         </div>
 
-        <div class="search-panel"></div>
+        <ion-scroll class="list" ng-if="searching">
+            <label ng-repeat="(index, item) in searchResultList" class="item search-item" ng-click="chooseItemSearch({{item.commentPrize}})">上海通用汽车{{item.commentPrize}}</label>
+            <div class="item no-results" ng-if="!searchResultList && searchObj.searchVal">抱歉，没有结果</div>
+        </ion-scroll>
 
         <div class="no-activity" ng-if="!noNetwork && !hasActivity">
             <img ng-src="images/no_goods.png" alt=""></div>
@@ -43,7 +44,7 @@
             </ion-slide-box>
 
             <h3 class="hot-product">
-                <a ng-href="#">查看所有商品&gt;&gt;</a>
+                <a ng-href="#/epbuy/list">查看所有商品&gt;&gt;</a>
                 热门商品
             </h3>
 
@@ -67,19 +68,5 @@
     </ion-content>
 
     <bottom-bar></bottom-bar>
-
-    <!-- 搜素面板 -->
-    <ion-scroll class="search-panel" ng-if="searching" on-scroll="onScroll()">
-        <div class="search-list" ng-if="searchObj.list">
-            <a href="{{item.Href}}" ng-repeat="item in searchObj.list">
-                <div class="count" ng-if="item.Count">{{item.Count}}结果</div>
-                <div class="detail" ng-bind-html="item.Name"></div>
-            </a>
-        </div>
-        <div class="search-near" ng-if="searchObj.near">
-            <a href="{{near.Href}}" ng-repeat="near in searchObj.near" ng-bind-html="near.Name"></a>
-        </div>
-        <div class="search-none" ng-if="showNoResult">抱歉，没有找到“{{searchObj.key}}”相关信息</div>
-    </ion-scroll>
 
 </ion-view>
