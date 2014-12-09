@@ -8,11 +8,15 @@ angular.module('EPBUY')
 			controller: function ($rootScope, $timeout) {
 				$rootScope.shoppingCartShow = false;
 				$timeout(function () {
+
 					$rootScope.shoppingCartShow = true;
 					$rootScope.shoppingCart = 11; //todo...
-					console.log($rootScope);
+
 				}, 300);
 
+				$rootScope.addToCart = function () {
+					console.log($rootScope.shoppingCart);
+				};
 			}
 		};
 	});
