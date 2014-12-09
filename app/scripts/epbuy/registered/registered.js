@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('RegisteredCtrl', function ($scope, $state, $ionicPopup, $timeout, Util) {
+    .controller('RegisteredCtrl', function ($cacheFactory, $scope, $state, $ionicPopup, $timeout, Util) {
 
         $scope.stepInit = true; //step1 view
         $scope.stepOneDisabled = true; //step1 submit
@@ -40,7 +40,7 @@ angular.module('EPBUY')
                 $scope.searchResultList = true;
 
                 Util.ajaxRequest({
-                    url: '/GetHomeRestaurantBannerInfo.json',
+                    url: 'GetHomeRestaurantBannerInfo',
                     effect: 'false',
                     success: function (data) {
                         $scope.searchResultList = data.commentList; //取数据 todo...
@@ -67,7 +67,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 // method: 'POST',
-                url: '/GetHomeRestaurantBannerInfo.json',
+                url: 'GetHomeRestaurantBannerInfo',
                 data: {
                     enterpriseCode: $scope.inputVal.enterpriseCode
                 },
@@ -94,7 +94,7 @@ angular.module('EPBUY')
         $scope.getVerificationCode = function () { //获取验证码
 
             Util.ajaxRequest({
-                url: '/GetHomeRestaurantBannerInfo.json',
+                url: 'GetHomeRestaurantBannerInfo',
                 effect: 'false',
                 success: function (data) {
                     $scope.validationDataCode = 100;
@@ -150,7 +150,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 // method: 'POST',
-                url: '/GetHomeRestaurantBannerInfo.json',
+                url: 'GetHomeRestaurantBannerInfo',
                 popup: 'false',
                 data: {
                     passCode: $scope.passCode, //验证企业码返回的passCode

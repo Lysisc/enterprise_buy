@@ -1,12 +1,11 @@
 'use strict';
 
-//公有方法
 angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $ionicLoading, $timeout, ENV) {
 
     var backDropDom = angular.element(document.querySelector('.backdrop'));
 
     if (!backDropDom) {
-        angular.element(document.getElementsByTagName('body')).append('<div class="backdrop"></div>');
+        angular.element(document.getElementsByTagName('body')[0]).append('<div class="backdrop"></div>');
     }
 
     var backDrop = { //重写遮罩层显示隐藏
@@ -25,17 +24,12 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
      * toast提示层
      * @param scope, msg, time
      */
-    var toastTimer = null,
-        toastTpl = null;
-
-    $rootScope.$on('$locationChangeStart', function () {
-        toastTpl = null;
-    });
-
+    var toastTimer = null;
     var msgToast = function (scope, msg, time) {
+        var toastDom = angular.element(document.querySelector('.notifier'));
 
-        if (!toastTpl) {
-            toastTpl = $compile('<div class="notifier" ng-if="notification"><span>{{notification}}</span></div>');
+        if (!toastDom.length) {
+            var toastTpl = $compile('<div class="notifier" ng-show="notification"><span>{{notification}}</span></div>');
             angular.element(document.getElementsByTagName('ion-nav-view')[0]).append(toastTpl(scope));
         }
 
@@ -45,7 +39,6 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
 
         toastTimer = $timeout(function () {
             scope.notification = '';
-            $timeout.cancel(toastTimer);
         }, time || 2000);
 
     };
@@ -128,7 +121,15 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
 
     /**
      * ajax请求
-     * @param param
+     * @param param = {
+        method: '请求方式',
+        url: '请求地址',
+        success: '请求成功回调',
+        error: '请求失败回调',
+        effect: '请求结果是否需要mask效果',
+        popup: '请求结果是否有popup',
+        data: 'POST数据'
+     }
      */
     var ajaxRequest = function (param) {
         var method = param && param.method || 'GET',
@@ -150,7 +151,7 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
 
         $http({
             method: method,
-            url: ENV.getDomain() + url,
+            url: ENV.getDomain() + url + '.json',
             data: postData
         }).success(function (data) {
             console.log(data);
@@ -163,6 +164,8 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
 
             if (typeof success === 'function') {
                 success(data);
+            } else {
+                console.log($rootScope);
             }
 
         }).error(function (data) {
@@ -177,7 +180,8 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
             if (typeof error === 'function') {
                 error(data);
             } else {
-                console.log('网络问题请重试');
+                $rootScope.noNetwork = true;
+                console.log($rootScope);
             }
 
         });
@@ -192,21 +196,3 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
         ajaxRequest: ajaxRequest
     };
 });
-
-//公有工具
-angular.module('EPBUY')
-    .directive('focusEffect', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, element) {
-                element.on('focus blur', function (e) {
-                    var labelObj = angular.element(e.path[1]);
-                    if (e.type === 'focus') {
-                        labelObj.addClass('focus');
-                    } else {
-                        labelObj.removeClass('focus');
-                    }
-                });
-            }
-        };
-    });

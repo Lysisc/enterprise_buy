@@ -1,142 +1,72 @@
-<ion-view class="home" hide-nav-bar="true">
+<ion-view class="home" hide-nav-bar="true" ng-class="{searching:searching}">
 
-    <!-- 头部 -->
-    <div class="nav-title-slide-ios7 bar-positive bar bar-header nav-bar disable-user-behavior">
-        <h1 class="title">企福惠</h1>
-        <a class="shopping-cart" ng-href="#"> <i class="ion-cart"></i>
-            <span>{{shoppingCart}}</span>
-        </a>
-    </div>
+    <ion-content scroll="false">
 
-    <!-- 搜索 -->
-    <div class="item-input-inset">
-        <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
-            <input ng-change="searchChange();" ng-model="inputVal.searchVal" type="search" placeholder="请输入企业名/企业码"></label>
-    </div>
-
-    <ion-content ng-class="{searching:searching}">
-
-        <ion-slide-box class="slide-box" auto-play="true" does-continue="true">
-            <ion-slide>
-                <div class="slide-page">
-                    <img ng-src="images/bottom_bg.png"></div>
-            </ion-slide>
-            <ion-slide>
-                <div class="slide-page">
-                    <img ng-src="images/bottom_bg.png"></div>
-            </ion-slide>
-            <ion-slide>
-                <div class="slide-page">
-                    <img ng-src="images/bottom_bg.png"></div>
-            </ion-slide>
-            <ion-slide>
-                <div class="slide-page">
-                    <img ng-src="images/bottom_bg.png"></div>
-            </ion-slide>
-        </ion-slide-box>
-
-        <h3 class="hot-product">
-            <a ng-href="#">查看所有商品&gt;&gt;</a>
-            热门商品
-        </h3>
-
-        <div class="product-list-double">
-            <div class="product-item">
-                <div class="img">
-                    <img ng-src="">
-                    <div class="mask" style="display:-webkit-box;">
-                        水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                    </div>
-                </div>
-                <div class="price">
-                    <span class="p-discount">5.5折</span>
-                    <span class="p-red">&yen;148</span>
-                    <s class="p-gray">&yen;260</s>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="img">
-                    <img ng-src="">
-                    <div class="mask">
-                        水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                    </div>
-                </div>
-                <div class="price">
-                    <span class="p-discount">5.5折</span>
-                    <span class="p-red">&yen;148</span>
-                    <s class="p-gray">&yen;260</s>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="img">
-                    <img ng-src="">
-                    <div class="mask">
-                        水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                    </div>
-                </div>
-                <div class="price">
-                    <span class="p-discount">5.5折</span>
-                    <span class="p-red">&yen;148</span>
-                    <s class="p-gray">&yen;260</s>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="img">
-                    <img ng-src="">
-                    <div class="mask">
-                        水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                    </div>
-                </div>
-                <div class="price">
-                    <span class="p-discount">5.5折</span>
-                    <span class="p-red">&yen;148</span>
-                    <s class="p-gray">&yen;260</s>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="img">
-                    <img ng-src="">
-                    <div class="mask">
-                        水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                    </div>
-                </div>
-                <div class="price">
-                    <span class="p-discount">5.5折</span>
-                    <span class="p-red">&yen;148</span>
-                    <s class="p-gray">&yen;260</s>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="img">
-                    <img ng-src="">
-                    <div class="mask">
-                        水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                    </div>
-                </div>
-                <div class="price">
-                    <span class="p-discount">5.5折</span>
-                    <span class="p-red">&yen;148</span>
-                    <s class="p-gray">&yen;260</s>
-                </div>
-            </div>
+        <!-- 头部 -->
+        <div class="nav-title-slide-ios7 bar-positive bar bar-header nav-bar disable-user-behavior">
+            <h1 class="title">企福惠</h1>
+            <a class="shopping-cart" ng-href="#" ng-if="hasActivity"> <i class="ion-cart"></i>
+                <span>{{shoppingCart}}</span>
+            </a>
         </div>
+
+        <!-- 搜索 -->
+        <div class="item-input-inset" ng-if="!noNetwork && hasActivity">
+            <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
+                <input ng-change="searchChange();" ng-focus="showSearch();" ng-model="searchObj.searchVal" type="search" placeholder="请输入关键字"></label>
+            <button class="button-clear" ng-click="showSearch();">取消</button>
+        </div>
+
+        <div class="search-panel"></div>
+
+        <div class="no-activity" ng-if="!noNetwork && !hasActivity">
+            <img ng-src="images/no_goods.png" alt=""></div>
+
+        <ion-scroll ng-if="!noNetwork && hasActivity">
+            <ion-slide-box class="slide-box" auto-play="true" does-continue="true">
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/bottom_bg.png"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/bottom_bg.png"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/bottom_bg.png"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/bottom_bg.png"></div>
+                </ion-slide>
+            </ion-slide-box>
+
+            <h3 class="hot-product">
+                <a ng-href="#">查看所有商品&gt;&gt;</a>
+                热门商品
+            </h3>
+
+            <div class="product-list-double">
+                <a class="product-item" ng-href="#/epbuy/home?index={{index}}" ng-repeat="(index, item) in productList">
+                    <div class="img">
+                        <img ng-src="">
+                        <div class="mask" style="display:-webkit-box;">
+                            水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="p-discount">5.5折</span>
+                        <span class="p-red">&yen;148</span>
+                        <s class="p-gray">&yen;260</s>
+                    </div>
+                </a>
+            </div>
+        </ion-scroll>
 
     </ion-content>
 
-    <div class="tabs tabs-icon-top">
-        <a class="tab-item">
-            <i class="icon ion-home"></i>
-            Home
-        </a>
-        <a class="tab-item">
-            <i class="icon ion-star"></i>
-            Favorites
-        </a>
-        <a class="tab-item">
-            <i class="icon ion-gear-a"></i>
-            Settings
-        </a>
-    </div>
+    <bottom-bar></bottom-bar>
 
     <!-- 搜素面板 -->
     <ion-scroll class="search-panel" ng-if="searching" on-scroll="onScroll()">

@@ -51,7 +51,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
 }
 // icon字体
-.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d {
+.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-bar-person {
     font-family: "Ionicons";
 }
 // 搜索框
@@ -78,6 +78,12 @@ input::-webkit-inner-spin-button {
 .bar .button.back-button:before {
     font-size: 26px;
 }
+.bar-positive.invisible {
+    .left-buttons {
+        display: none;
+    }
+}
+//主体背景
 .scroll-content {
     background-color: #f5f5f5;
 }
@@ -341,16 +347,24 @@ input::-webkit-inner-spin-button {
         width: 100%;
     }
 }
+// 滚动容器
+.scroll-view {
+    height: 100%;
+}
 // 列表样式
 .product-list {
     width: 100%;
 }
 .product-list-double {
     width: 100%;
+    overflow: hidden;
+    @include clear-float;
     .product-item {
         float: left;
+        display: block;
         width: 50%;
         overflow: hidden;
+        text-decoration: none;
         padding: 6px 5px 4px;
         .img {
             position: relative;

@@ -1,9 +1,6 @@
 .home {
     .bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 2;
+        position: static;
         height: 45px;
         .shopping-cart {
             position: absolute;
@@ -26,46 +23,64 @@
             }
             span {
                 font-size: 16px;
-                margin-left: 5px;
             }
         }
     }
-    .item-input-inset {
-        position: fixed;
+    .slide-box {
         width: 100%;
-        top: 45px;
-        left: 0;
-        z-index: 1;
+        overflow: hidden;
+        .slide-page img {
+            width: 100%;
+        }
     }
-    .scroll-content {
-        background-color: #fff;
+    .hot-product {
+        margin: 0;
+        padding: 5px 15px 3px;
+        font-size: 14px;
+        color: #476681;
+        a {
+            float: right;
+            text-decoration: none;
+            color: #476681;
+        }
     }
     .scroll {
         background-color: #fff;
-        @include clear-float;
-        .slide-box {
-            width: 100%;
-            overflow: hidden;
-            margin-top: 93px;
-            .slide-page img {
-                width: 100%;
-            }
-        }
-        .hot-product {
-            margin: 0;
-            padding: 5px 15px 3px;
-            font-size: 14px;
-            color: #476681;
-            a {
-                float: right;
-                text-decoration: none;
-                color: #476681;
-            }
+        padding-bottom: 175px;
+    }
+    .no-activity {
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        position: relative;
+        img {
+            position: absolute;
+            left: 50%;
+            bottom: 100px;
+            z-index: 1;
+            margin-left: -120px;
+            width: 239px;
         }
     }
-
+    .search-panel {
+        display: none;
+        width: 100%;
+        height: 100%;
+    }
+    .button-clear {
+        display: none;
+    }
     &.searching {
-        background-color: #000;
+        .item-input-inset {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+        }
+        .search-panel, .button-clear {
+            display: block;
+        }
     }
 }
 .hybirdIOS7 .searching {

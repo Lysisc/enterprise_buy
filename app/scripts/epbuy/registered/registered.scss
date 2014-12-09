@@ -41,7 +41,9 @@
             color: #999;
         }
         .list {
-            height: 100%;
+            .scroll {
+                padding-bottom: 65px;
+            }
         }
         .no-results {
             text-align: center;

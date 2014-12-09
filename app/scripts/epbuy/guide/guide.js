@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('GuideCtrl', function ($scope, $timeout, $state, $http, ENV) {
+    .controller('GuideCtrl', function ($scope, $timeout, $state, ENV, Util) {
 
         var pager = null;
 
@@ -35,11 +35,5 @@ angular.module('EPBUY')
         };
 
         $scope.isHybrid = ENV.isHybrid;
-        $scope.RestaurantBanner = {};
-        $scope.RestaurantBanner.linksrc = '';
-        $scope.RestaurantBanner.img = '';
-        $scope.ShoppingBanner = {};
-        $scope.ShoppingBanner.linksrc = '';
-        $scope.ShoppingBanner.img = '';
 
     });

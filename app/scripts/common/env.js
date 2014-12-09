@@ -17,18 +17,17 @@ angular.module('EPBUY').factory('ENV', function () {
 
     var domainMap = {
         // todo: use gateway domain with service code.
-        // waptest: 'http://ws.you.fat61.qa.nt.ctripcorp.com/mobilefood',
-        waptest: '/api',
-        uat: 'http://gateway.m.uat.qa.nt.ctripcorp.com/restapi/soa2/10332',
-        baolei: 'http://m.ctrip.com/restapi/soa2/10332',
-        preProduction: 'http://m.ctrip.com/restapi/soa2/10332'
+        waptest: '/api/',
+        uat: '/api/',
+        baolei: '/api/',
+        preProduction: '/api/'
     };
 
     var domainOnlyMap = {
-        waptest: 'http://gateway.m.fws.qa.nt.ctripcorp.com/restapi',
-        uat: 'http://gateway.m.uat.qa.nt.ctripcorp.com/restapi',
-        baolei: 'http://m.ctrip.com/restapi',
-        preProduction: 'http://m.ctrip.com'
+        waptest: '/api/',
+        uat: '/api/',
+        baolei: '/api/',
+        preProduction: '/api/'
     };
 
     /*

@@ -5,7 +5,7 @@
 
     <ion-content has-bouncing="false" scroll="false">
         <!-- 右边的滑动定位控件 -->
-        <ul class="slide-locate" gs-touch-move="sliderTouchMove($event)" ng-if="internal && external && !searching">
+        <ul class="slide-locate" touch-move="sliderTouchMove($event)" ng-if="internal && external && !searching">
             <li ng-repeat="(id, cities) in internal" idx="{{$index + 1}}" ng-class="{'ion-search': $first}" ng-if="tabIndex == 0">{{$first ? '' : id}}</li>
             <li ng-repeat="(id, cities) in external" idx="{{$index + 1}}" ng-class="{'ion-search': $first}" ng-if="tabIndex == 1">{{$first ? '' : id}}</li>
         </ul>

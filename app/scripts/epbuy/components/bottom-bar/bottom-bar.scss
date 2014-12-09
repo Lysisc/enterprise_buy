@@ -1,0 +1,30 @@
+.ep-bottom-bar.tabs {
+    z-index: 15;
+    background-color: #333;
+    color: #fff;
+    .tab-item {
+        height: 49px;
+        margin-top: -2px;
+        font-size: 14px;
+        padding-top: 9px;
+        &:active, &.cur {
+            background-color: #4a87ee;
+        }
+    }
+    .icon {
+        font-size: 27px;
+        height: 22px;
+    }
+    .ion-bar-home:before {
+        content: "\f447";
+    }
+    .ion-bar-heart {
+        padding-right: 1px;
+    }
+    .ion-bar-heart:before {
+        content: "\f442";
+    }
+    .ion-bar-person:before {
+        content: "\f47d";
+    }
+}
