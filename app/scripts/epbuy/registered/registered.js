@@ -46,7 +46,7 @@ angular.module('EPBUY')
                 searchTimer = $timeout(function () {
                     Util.ajaxRequest({
                         url: 'GetHomeRestaurantBannerInfo',
-                        effect: 'false',
+                        mask: 'false',
                         data: {
                             enterpriseCode: $scope.inputVal.enterpriseCode // todo...
                         },
@@ -109,7 +109,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 url: 'GetHomeRestaurantBannerInfo',
-                effect: 'false',
+                mask: 'false',
                 data: {
                     enterpriseCode: $scope.inputVal.enterpriseCode // todo...
                 },

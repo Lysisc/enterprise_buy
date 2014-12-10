@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('ListCtrl', function ($scope, $cacheFactory, $ionicScrollDelegate, $timeout, Util) {
+    .controller('ListCtrl', function ($rootScope, $scope, $ionicScrollDelegate, $timeout, Util) {
 
         $scope.isSingle = true; //初始化单列列表
         $scope.priceUp = true; //初始化价格升序
@@ -9,81 +9,98 @@ angular.module('EPBUY')
         $scope.pageIndex = 1; //初始化第一页
 
         $scope.searchType = 'detail'; // 列表页搜索接口类型定义
-        $scope.bottomBarCur = 'home';
+        $scope.bottomBarCur = 'home'; //底部bar高亮
 
-        function renderData() {
+        function dateSubtract(startDate, endDate) { // 活动时间处理
+
+            var sDate = new Date(Date.parse(startDate.replace(/-/g, '/'))),
+                eDate = new Date(Date.parse(endDate.replace(/-/g, '/'))),
+                rest = '';
+
+            if (sDate.getTime() > eDate.getTime()) {
+                console.log('数据错误，开始日期不能大于结束日期！');
+            } else {
+                var diff = eDate.getTime() - sDate.getTime(),
+                    days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                diff = diff - days * (1000 * 60 * 60 * 24);
+
+                var hours = Math.floor(diff / (1000 * 60 * 60));
+
+                diff = diff - hours * (1000 * 60 * 60);
+
+                var minutes = diff / 1000;
+
+                if (parseInt(days, 0)) {
+                    rest = days + '天' + hours + '小时';
+                } else if (parseInt(hours, 0)) {
+                    rest = hours + '小时';
+                } else {
+                    rest = minutes + '分钟';
+                }
+
+                return rest;
+            }
+
+        }
+
+        function renderData(sort, isLoading, isMask) {
             Util.ajaxRequest({
                 url: 'GetHomeRestaurantBannerInfo',
+                loading: isLoading || true,
+                mask: isMask || true,
                 data: {
-
                     enterpriseCode: $scope.enterpriseCode // todo...
                 },
                 success: function (data) {
 
+                    switch (sort) {
+                    case 'price':
+                        $scope.priceUp = $scope.priceUp ? false : true;
+                        break;
+                    case 'discount':
+                        $scope.discountUp = $scope.discountUp ? false : true;
+                        break;
+                    }
+
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+
                     if (data.commentList && data.commentList.length > 0) {
 
-                        // $cacheFactory('listData', data);
+                        $scope.startTime = '2014-12-20 12:43:16'.substr(5, 5);
+                        $scope.endTime = '2014-12-22 12:43:16'.substr(5, 5);
+                        $scope.restTime = dateSubtract('2014-12-20 12:53:16', '2014-12-22 12:43:16');
 
-                        $scope.productList = data.commentList; //取数据 todo...
+                        if (sort) {
+                            $scope.pageIndex = 1;
+                            $scope.productList = data.commentList; //取数据 todo...
+                            $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
+                        } else {
+                            $scope.productList = $scope.productList.concat(data.commentList);
+                        }
                     }
 
                 }
             });
         }
 
-        renderData();
+        renderData(true); //首屏数据加载
 
-        // var listData = $cacheFactory.get('listData');
-
-        // if (listData && listData.info().commentList) {
-        //     $scope.productList = listData.info().commentList; //取缓存数据
-        // } else {
-        //     renderData();
-        // }
-
-        $scope.pageLoad = function () {
-            // alert(1);
+        $scope.loadMore = function () { //翻页加载
             $scope.pageIndex++;
-            renderData();
+            renderData(false, 'false', 'false');
         };
 
         $scope.filtersCtrl = function (type) {
             switch (type) {
             case 'brand': //品牌
-
-                console.log(type);
-                renderData();
-
-                break;
             case 'price': //价格
-
-                if ($scope.priceUp) {
-                    $scope.priceUp = false;
-                } else {
-                    $scope.priceUp = true;
-                }
-
-                renderData();
-
-                break;
             case 'discount': //折扣
-
-                if ($scope.discountUp) {
-                    $scope.discountUp = false;
-                } else {
-                    $scope.discountUp = true;
-                }
-
-                renderData();
-
+                renderData(type);
                 break;
             default:
                 $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0, true);
-                if ($scope.isSingle) {
-                    $scope.isSingle = false;
-                } else {
-                    $scope.isSingle = true;
-                }
+                $scope.isSingle = $scope.isSingle ? false : true;
             }
         };
 

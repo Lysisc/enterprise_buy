@@ -126,27 +126,44 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
         url: '请求地址',
         success: '请求成功回调',
         error: '请求失败回调',
-        effect: '请求结果是否需要mask效果',
+        mask: '请求结果是否需要mask效果',
         popup: '请求结果是否有popup',
         data: 'POST数据'
      }
      */
+    $rootScope.isGetingData = false;
     var ajaxRequest = function (param) {
         var method = param && param.method || 'GET',
             url = param && param.url || '',
             success = param && param.success,
             error = param && param.error,
-            effect = param && param.effect,
+            loading = param && param.loading,
+            mask = param && param.mask,
             popup = param && param.popup,
-            postData = param && param.data || {};
+            postData = param && param.data || {},
+            effect = function () {
+                $rootScope.isGetingData = false;
+                if (loading !== 'false') {
+                    $ionicLoading.hide();
+                }
+                if (popup !== 'false') {
+                    backDrop.release();
+                }
+            };
 
-        if (effect !== 'false') {
+        if (mask !== 'false') {
 
             $ionicLoading.show({
                 template: '<span class="ion-load-d"></span>'
             });
 
             backDrop.retain();
+        }
+
+        if ($rootScope.isGetingData) {
+            return false;
+        } else {
+            $rootScope.isGetingData = true;
         }
 
         $http({
@@ -156,27 +173,17 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
         }).success(function (data) {
             console.log(data);
 
-            $ionicLoading.hide();
-
-            if (popup !== 'false') {
-                backDrop.release();
-            }
+            effect();
 
             if (typeof success === 'function') {
                 success(data);
-            } else {
-                console.log($rootScope);
             }
 
         }).error(function (data) {
 
-            $ionicLoading.hide();
+            effect();
 
-            if (popup !== 'false') {
-                backDrop.release();
-            }
-
-            //todo... 判断错误信息
+            //todo... 需要加判断错误信息
             if (typeof error === 'function') {
                 error(data);
             } else {

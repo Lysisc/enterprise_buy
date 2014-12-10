@@ -71,7 +71,7 @@ angular.module('EPBUY')
                     searchTimer = $timeout(function () {
                         Util.ajaxRequest({
                             url: searchAjaxUrl,
-                            effect: 'false',
+                            mask: 'false',
                             data: {
                                 enterpriseCode: $scope.enterpriseCode // todo...
                             },

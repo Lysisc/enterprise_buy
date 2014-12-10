@@ -2,7 +2,7 @@
 
     <ion-content scroll="false">
 
-        <div class="activity-date"><i class="icon ion-time-alarm"></i>内购活动日期：xxxxx-xxxxxx，距离结束还有：xxxxx</div>
+        <div class="activity-date"><i class="icon ion-time-alarm"></i>活动日期：{{startTime}}至{{endTime}}，距离结束还有：{{restTime}}</div>
 
         <div class="filters">
             <div class="cyan">筛选<i class="icon ion-ios-arrow-down"></i></div>
@@ -44,7 +44,7 @@
                 </a>
             </div>
 
-            <ion-infinite-scroll on-infinite="pageLoad({{postData.PageIndex}})" distance="1%"></ion-infinite-scroll>
+            <ion-infinite-scroll on-infinite="loadMore({{postData.PageIndex}})" distance="1%"></ion-infinite-scroll>
 
         </ion-scroll>
 
