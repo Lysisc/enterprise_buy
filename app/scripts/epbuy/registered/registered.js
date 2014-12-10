@@ -47,6 +47,9 @@ angular.module('EPBUY')
                     Util.ajaxRequest({
                         url: 'GetHomeRestaurantBannerInfo',
                         effect: 'false',
+                        data: {
+                            enterpriseCode: $scope.inputVal.enterpriseCode // todo...
+                        },
                         success: function (data) {
                             if (data.commentList && data.commentList.length > 0) {
                                 $scope.searchResultList = data.commentList; //取数据 todo...
@@ -62,7 +65,7 @@ angular.module('EPBUY')
 
             } else {
                 $timeout.cancel(searchTimer);
-                $scope.searchResultList = false;
+                $scope.searchResultList = true;
             }
         };
 
@@ -107,6 +110,9 @@ angular.module('EPBUY')
             Util.ajaxRequest({
                 url: 'GetHomeRestaurantBannerInfo',
                 effect: 'false',
+                data: {
+                    enterpriseCode: $scope.inputVal.enterpriseCode // todo...
+                },
                 success: function (data) {
                     $scope.validationDataCode = 100;
 
@@ -164,10 +170,10 @@ angular.module('EPBUY')
                 url: 'GetHomeRestaurantBannerInfo',
                 popup: 'false',
                 data: {
-                    passCode: $scope.passCode, //验证企业码返回的passCode
-                    phoneNumber: $scope.inputVal.phoneNumber,
-                    validationCode: $scope.inputVal.validationCode,
-                    passWord: $scope.inputVal.passWord
+                    passCode: $scope.passCode, //请求企业码返回的passCode
+                    phoneNumber: $scope.inputVal.phoneNumber, //电话号码
+                    validationCode: $scope.inputVal.validationCode, //验证码
+                    passWord: $scope.inputVal.passWord //密码
                 },
                 success: function (data) {
 

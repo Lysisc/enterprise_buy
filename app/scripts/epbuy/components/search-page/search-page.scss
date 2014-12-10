@@ -1,0 +1,31 @@
+.ep-search {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 12;
+    background-color: #f5f5f5;
+    .scroll {
+        padding-bottom: 65px;
+    }
+    .no-results {
+        text-align: center;
+    }
+}
+.ep-list-search {
+    position: absolute;
+    right: 51px;
+    top: -4px;
+    z-index: 1;
+    width: 44px;
+    height: 43px;
+    text-align: center;
+    line-height: 44px;
+    font-weight: 400;
+    font-size: 18px;
+    color: #fff;
+    &.ion-search:before {
+        content: "\f4a4";
+    }
+}

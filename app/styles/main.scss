@@ -51,7 +51,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
 }
 // icon字体
-.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-bar-person {
+.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d {
     font-family: "Ionicons";
 }
 // 搜索框
@@ -60,6 +60,9 @@ input::-webkit-inner-spin-button {
     padding: 8px 11px;
     .item-input-wrapper {
         background-color: #fff;
+        input {
+            background-color: #fff;
+        }
     }
     .ion-search:before {
         content: "\f4a4";
@@ -350,74 +353,6 @@ input::-webkit-inner-spin-button {
 // 滚动容器
 .scroll-view {
     height: 100%;
-}
-// 列表样式
-.product-list {
-    width: 100%;
-}
-.product-list-double {
-    width: 100%;
-    overflow: hidden;
-    @include clear-float;
-    .product-item {
-        float: left;
-        display: block;
-        width: 50%;
-        overflow: hidden;
-        text-decoration: none;
-        padding: 6px 5px 4px;
-        .img {
-            position: relative;
-            z-index: 1;
-            min-height: 150px;
-            @include border-line;
-            border-width: 1px;
-            background: #f8f8f8 url(../images/default_image.png) center center no-repeat;
-            background-size: 150px 150px;
-            .mask {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, .5);
-                width: 100%;
-                height: 40px;
-                color: #fff;
-                font-size: 13px;
-                padding: 3px 5px 0;
-                line-height: 18px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-            }
-        }
-        .price {
-            @include border-line;
-            border-width: 1px;
-            border-top-width: 0;
-            padding: 0 6px;
-            line-height: 30px;
-            .p-discount {
-                float: right;
-                width: 36px;
-                height: 18px;
-                line-height: 18px;
-                text-align: center;
-                margin-top: 6px;
-                background-color: #ef742f;
-                color: #fff;
-                font-size: 12px;
-            }
-            .p-red {
-                color: #ff0000;
-                font-size: 18px;
-                margin-right: 5px;
-            }
-            .p-gray {
-                color: #999;
-            }
-        }
-    }
 }
 // 兼容hybird模式IOS7版本
 .hybirdIOS7 {
