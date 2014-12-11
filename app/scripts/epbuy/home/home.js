@@ -10,7 +10,7 @@ angular.module('EPBUY')
 
         if (homeData && homeData.info().commentList) {
             $scope.hasActivity = true;
-            $scope.productList = homeData.info().commentList; //取缓存数据
+            $scope.goodsList = homeData.info().commentList; //取缓存数据
         } else {
             Util.ajaxRequest({
                 url: 'GetHomeRestaurantBannerInfo',
@@ -24,7 +24,7 @@ angular.module('EPBUY')
 
                         $cacheFactory('homeData', data);
 
-                        $scope.productList = data.commentList; //取数据 todo...
+                        $scope.goodsList = data.commentList; //取数据 todo...
                     }
 
                 }

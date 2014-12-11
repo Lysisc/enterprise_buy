@@ -1,0 +1,35 @@
+<ion-view title="{{titleName}}" class="ep-detail">
+
+    <ion-content>
+
+        <div class="goods-slide">
+            <ion-slide-box class="slide-box" does-continue="true">
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/guide_page_04.png"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/guide_page_04.png"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/guide_page_04.png"></div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="slide-page">
+                        <img ng-src="images/guide_page_04.png"></div>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+
+    </ion-content>
+
+    <bottom-bar></bottom-bar>
+
+</ion-view>
+
+<ion-nav-buttons side="right">
+    <a ng-click="showSearch();" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
+    <shopping-cart></shopping-cart>
+</ion-nav-buttons>

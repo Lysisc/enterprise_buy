@@ -41,25 +41,18 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/list/list.html',
                 controller: 'ListCtrl'
             })
+            // 详情页
+            .state('epbuy.detail', {
+                url: '/detail/:GoodsId',
+                templateUrl: 'scripts/epbuy/detail/detail.html',
+                controller: 'DetailCtrl'
+            })
 
-            
             // 目的地切换
             .state('epbuy.destinationSwitch', {
                 url: '/destinationSwitch',
                 templateUrl: 'scripts/epbuy/destination/destination-switch.html',
                 controller: 'DestinationSwitchCtrl'
-            })
-            // 餐馆详情页
-            .state('epbuy.restaurant', {
-                url: '/rest/:RestaurantId',
-                templateUrl: 'scripts/epbuy/rest/foods-restaurant.html',
-                controller: 'FoodsRestaurantCtrl'
-            })
-            // 搜索结果页 & 发现美食页
-            .state('epbuy.findfoods', {
-                url: '/findfoods/:DestinationId',
-                templateUrl: 'scripts/epbuy/findfoods/foods-findfoods.html',
-                controller: 'FindFoodsCtrl'
             });
 
         // 处理在状态配置中指定的路由之外的 url 请求

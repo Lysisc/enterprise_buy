@@ -126,6 +126,7 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
         url: '请求地址',
         success: '请求成功回调',
         error: '请求失败回调',
+        loading: '请求结果是否需要loading效果',
         mask: '请求结果是否需要mask效果',
         popup: '请求结果是否有popup',
         data: 'POST数据'
@@ -140,9 +141,11 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
             loading = param && param.loading,
             mask = param && param.mask,
             popup = param && param.popup,
-            postData = param && param.data || {},
+            data = param && param.data || {},
             effect = function () {
+
                 $rootScope.isGetingData = false;
+
                 if (loading !== 'false') {
                     $ionicLoading.hide();
                 }
@@ -160,37 +163,38 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
             backDrop.retain();
         }
 
-        if ($rootScope.isGetingData) {
-            return false;
-        } else {
+        if (!$rootScope.isGetingData) {
+
             $rootScope.isGetingData = true;
+
+            $http({
+                method: method,
+                url: ENV.getDomain() + url + '.json',
+                params: /(POST)/ig.test(method) ? null : data,
+                data: /(POST)/ig.test(method) ? data : null,
+                timeout: 15000,
+            }).success(function (data) {
+                console.log(data);
+
+                if (typeof success === 'function') {
+                    success(data);
+                }
+
+                effect();
+
+            }).error(function (data) {
+                //todo... 需要加判断错误信息
+                if (typeof error === 'function') {
+                    error(data);
+                } else {
+                    $rootScope.noNetwork = true;
+                }
+
+                effect();
+
+            });
+
         }
-
-        $http({
-            method: method,
-            url: ENV.getDomain() + url + '.json',
-            data: postData
-        }).success(function (data) {
-            console.log(data);
-
-            effect();
-
-            if (typeof success === 'function') {
-                success(data);
-            }
-
-        }).error(function (data) {
-
-            effect();
-
-            //todo... 需要加判断错误信息
-            if (typeof error === 'function') {
-                error(data);
-            } else {
-                $rootScope.noNetwork = true;
-            }
-
-        });
 
     };
 

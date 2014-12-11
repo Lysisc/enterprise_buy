@@ -33,6 +33,9 @@
             max-width: 150px;
             height: 100%;
             opacity: 0.8;
+            &.active, &.activated {
+                opacity: 1;
+            }
         }
         .cyan {
             background-color: #29ccc9;
@@ -79,26 +82,82 @@
             content: "\f3d4";
         }
     }
-    .scroll {
-        padding-bottom: 120px;
-        .product-list-double {
+    .sort-nav {
+        width: 100%;
+        height: 40%;
+        position: absolute;
+        top: 73px;
+        left: 0;
+        z-index: 11;
+        .sort-lvl-1, .sort-lvl-2 {
+            float: left;
+            width: 50%;
+            overflow: hidden;
+            margin-top: 0;
+            a {
+                display: block;
+                line-height: 32px;
+                padding-left: 15px;
+                &.active, &.activated {
+                    background-color: #eee;
+                }
+            }
+            .scroll {
+                padding: 5px 0;
+            }
+        }
+        .sort-lvl-1 {
+            background-color: #ccc;
+            a {
+                padding-right: 15px;
+                &.ion-arrow-right:before {
+                    float: right;
+                    margin-left: 8px;
+                    content: "\f3d1";
+                }
+            }
+        }
+        .sort-lvl-2 {
+            background-color: #eee;
+        }
+        .sort-backdrop {
+            position: fixed;
+            top: 116px;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: 0.1s opacity linear;
+            &.active {
+                opacity: 1;
+            }
+        }
+    }
+    .list-box .scroll {
+        padding-bottom: 111px;
+        .goods-list-double {
             padding-top: 4px;
         }
     }
-    .ion-loading-d:before {
-        content: "\f29d";
+    .load-more-bar {
+        margin-top: -11px;
+        .ion-loading-d:before {
+            content: "\f29d";
+        }
     }
 }
 // 列表样式
-.product-item {
+.goods-item {
     display: block;
     background-color: #fff;
     text-decoration: none;
     overflow: hidden;
 }
-.product-list {
+.goods-list {
     width: 100%;
-    .product-item {
+    .goods-item {
         width: 100%;
         @include border-line;
         border-bottom-width: 1px;
@@ -147,11 +206,11 @@
         }
     }
 }
-.product-list-double {
+.goods-list-double {
     width: 100%;
     overflow: hidden;
     @include clear-float;
-    .product-item {
+    .goods-item {
         float: left;
         width: 50%;
         padding: 6px 5px 4px;

@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('ListCtrl', function ($rootScope, $scope, $ionicScrollDelegate, $timeout, Util) {
+    .controller('ListCtrl', function ($scope, $ionicScrollDelegate, $timeout, Util) {
 
+        $scope.showSort = false; //初始化筛选列表
         $scope.isSingle = true; //初始化单列列表
         $scope.priceUp = true; //初始化价格升序
         $scope.discountUp = true; //初始化折扣升序
         $scope.pageIndex = 1; //初始化第一页
-
         $scope.searchType = 'detail'; // 列表页搜索接口类型定义
         $scope.bottomBarCur = 'home'; //底部bar高亮
 
@@ -45,12 +45,15 @@ angular.module('EPBUY')
         }
 
         function renderData(sort, isLoading, isMask) {
+
+            $scope.showSort = false;
+
             Util.ajaxRequest({
                 url: 'GetHomeRestaurantBannerInfo',
                 loading: isLoading || true,
                 mask: isMask || true,
                 data: {
-                    enterpriseCode: $scope.enterpriseCode // todo...
+                    enterpriseCode: 'abs' // todo...
                 },
                 success: function (data) {
 
@@ -63,20 +66,32 @@ angular.module('EPBUY')
                         break;
                     }
 
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-
                     if (data.commentList && data.commentList.length > 0) {
 
                         $scope.startTime = '2014-12-20 12:43:16'.substr(5, 5);
                         $scope.endTime = '2014-12-22 12:43:16'.substr(5, 5);
                         $scope.restTime = dateSubtract('2014-12-20 12:53:16', '2014-12-22 12:43:16');
 
-                        if (sort) {
+                        if (sort) { // 处理筛选&首屏加载
+
                             $scope.pageIndex = 1;
-                            $scope.productList = data.commentList; //取数据 todo...
+                            $scope.goodsList = data.commentList; //取数据 todo...
                             $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
-                        } else {
-                            $scope.productList = $scope.productList.concat(data.commentList);
+
+                        } else { // 处理翻页
+
+                            if (angular.isArray($scope.goodsList)) {
+                                $scope.goodsList = $scope.goodsList.concat(data.commentList); //拼接数据
+                                $scope.pageIndex++;
+
+                                $timeout(function () {
+                                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                                }, 300);
+
+                            } else {
+                                console.log('加载错误');
+                            }
+
                         }
                     }
 
@@ -84,15 +99,21 @@ angular.module('EPBUY')
             });
         }
 
-        renderData(true); //首屏数据加载
+        renderData(true);
 
         $scope.loadMore = function () { //翻页加载
-            $scope.pageIndex++;
             renderData(false, 'false', 'false');
         };
 
         $scope.filtersCtrl = function (type) {
             switch (type) {
+            case 'sort': //筛选
+                $scope.showSort = $scope.showSort ? false : true;
+                $scope.sortPrimarySelected = 0;
+                $scope.sortPrimary = $scope.goodsList; //todo...
+                $scope.sortSecondary = ['1类', '1类', '1类']; //todo...
+                $ionicScrollDelegate.$getByHandle('sortPrimary').scrollTo(0, 0);
+                break;
             case 'brand': //品牌
             case 'price': //价格
             case 'discount': //折扣
@@ -101,7 +122,29 @@ angular.module('EPBUY')
             default:
                 $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0, true);
                 $scope.isSingle = $scope.isSingle ? false : true;
+                $scope.showSort = false;
             }
+        };
+
+        $scope.sortSelect = function (index) {
+            if (typeof index === 'number') {
+
+                $scope.sortPrimarySelected = index;
+
+                var arr = [],
+                    num = Math.floor(Math.random() * 10) + 1;
+
+                for (var i = 0; i < num; i++) {
+                    arr[i] = index + 1 + '类';
+                }
+
+                $scope.sortSecondary = arr;
+
+                $ionicScrollDelegate.$getByHandle('sortSecondary').scrollTo(0, 0, true);
+            } else {
+                renderData(true);
+            }
+
         };
 
     });

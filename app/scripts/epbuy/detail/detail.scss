@@ -1,0 +1,17 @@
+.ep-detail {
+    .goods-slide {
+        .slider-slide {
+            width: -moz-calc(100% - 60px);
+            width: -webkit-calc(100% - 60px);
+            width: calc(100% - 60px);
+            padding: 10px 0 35px;
+            img {
+                width: -moz-calc(100% - 30px);
+                width: -webkit-calc(100% - 30px);
+                width: calc(100% - 30px);
+                margin-left: 15px;
+                border-radius: 5px;
+            }
+        }
+    }
+}
