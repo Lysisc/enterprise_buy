@@ -5,17 +5,21 @@ angular.module('EPBUY')
         return {
             restrict: 'E',
             templateUrl: 'scripts/epbuy/components/shopping-cart/shopping-cart.html',
-            controller: function ($rootScope, $timeout) {
+            controller: function ($rootScope, $scope, $timeout) {
                 $rootScope.shoppingCartShow = false;
                 $timeout(function () {
 
                     $rootScope.shoppingCartShow = true;
-                    $rootScope.shoppingCart = 11; //todo...
+                    $rootScope.shoppingCartNum = 11; //todo...取locaStorage数据
 
                 }, 200);
 
-                $rootScope.addToCart = function () {
-                    console.log($rootScope.shoppingCart);
+                $scope.addToCart = function () {
+                    if (!$scope.hasAdded) {
+                        $scope.hasAdded = true;
+                        $rootScope.shoppingCartNum++;
+                        //todo...
+                    }
                 };
             }
         };

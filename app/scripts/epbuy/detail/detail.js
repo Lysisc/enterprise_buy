@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('DetailCtrl', function ($scope, $stateParams, $ionicSlideBoxDelegate, $timeout, $userService, $state, Util) {
+    .controller('DetailCtrl', function ($scope, $stateParams, $timeout, $userService, $state, Util) {
 
         $scope.titleName = '我是商品名称';
 
@@ -12,16 +12,10 @@ angular.module('EPBUY')
             },
             success: function (data) {
                 $scope.goodsPictureList = data.commentList; //取数据 todo...
-                console.log($ionicSlideBoxDelegate);
-                // $ionicSlideBoxDelegate.update();
-
-                $timeout(function () {
-                    var slideBox = angular.element(document.querySelector('.slide-box'));
-                    slideBox.addClass('special');
-                    console.log(slideBox);
+                $timeout(function () { // 给幻灯片补充样式
+                    $scope.specialList = true;
                 }, 100);
             }
         });
-
 
     });

@@ -2,16 +2,40 @@
 
     <ion-content>
 
+        <!-- 商品幻灯区 -->
         <div class="goods-slide">
-            <ion-slide-box class="slide-box" does-continue="true">
+            <ion-slide-box class="slide-box" does-continue="true" ng-if="goodsPictureList" ng-class="{special:specialList}">
                 <ion-slide ng-repeat="(key, value) in goodsPictureList">
                     <div class="slide-page">
                         <img ng-src="images/guide_page_04.png"></div>
                 </ion-slide>
-            </ion-slide-box>
+            </ion-slide-box> <i class="special-offer">特价</i>
+        </div>
+
+        <div class="select-bar">
+            <div class="price">
+                <p>
+                    市场价
+                    <s class="gray">&yen;260</s>
+                </p>
+                <p>
+                    内购价
+                    <span class="red">&yen;130</span>
+                </p>
+            </div>
+            <select>
+                <option selected>Green</option>
+                <option>Blue</option>
+                <option>Red</option>
+            </select>
         </div>
 
     </ion-content>
+
+    <div class="detail-bar">
+        <a class="share-btn"><i class="icon ion-share"></i></a>
+        <a ng-click="addToCart();" ng-class="{disabled:hasAdded}" class="add-to-cart">{{hasAdded ? '已加入购物车' : '加入购物车'}}</a>
+    </div>
 
     <bottom-bar></bottom-bar>
 

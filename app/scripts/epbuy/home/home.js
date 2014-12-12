@@ -10,6 +10,7 @@ angular.module('EPBUY')
 
         if (homeData && homeData.info().commentList) {
             $scope.hasActivity = true;
+            $scope.bannerList = homeData.info().commentList; //取缓存数据
             $scope.goodsList = homeData.info().commentList; //取缓存数据
         } else {
             Util.ajaxRequest({
