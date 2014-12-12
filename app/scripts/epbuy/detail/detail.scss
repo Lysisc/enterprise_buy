@@ -1,15 +1,25 @@
 .ep-detail {
     .goods-slide {
         width: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        padding: 10px 0 35px;
         .slide-box {
-            margin: 10px 30px 35px;
-            position: absolute;
+            width: 84%;
+            margin: 0 auto;
+            box-sizing: content-box !important;
+            &.special {
+                padding: 0 8%;
+            }
             .slider-slide {
-                img {
-                    width: -moz-calc(100% - 60px);
-                    width: -webkit-calc(100% - 60px);
-                    width: calc(100% - 60px);
-                    border-radius: 5px;
+                width: 84%;
+                .slide-page {
+                    padding: 0 3%;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 5px;
+                    }
                 }
             }
         }

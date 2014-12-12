@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $ionicLoading, $timeout, ENV) {
+angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading, $timeout, ENV) {
 
     var backDropDom = angular.element(document.querySelector('.backdrop'));
 
@@ -132,7 +132,6 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
         data: 'POST数据'
      }
      */
-    $rootScope.isGetingData = false;
     var ajaxRequest = function (param) {
         var method = param && param.method || 'GET',
             url = param && param.url || '',
@@ -143,9 +142,6 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
             popup = param && param.popup,
             data = param && param.data || {},
             effect = function () {
-
-                $rootScope.isGetingData = false;
-
                 if (loading !== 'false') {
                     $ionicLoading.hide();
                 }
@@ -163,38 +159,30 @@ angular.module('EPBUY').factory('Util', function ($rootScope, $http, $compile, $
             backDrop.retain();
         }
 
-        if (!$rootScope.isGetingData) {
+        $http({
+            method: method,
+            url: ENV.getDomain() + url + '.json',
+            params: /(POST)/ig.test(method) ? null : data,
+            data: /(POST)/ig.test(method) ? data : null,
+            timeout: 15000,
+        }).success(function (data) {
+            console.log(data);
 
-            $rootScope.isGetingData = true;
+            if (typeof success === 'function') {
+                success(data);
+            }
 
-            $http({
-                method: method,
-                url: ENV.getDomain() + url + '.json',
-                params: /(POST)/ig.test(method) ? null : data,
-                data: /(POST)/ig.test(method) ? data : null,
-                timeout: 15000,
-            }).success(function (data) {
-                console.log(data);
+            effect();
 
-                if (typeof success === 'function') {
-                    success(data);
-                }
+        }).error(function (data) {
 
-                effect();
+            if (typeof error === 'function') {
+                error(data);
+            }
 
-            }).error(function (data) {
-                //todo... 需要加判断错误信息
-                if (typeof error === 'function') {
-                    error(data);
-                } else {
-                    $rootScope.noNetwork = true;
-                }
+            effect();
 
-                effect();
-
-            });
-
-        }
+        });
 
     };
 

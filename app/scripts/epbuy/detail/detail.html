@@ -4,19 +4,7 @@
 
         <div class="goods-slide">
             <ion-slide-box class="slide-box" does-continue="true">
-                <ion-slide>
-                    <div class="slide-page">
-                        <img ng-src="images/guide_page_04.png"></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="slide-page">
-                        <img ng-src="images/guide_page_04.png"></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="slide-page">
-                        <img ng-src="images/guide_page_04.png"></div>
-                </ion-slide>
-                <ion-slide>
+                <ion-slide ng-repeat="(key, value) in goodsPictureList">
                     <div class="slide-page">
                         <img ng-src="images/guide_page_04.png"></div>
                 </ion-slide>

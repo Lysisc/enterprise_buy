@@ -24,6 +24,8 @@ angular.module('EPBUY')
 
                         $cacheFactory('homeData', data);
 
+                        $scope.bannerList = data.commentList;
+
                         $scope.goodsList = data.commentList; //取数据 todo...
                     }
 

@@ -19,19 +19,7 @@
 
         <ion-scroll ng-if="!noNetwork && hasActivity">
             <ion-slide-box class="slide-box" auto-play="true" does-continue="true">
-                <ion-slide>
-                    <div class="slide-page">
-                        <img ng-src="images/bottom_bg.png"></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="slide-page">
-                        <img ng-src="images/bottom_bg.png"></div>
-                </ion-slide>
-                <ion-slide>
-                    <div class="slide-page">
-                        <img ng-src="images/bottom_bg.png"></div>
-                </ion-slide>
-                <ion-slide>
+                <ion-slide ng-repeat="(key, value) in bannerList">
                     <div class="slide-page">
                         <img ng-src="images/bottom_bg.png"></div>
                 </ion-slide>
