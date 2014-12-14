@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('CartCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, $timeout, Util) {
+    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, Util) {
 
         var shoppingCart = localStorage.getItem('EPBUY_SHOPPING_CART');
 
@@ -73,7 +73,7 @@ angular.module('EPBUY')
                     deleteArr[i].removed = true;
                 }
 
-                console.log(tempArr);
+                // console.log(tempArr);
             }, 400);
         };
 
