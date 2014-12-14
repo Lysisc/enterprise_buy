@@ -20,7 +20,7 @@ angular.module('EPBUY')
 
                 element.on('touchmove', function (event) {
                     var thisTouch = event.touches[0],
-                        target = window.document.elementFromPoint(
+                        target = document.elementFromPoint(
                             thisTouch.clientX,
                             thisTouch.clientY
                         );

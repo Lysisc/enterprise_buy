@@ -51,7 +51,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
 }
 // icon字体
-.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d, .ion-arrow-right, .ion-share {
+.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d, .ion-arrow-right, .ion-share, .ion-star, .ion-add, .ion-remove {
     font-family: "Ionicons";
 }
 // 搜索框
@@ -116,12 +116,8 @@ input::-webkit-inner-spin-button {
         // background: url(../images/send_loading.png) no-repeat;
         // background-size: 48px 48px;
         -webkit-animation: cui-loading 1.58s linear infinite;
-        -moz-animation: cui-loading 1.58s linear infinite;
-        -ms-animation: cui-loading 1.58s linear infinite;
         animation: cui-loading 1.58s linear infinite;
         -webkit-transform-origin: 50% 50%;
-        -moz-transform-origin: 50% 50%;
-        -ms-transform-origin: 50% 50%;
         transform-origin: 50% 50%;
     }
     .ion-load-d:before {
@@ -156,9 +152,6 @@ input::-webkit-inner-spin-button {
     top: 50%;
     text-align: center;
     -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
     transform: translateY(-50%);
 }
 .no-network .icon-no-network {

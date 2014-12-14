@@ -47,6 +47,12 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/detail/detail.html',
                 controller: 'DetailCtrl'
             })
+            // 购物车页
+            .state('epbuy.cart', {
+                url: '/cart',
+                templateUrl: 'scripts/epbuy/cart/cart.html',
+                controller: 'CartCtrl'
+            })
 
             // 目的地切换
             .state('epbuy.destinationSwitch', {

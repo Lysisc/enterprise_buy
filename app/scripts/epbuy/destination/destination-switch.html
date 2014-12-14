@@ -21,7 +21,7 @@
         </div>
 
         <!-- 国际/国内切换 -->
-        <div class="switch-tabs" ng-show="!searching">
+        <div class="switch-tabs" ng-show="!searching" style="display: -webkit-box;">
             <i class="internal" ng-class="{current: tabIndex == 0}" ng-click="switchTab(0)">国内</i>
             <i class="external" ng-class="{current: tabIndex == 1}" ng-click="switchTab(1)">海外</i>
             <span ng-class="{'i-city': tabIndex == 0, 'e-city': tabIndex == 1}"></span>

@@ -166,12 +166,17 @@
         .img {
             width: 90px;
             height: 90px;
+            overflow: hidden;
             @include border-line;
             border-width: 1px;
-            background: #f8f8f8 url(../images/default_image.png) center center no-repeat;
+            background-color: #f3f3f3;
+            // background: #f8f8f8 url(../images/default_image.png) center center no-repeat;
             background-size: 90px 90px;
             float: left;
             margin-right: 10px;
+            img {
+                width: 100%;
+            }
         }
         .detail {
             h3 {
@@ -220,8 +225,12 @@
             min-height: 150px;
             @include border-line;
             border-width: 1px;
-            background: #f8f8f8 url(../images/default_image.png) center center no-repeat;
+            background-color: #f3f3f3;
+            // background: #f8f8f8 url(../images/default_image.png) center center no-repeat;
             background-size: 150px 150px;
+            img {
+                width: 100%;
+            }
             .mask {
                 position: absolute;
                 left: 0;

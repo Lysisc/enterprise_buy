@@ -1,13 +1,18 @@
 .ep-detail {
+    $Color666:#666;
+    $Color888:#888;
+    $Color999:#999;
+    .scroll {
+        padding-bottom: 50px;
+    }
     .goods-slide {
         position: relative;
         background-color: #fff;
-        margin-bottom: 15px;
         .slide-box {
             width: 80%;
             box-sizing: content-box !important;
             padding-top: 10px;
-            padding-bottom: 35px;
+            padding-bottom: 30px;
             &.special {
                 padding-left: 10%;
                 padding-right: 10%;
@@ -53,39 +58,154 @@
             text-align: center;
             line-height: 80px;
         }
-        .select-bar {
-            height: 55px;
-            @include border-line;
-            border-bottom-width: 1px;
-            select {
-                width: 100px;
-                height: 30px;
-                border-radius: 3px;
-                margin-top: 12px;
-                margin-left: 15px;
+    }
+    .goods-detail {
+        padding-left: 15px;
+        padding-right: 10px;
+        background-color: #fff;
+        @include border-line;
+        border-bottom-width: 1px;
+        margin-bottom: 3px;
+        .goods-name {
+            @include clear-float;
+            -webkit-box-orient: horizontal;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+            margin-bottom: 10px;
+            p {
+                width: 80%;
+                font-weight: bold;
+                margin-bottom: 0;
             }
-            .price {
-                float: right;
-                height: 44px;
-                margin-right: 20px;
-                p {
-                    line-height: 22px;
-                    margin: 0;
-                    .gray, .red {
-                        margin-left: 10px;
-                    }
-                    .gray {
-                        color: #999;
-                    }
-                    .red {
-                        color: #e85454;
-                        font-size: 18px;
+            .collection-btn {
+                display: inline-block;
+                @include border-line;
+                border-left-width: 1px;
+                text-align: center;
+                width: 55px;
+                height: 46px;
+                padding-top: 4px;
+                margin-left: 5px;
+                line-height: 18px;
+                color: $Color666;
+                font-size: 15px;
+                .ion-star {
+                    color: #4e8eeb;
+                    font-size: 25px;
+                    margin-left: 4px;
+                }
+                .ion-star:before {
+                    content: "\f4b2";
+                }
+                &.hasCollection {
+                    .ion-star:before {
+                        content: "\f4b3";
                     }
                 }
             }
         }
+        .price {
+            color: $Color888;
+            .p-red {
+                font-size: 24px;
+                margin-right: 12px;
+            }
+            .p-discount {
+                float: right;
+                margin-top: 3px;
+                margin-right: 3px;
+                width: 36px;
+                height: 18px;
+                line-height: 18px;
+                text-align: center;
+                background-color: #ef742f;
+                color: #fff;
+                font-size: 12px;
+            }
+        }
+        .integral {
+            color: $Color888;
+            .p-red {
+                font-size: 15px;
+            }
+        }
+        .p-red {
+            color: #e85454;
+        }
     }
-    .detail-bar {
+    .parameter {
+        margin-bottom: 3px;
+        ul {
+            padding-top: 5px;
+            background-color: #fff;
+            li {
+                color: $Color888;
+                padding: 0 15px;
+                line-height: 28px;
+                span {
+                    margin-right: 8px;
+                }
+            }
+        }
+        .select-bar {
+            background-color: #fff;
+            color: $Color888;
+            margin-top: 3px;
+            padding: 10px 15px;
+            @include clear-float;
+            @include border-line;
+            border-bottom-width: 1px;
+            select {
+                color: $Color888;
+                min-width: 100px;
+                max-width: 170px;
+                border: 0 none;
+            }
+        }
+    }
+    .goods-text {
+        @include clear-float;
+        @include border-line;
+        border-top-width: 1px;
+        background-color: #fff;
+        padding-bottom: 50px;
+    }
+    .switch-tabs {
+        height: 50px;
+        @include border-line;
+        border-bottom-width: 1px;
+        position: relative;
+        z-index: 1;
+        a {
+            display: block;
+            -webkit-box-flex: 1;
+            text-align: center;
+            line-height: 50px;
+            &.current {
+                color: #4a88ef;
+            }
+            &:first-child {
+                @include border-line;
+                border-right-width: 1px;
+            }
+        }
+        span {
+            background-color: #4a88ef;
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            -webkit-transition: left ease-out 200ms;
+        }
+    }
+    .switch-conts {
+        padding: 10px 15px;
+        p {
+            margin-bottom: 0;
+        }
+    }
+    .goods-bar {
         position: fixed;
         bottom: 50px;
         left: 0;
@@ -104,7 +224,7 @@
             text-align: center;
             color: #fff;
             &.disabled {
-                color: #666;
+                color: $Color666;
                 background-color: #ccc;
             }
         }
@@ -116,7 +236,7 @@
             line-height: 38px;
             text-align: center;
             background-color: #ddd;
-            color: #999;
+            color: $Color999;
             .ion-share {
                 font-size: 28px;
             }

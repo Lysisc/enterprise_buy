@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('ListCtrl', function ($scope, $ionicScrollDelegate, $timeout, Util) {
+    .controller('ListCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, $timeout, Util) {
 
         $scope.showSort = false; //初始化筛选列表
         $scope.isSingle = true; //初始化单列列表

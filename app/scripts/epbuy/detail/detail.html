@@ -1,39 +1,76 @@
 <ion-view title="{{titleName}}" class="ep-detail">
 
-    <ion-content>
+    <ion-content delegate-handle="contentHandle">
 
         <!-- 商品幻灯区 -->
-        <div class="goods-slide">
+        <div class="goods-slide"> <i class="special-offer">特价</i>
             <ion-slide-box class="slide-box" does-continue="true" ng-if="goodsPictureList" ng-class="{special:specialList}">
                 <ion-slide ng-repeat="(key, value) in goodsPictureList">
                     <div class="slide-page">
                         <img ng-src="images/guide_page_04.png"></div>
                 </ion-slide>
-            </ion-slide-box> <i class="special-offer">特价</i>
+            </ion-slide-box>
         </div>
 
-        <div class="select-bar">
-            <div class="price">
-                <p>
-                    市场价
-                    <s class="gray">&yen;260</s>
+        <div class="goods-detail">
+            <div class="goods-name" style="display:-webkit-box;">
+                <p>我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称</p>
+                <a collection-ctrl ng-class="{hasCollection:hasCollection}" class="collection-btn"> <i class="icon ion-star"></i>
+                    <br>
+                    <span>{{hasCollection ? '已收藏' : '收藏'}}</span>
+                </a>
+            </div>
+            <p class="price">
+                <span class="p-discount">5.5折</span>
+                内购价：
+                <span class="p-red">&yen;130</span>
+                市场价：
+                <s class="p-gray">&yen;260</s>
+            </p>
+            <p class="integral">
+                积分：
+                <span class="p-red">13</span>
+            </p>
+        </div>
+
+        <div class="parameter">
+            <ul>
+                <li><span>保质期：</span>2014.10.30-2014.12.30</li>
+                <li><span>库存量：</span>1000件</li>
+                <li><span>限购数：</span>5件</li>
+            </ul>
+            <div class="select-bar">
+                请选择商品规格：
+                <select>
+                    <option selected>Green</option>
+                    <option>Blue</option>
+                    <option>Red</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="goods-text">
+            <div class="switch-tabs" style="display: -webkit-box;">
+                <a ng-class="{current: tabIndex == 0}" ng-click="switchTab(0)">商品描述</a>
+                <a ng-class="{current: tabIndex == 1}" ng-click="switchTab(1)">其他备注</a>
+                <span ng-style="tabSlide"></span>
+            </div>
+            <div class="switch-conts">
+                <p ng-if="tabIndex == 0" class="conts">
+                    文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍
                 </p>
-                <p>
-                    内购价
-                    <span class="red">&yen;130</span>
+                <p ng-if="tabIndex == 1" class="conts">
+                    备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
                 </p>
             </div>
-            <select>
-                <option selected>Green</option>
-                <option>Blue</option>
-                <option>Red</option>
-            </select>
         </div>
 
     </ion-content>
 
-    <div class="detail-bar">
-        <a class="share-btn"><i class="icon ion-share"></i></a>
+    <div class="goods-bar">
+        <a class="share-btn">
+            <i class="icon ion-share"></i>
+        </a>
         <a ng-click="addToCart();" ng-class="{disabled:hasAdded}" class="add-to-cart">{{hasAdded ? '已加入购物车' : '加入购物车'}}</a>
     </div>
 
@@ -42,6 +79,5 @@
 </ion-view>
 
 <ion-nav-buttons side="right">
-    <a ng-click="showSearch();" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
     <shopping-cart></shopping-cart>
 </ion-nav-buttons>

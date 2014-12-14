@@ -195,7 +195,6 @@ angular.module('EPBUY')
             }).error(function () {
                 $scope.searchObj.list = [];
             });
-
         };
 
         $scope.onKeydown = function (e) {
@@ -205,10 +204,11 @@ angular.module('EPBUY')
         };
 
         $scope.onScroll = function () {
-            Util.stickyTopScroll($scope, titleEles, handler);
+            Util.stickyTopScroll($scope, $compile, titleEles, handler);
         };
 
         $scope.sliderTouchMove = function (event) {
+            console.log(1);
             var idx, i, len;
             for (i = 0, len = letterPosArr.length; i < len; i++) {
                 if (event.touches[0].pageY < letterPosArr[i]) {

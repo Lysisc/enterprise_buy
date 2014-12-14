@@ -66,7 +66,7 @@ angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading
      * @param sticker
      * @param handler
      */
-    var stickyTopScroll = function (scope, titleEles, handler) {
+    var stickyTopScroll = function (scope, compile, titleEles, handler) {
         if (!scope || !titleEles || !titleEles.length || !handler || !handler.getScrollPosition()) {
             return;
         }
@@ -75,7 +75,7 @@ angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading
             scrollTop = handler.getScrollPosition().top;
 
         if (scope.stickyContent === undefined) {
-            var tpl = $compile('<h2 class="sticker" ng-if="stickyContent != null">{{stickyContent}}</h2>');
+            var tpl = compile('<h2 class="sticker" ng-show="stickyContent != null">{{stickyContent}}</h2>');
             sticker = tpl(scope);
             sticker.css({
                 position: 'absolute',

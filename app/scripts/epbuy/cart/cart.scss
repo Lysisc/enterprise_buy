@@ -1,0 +1,89 @@
+.ep-cart {
+    .scroll {
+        padding-bottom: 100px;
+    }
+    .goods-item {
+        position: relative;
+        z-index: 2;
+        -webkit-transition: all ease-out 400ms;
+        &.leave {
+            z-index: -1;
+            margin-top: -111px;
+        }
+        &.check-delete {
+            overflow: visible;
+            margin-left: 50px;
+        }
+        &.has-chosen {
+            background-color: #f8f8f8;
+        }
+        .checkbox {
+            position: absolute;
+            top: 50%;
+            left: -45px;
+            margin-top: -21px;
+        }
+        .img {
+            padding: 5px;
+            border: 0 none;
+        }
+        .detail {
+            h3 {
+                width: 50%;
+                margin-top: 5px;
+            }
+            .red {
+                float: right;
+                color: #e85454;
+                line-height: 15px;
+                font-size: 15px;
+                margin-right: 4px;
+            }
+            .number-ctrl {
+                float: left;
+                position: relative;
+                background-color: #f3f3f3;
+                width: 195px;
+                height: 39px;
+                line-height: 39px;
+                text-align: center;
+                color: #333;
+                .ion-add, .ion-remove, .delete, .most {
+                    position: absolute;
+                    top: 0;
+                    display: block;
+                    font-size: 20px;
+                    width: 39px;
+                    height: 39px;
+                }
+                .ion-add {
+                    right: 0;
+                }
+                .ion-add:before {
+                    content: "\f2c7";
+                }
+                .ion-remove, .delete {
+                    left: 0;
+                }
+                .ion-remove:before {
+                    content: "\f2f4";
+                }
+                .delete, .most {
+                    font-size: 14px;
+                }
+                .delete {
+                    color: #666;
+                }
+                .most {
+                    color: #e85454;
+                    width: auto;
+                    right: 5px;
+                }
+            }
+        }
+    }
+}
+.ep-edit {
+    line-height: 34px;
+    padding: 0 10px;
+}
