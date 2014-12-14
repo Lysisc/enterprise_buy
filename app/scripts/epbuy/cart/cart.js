@@ -4,6 +4,7 @@ angular.module('EPBUY')
     .controller('CartCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, $timeout, Util) {
 
         var shoppingCart = localStorage.getItem('EPBUY_SHOPPING_CART');
+
         if (shoppingCart && JSON.parse(shoppingCart).length > 0) {
             $scope.shoppingCartList = JSON.parse(shoppingCart);
         } else {
@@ -19,8 +20,7 @@ angular.module('EPBUY')
             });
         }
 
-        var hasChosenList = '', // 多选待删除的数组
-            timer = null;
+        var hasChosenList = ''; // 多选待删除的数组
 
         $scope.hasChosenItem = function (e, index) {
             var el = angular.element(e.target);
@@ -32,28 +32,48 @@ angular.module('EPBUY')
         };
 
         $scope.deleteGoods = function (str) { // 删除数组
+
             if (!str) {
-                str = str + '|';
+                return false;
             }
 
-            var tempArr = [];
+            var tempArr = [],
+                deleteArr = [];
 
             for (var i = 0; i < $scope.shoppingCartList.length; i++) {
                 var isExist = new RegExp(i).test(str);
-                if (!isExist) {
-                    tempArr.push($scope.shoppingCartList[i]);
+                if (isExist) {
+                    $scope.shoppingCartList[i].removing = true;
+                    deleteArr.push($scope.shoppingCartList[i]);
                 } else {
-                    $scope.shoppingCartList[i] = false;
+                    if (!$scope.shoppingCartList[i].removing) {
+                        tempArr.push($scope.shoppingCartList[i]);
+                    }
                 }
             }
 
-            $timeout.cancel(timer);
+            $timeout(function () {
+                if (tempArr.length > 0) {
+                    localStorage.setItem('EPBUY_SHOPPING_CART', JSON.stringify(tempArr));
+                } else {
+                    localStorage.removeItem('EPBUY_SHOPPING_CART');
+                    $ionicPopup.alert({
+                        template: '购物车为空，请返回',
+                        buttons: [{
+                            text: '朕知道了',
+                            type: 'button-positive',
+                            onTap: function () {
+                                $state.go('epbuy.home');
+                            }
+                        }]
+                    });
+                }
 
-            timer = $timeout(function () {
-                $scope.shoppingCartList = tempArr;
-                localStorage.setItem('EPBUY_SHOPPING_CART', JSON.stringify($scope.shoppingCartList));
+                for (var i = 0; i < deleteArr.length; i++) { //移除隐藏元素
+                    deleteArr[i].removed = true;
+                }
 
-                console.log($scope.shoppingCartList);
+                console.log(tempArr);
             }, 400);
         };
 
