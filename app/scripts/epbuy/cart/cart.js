@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, Util) {
+    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, AREA) {
+
+        var area = new AREA.GetArea();
+        console.log(area);
 
         var shoppingCart = localStorage.getItem('EPBUY_SHOPPING_CART');
 
