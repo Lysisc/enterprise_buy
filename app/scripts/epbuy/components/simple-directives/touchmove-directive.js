@@ -7,7 +7,7 @@ angular.module('EPBUY')
     return {
         restrict: 'A',
         compile: function ($element, attr) {
-            var fn = $parse(attr.gsTouchMove);
+            var fn = $parse(attr.touchMove);
             return function (scope, element) {
                 element.on('touchstart', function (event) {
                     scope.$apply(function () {

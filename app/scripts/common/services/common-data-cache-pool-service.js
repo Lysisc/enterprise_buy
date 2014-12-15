@@ -8,7 +8,7 @@ angular.module('EPBUY').factory('DataCachePool', function () {
             return null;
         }
 
-        var itemStr = window.localStorage.getItem('GS_FOODS_' + key),
+        var itemStr = localStorage.getItem('EPBUY_' + key),
             item;
         try {
             item = JSON.parse(itemStr);
@@ -37,7 +37,7 @@ angular.module('EPBUY').factory('DataCachePool', function () {
                 item.pop();
             }
         }
-        window.localStorage.setItem('GS_FOODS_' + key, JSON.stringify(item));
+        localStorage.setItem('EPBUY_' + key, JSON.stringify(item));
     };
 
     var fetchData = function (key, dataKey) {

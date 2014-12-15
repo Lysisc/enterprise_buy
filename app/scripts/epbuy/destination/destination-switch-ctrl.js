@@ -208,7 +208,6 @@ angular.module('EPBUY')
         };
 
         $scope.sliderTouchMove = function (event) {
-            console.log(1);
             var idx, i, len;
             for (i = 0, len = letterPosArr.length; i < len; i++) {
                 if (event.touches[0].pageY < letterPosArr[i]) {
