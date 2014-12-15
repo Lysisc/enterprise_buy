@@ -27,12 +27,12 @@
             </ion-slide-box>
 
             <h3 class="hot-goods">
-                <a ng-href="#/epbuy/list">查看所有商品&gt;&gt;</a>
+                <a epbuy-jump="list">查看所有商品&gt;&gt;</a>
                 热门商品
             </h3>
 
             <div class="goods-list-double">
-                <a class="goods-item" ng-href="#/epbuy/detail/1234" ng-repeat="(index, item) in goodsList">
+                <a class="goods-item" epbuy-jump="list" ng-repeat="(index, item) in goodsList">
                     <div class="img">
                         <img ng-src="">
                         <div class="mask" style="display:-webkit-box;">

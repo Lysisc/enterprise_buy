@@ -34,6 +34,4 @@ angular.module('EPBUY')
 
         };
 
-        $scope.isHybrid = ENV.isHybrid;
-
     });

@@ -12,7 +12,7 @@
                     <span class="red">&yen;{{item.Price}}</span>
                     <h3>{{item.Title}}</h3>
                     <p class="text">{{item.Note}}</p>
-                    <div class="number-ctrl"> <i class="icon ion-remove" ng-if="item.Num > 1" ng-click="item.Num = item.Num - 1"></i> <i class="icon ion-add" ng-if="item.Num < item.Limit" ng-click="item.Num = item.Num + 1"></i>
+                    <div class="number-ctrl"> <i class="icon ion-remove" ng-if="item.Num > 1" ng-click="item.Num = item.Num - 1;totalNumber(item.Price);"></i> <i class="icon ion-add" ng-if="item.Num < item.Limit" ng-click="item.Num = item.Num + 1;totalNumber(item.Price,true);"></i>
                         <span class="delete" ng-if="item.Num == 1 && !moreGoodsChoos" ng-click="deleteGoods($index+'|');">删除</span>
                         <span class="most" ng-if="item.Num == item.Limit">限购{{item.Limit}}件</span>
                         <span class="num">{{item.Num}}</span>
@@ -22,6 +22,19 @@
         </div>
 
     </ion-content>
+
+    <div class="order-info">
+        <p>
+            商品数量：
+            <span class="red">{{cartNum}}件</span>
+        </p>
+        <p>
+            订单金额：
+            <span class="b-red">&yen;{{cartPrice}}</span>
+            (不含运费)
+        </p>
+        <a ng-click="placeTheOrder();">下 单</a>
+    </div>
 
     <bottom-bar></bottom-bar>
 

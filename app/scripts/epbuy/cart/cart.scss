@@ -1,6 +1,6 @@
 .ep-cart {
     .scroll {
-        padding-bottom: 100px;
+        padding-bottom: 168px;
     }
     .goods-item {
         position: relative;
@@ -79,6 +79,48 @@
                     width: auto;
                     right: 5px;
                 }
+            }
+        }
+    }
+    .order-info {
+        position: fixed;
+        left: 0;
+        bottom: 49px;
+        z-index: 1;
+        width: 100%;
+        background-color: #fff;
+        padding-top: 10px;
+        @include border-line;
+        border-top-width: 1px;
+        p {
+            color: #666;
+            line-height: 20px;
+            margin-bottom: 0;
+            line-height: 26px;
+            margin-left: 80px;
+            .red {
+                color: #e85454;
+            }
+            .b-red {
+                color: #e85454;
+                font-size: 20px;
+                margin-right: 5px;
+            }
+        }
+        a {
+            display: block;
+            color: #fff;
+            background-color: #29ccc9;
+            width: 100%;
+            max-width: 640px;
+            text-align: center;
+            line-height: 45px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px auto 0;
+            opacity: 1;
+            &.activated {
+                opacity: 0.8;
             }
         }
     }

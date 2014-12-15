@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('HomeCtrl', function ($scope, $cacheFactory, Util) {
+    .controller('HomeCtrl', function ($scope, $state, $cacheFactory, Util) {
 
         $scope.searchType = 'detail';
         $scope.bottomBarCur = 'home';

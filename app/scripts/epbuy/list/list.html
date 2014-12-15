@@ -25,7 +25,7 @@
         <ion-scroll class="list-box" delegate-handle="listScroll">
 
             <div class="goods-list" ng-if="isSingle">
-                <a class="goods-item" ng-href="#/epbuy/detail/1234" ng-repeat="(index, item) in goodsList">
+                <a class="goods-item" epbuy-jump="detail" ng-repeat="(index, item) in goodsList">
                     <div class="img">
                         <img ng-src="">
                     </div>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="goods-list-double" ng-if="!isSingle">
-                <a class="goods-item" ng-href="#/epbuy/detail/1234" ng-repeat="(index, item) in goodsList">
+                <a class="goods-item" epbuy-jump="detail" ng-repeat="(index, item) in goodsList">
                     <div class="img">
                         <img ng-src="">
                         <div class="mask" style="display:-webkit-box;">
