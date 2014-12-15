@@ -82,6 +82,7 @@ angular.module('EPBUY')
             Util.ajaxRequest({
                 // method: 'POST',
                 url: 'GetHomeRestaurantBannerInfo',
+                popup: 'false',
                 data: {
                     enterpriseCode: $scope.inputVal.enterpriseCode
                 },
@@ -91,6 +92,7 @@ angular.module('EPBUY')
                     //todo...
                 },
                 error: function (data) {
+                    Util.backDrop.retain();
                     var alertPopup = $ionicPopup.alert({
                         template: '抱歉，企业码无效',
                         buttons: [{
