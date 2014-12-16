@@ -3,48 +3,35 @@
 angular.module('EPBUY').factory('ENV', function () {
 
     /**
-     * 'waptest': 测试
-     * 'uat': UAT,
-     * 'baolei': 堡垒,
-     * 'preProduction': 生产
+     * 'local': 本地环境
+     * 'server': 服务器环境
      */
     var reservedMode = [
-        'waptest',
-        'uat',
-        'baolei',
-        'preProduction'
+        'local',
+        'server'
     ];
 
     var domainMap = {
         // todo: use gateway domain with service code.
-        waptest: '/api/',
-        uat: '/api/',
-        baolei: '/api/',
-        preProduction: '/api/'
+        local: '/api/',
+        server: '/dist/api/'
     };
 
     var domainOnlyMap = {
-        waptest: '/api/',
-        uat: '/api/',
-        baolei: '/api/',
-        preProduction: '/api/'
+        local: '/api/',
+        server: '/dist/api/'
     };
 
     /*
-     * '0': 测试
-     * '1': 堡垒
-     * '2': UAT
-     * 其他: 生产
+     * '0': 本地环境
+     * '1': 服务器环境
      */
     var hybridEnvMap = {
-        '0': 'waptest',
-        '1': 'baolei',
-        '2': 'uat'
+        '0': 'local',
+        '1': 'server'
     };
 
-    var isHybrid = /ctripwireless/.test(window.navigator.userAgent.toLowerCase());
-    var isBrowser = !isHybrid;
-    var defaultMode = 'preProduction';
+    var defaultMode = 'server';
 
     var ENV = (function () {
 
@@ -62,24 +49,10 @@ angular.module('EPBUY').factory('ENV', function () {
                 var mode = defaultMode;
                 var l = window.location.href;
 
-                if (isHybrid) {
-                    var isPreProduction = window.Env.isPreProduction;
-
-                    if (hybridEnvMap[isPreProduction]) {
-                        mode = hybridEnvMap[isPreProduction];
-                    }
-
-                } else {
-
-                    if (l.indexOf('uat.qa.nt.ctripcorp') > -1) {
-                        mode = 'uat';
-                        // } else if (l.indexOf(':3000') > -1 || l.indexOf('nt.ctripcorp.com') > -1) {
-                    } else if (l.indexOf('localhost:3000') > -1 || l.indexOf('nt.ctripcorp.com') > -1) {
-                        mode = 'waptest';
-                    } else if (l.indexOf('10.8.2.111') > -1) {
-                        mode = 'baolei';
-                    }
-
+                if (l.indexOf('http://www.51mart.com.cn/') > -1) {
+                    mode = 'server';
+                } else if (l.indexOf('localhost:3001') > -1 || l.indexOf('localhost:3000') > -1) {
+                    mode = 'local';
                 }
 
                 this.mode = mode;
@@ -153,20 +126,6 @@ angular.module('EPBUY').factory('ENV', function () {
          * @type {string}
          */
         staticResourceUrl: ENV.staticResourceUrl,
-
-        /**
-         * 成员
-         * true: 在携程 App 环境中
-         * @type {Boolean}
-         */
-        isHybrid: isHybrid,
-
-        /**
-         * 成员
-         * true: 不在携程 App 环境中
-         * @type {Boolean}
-         */
-        isBrowser: isBrowser,
 
         initMode: ENV.initMode,
 
