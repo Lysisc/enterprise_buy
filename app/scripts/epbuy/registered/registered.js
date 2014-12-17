@@ -45,8 +45,8 @@ angular.module('EPBUY')
 
                 searchTimer = $timeout(function () {
                     Util.ajaxRequest({
+                        noMask: true,
                         url: 'GetHomeRestaurantBannerInfo',
-                        mask: 'false',
                         data: {
                             enterpriseCode: $scope.inputVal.enterpriseCode // todo...
                         },
@@ -80,9 +80,9 @@ angular.module('EPBUY')
         $scope.goStepTwo = function () { //去第二步
 
             Util.ajaxRequest({
+                isPopup: true,
                 // method: 'POST',
                 url: 'GetHomeRestaurantBannerInfo',
-                popup: 'false',
                 data: {
                     enterpriseCode: $scope.inputVal.enterpriseCode
                 },
@@ -110,8 +110,8 @@ angular.module('EPBUY')
         $scope.getVerificationCode = function () { //获取验证码
 
             Util.ajaxRequest({
+                noMask: true,
                 url: 'GetHomeRestaurantBannerInfo',
-                mask: 'false',
                 data: {
                     enterpriseCode: $scope.inputVal.enterpriseCode // todo...
                 },
@@ -168,9 +168,9 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
+                isPopup: true,
                 // method: 'POST',
                 url: 'GetHomeRestaurantBannerInfo',
-                popup: 'false',
                 data: {
                     passCode: $scope.passCode, //请求企业码返回的passCode
                     phoneNumber: $scope.inputVal.phoneNumber, //电话号码

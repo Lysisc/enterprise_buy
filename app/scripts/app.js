@@ -53,13 +53,19 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/cart/cart.html',
                 controller: 'CartCtrl'
             })
+            // 订单页
+            .state('epbuy.order', {
+                url: '/order/:CartNum&:CartPrice',
+                templateUrl: 'scripts/epbuy/order/order.html',
+                controller: 'OrderCtrl'
+            })
 
-            // 目的地切换
-            .state('epbuy.destinationSwitch', {
-                url: '/destinationSwitch',
-                templateUrl: 'scripts/epbuy/destination/destination-switch.html',
-                controller: 'DestinationSwitchCtrl'
-            });
+        // 目的地切换
+        .state('epbuy.destinationSwitch', {
+            url: '/destinationSwitch',
+            templateUrl: 'scripts/epbuy/destination/destination-switch.html',
+            controller: 'DestinationSwitchCtrl'
+        });
 
         // 处理在状态配置中指定的路由之外的 url 请求
         var isShowGuide = localStorage.getItem('EPBUY_SHOW_GUIDE') || 1;

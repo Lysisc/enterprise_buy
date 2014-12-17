@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('DetailCtrl', function ($scope, $stateParams, $timeout, $ionicScrollDelegate, $state, Util) {
+    .controller('DetailCtrl', function ($scope, $timeout, $ionicScrollDelegate, Util) {
 
         $scope.titleName = '我是商品名称';
 

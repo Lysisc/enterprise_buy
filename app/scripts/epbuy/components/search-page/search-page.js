@@ -70,8 +70,8 @@ angular.module('EPBUY')
 
                     searchTimer = $timeout(function () {
                         Util.ajaxRequest({
+                            noMask: true,
                             url: searchAjaxUrl,
-                            mask: 'false',
                             data: {
                                 enterpriseCode: $scope.enterpriseCode // todo...
                             },

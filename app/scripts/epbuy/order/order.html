@@ -1,0 +1,63 @@
+<ion-view title="确认订单" class="ep-order">
+
+    <ion-content>
+
+        <div class="receive-info" style="display:-webkit-box;">
+            <span class="icon ion-location"></span>
+            <div>
+                <p class="name">
+                    <span>收货人</span>
+                    ： 我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名
+                </p>
+                <p class="address" style="display:-webkit-box;">
+                    <span>收货地址</span>
+                    ： 上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市
+                </p>
+            </div> <i class="icon ion-arrow-right"></i>
+        </div>
+
+        <div class="delivery-item">
+            <a class="set-item">
+                <div>
+                    <span>配送方式</span>
+                    快递 20元 <i class="icon ion-arrow-right"></i>
+                </div>
+            </a>
+            <a class="set-item">
+                <div>
+                    <span class="time">
+                        收货时间 <em>将于7日内完成配送</em>
+                    </span>
+                    工作时间送货
+                    <i class="icon ion-arrow-right"></i>
+                </div>
+            </a>
+            <div ng-click="showTextarea = true" class="remark">
+                <!-- <p contenteditable="true" ng-model="remark">{{remark ? remark : '备注要求'}}</p>
+            -->
+            <p ng-hide="showTextarea">{{remark ? remark : '备注要求'}}</p>
+            <textarea focus-me="{{showTextarea}}" ng-show="showTextarea" ng-blur="showTextarea = false;checkRemark($event,remark);" ng-model="remark" ng-trim="true" ng-maxlength="100" placeholder="备注要求"></textarea>
+        </div>
+        <div class="explain">
+            <a ng-click="activityExplain();">活动及售后服务说明</a>
+            <label class="checkbox">
+                <input type="checkbox" ng-checked="activityCheck.checked" ng-model="activityCheck.checked"></label>
+        </div>
+    </div>
+
+</ion-content>
+
+<div class="order-info">
+    <p>
+        商品数量：
+        <span class="red">{{cartNum}}件</span>
+    </p>
+    <p>
+        订单金额：
+        <span class="b-red">&yen;{{cartPrice}}</span>
+        (不含运费)
+    </p>
+    <a ng-click="placeTheOrder();">下 单</a>
+</div>
+
+</ion-view>

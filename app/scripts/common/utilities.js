@@ -122,35 +122,35 @@ angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading
     /**
      * ajax请求
      * @param param = {
-        method: '请求方式',
-        url: '请求地址',
-        success: '请求成功回调',
-        error: '请求失败回调',
-        loading: '请求结果是否需要loading效果',
-        mask: '请求结果是否需要mask效果',
-        popup: '请求结果是否有popup',
-        data: 'POST数据'
+        method: 请求方式,
+        url: 请求地址,
+        success: 请求成功回调,
+        error: 请求失败回调,
+        data: 'POST数据',
+        noLoad: 请求结果是否需要loading效果,
+        noMask: 请求结果是否需要mask效果,
+        isPopup: 请求结果是否有popup
      }
      */
     var ajaxRequest = function (param) {
         var method = param && param.method || 'GET',
             url = param && param.url || '',
+            data = param && param.data || {},
             success = param && param.success,
             error = param && param.error,
-            loading = param && param.loading,
-            mask = param && param.mask,
-            popup = param && param.popup,
-            data = param && param.data || {},
+            noLoad = !param.noLoad,
+            noMask = !param.noMask,
+            isPopup = !param.isPopup,
             effect = function () {
-                if (loading !== 'false') {
+                if (noLoad) {
                     $ionicLoading.hide();
                 }
-                if (popup !== 'false') {
+                if (isPopup) {
                     backDrop.release();
                 }
             };
 
-        if (mask !== 'false') {
+        if (noMask) {
 
             $ionicLoading.show({
                 template: '<span class="ion-load-d"></span>'

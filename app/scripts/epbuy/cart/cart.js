@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, AREA) {
+    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, DataCachePool) {
 
         // var area = new AREA.GetArea();
         // console.log(area);
@@ -21,11 +21,11 @@ angular.module('EPBUY')
             }
         };
 
-        var shoppingCart = localStorage.getItem('EPBUY_SHOPPING_CART');
+        var shoppingCart = DataCachePool.pull('SHOPPING_CART');
 
-        if (shoppingCart && JSON.parse(shoppingCart).length > 0) {
-            $scope.shoppingCartList = JSON.parse(shoppingCart);
-            $scope.totalNumber($scope.shoppingCartList);
+        if (shoppingCart && shoppingCart.length > 0) {
+            $scope.totalNumber(shoppingCart);
+            $scope.shoppingCartList = shoppingCart;
         } else {
             $ionicPopup.alert({
                 template: '购物车为空，请返回',
@@ -78,9 +78,9 @@ angular.module('EPBUY')
                 $scope.totalNumber(tempArr);
 
                 if (tempArr.length > 0) {
-                    localStorage.setItem('EPBUY_SHOPPING_CART', JSON.stringify(tempArr));
+                    DataCachePool.push('SHOPPING_CART', tempArr);
                 } else {
-                    localStorage.removeItem('EPBUY_SHOPPING_CART');
+                    DataCachePool.remove('SHOPPING_CART');
                     $ionicPopup.alert({
                         template: '购物车为空，请返回',
                         buttons: [{
@@ -97,7 +97,6 @@ angular.module('EPBUY')
                     deleteArr[i].removed = true;
                 }
 
-                // console.log(tempArr);
             }, 400);
         };
 
@@ -119,7 +118,10 @@ angular.module('EPBUY')
         };
 
         $scope.placeTheOrder = function () {
-            console.log('下单');
+            $state.go('epbuy.order', {
+                CartNum: $scope.cartNum,
+                CartPrice: $scope.cartPrice
+            });
         };
 
     });

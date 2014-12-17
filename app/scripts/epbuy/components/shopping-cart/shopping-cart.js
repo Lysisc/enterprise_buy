@@ -5,7 +5,7 @@ angular.module('EPBUY')
         return {
             restrict: 'E',
             templateUrl: 'scripts/epbuy/components/shopping-cart/shopping-cart.html',
-            controller: function ($rootScope, $scope, $timeout, $ionicPopup, $state) {
+            controller: function ($rootScope, $scope, $timeout, $ionicPopup, $state, DataCachePool) {
                 $rootScope.shoppingCartShow = false;
                 $timeout(function () {
                     $rootScope.shoppingCartShow = true;
@@ -35,7 +35,7 @@ angular.module('EPBUY')
                 };
 
                 //取数据
-                localStorage.setItem('EPBUY_SHOPPING_CART', JSON.stringify([{
+                var shoppingGoods = [{
                     ImgUrl: 'images/default_goods.jpg',
                     Title: '我是商品名称',
                     Note: '我是备注信息我是备注信息我是备注信息我是备注信息',
@@ -84,7 +84,10 @@ angular.module('EPBUY')
                     Price: 130,
                     Limit: 5,
                     Num: 1
-                }]));
+                }];
+
+                DataCachePool.push('SHOPPING_CART', shoppingGoods);
+
             }
         };
     });

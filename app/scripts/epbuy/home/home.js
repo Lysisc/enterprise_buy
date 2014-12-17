@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('HomeCtrl', function ($scope, $state, $cacheFactory, Util) {
+    .controller('HomeCtrl', function ($scope, $state, $cacheFactory, $ionicPopup, Util, DataCachePool) {
 
         $scope.searchType = 'detail';
         $scope.bottomBarCur = 'home';
@@ -14,6 +14,7 @@ angular.module('EPBUY')
             $scope.goodsList = homeData.info().commentList; //取缓存数据
         } else {
             Util.ajaxRequest({
+                isPopup: true,
                 url: 'GetHomeRestaurantBannerInfo',
                 data: {
                     enterpriseCode: $scope.enterpriseCode // todo...
@@ -28,6 +29,25 @@ angular.module('EPBUY')
                         $scope.bannerList = data.commentList;
 
                         $scope.goodsList = data.commentList; //取数据 todo...
+
+                        if (DataCachePool.pull('STATEMENT') !== 1) {
+
+                            var statement = '我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明';
+
+                            Util.backDrop.retain();
+
+                            $ionicPopup.alert({
+                                template: '<h4>活动声明</h4><ion-scroll>' + statement + '</ion-scroll>',
+                                buttons: [{
+                                    text: '朕知道了',
+                                    type: 'button-positive'
+                                }]
+                            });
+
+                            DataCachePool.push('STATEMENT', 1);
+
+                        }
+
                     }
 
                 }

@@ -49,9 +49,9 @@ angular.module('EPBUY')
             $scope.showSort = false;
 
             Util.ajaxRequest({
+                noLoad: isLoading,
+                noMask: isMask,
                 url: 'GetHomeRestaurantBannerInfo',
-                loading: isLoading || true,
-                mask: isMask || true,
                 data: {
                     enterpriseCode: 'abs' // todo...
                 },
@@ -102,7 +102,7 @@ angular.module('EPBUY')
         renderData(true);
 
         $scope.loadMore = function () { //翻页加载
-            renderData(false, 'false', 'false');
+            renderData(false, true, true);
         };
 
         $scope.filtersCtrl = function (type) {

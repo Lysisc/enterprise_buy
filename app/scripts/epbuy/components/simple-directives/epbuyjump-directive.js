@@ -10,6 +10,10 @@ angular.module('EPBUY')
 
             var pageName = attr.epbuyJump;
 
+            // $state.go('.', {}, {
+            //     reload: true
+            // });
+
             element.on('click', function () {
                 switch (pageName) {
                 case 'login':
@@ -25,7 +29,10 @@ angular.module('EPBUY')
                     $state.go('epbuy.list');
                     break;
                 case 'detail':
-                    $state.go('epbuy.detail');
+                    var goodsId = attr.detailId;
+                    $state.go('epbuy.detail', {
+                        GoodsId: goodsId
+                    });
                     break;
                 }
             });
