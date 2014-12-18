@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('ListCtrl', function ($scope, $ionicScrollDelegate, $ionicPopup, $timeout, Util) {
+    .controller('ListCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, $timeout, Util) {
 
         $scope.showSort = false; //初始化筛选列表
         $scope.isSingle = true; //初始化单列列表
@@ -9,7 +9,13 @@ angular.module('EPBUY')
         $scope.discountUp = true; //初始化折扣升序
         $scope.pageIndex = 1; //初始化第一页
         $scope.searchType = 'detail'; // 列表页搜索接口类型定义
-        $scope.bottomBarCur = 'home'; //底部bar高亮
+        $scope.isHeart = $state.is('epbuy.heart');
+
+        if ($scope.isHeart) { //底部bar高亮判断
+            $scope.bottomBarCur = 'heart';
+        } else {
+            $scope.bottomBarCur = 'home';
+        }
 
         function dateSubtract(startDate, endDate) { // 活动时间处理
 
@@ -144,6 +150,33 @@ angular.module('EPBUY')
             } else {
                 renderData(true);
             }
+
+        };
+
+        $scope.toGoodsDetail = function (goodsId) {
+            var router = $scope.isHeart ? 'want' : 'detail';
+            $state.go('epbuy.' + router, {
+                GoodsId: goodsId
+            });
+        };
+
+        $scope.wantToHeart = function (index, item) {
+            if ($scope.goodsList[index].hasHeart) {
+                return;
+            }
+
+            Util.ajaxRequest({
+                url: 'GetHomeRestaurantBannerInfo',
+                data: {
+                    enterpriseCode: item.commentPrize // todo...
+                },
+                success: function (data) {
+
+                    $scope.goodsList[index].hasHeart = true; // todo...
+                    $scope.goodsList[index].commentPrize++;
+
+                }
+            });
 
         };
 

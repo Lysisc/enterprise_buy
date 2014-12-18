@@ -1,0 +1,54 @@
+<ion-view title="{{addressTitle}}收货地址" class="ep-address">
+
+    <ion-content scroll="false" ng-class="{'has-bottom':!isChoice}">
+
+        <div class="switch-tabs" style="display: -webkit-box;">
+            <a ng-class="{current: tabIndex == 0}" ng-click="tabIndex = 0;addressCheck(0, choicedIndex);">企业地址</a>
+            <a ng-class="{current: tabIndex == 1}" ng-click="tabIndex = 1;addressCheck(1, choicedIndex);">个人地址</a>
+        </div>
+        <ion-scroll ng-if="tabIndex == 0" class="address-list">
+            <div class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in enterpriseList track by $index">
+                <label class="checkbox">
+                    <input type="checkbox" ng-checked="checked == $index"></label>
+                <div class="item-detail">
+                    <p>
+                        <span class="phone">15912331234</span>
+                        我是姓名
+                    </p>
+                    <p class="text" style="display:-webkit-box;">
+                        <span ng-if="defaultAddress">[默认]</span>
+                        我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址我是地址
+                    </p>
+                </div>
+            </div>
+        </ion-scroll>
+        <ion-scroll ng-if="tabIndex == 1" class="address-list">
+            <div class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in personageList track by $index">
+                <label class="checkbox">
+                    <input type="checkbox" ng-checked="checked == $index"></label>
+                <div class="item-detail">
+                    <p>
+                        <span class="phone">15912331234</span>
+                        123123123
+                    </p>
+                    <p class="text" style="display:-webkit-box;">
+                        <span ng-if="defaultAddress">[默认]</span>
+                        123123123123
+                    </p>
+                </div>
+            </div>
+        </ion-scroll>
+
+        <div class="add-address-ctrl" ng-class="{'has-bottom':!isChoice}">
+            <button class="button button-block button-positive" ng-click="goStepTwo();" ng-class="{disabled: stepOneDisabled}">新增收货地址</button>
+        </div>
+
+    </ion-content>
+
+    <bottom-bar ng-if="!isChoice"></bottom-bar>
+
+</ion-view>
+
+<ion-nav-buttons side="right">
+    <a ng-click="addressEdit();" class="ep-edit">{{isChoice ? '确定' : '编辑'}}</a>
+</ion-nav-buttons>

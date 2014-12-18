@@ -117,7 +117,7 @@ angular.module('EPBUY')
             }
         };
 
-        $scope.placeTheOrder = function () {
+        $scope.goOrder = function () {
             $state.go('epbuy.order', {
                 CartNum: $scope.cartNum,
                 CartPrice: $scope.cartPrice

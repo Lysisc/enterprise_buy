@@ -51,7 +51,7 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
 }
 // icon字体
-.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-key, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d, .ion-arrow-right, .ion-share, .ion-star, .ion-add, .ion-remove, .ion-location {
+.ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-ios-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d, .ion-arrow-right, .ion-share, .ion-star, .ion-add, .ion-remove, .ion-location {
     font-family: "Ionicons";
 }
 // 搜索框
@@ -219,22 +219,18 @@ input::-webkit-inner-spin-button {
         background-color: rgba(0, 0, 0, .6);
     }
 }
-
-/** 从下往上切换页面 **/
-/** .slide-bottom-top > .ng-enter, .slide-bottom-top > .ng-leave {
-    -webkit-transition: all ease-out 400ms;
+// 从右往左切换页面
+.slide-right-left-n {
+    -webkit-transform: translate3d(100%, 0, 0);
 }
-.slide-bottom-top > .ng-enter {
-    -webkit-transform: translate3d(0, 100%, 0);
-}
-.slide-bottom-top > .ng-enter.ng-enter-active {
+.slide-right-left-n.enter {
+    -webkit-transition: all ease-out 300ms;
     -webkit-transform: translate3d(0, 0, 0);
 }
-.slide-bottom-top > .ng-leave.ng-leave-active {
-    -webkit-transform: translate3d(0, 0, 0);
+.slide-right-left-n.leave {
+    -webkit-transition: all ease-out 300ms;
+    -webkit-transform: translate3d(100%, 0, 0);
 }
-**/
-
 // 从下往上切换页面
 .slide-bottom-top {
     -webkit-transform: translate3d(0, 100%, 0);
@@ -330,6 +326,11 @@ input::-webkit-inner-spin-button {
     height: 155px;
     background: url(../images/header_bg.png) top center no-repeat;
     background-size: cover;
+}
+// 右上角编辑按钮
+.ep-edit {
+    line-height: 34px;
+    padding: 0 10px;
 }
 // 底部背景
 .bottom-bg {

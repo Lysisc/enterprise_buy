@@ -208,6 +208,70 @@
                 color: #999;
                 margin-left: 20px;
             }
+            .p-heart {
+                padding-top: 2px;
+                margin-bottom: 7px;
+                .p-red {
+                    color: #e85454;
+                    font-size: 18px;
+                    vertical-align: middle;
+                }
+                s {
+                    color: #999;
+                    margin: 0 10px;
+                }
+                .p-discount {
+                    display: inline-block;
+                    width: 36px;
+                    height: 18px;
+                    line-height: 18px;
+                    text-align: center;
+                    background-color: #ef742f;
+                    color: #fff;
+                    font-size: 12px;
+                }
+            }
+            .want-to {
+                width: 190px;
+                height: 35px;
+                line-height: 33px;
+                margin-bottom: 0;
+                display: inline-block;
+                border: 1px solid #4a87ee;
+                font-weight: bold;
+                span {
+                    float: right;
+                    display: inline-block;
+                    width: 85px;
+                    text-align: center;
+                }
+                &.ion-bar-heart {
+                    background-color: #fff;
+                    color: #4a87ee;
+                    span {
+                        border-left: 1px solid #4a87ee;
+                    }
+                }
+                &.ion-bar-heart:before, &.ion-ios-heart:before {
+                    font-size: 20px;
+                    margin-left: 15px;
+                    margin-right: 10px;
+                    vertical-align: middle;
+                }
+                &.ion-bar-heart:before {
+                    content: "\f442";
+                }
+                &.ion-ios-heart {
+                    background-color: #4a87ee;
+                    color: #fff;
+                    span {
+                        border-left: 1px solid #fff;
+                    }
+                }
+                &.ion-ios-heart:before {
+                    content: "\f443";
+                }
+            }
         }
     }
 }

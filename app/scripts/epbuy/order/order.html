@@ -1,10 +1,11 @@
 <ion-view title="确认订单" class="ep-order">
 
-    <ion-content>
+    <ion-content ng-init="showReceive = false;choice = '周一至周日全天'">
 
-        <div class="receive-info" style="display:-webkit-box;">
+        <a class="receive-info" epbuy-jump="address" address-type="choice" address-index="0|3" style="display:-webkit-box;">
             <span class="icon ion-location"></span>
-            <div>
+            <div ng-if="!hasAddress">暂无收货地址，请添加</div>
+            <div ng-if="hasAddress">
                 <p class="name">
                     <span>收货人</span>
                     ： 我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名
@@ -14,27 +15,26 @@
                     ： 上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市
                 </p>
             </div> <i class="icon ion-arrow-right"></i>
-        </div>
+        </a>
 
         <div class="delivery-item">
             <a class="set-item">
                 <div>
                     <span>配送方式</span>
-                    快递 20元 <i class="icon ion-arrow-right"></i>
+                    快递 20元
                 </div>
             </a>
-            <a class="set-item">
+            <a class="set-item" ng-click="showReceive = true">
                 <div>
                     <span class="time">
                         收货时间 <em>将于7日内完成配送</em>
                     </span>
-                    工作时间送货
-                    <i class="icon ion-arrow-right"></i>
+                    {{choice}} <i class="icon ion-arrow-right"></i>
                 </div>
             </a>
-            <div ng-click="showTextarea = true;remarkStyle={'height':'80px'}" ng-style="remarkStyle" class="remark">
+            <div ng-click="showTextarea = true;remarkStyle={'height':'80px'}" class="remark">
                 <p ng-hide="showTextarea">{{remark ? remark : '备注要求'}}</p>
-                <textarea focus-me="{{showTextarea}}" ng-style="remarkStyle" ng-show="showTextarea" ng-blur="showTextarea = false;remarkStyle={'height':'40px'};checkRemark($event,remark);" ng-model="remark" ng-trim="true" ng-maxlength="100" placeholder="备注要求"></textarea>
+                <textarea focus-me="{{showTextarea}}" ng-style="remarkStyle" ng-show="showTextarea" ng-blur="showTextarea = false;remarkStyle={'height':'40px'};checkRemark($event,remark);" ng-model="remark" ng-maxlength="100" placeholder="备注要求"></textarea>
             </div>
             <div class="explain">
                 <a ng-click="activityExplain();">活动及售后服务说明</a>
@@ -43,19 +43,22 @@
             </div>
         </div>
 
+        <div ng-class="{enter:showReceive,leave:!showReceive}" class="slide-right-left-n receive-setting">
+            <ion-radio ng-click="showReceive = false" ng-model="choice" ng-value="'周一至周日全天'">周一至周日全天</ion-radio>
+            <ion-radio ng-click="showReceive = false" ng-model="choice" ng-value="'周一至周五工作时间'">周一至周五工作时间</ion-radio>
+            <ion-radio ng-click="showReceive = false" ng-model="choice" ng-value="'周六及周日全天'">周六及周日全天</ion-radio>
+        </div>
+
+        <div ng-class="{enter:showReceive,leave:!showReceive}" class="slide-right-left-n set-backdrop"></div>
+
     </ion-content>
 
-    <div class="order-info">
-        <p>
-            商品数量：
-            <span class="red">{{cartNum}}件</span>
-        </p>
-        <p>
-            订单金额：
-            <span class="b-red">&yen;{{cartPrice}}</span>
-            (不含运费)
-        </p>
-        <a ng-click="placeTheOrder();">下 单</a>
+    <div class="order-ctrl">
+        <a ng-click="placeTheOrder();">确认下单</a>
+        共
+        <span>{{cartNum}}</span>
+        件商品&nbsp;&nbsp;合计
+        <span>&yen;{{cartPrice}}</span>
     </div>
 
 </ion-view>

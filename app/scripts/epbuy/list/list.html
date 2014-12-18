@@ -1,15 +1,27 @@
-<ion-view title="所有商品" class="ep-list">
+<ion-view title="商品列表" class="ep-list">
 
     <ion-content scroll="false">
 
-        <div class="activity-date"><i class="icon ion-time-alarm"></i>活动日期：{{startTime}}至{{endTime}}，距离结束还有：{{restTime}}</div>
+        <div ng-if="!isHeart" class="activity-date"> <i class="icon ion-time-alarm"></i>
+            活动日期：{{startTime}}至{{endTime}}，距离结束还有：{{restTime}}
+        </div>
 
         <div class="filters">
-            <div ng-click="filtersCtrl('sort');" ng-class="{active:showSort}" class="cyan">筛选<i class="icon ion-ios-arrow-down"></i></div>
+            <div ng-click="filtersCtrl('sort');" ng-class="{active:showSort}" class="cyan">
+                筛选 <i class="icon ion-ios-arrow-down"></i>
+            </div>
             <div ng-click="filtersCtrl('brand');">品牌</div>
-            <div ng-click="filtersCtrl('price');">价格<i ng-class="{'ion-arrow-up':priceUp,'ion-arrow-down':!priceUp}" class="icon"></i></div>
-            <div ng-click="filtersCtrl('discount');">折扣<i ng-class="{'ion-arrow-up':discountUp,'ion-arrow-down':!discountUp}" class="icon"></i></div>
-            <div class="switch-style" ng-click="filtersCtrl();"><i ng-class="{'ion-double-row':isSingle,'ion-single-row':!isSingle}" class="icon"></i></div>
+            <div ng-click="filtersCtrl('price');">
+                价格
+                <i ng-class="{'ion-arrow-up':priceUp,'ion-arrow-down':!priceUp}" class="icon"></i>
+            </div>
+            <div ng-click="filtersCtrl('discount');">
+                折扣
+                <i ng-class="{'ion-arrow-up':discountUp,'ion-arrow-down':!discountUp}" class="icon"></i>
+            </div>
+            <div ng-if="!isHeart" class="switch-style" ng-click="filtersCtrl();">
+                <i ng-class="{'ion-double-row':isSingle,'ion-single-row':!isSingle}" class="icon"></i>
+            </div>
         </div>
 
         <div class="sort-nav" ng-show="showSort">
@@ -25,21 +37,40 @@
         <ion-scroll class="list-box" delegate-handle="listScroll">
 
             <div class="goods-list" ng-if="isSingle">
-                <a class="goods-item" epbuy-jump="detail" ng-repeat="(index, item) in goodsList">
+                <a class="goods-item" ng-click="toGoodsDetail(1234);" ng-repeat="item in goodsList track by $index">
                     <div class="img">
-                        <img ng-src="">
-                    </div>
-                    <div class="detail">
+                        <img ng-src=""></div>
+                    <div ng-if="!isHeart" class="detail">
                         <h3>我是产品名称我是产品名称我是产品名称</h3>
                         <p class="text">尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等</p>
-                        <p class="p-gray">市场价<s>&yen;260</s></p>
-                        <p class="p-red">内购价<span>&yen;148</span></p>
+                        <p class="p-gray">
+                            市场价
+                            <s>&yen;260</s>
+                        </p>
+                        <p class="p-red">
+                            内购价
+                            <span>&yen;148</span>
+                        </p>
                     </div>
+
+                    <div ng-if="isHeart" class="detail">
+                        <h3>我是产品名称我是产品名称我是产品名称</h3>
+                        <p class="p-heart">
+                            <span class="p-red">&yen;148</span>
+                            <s>&yen;260</s>
+                            <span class="p-discount">5.5折</span>
+                        </p>
+                        <p ng-init="item.hasHeart = false" class="want-to icon" ng-class="{'ion-bar-heart':!item.hasHeart,'ion-ios-heart':item.hasHeart}">
+                            <span ng-click="wantToHeart($index,item.commentPrize);$event.stopPropagation();">{{item.hasHeart ? '已投票':'我想要'}}</span>
+                            {{item.commentPrize}}
+                        </p>
+                    </div>
+
                 </a>
             </div>
 
-            <div class="goods-list-double" ng-if="!isSingle">
-                <a class="goods-item" epbuy-jump="detail" ng-repeat="(index, item) in goodsList">
+            <div class="goods-list-double" ng-if="!isHeart && !isSingle">
+                <a class="goods-item" ng-click="toGoodsDetail(1234);" ng-repeat="item in goodsList track by $index">
                     <div class="img">
                         <img ng-src="">
                         <div class="mask" style="display:-webkit-box;">

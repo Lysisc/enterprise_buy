@@ -35,15 +35,27 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/home/home.html',
                 controller: 'HomeCtrl'
             })
-            // 列表页
+            // 商品列表页
             .state('epbuy.list', {
                 url: '/list',
                 templateUrl: 'scripts/epbuy/list/list.html',
                 controller: 'ListCtrl'
             })
-            // 详情页
+            // 想要列表页
+            .state('epbuy.heart', {
+                url: '/heart',
+                templateUrl: 'scripts/epbuy/list/list.html',
+                controller: 'ListCtrl'
+            })
+            // 商品详情页
             .state('epbuy.detail', {
                 url: '/detail/:GoodsId',
+                templateUrl: 'scripts/epbuy/detail/detail.html',
+                controller: 'DetailCtrl'
+            })
+            // 想要列表页
+            .state('epbuy.want', {
+                url: '/want/:GoodsId',
                 templateUrl: 'scripts/epbuy/detail/detail.html',
                 controller: 'DetailCtrl'
             })
@@ -58,6 +70,12 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 url: '/order/:CartNum&:CartPrice',
                 templateUrl: 'scripts/epbuy/order/order.html',
                 controller: 'OrderCtrl'
+            })
+            // 编辑收货地址页
+            .state('epbuy.address', {
+                url: '/address/:Type?idx',
+                templateUrl: 'scripts/epbuy/address/address.html',
+                controller: 'AddressCtrl'
             })
 
         // 目的地切换

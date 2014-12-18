@@ -1,9 +1,11 @@
 .ep-order {
     $Color999:#999;
     .scroll {
-        padding-bottom: 168px;
+        padding-bottom: 170px;
+        background-color: #fff;
     }
     .receive-info {
+        display: block;
         position: relative;
         z-index: 1;
         padding: 8px 10px;
@@ -11,9 +13,12 @@
         color: $Color999;
         -webkit-box-orient: horizontal;
         -webkit-box-align: center;
+        &.activated {
+            background-color: #ddd;
+        }
         div {
             width: 80%;
-            height: 60px;
+            max-height: 60px;
             p {
                 margin-bottom: 0;
                 line-height: 20px;
@@ -106,12 +111,12 @@
             overflow: hidden;
             textarea {
                 width: 100%;
-                padding: 9px 10px 9px 12px;
+                padding: 9px 10px 9px 11px;
                 line-height: 20px;
             }
             p {
                 width: 100%;
-                padding: 9px 10px 9px 12px;
+                padding: 9px 8px 9px 11px;
                 line-height: 20px;
                 margin-bottom: 0;
             }
@@ -145,5 +150,56 @@
                 }
             }
         }
+    }
+    .order-ctrl {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 49px;
+        line-height: 49px;
+        padding: 0 12px;
+        background-color: #ccc;
+        color: #666;
+        a {
+            background-color: #4a87ee;
+            width: 100px;
+            height: 37px;
+            line-height: 37px;
+            margin-top: 6px;
+            float: right;
+            color: #fff;
+            vertical-align: middle;
+            text-align: center;
+        }
+        span {
+            color: #e85454;
+            font-size: 18px;
+        }
+    }
+    .receive-setting {
+        background-color: #fff;
+        position: fixed;
+        top: 12%;
+        left: 0;
+        z-index: 2;
+        width: 100%;
+        .ion-checkmark {
+            font-size: 18px;
+        }
+        .ion-checkmark:before {
+            color: #4a87ee;
+            content: "\f122";
+        }
+    }
+    .set-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
     }
 }

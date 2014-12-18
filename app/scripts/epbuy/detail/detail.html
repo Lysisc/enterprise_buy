@@ -35,9 +35,18 @@
 
         <div class="parameter">
             <ul>
-                <li><span>保质期：</span>2014.10.30-2014.12.30</li>
-                <li><span>库存量：</span>1000件</li>
-                <li><span>限购数：</span>5件</li>
+                <li>
+                    <span>保质期：</span>
+                    2014.10.30-2014.12.30
+                </li>
+                <li>
+                    <span>库存量：</span>
+                    1000件
+                </li>
+                <li>
+                    <span>限购数：</span>
+                    5件
+                </li>
             </ul>
             <div class="select-bar">
                 请选择商品规格：
@@ -55,14 +64,10 @@
                 <a ng-class="{current: tabIndex == 1}" ng-click="switchTab(1)">其他备注</a>
                 <span ng-style="tabSlide"></span>
             </div>
-            <div class="switch-conts">
-                <p ng-if="tabIndex == 0" class="conts">
-                    文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍
-                </p>
-                <p ng-if="tabIndex == 1" class="conts">
-                    备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
-                </p>
-            </div>
+            <p ng-if="tabIndex == 0" class="switch-conts">
+                文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍
+            </p>
+            <p ng-if="tabIndex == 1" class="switch-conts">备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明</p>
         </div>
 
     </ion-content>
