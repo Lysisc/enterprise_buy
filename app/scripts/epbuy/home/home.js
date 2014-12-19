@@ -3,9 +3,6 @@
 angular.module('EPBUY')
     .controller('HomeCtrl', function ($scope, $state, $cacheFactory, $ionicPopup, Util, DataCachePool) {
 
-        $scope.searchType = 'detail';
-        $scope.bottomBarCur = 'home';
-
         var homeData = $cacheFactory.get('homeData');
 
         if (homeData && homeData.info().commentList) {

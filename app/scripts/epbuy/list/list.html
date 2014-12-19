@@ -1,6 +1,13 @@
-<ion-view title="商品列表" class="ep-list">
+<ion-view title="商品列表" class="ep-list" hide-nav-bar="isHeart">
 
     <ion-content scroll="false">
+
+        <!-- 头部 -->
+        <div ng-if="isHeart" class="bar-positive bar">
+            <h1 class="title">商品列表</h1>
+            <a ng-click="showSearch();" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
+            <shopping-cart></shopping-cart>
+        </div>
 
         <div ng-if="!isHeart" class="activity-date"> <i class="icon ion-time-alarm"></i>
             活动日期：{{startTime}}至{{endTime}}，距离结束还有：{{restTime}}

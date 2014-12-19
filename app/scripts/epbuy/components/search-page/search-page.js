@@ -28,15 +28,17 @@ angular.module('EPBUY')
                 $scope.showSearchPage = false;
             };
 
-            $scope.chooseItemSearch = function (itemId) { // 搜索结果跳转
-                console.log(itemId);
-
+            $scope.chooseItemSearch = function (goodsId) { // 搜索结果跳转
                 switch ($scope.searchType) {
                 case 'detail':
-                    $state.go('epbuy.login');
+                    $state.go('epbuy.detail', {
+                        GoodsId: goodsId
+                    });
                     break;
                 case 'want':
-                    $state.go('epbuy.login');
+                    $state.go('epbuy.want', {
+                        GoodsId: goodsId
+                    });
                     break;
                 default:
                     console.log('searchType is null');

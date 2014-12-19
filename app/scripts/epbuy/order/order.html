@@ -32,7 +32,7 @@
                     {{choice}} <i class="icon ion-arrow-right"></i>
                 </div>
             </a>
-            <div ng-click="showTextarea = true;remarkStyle={'height':'80px'}" class="remark">
+            <div ng-init="remark = null" ng-click="showTextarea = true;remarkStyle={'height':'80px'}" class="remark">
                 <p ng-hide="showTextarea">{{remark ? remark : '备注要求'}}</p>
                 <textarea focus-me="{{showTextarea}}" ng-style="remarkStyle" ng-show="showTextarea" ng-blur="showTextarea = false;remarkStyle={'height':'40px'};checkRemark($event,remark);" ng-model="remark" ng-maxlength="100" placeholder="备注要求"></textarea>
             </div>
@@ -49,7 +49,7 @@
             <ion-radio ng-click="showReceive = false" ng-model="choice" ng-value="'周六及周日全天'">周六及周日全天</ion-radio>
         </div>
 
-        <div ng-class="{enter:showReceive,leave:!showReceive}" class="slide-right-left-n set-backdrop"></div>
+        <div ng-class="{enter:showReceive,leave:!showReceive}" ng-click="showReceive = false" class="slide-right-left-n set-backdrop"></div>
 
     </ion-content>
 

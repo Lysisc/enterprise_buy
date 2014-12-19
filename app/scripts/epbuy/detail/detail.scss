@@ -73,9 +73,11 @@
             -webkit-box-align: center;
             margin-bottom: 10px;
             p {
-                width: 80%;
                 font-weight: bold;
                 margin-bottom: 0;
+                &.is-detail {
+                    width: 80%;
+                }
             }
             .collection-btn {
                 display: inline-block;
@@ -240,6 +242,47 @@
             }
             .ion-share:before {
                 content: "\f220";
+            }
+        }
+        .want-to {
+            width: 260px;
+            height: 38px;
+            line-height: 36px;
+            margin-bottom: 0;
+            display: inline-block;
+            border: 1px solid #4a87ee;
+            font-weight: bold;
+            span {
+                float: right;
+                display: inline-block;
+                width: 140px;
+                text-align: center;
+            }
+            &.ion-bar-heart {
+                background-color: #fff;
+                color: #4a87ee;
+                span {
+                    border-left: 1px solid #4a87ee;
+                }
+            }
+            &.ion-bar-heart:before, &.ion-ios-heart:before {
+                font-size: 20px;
+                margin-left: 20px;
+                margin-right: 15px;
+                vertical-align: middle;
+            }
+            &.ion-bar-heart:before {
+                content: "\f442";
+            }
+            &.ion-ios-heart {
+                background-color: #4a87ee;
+                color: #fff;
+                span {
+                    border-left: 1px solid #fff;
+                }
+            }
+            &.ion-ios-heart:before {
+                content: "\f443";
             }
         }
     }

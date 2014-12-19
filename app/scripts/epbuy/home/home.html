@@ -1,9 +1,9 @@
-<ion-view class="ep-home" hide-nav-bar="true">
+<ion-view class="ep-home" hide-nav-bar="true" ng-init="searchType = 'detail'">
 
     <ion-content scroll="false">
 
         <!-- 头部 -->
-        <div class="nav-title-slide-ios7 bar-positive bar bar-header nav-bar disable-user-behavior">
+        <div class="bar-positive bar">
             <h1 class="title">企福惠</h1>
             <shopping-cart ng-if="hasActivity"></shopping-cart>
         </div>
@@ -51,7 +51,7 @@
 
     </ion-content>
 
-    <bottom-bar></bottom-bar>
+    <bottom-bar ng-init="bottomBarCur = 'home'"></bottom-bar>
 
 </ion-view>
 

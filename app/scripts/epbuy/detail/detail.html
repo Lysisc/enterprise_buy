@@ -1,4 +1,4 @@
-<ion-view title="{{titleName}}" class="ep-detail">
+<ion-view title="{{titleName ? titleName : '商品详情'}}" class="ep-detail">
 
     <ion-content delegate-handle="contentHandle">
 
@@ -14,8 +14,8 @@
 
         <div class="goods-detail">
             <div class="goods-name" style="display:-webkit-box;">
-                <p>我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称</p>
-                <a collection-ctrl ng-class="{hasCollection:hasCollection}" class="collection-btn"> <i class="icon ion-star"></i>
+                <p ng-class="{'is-detail':!isWant}">我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称</p>
+                <a collection-ctrl ng-if="!isWant" ng-class="{hasCollection:hasCollection}" class="collection-btn"> <i class="icon ion-star"></i>
                     <br>
                     <span>{{hasCollection ? '已收藏' : '收藏'}}</span>
                 </a>
@@ -27,13 +27,13 @@
                 市场价：
                 <s class="p-gray">&yen;260</s>
             </p>
-            <p class="integral">
+            <p ng-if="!isWant" class="integral">
                 积分：
                 <span class="p-red">13</span>
             </p>
         </div>
 
-        <div class="parameter">
+        <div class="parameter" ng-if="!isWant">
             <ul>
                 <li>
                     <span>保质期：</span>
@@ -76,7 +76,11 @@
         <a class="share-btn">
             <i class="icon ion-share"></i>
         </a>
-        <a ng-click="addToCart();" ng-class="{disabled:hasAdded}" class="add-to-cart">{{hasAdded ? '已加入购物车' : '加入购物车'}}</a>
+        <p ng-if="isWant" class="want-to icon" ng-class="{'ion-bar-heart':!hasHeart,'ion-ios-heart':hasHeart}">
+            <span ng-click="wantToHeart(1234);">{{hasHeart ? '已投票':'我想要'}}</span>
+            {{1234}}
+        </p>
+        <a ng-if="!isWant" ng-click="addToCart();" ng-class="{disabled:hasAdded}" class="add-to-cart">{{hasAdded ? '已加入购物车' : '加入购物车'}}</a>
     </div>
 
     <bottom-bar></bottom-bar>

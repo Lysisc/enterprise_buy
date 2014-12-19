@@ -1,13 +1,10 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('AddressCtrl', function ($rootScope, $scope, $location, $timeout, $stateParams, $window, Util) {
+    .controller('AddressCtrl', function ($rootScope, $scope, $location, $stateParams, $window, Util) {
 
         $scope.isChoice = $stateParams.Type;
         $scope.addressTitle = $scope.isChoice ? '选择' : '管理';
-        $scope.bottomBarCur = 'person'; //初始化bottomBar类型
-        $scope.tabIndex = 0; //初始化地址类型
-        $scope.choicedIndex = 0; //初始化类型下索引
 
         $scope.addressCheck = function (type, index) {
             if (!angular.isNumber(type)) {
@@ -46,7 +43,7 @@ angular.module('EPBUY')
 
                 $window.history.back();
             } else {
-                if ($scope.tabIndex) {}
+                if ($scope.tabIndex) {} //todo...
             }
         };
 

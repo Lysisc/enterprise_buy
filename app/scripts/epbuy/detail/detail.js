@@ -1,9 +1,15 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('DetailCtrl', function ($scope, $timeout, $ionicScrollDelegate, Util) {
+    .controller('DetailCtrl', function ($scope, $state, $timeout, $ionicScrollDelegate, Util) {
 
-        $scope.titleName = '我是商品名称';
+        $scope.isWant = $state.is('epbuy.want');
+
+        if ($scope.isWant) { //底部bar高亮判断
+            $scope.bottomBarCur = 'heart';
+        } else {
+            $scope.bottomBarCur = 'home';
+        }
 
         function spanSlide(index) {
             $scope.tabIndex = index;
@@ -12,17 +18,14 @@ angular.module('EPBUY')
             };
         }
 
-        $scope.switchTab = function (index) {
-            spanSlide(index);
-            $ionicScrollDelegate.$getByHandle('contentHandle').scrollBottom(true);
-        };
-
         Util.ajaxRequest({
             url: 'GetHomeRestaurantBannerInfo',
             data: {
                 enterpriseCode: $scope.enterpriseCode // todo...
             },
             success: function (data) {
+
+                $scope.titleName = '我是商品名称';
 
                 $scope.hasCollection = false;
                 $scope.tabIndex = 1;
@@ -33,5 +36,33 @@ angular.module('EPBUY')
                 }, 100);
             }
         });
+
+        $scope.switchTab = function (index) {
+            spanSlide(index);
+            $ionicScrollDelegate.$getByHandle('contentHandle').scrollBottom(true);
+        };
+
+        $scope.addToCart = function () {
+            //todo...加入购物车
+        };
+
+        $scope.wantToHeart = function (goodsId) {
+            if ($scope.hasHeart) {
+                return;
+            }
+
+            Util.ajaxRequest({
+                url: 'GetHomeRestaurantBannerInfo',
+                data: {
+                    enterpriseCode: goodsId // todo...
+                },
+                success: function (data) {
+                    
+                    $scope.hasHeart = true; // todo...
+
+                }
+            });
+
+        };
 
     });

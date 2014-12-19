@@ -8,13 +8,14 @@ angular.module('EPBUY')
         $scope.priceUp = true; //初始化价格升序
         $scope.discountUp = true; //初始化折扣升序
         $scope.pageIndex = 1; //初始化第一页
-        $scope.searchType = 'detail'; // 列表页搜索接口类型定义
         $scope.isHeart = $state.is('epbuy.heart');
 
         if ($scope.isHeart) { //底部bar高亮判断
             $scope.bottomBarCur = 'heart';
+            $scope.searchType = 'want'; //列表页搜索接口类型定义
         } else {
             $scope.bottomBarCur = 'home';
+            $scope.searchType = 'detail'; //列表页搜索接口类型定义
         }
 
         function dateSubtract(startDate, endDate) { // 活动时间处理

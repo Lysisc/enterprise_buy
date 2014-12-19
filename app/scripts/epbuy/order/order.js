@@ -18,8 +18,6 @@ angular.module('EPBUY')
             }
         });
 
-        $scope.remark = null;
-
         var remarkText = null;
         $scope.checkRemark = function (e, remark) { // 备注要求
             var el = angular.element(e.target),
