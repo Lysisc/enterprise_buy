@@ -1,0 +1,49 @@
+.ep-edit-address {
+    .edit-ctrl {
+        width: 100%;
+        height: 100%;
+        padding-bottom: 60px;
+        margin-top: 1px;
+        background-color: #fff;
+        &.paddingtop {
+            padding-bottom: 150px;
+        }
+    }
+    .edit-item {
+        @include border-line;
+        border-bottom-width: 1px;
+        height: 45px;
+        span {
+            float: left;
+            width: 30%;
+            padding-left: 15px;
+            padding-right: 20px;
+            line-height: 44px;
+            color: #999;
+        }
+        input {
+            display: inline-block;
+            width: 70%;
+            height: 44px;
+            padding: 5px 15px 5px 4px;
+        }
+        select {
+            border: 0 none;
+            width: 65%;
+            height: 44px;
+            margin-right: 15px;
+        }
+        &.delete {
+            text-align: center;
+            color: #e85454;
+            line-height: 44px;
+        }
+        &.save-address {
+            padding: 0 10px;
+            border-bottom-width: 0;
+            .button-positive {
+                border-radius: 5px;
+            }
+        }
+    }
+}

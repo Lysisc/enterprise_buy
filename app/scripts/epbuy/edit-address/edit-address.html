@@ -1,0 +1,55 @@
+<ion-view title="{{addressId ? '修改' + title + '收货地址' : '新增收货地址'}}" class="ep-edit-address">
+
+    <ion-content>
+
+        <ul class="edit-ctrl" ng-class="{paddingtop:addressType == 0}">
+            <li class="edit-item">
+                <span>收货人</span>
+                <input type="text"></li>
+            <li class="edit-item">
+                <span>手机号码</span>
+                <input type="number"></li>
+            <li class="edit-item">
+                <span>地址类型</span>
+                <select ng-model="addressType">
+                    <option value="0" selected="0">企业地址</option>
+                    <option value="1" selected="1">个人地址</option>
+                </select>
+            </li>
+            <li ng-if="addressType == 0" class="edit-item">
+                <span>选择地址</span>
+                <select ng-model="cpCode" ng-init="cpCode = 'a'">
+                    <option value="a" selected="a">我是公司地址1</option>
+                    <option value="b" selected="b">我是公司地址2</option>
+                    <option value="c" selected="c">我是公司地址3</option>
+                </select>
+            </li>
+            <li ng-if="addressType == 1" class="edit-item">
+                <span>所在地</span>
+                <select ng-model="selected" ng-options="m.productName for m in model">
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </li>
+            <li ng-if="addressType == 1" class="edit-item">
+                <span>所在区</span>
+                <select ng-model="selected" ng-options="m.productName for m in model">
+                    <option value="">-- 请选择 --</option>
+                </select>
+            </li>
+            <li ng-if="addressType == 1" class="edit-item">
+                <span>详细地址</span>
+                <input type="text"></li>
+            <li class="edit-item">
+                <span>邮编</span>
+                <input type="number"></li>
+            <li class="edit-item delete">删除收货地址</li>
+            <li class="edit-item save-address">
+                <button class="button button-block button-positive" ng-click="goStepTwo();">保 存</button>
+            </li>
+        </ul>
+
+    </ion-content>
+
+    <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
+
+</ion-view>

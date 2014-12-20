@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('AddressCtrl', function ($rootScope, $scope, $location, $stateParams, $window, Util) {
+    .controller('AddressCtrl', function ($rootScope, $scope, $state, $location, $stateParams, $window, Util) {
 
         $scope.isChoice = $stateParams.Type;
         $scope.addressTitle = $scope.isChoice ? '选择' : '管理';
@@ -28,7 +28,7 @@ angular.module('EPBUY')
             }
         };
 
-        $scope.addressEdit = function () {
+        $scope.addressEdit = function (isAdd) {
             if ($scope.isChoice) {
 
                 var type = $scope.tabIndex,
@@ -43,7 +43,15 @@ angular.module('EPBUY')
 
                 $window.history.back();
             } else {
-                if ($scope.tabIndex) {} //todo...
+                if (angular.isNumber(isAdd)) {
+                    $state.go('epbuy.edit-address', {
+                        type: isAdd
+                    });
+                } else {
+                    $state.go('epbuy.edit-address', {
+                        AddressId: 1234
+                    });
+                }
             }
         };
 

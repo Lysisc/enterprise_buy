@@ -71,11 +71,17 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/order/order.html',
                 controller: 'OrderCtrl'
             })
-            // 编辑收货地址页
+            // 收货地址页
             .state('epbuy.address', {
                 url: '/address/:Type?idx',
                 templateUrl: 'scripts/epbuy/address/address.html',
                 controller: 'AddressCtrl'
+            })
+            // 编辑收货地址页
+            .state('epbuy.edit-address', {
+                url: '/edit-address/:AddressId?type',
+                templateUrl: 'scripts/epbuy/edit-address/edit-address.html',
+                controller: 'EditAddressCtrl'
             })
 
         // 目的地切换

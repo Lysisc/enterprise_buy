@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('DetailCtrl', function ($scope, $state, $timeout, $ionicScrollDelegate, Util) {
+    .controller('DetailCtrl', function ($scope, $state, $stateParams, $timeout, $ionicScrollDelegate, Util) {
+
+        console.log($stateParams.GoodsId);
 
         $scope.isWant = $state.is('epbuy.want');
 
@@ -21,7 +23,7 @@ angular.module('EPBUY')
         Util.ajaxRequest({
             url: 'GetHomeRestaurantBannerInfo',
             data: {
-                enterpriseCode: $scope.enterpriseCode // todo...
+                enterpriseCode: $stateParams.GoodsId // todo...
             },
             success: function (data) {
 

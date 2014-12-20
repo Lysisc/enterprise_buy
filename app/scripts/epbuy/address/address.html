@@ -1,4 +1,4 @@
-<ion-view title="{{addressTitle}}收货地址" class="ep-address" ng-init="bottomBarCur = 'person';tabIndex = 0;choicedIndex = 0">
+<ion-view title="{{addressTitle}}收货地址" class="ep-address" ng-init="tabIndex = 0;choicedIndex = 0">
 
     <ion-content scroll="false" ng-class="{'has-bottom':!isChoice}">
 
@@ -7,7 +7,8 @@
             <a ng-class="{current: tabIndex == 1}" ng-click="tabIndex = 1;addressCheck(1, choicedIndex);">个人地址</a>
         </div>
         <ion-scroll ng-if="tabIndex == 0" class="address-list">
-            <div class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in enterpriseList track by $index">
+            <div ng-if="!enterpriseList || enterpriseList.length == 0" class="no-address">您还没有添加过地址</div>
+            <div ng-if="enterpriseList" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in enterpriseList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
                 <div class="item-detail">
@@ -23,7 +24,8 @@
             </div>
         </ion-scroll>
         <ion-scroll ng-if="tabIndex == 1" class="address-list">
-            <div class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in personageList track by $index">
+            <div ng-if="!personageList || personageList.length == 0" class="no-address">您还没有添加过地址</div>
+            <div ng-if="personageList" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in personageList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
                 <div class="item-detail">
@@ -39,13 +41,13 @@
             </div>
         </ion-scroll>
 
-        <div class="add-address-ctrl" ng-class="{'has-bottom':!isChoice}">
-            <button class="button button-block button-positive" ng-click="goStepTwo();" ng-class="{disabled: stepOneDisabled}">新增收货地址</button>
+        <div ng-class="{'has-bottom':!isChoice}" class="add-address-ctrl">
+            <button class="button button-block button-positive" ng-click="addressEdit(tabIndex);" ng-class="{disabled: stepOneDisabled}">新增收货地址</button>
         </div>
 
     </ion-content>
 
-    <bottom-bar ng-if="!isChoice"></bottom-bar>
+    <bottom-bar ng-init="bottomBarCur = 'person'" ng-if="!isChoice"></bottom-bar>
 
 </ion-view>
 
