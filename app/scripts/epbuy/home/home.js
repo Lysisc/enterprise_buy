@@ -12,7 +12,7 @@ angular.module('EPBUY')
         } else {
             Util.ajaxRequest({
                 isPopup: true,
-                url: 'GetHomeRestaurantBannerInfo',
+                url: '$api/Home/Index',
                 data: {
                     enterpriseCode: $scope.enterpriseCode // todo...
                 },
@@ -50,5 +50,11 @@ angular.module('EPBUY')
                 }
             });
         }
+
+        $scope.toGoodsDetail = function (goodsId) {
+            $state.go('epbuy.detail', {
+                GoodsId: goodsId
+            });
+        };
 
     });

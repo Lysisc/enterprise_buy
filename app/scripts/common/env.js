@@ -13,13 +13,9 @@ angular.module('EPBUY').factory('ENV', function () {
 
     var domainMap = {
         // todo: use gateway domain with service code.
-        local: '/api/',
-        server: '/dist/api/'
-    };
-
-    var domainOnlyMap = {
-        local: '/api/',
-        server: '/dist/api/'
+        // local: '/api/',
+        local: 'http://www.51mart.com.cn/Service/api/',
+        server: 'http://www.51mart.com.cn/Service/api/'
     };
 
     /*
@@ -38,8 +34,6 @@ angular.module('EPBUY').factory('ENV', function () {
         return {
 
             mode: '',
-
-            staticResourceUrl: '',
 
             /**
              * 初始化 Env Mode
@@ -89,14 +83,6 @@ angular.module('EPBUY').factory('ENV', function () {
                 return domainMap[this.getMode()];
             },
 
-            getDomainOnly: function () {
-                return domainOnlyMap[this.getMode()];
-            },
-
-            setStaticResourceUrl: function () {
-
-            },
-
             init: function () {
 
                 // this.initMode();
@@ -119,13 +105,6 @@ angular.module('EPBUY').factory('ENV', function () {
          * @type {string}
          */
         mode: ENV.mode,
-
-        /**
-         * 成员
-         * 静态资源 URL, 本地为相对路径, 测试环境或生产环境下为绝对路径 URL
-         * @type {string}
-         */
-        staticResourceUrl: ENV.staticResourceUrl,
 
         initMode: ENV.initMode,
 
@@ -151,14 +130,6 @@ angular.module('EPBUY').factory('ENV', function () {
          * @param  不需要
          * @return {string} domainMap 中的一个
          */
-        getDomain: ENV.getDomain,
-
-        /**
-         * 方法
-         * 获取当前 API Domain 前缀
-         * @param  不需要
-         * @return {string} domainOnlyMap 中的一个
-         */
-        getDomainOnly: ENV.getDomainOnly
+        getDomain: ENV.getDomain
     };
 });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading, $timeout, ENV) {
+angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading, $timeout) {
 
     var backDropDom = angular.element(document.querySelector('.backdrop'));
 
@@ -29,7 +29,7 @@ angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading
         var toastDom = angular.element(document.querySelector('.notifier'));
 
         if (!toastDom.length) {
-            var toastTpl = $compile('<div class="notifier" ng-show="notification"><span>{{notification}}</span></div>');
+            var toastTpl = $compile('<div class="notifier" ng-click="notification=null" ng-show="notification"><span>{{notification}}</span></div>');
             angular.element(document.getElementsByTagName('ion-nav-view')[0]).append(toastTpl(scope));
         }
 
@@ -161,7 +161,7 @@ angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading
 
         $http({
             method: method,
-            url: ENV.getDomain() + url + '.json',
+            url: url,
             params: /(POST)/ig.test(method) ? null : data,
             data: /(POST)/ig.test(method) ? data : null,
             timeout: 15000,

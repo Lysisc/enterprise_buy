@@ -1,9 +1,9 @@
 <!-- 搜索 -->
-<div class="ep-search slide-bottom-top" ng-class="{enter:showSearchPage,leave:!showSearchPage}">
+<div class="ep-search slide-bottom-top" ng-init="showSearchPage = false" ng-class="{enter:showSearchPage,leave:!showSearchPage}">
     <div class="item-input-inset">
         <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
             <input id="searchInput" ng-change="searchChange();" ng-model="searchObj.searchVal" type="search" placeholder="请输入关键字"></label>
-        <button class="button-clear" ng-click="hideSearch();">取消</button>
+        <button class="button-clear" ng-click="searchResultList = true;showSearchPage = false">取消</button>
     </div>
 
     <ion-scroll class="list" delegate-handle="searchScroll">

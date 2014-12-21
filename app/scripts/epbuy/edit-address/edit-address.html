@@ -2,21 +2,21 @@
 
     <ion-content>
 
-        <ul class="edit-ctrl" ng-class="{paddingtop:addressType == 0}">
+        <ul class="edit-ctrl" ng-class="{paddingtop:inputVal.addressType == 0}">
             <li class="edit-item">
                 <span>收货人</span>
-                <input type="text"></li>
+                <input ng-model="inputVal.consignee" type="text"></li>
             <li class="edit-item">
                 <span>手机号码</span>
-                <input type="number"></li>
-            <li class="edit-item">
+                <input ng-model="inputVal.phoneNumber" type="number"></li>
+            <li ng-if="!addressId" class="edit-item">
                 <span>地址类型</span>
-                <select ng-model="addressType">
-                    <option value="0" selected="0">企业地址</option>
-                    <option value="1" selected="1">个人地址</option>
+                <select ng-model="inputVal.addressType" ng-change="getArea();">
+                    <option value="0">企业地址</option>
+                    <option value="1">个人地址</option>
                 </select>
             </li>
-            <li ng-if="addressType == 0" class="edit-item">
+            <li ng-if="inputVal.addressType == 0" class="edit-item">
                 <span>选择地址</span>
                 <select ng-model="cpCode" ng-init="cpCode = 'a'">
                     <option value="a" selected="a">我是公司地址1</option>
@@ -24,27 +24,35 @@
                     <option value="c" selected="c">我是公司地址3</option>
                 </select>
             </li>
-            <li ng-if="addressType == 1" class="edit-item">
-                <span>所在地</span>
-                <select ng-model="selected" ng-options="m.productName for m in model">
-                    <option value="">-- 请选择 --</option>
+            <li ng-if="inputVal.addressType == 1" class="edit-item">
+                <span>所在省</span>
+                <select ng-model="inputVal.province" ng-change="getArea(inputVal.province);" ng-options="pDat for pDat in area.pDat">
+                    <option ng-if="area.pName == '选择省'" value="">{{area.pName}}</option>
                 </select>
             </li>
-            <li ng-if="addressType == 1" class="edit-item">
+            <li ng-if="inputVal.addressType == 1" class="edit-item">
+                <span>所在市</span>
+                <p ng-if="!area.cDat || area.cDat.length == 0" class="disabled">选择市</p>
+                <select ng-model="inputVal.city" ng-if="area.cDat && area.cDat.length > 0" ng-change="getArea(inputVal.province, inputVal.city || '选择市');" ng-options="cDat for cDat in area.cDat">
+                    <option ng-if="area.cName == '选择市'" ng-selected="!inputVal.city" value="">{{area.cName}}</option>
+                </select>
+            </li>
+            <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>所在区</span>
-                <select ng-model="selected" ng-options="m.productName for m in model">
-                    <option value="">-- 请选择 --</option>
+                <p ng-if="!area.dDat || area.dDat.length == 0" class="disabled">选择区</p>
+                <select ng-model="inputVal.district" ng-if="area.dDat && area.dDat.length > 0" ng-change="getArea(inputVal.province, inputVal.city, inputVal.district || '选择区');" ng-options="dDat for dDat in area.dDat">
+                    <option ng-if="area.dName == '选择区'" value="">{{area.dName}}</option>
                 </select>
             </li>
-            <li ng-if="addressType == 1" class="edit-item">
+            <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>详细地址</span>
-                <input type="text"></li>
+                <input ng-model="inputVal.detailedAddress" type="text"></li>
             <li class="edit-item">
                 <span>邮编</span>
-                <input type="number"></li>
-            <li class="edit-item delete">删除收货地址</li>
+                <input type="number" placeholder="可选" ng-maxlength="6"></li>
+            <li ng-if="addressId" ng-click="deleteAddress();" class="edit-item delete">删除收货地址</li>
             <li class="edit-item save-address">
-                <button class="button button-block button-positive" ng-click="goStepTwo();">保 存</button>
+                <button class="button button-block button-positive" ng-click="saveAddress();">保 存</button>
             </li>
         </ul>
 

@@ -26,6 +26,7 @@
     overflow: hidden;
 }
 // 背景图变量：用于icon配置
+// 调用方式：@include icon-bg(168px, 168px, url(../images/user_default.png));
 @mixin icon-bg ($width:0, $height:0, $url:url(''), $display:block) {
     display: $display;
     width: $width / 2;

@@ -19,9 +19,6 @@ angular.module('EPBUY')
                 case 'login':
                     $state.go('epbuy.login');
                     break;
-                case 'registered':
-                    $state.go('epbuy.registered');
-                    break;
                 case 'home':
                     $state.go('epbuy.home');
                     break;
@@ -31,11 +28,8 @@ angular.module('EPBUY')
                 case 'heart':
                     $state.go('epbuy.heart');
                     break;
-                case 'detail':
-                    var goodsId = attr.goodsId;
-                    $state.go('epbuy.detail', {
-                        GoodsId: goodsId
-                    });
+                case 'person':
+                    $state.go('epbuy.person');
                     break;
                 case 'address':
                     var type = attr.addressType,

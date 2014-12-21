@@ -1,0 +1,63 @@
+<ion-view title="企福惠" class="ep-person" hide-nav-bar="true">
+
+    <ion-content scroll="false">
+
+        <div class="ep-header-bg">
+            <div class="user-cover">
+                <img ng-src="images/header_bg.png"></div>
+
+            <a ng-click="toJump();" class="user-info icon ion-arrow-right">
+                <span>159 0000 0000</span>
+                上汽集团 - 000 001
+            </a>
+
+            <shopping-cart class="header-cart"></shopping-cart>
+        </div>
+
+        <div class="user-record">
+            <a ng-click="toJump();"> <i></i>
+                <span>全部订单</span>
+                20
+            </a>
+            <a ng-click="toJump();"> <i></i>
+                <span>代付款</span>
+                0
+            </a>
+            <a ng-click="toJump();">
+                <i></i>
+                <span>待收货</span>
+                1
+            </a>
+        </div>
+
+        <ion-scroll class="user-details">
+            <a ng-click="toJump();" class="item icon ion-arrow-right">
+                <span>我的收藏</span>
+                20
+            </a>
+            <a ng-click="toJump();" class="item icon ion-arrow-right">
+                <span>我的积分</span>
+                1200
+            </a>
+            <a epbuy-jump="address" class="item icon ion-arrow-right">
+                <span>管理收货地址</span>
+            </a>
+            <a ng-click="callPhone(phoneNumber);" class="item icon ion-arrow-right">
+                <span>售后服务</span>
+                021-52340687
+            </a>
+            <a ng-click="aboutUs();" class="item icon ion-arrow-right">
+                <span>关于我们</span>
+            </a>
+
+            <a ng-click="goLogout();" class="item logout">推出登录</a>
+
+            <a class="item">企福惠 v1.0.0</a>
+
+        </ion-scroll>
+
+    </ion-content>
+
+    <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
+
+</ion-view>

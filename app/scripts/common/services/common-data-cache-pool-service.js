@@ -37,8 +37,8 @@ angular.module('EPBUY').factory('DataCachePool', function () {
             dataKey = 'value';
 
         if (typeof dataObj === 'object' && !angular.isArray(dataObj)) {
-            dataKey = dataObj.dataKey ? dataObj.dataKey : 'value';
-            item[dataKey] = dataObj.data || undefined;
+            dataKey = dataObj.DataKey ? dataObj.DataKey : 'value';
+            item[dataKey] = dataObj.Data || undefined;
         } else {
             item[dataKey] = dataObj || undefined;
         }
@@ -75,6 +75,7 @@ angular.module('EPBUY').factory('DataCachePool', function () {
         var item = fetchItem(key);
 
         if (!item) {
+            localStorage.removeItem('EPBUY_' + key);
             return;
         }
 

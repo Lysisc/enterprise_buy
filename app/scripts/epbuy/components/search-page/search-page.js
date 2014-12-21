@@ -14,18 +14,12 @@ angular.module('EPBUY')
             }, 300);
 
             $scope.searchObj = {};
-            $scope.showSearchPage = false;
 
             $scope.showSearch = function () {
                 // var input = document.getElementById('searchInput').focus();
                 $scope.searchObj.searchVal = null;
                 $scope.showSearchPage = true;
                 $scope.searchResultList = true;
-            };
-
-            $scope.hideSearch = function () {
-                $scope.searchResultList = false;
-                $scope.showSearchPage = false;
             };
 
             $scope.chooseItemSearch = function (goodsId) { // 搜索结果跳转

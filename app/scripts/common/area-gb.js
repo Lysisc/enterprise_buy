@@ -415,7 +415,7 @@ angular.module('EPBUY').factory('AREA', function () {
             '香港特别行政区': '',
             '澳门特别行政区': ''
         };
-        this.text = ['选择省', '选择市', '选择县'];
+        this.text = ['选择省', '选择市', '选择区'];
         this.pName = this.text[0];
         this.cName = this.text[1];
         this.dName = this.text[2];
@@ -467,8 +467,10 @@ angular.module('EPBUY').factory('AREA', function () {
             this.dName = this.text[2];
             this.dDat = [];
             var obj = this.dat[this.pName][this.cName];
-            for (var i = 0; i < obj.length; i++) {
-                this.dDat.push(obj[i]);
+            if (city !== '选择市') {
+                for (var i = 0; i < obj.length; i++) {
+                    this.dDat.push(obj[i]);
+                }
             }
         }
     };

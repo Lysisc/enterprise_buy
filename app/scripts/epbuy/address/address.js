@@ -62,7 +62,7 @@ angular.module('EPBUY')
             },
             success: function (data) {
 
-                $scope.tabIndex = 1;
+                // $scope.tabIndex = 1;
                 $scope.choicedIndex = 3;
 
                 $scope.enterpriseList = data.commentList; //取数据 todo...

@@ -3,10 +3,10 @@
 angular.module('EPBUY')
 
 // 默认背景配置
-.directive('fallbackSrc', function (ENV) {
+.directive('fallbackSrc', function () {
     return {
         link: function (scope, iElement, iAttrs) {
-            var src = ENV.staticResourceUrl + iAttrs.fallbackSrc;
+            var src = iAttrs.fallbackSrc;
             scope.fallbackSrc = src;
             iElement.bind('error', function () {
                 if (iAttrs.fallbackSrc) {

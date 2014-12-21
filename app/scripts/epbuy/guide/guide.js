@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('GuideCtrl', function ($scope, $timeout, $state, ENV, Util) {
+    .controller('GuideCtrl', function ($scope, $timeout, $state, Util, DataCachePool) {
 
         var pager = null;
 
@@ -27,10 +27,27 @@ angular.module('EPBUY')
 
         };
 
-        $scope.goLogin = function () { //首页跳转
+        $scope.goLogin = function () { //判断跳登陆页还是首页
 
-            $state.go('epbuy.login');
-            localStorage.setItem('EPBUY_SHOW_GUIDE', 0);
+            DataCachePool.push('SHOWED_GUIDE', 1);
+
+            Util.ajaxRequest({
+                noMask: true,
+                url: '$api/Account/CheckLogin',
+                data: {
+                    Auth: DataCachePool.pull('USERAUTH')
+                },
+                success: function (data) {
+                    if (data && data.IsLogin) {
+                        $state.go('epbuy.home');
+                    } else {
+                        $state.go('epbuy.login');
+                    }
+                },
+                error: function (data) {
+                    $state.go('epbuy.login');
+                }
+            });
 
         };
 

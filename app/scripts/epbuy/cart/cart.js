@@ -3,9 +3,6 @@
 angular.module('EPBUY')
     .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, DataCachePool) {
 
-        // var area = new AREA.GetArea();
-        // console.log(area);
-
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
 

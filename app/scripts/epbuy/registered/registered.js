@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('RegisteredCtrl', function ($cacheFactory, $scope, $state, $ionicPopup, $timeout, Util) {
+    .controller('RegisteredCtrl', function ($cacheFactory, $scope, $state, $ionicPopup, $timeout, Util, DataCachePool) {
 
         $scope.stepInit = true; //step1 view
         $scope.stepOneDisabled = true; //step1 submit
@@ -46,9 +46,9 @@ angular.module('EPBUY')
                 searchTimer = $timeout(function () {
                     Util.ajaxRequest({
                         noMask: true,
-                        url: 'GetHomeRestaurantBannerInfo',
+                        url: '$api/Account/QueryEnterpriseByName',
                         data: {
-                            enterpriseCode: $scope.inputVal.enterpriseCode // todo...
+                            name: $scope.inputVal.searchVal // todo...
                         },
                         success: function (data) {
                             if (data.commentList && data.commentList.length > 0) {
@@ -179,7 +179,7 @@ angular.module('EPBUY')
                 },
                 success: function (data) {
 
-                    localStorage.setItem('EPBUY_USERINFO', 0 || data);
+                    DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
 
                     $ionicPopup.alert({
                         template: '<h4>免责声明</h4><ion-scroll>我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明</ion-scroll><h3>恭喜您，注册成功</h3>',
