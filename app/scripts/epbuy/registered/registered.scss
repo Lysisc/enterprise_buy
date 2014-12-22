@@ -17,6 +17,10 @@
         background-color: #f5f5f5;
         .search-item {
             padding-left: 20px;
+            span {
+                display: inline-block;
+                width: 150px;
+            }
             .ion-checkmark {
                 float: left;
                 visibility: hidden;
@@ -42,6 +46,11 @@
         }
         .list .scroll {
             padding-bottom: 65px;
+            .item {
+                height: 45px;
+                line-height: 44px;
+                padding: 0 20px;
+            }
         }
         .no-results {
             text-align: center;
@@ -87,16 +96,17 @@
         }
         .button {
             border-radius: 5px;
-            float: right;
             .ion-search:before {
                 content: "\f4a4";
             }
         }
+        .search-button {
+            float: right;
+        }
         .validation-button {
+            float: right;
             font-size: 12px;
             width: 90px;
         }
-    }
-    .ep-registered-step2 {
     }
 }

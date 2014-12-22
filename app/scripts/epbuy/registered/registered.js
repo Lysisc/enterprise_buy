@@ -22,18 +22,13 @@ angular.module('EPBUY')
             $scope.searching = false;
         };
 
-        $scope.chooseItemSearch = function (e, itemId) { //选择企业
-            console.log(itemId);
-            angular.element(document.querySelectorAll('.search-item')).removeClass('cur');
-            angular.element(e.target).addClass('cur');
-            if (itemId) {
-                $scope.inputVal.enterpriseCode = itemId;
-                $scope.inputVal.searchVal = null;
-                $scope.stepOneDisabled = false;
-                $scope.searching = false;
-            } else {
-                console.log('itemId error');
-            }
+        $scope.chooseItemSearch = function (code) { //选择企业
+            // angular.element(document.querySelectorAll('.search-item')).removeClass('cur');
+            // angular.element(e.target).addClass('cur');
+            $scope.inputVal.enterpriseCode = code;
+            $scope.inputVal.searchVal = null;
+            $scope.stepOneDisabled = false;
+            $scope.searching = false;
         };
 
         var searchTimer = null;
@@ -51,13 +46,14 @@ angular.module('EPBUY')
                             name: $scope.inputVal.searchVal // todo...
                         },
                         success: function (data) {
-                            if (data.commentList && data.commentList.length > 0) {
-                                $scope.searchResultList = data.commentList; //取数据 todo...
+                            if (data.enterpriselist && data.enterpriselist.length > 0) {
+                                $scope.searchResultList = data.enterpriselist;
                             } else {
                                 $scope.searchResultList = false;
                             }
                         },
                         error: function (data) {
+                            console.log('验证码接口不可用');
                             $scope.searchResultList = false;
                         }
                     });
@@ -81,28 +77,30 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 isPopup: true,
-                // method: 'POST',
-                url: 'GetHomeRestaurantBannerInfo',
+                url: '$api/Account/EnterpriseCheck',
                 data: {
-                    enterpriseCode: $scope.inputVal.enterpriseCode
+                    Code: $scope.inputVal.enterpriseCode
                 },
                 success: function (data) {
-                    $scope.stepInit = false;
-                    $scope.stepOnePass = true;
-                    //todo...
+                    if (data.state === 999) {
+                        var alertPopup = $ionicPopup.alert({
+                            template: '抱歉，企业码不存在',
+                            buttons: [{
+                                text: '知道了'
+                            }]
+                        });
+                        // alertPopup.then(function (res) {
+                        //     console.log(res);
+                        // });
+                    }
+
+                    if (data.state === 200) {
+                        $scope.stepInit = false;
+                        $scope.stepOnePass = true;
+                    }
+
                 },
-                error: function (data) {
-                    Util.backDrop.retain();
-                    var alertPopup = $ionicPopup.alert({
-                        template: '抱歉，企业码无效',
-                        buttons: [{
-                            text: '知道了'
-                        }]
-                    });
-                    alertPopup.then(function (res) {
-                        console.log(res);
-                    });
-                }
+                error: function (data) {}
             });
 
         };
@@ -111,16 +109,11 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 noMask: true,
-                url: 'GetHomeRestaurantBannerInfo',
+                url: '$api/Tools/SendCheckCode',
                 data: {
-                    enterpriseCode: $scope.inputVal.enterpriseCode // todo...
+                    Mobile: $scope.inputVal.phoneNumber // todo...
                 },
                 success: function (data) {
-                    $scope.validationDataCode = 100;
-
-                    $scope.validationDisabled = true;
-                    $scope.validationEnable = false;
-
                     var time = 30,
                         countdown = function () { //倒计时
                             if (time > 0) {
@@ -134,7 +127,14 @@ angular.module('EPBUY')
                             }
                         };
 
-                    $timeout(countdown, 0);
+                    if (data.ShortMessage) {
+                        Util.msgToast($scope, data.ShortMessage);
+                        $scope.validationDisabled = true;
+                        $scope.validationEnable = false;
+                        $timeout(countdown, 0);
+                    } else {
+                        Util.msgToast($scope, data.msg || '手机号无效');
+                    }
 
                 }
             });
@@ -142,6 +142,7 @@ angular.module('EPBUY')
         };
 
         $scope.submitRegistered = function () {
+            console.log($scope.inputVal.enterpriseCode);
             if (!$scope.inputVal.phoneNumber) {
                 Util.msgToast($scope, '请输入手机号码');
                 return;
@@ -157,10 +158,10 @@ angular.module('EPBUY')
                 return;
             }
 
-            if ($scope.inputVal.validationCode && $scope.inputVal.validationCode !== $scope.validationDataCode) {
-                Util.msgToast($scope, '验证码不正确');
-                return;
-            }
+            // if ($scope.inputVal.validationCode && $scope.inputVal.validationCode !== $scope.validationDataCode) {
+            //     Util.msgToast($scope, '验证码不正确');
+            //     return;
+            // }
 
             if (!$scope.inputVal.passWord) {
                 Util.msgToast($scope, '请输入密码');
@@ -169,43 +170,40 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 isPopup: true,
-                // method: 'POST',
-                url: 'GetHomeRestaurantBannerInfo',
+                method: 'POST',
+                url: '$api/Account/Regest',
                 data: {
-                    passCode: $scope.passCode, //请求企业码返回的passCode
-                    phoneNumber: $scope.inputVal.phoneNumber, //电话号码
-                    validationCode: $scope.inputVal.validationCode, //验证码
-                    passWord: $scope.inputVal.passWord //密码
+                    LoginName: $scope.inputVal.phoneNumber, //电话号码
+                    Password: $scope.inputVal.passWord, //密码
+                    Code: $scope.inputVal.enterpriseCode || 0, //企业码
+                    CheckCode: $scope.inputVal.validationCode //验证码
                 },
                 success: function (data) {
+                    if (data.state === 999) {
+                        Util.msgToast($scope, data.msg);
+                    }
 
-                    DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
+                    if (data.state === 200) {
+                        DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
+                        DataCachePool.push('USERAUTH', data.Auth, 2 / 24); //存入用户Auth，并设置过期时间
 
-                    $ionicPopup.alert({
-                        template: '<h4>免责声明</h4><ion-scroll>我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明我是免责申明</ion-scroll><h3>恭喜您，注册成功</h3>',
-                        buttons: [{
-                            text: '开始购物吧',
-                            type: 'button-positive',
-                            onTap: function () {
-                                $state.go('epbuy.home');
-                            }
-                        }]
-                    });
+                        var disclaimer = '我是免责我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明';
 
+                        $ionicPopup.alert({
+                            template: '<h4>免责声明</h4><ion-scroll>' + disclaimer + '</ion-scroll><h3>恭喜您，注册成功</h3>',
+                            buttons: [{
+                                text: '开始购物吧',
+                                type: 'button-positive',
+                                onTap: function () {
+                                    $state.go('epbuy.home');
+                                }
+                            }]
+                        });
+                    }
+                    
                 },
                 error: function (data) {
-                    //todo... 注册失败信息
-                    $ionicPopup.alert({
-                        template: '抱歉，注册失败',
-                        buttons: [{
-                            text: '请重试',
-                            type: 'button-positive',
-                            onTap: function () {
-                                // alert(1);
-                            }
-                        }]
-                    });
-
+                    Util.msgToast($scope, '注册失败请重试或检查网络');
                 }
             });
 

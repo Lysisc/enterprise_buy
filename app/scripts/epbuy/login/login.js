@@ -12,19 +12,23 @@ angular.module('EPBUY')
 			success: function (data) {
 				if (data && data.IsLogin) {
 					$state.go('epbuy.home');
-				} else {
-					$state.go('epbuy.login');
 				}
-			},
-			error: function (data) {}
+			}
 		});
 
 		$scope.inputVal = {}; //初始化ng-model
 		$scope.inputVal.phoneNumber = DataCachePool.pull('USERNAME');
 		$scope.inputVal.checked = $scope.inputVal.phoneNumber ? true : false;
 
-		$scope.goRegistered = function () {
-			$state.go('epbuy.registered');
+		$scope.toJump = function (type) {
+			switch (type) {
+			case 'registered':
+				$state.go('epbuy.registered');
+				break;
+			case 'forget-password':
+				$state.go('epbuy.forget-password');
+				break;
+			}
 		};
 
 		$scope.getLogin = function () { //首页跳转

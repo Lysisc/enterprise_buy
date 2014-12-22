@@ -8,8 +8,8 @@
                 <button class="button-clear" ng-click="hideSearch();">取消</button>
             </div>
             <ion-scroll class="list" ng-if="searching">
-                <label ng-repeat="(index, item) in searchResultList" class="item search-item" ng-class="{cur: index == 0}" ng-click="chooseItemSearch($event, {{item.commentPrize}})"> <i class="icon ion-checkmark"></i>
-                    上海通用汽车 - {{item.commentPrize}}
+                <label ng-repeat="item in searchResultList track by $index" class="item search-item cur" ng-click="chooseItemSearch(item.Code);"> <!-- <i class="icon ion-checkmark"></i> -->
+                    <span>{{item.Name}}</span>{{item.Code}}
                 </label>
                 <div class="item no-results" ng-if="!searchResultList && inputVal.searchVal">抱歉，没有结果</div>
             </ion-scroll>
@@ -18,7 +18,7 @@
         <div class="ep-registered-step" ng-if="stepInit">
             <ul>
                 <li>
-                    <button class="button button-positive" ng-click="showSearch();">
+                    <button class="button button-positive search-button" ng-click="showSearch();">
                         <i class="icon ion-search"></i>
                     </button>
                     <label class="item-input short-one">

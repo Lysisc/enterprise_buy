@@ -23,6 +23,12 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/login/login.html',
                 controller: 'LoginCtrl'
             })
+            // 忘记密码页
+            .state('epbuy.forget-password', {
+                url: '/forget-password',
+                templateUrl: 'scripts/epbuy/forget-password/forget-password.html',
+                controller: 'ForgetPasswordCtrl'
+            })
             // 注册页
             .state('epbuy.registered', {
                 url: '/registered',
@@ -89,6 +95,19 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/person/person.html',
                 controller: 'PersonCtrl'
             })
+            // 个人信息页
+            // .state('epbuy.person', {
+            //     url: '/person',
+            //     templateUrl: 'scripts/epbuy/person/person.html',
+            //     controller: 'PersonCtrl'
+            // })
+            // 全部订单页
+            .state('epbuy.order-list', {
+                url: '/order-list',
+                templateUrl: 'scripts/epbuy/order-list/order-list.html',
+                controller: 'OrderListCtrl'
+            })
+
 
         // 目的地切换
         .state('epbuy.destinationSwitch', {

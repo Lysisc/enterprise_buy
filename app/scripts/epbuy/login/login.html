@@ -18,13 +18,13 @@
                 <li class="checkbox-li">
                     <label class="checkbox">
                         <input ng-model="inputVal.checked" type="checkbox">记住我</label>
-                    <a class="forget-password" ng-href="#">忘记密码</a>
+                    <a ng-click="toJump('forget-password');" class="forget-password">忘记密码</a>
                 </li>
                 <li>
                     <button ng-click="getLogin();" class="button button-block button-positive">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</button>
                 </li>
                 <li>
-                    <a ng-click="goRegistered();">还没有账号，马上注册</a>
+                    <a ng-click="toJump('registered');">还没有账号，马上注册</a>
                 </li>
             </ul>
             
