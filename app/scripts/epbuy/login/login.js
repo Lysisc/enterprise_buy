@@ -17,8 +17,8 @@ angular.module('EPBUY')
 		});
 
 		$scope.inputVal = {}; //初始化ng-model
-		$scope.inputVal.phoneNumber = DataCachePool.pull('USERNAME');
-		$scope.inputVal.checked = $scope.inputVal.phoneNumber ? true : false;
+		$scope.inputVal.checked = DataCachePool.pull('REMEMBER_LOGIN') ? true : false;
+		$scope.inputVal.phoneNumber = $scope.inputVal.checked ? DataCachePool.pull('USERNAME') : null;
 
 		$scope.toJump = function (type) {
 			switch (type) {
@@ -58,12 +58,13 @@ angular.module('EPBUY')
 				success: function (data) {
 					if (data && data.UserEntity) {
 
-						if ($scope.inputVal.checked) { //如果选择记住我，则存入用户名
-							DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
+						if ($scope.inputVal.checked) { //记住我
+							DataCachePool.push('REMEMBER_LOGIN', 1);
 						} else {
-							DataCachePool.remove('USERNAME');
+							DataCachePool.remove('REMEMBER_LOGIN');
 						}
 
+						DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
 						DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
 						$state.go('epbuy.home');
 					} else {

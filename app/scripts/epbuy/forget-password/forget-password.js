@@ -6,7 +6,7 @@ angular.module('EPBUY')
 		$scope.validationDisabled = false; //验证码不可用
 		$scope.validationEnable = true; //验证码可用
 		$scope.inputVal = {}; //初始化ng-model
-		$scope.inputVal.phoneNumber = DataCachePool.pull('USERNAME');
+		$scope.inputVal.phoneNumber = DataCachePool.pull('REMEMBER_LOGIN') ? DataCachePool.pull('USERNAME') : null;
 
 		$scope.getVerificationCode = function () { //获取验证码
 

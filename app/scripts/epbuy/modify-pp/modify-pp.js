@@ -73,18 +73,19 @@ angular.module('EPBUY')
 				isPopup: true,
 				url: '$api/Account/PasswordForgotModify',
 				data: {
+					Auth: DataCachePool.pull('USERAUTH'),
 					LoginName: $scope.inputVal.phoneNumber,
-					CheckCode: $scope.inputVal.validationCode,
-					newpassword: $scope.inputVal.newPassword
+					CheckCode: $scope.inputVal.validationCode
 				},
 				success: function (data) {
 					if (data && data.state === 200) {
 						Util.msgToast($scope, data.msg);
 						$timeout(function () {
+							DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
 							$window.history.back();
 						}, 2000);
 					} else {
-						Util.msgToast($scope, data.msg);
+						Util.msgToast($scope, '修改失败，请重试');
 					}
 				},
 				error: function (data) {
@@ -120,12 +121,17 @@ angular.module('EPBUY')
 				return;
 			}
 
+			if ($scope.inputVal.password === $scope.inputVal.newPassword) {
+				Util.msgToast($scope, '新密码和当前密码不能相同');
+				return;
+			}
+
 			Util.ajaxRequest({
 				isPopup: true,
-				url: '$api/Account/PasswordForgotModify',
+				url: '$api/Account/PasswordUpdate',
 				data: {
-					LoginName: $scope.inputVal.phoneNumber,
-					CheckCode: $scope.inputVal.validationCode,
+					Auth: DataCachePool.pull('USERAUTH'),
+					password: $scope.inputVal.password,
 					newpassword: $scope.inputVal.newPassword
 				},
 				success: function (data) {
@@ -135,7 +141,7 @@ angular.module('EPBUY')
 							$window.history.back();
 						}, 2000);
 					} else {
-						Util.msgToast($scope, data.msg);
+						Util.msgToast($scope, '修改失败，请重试');
 					}
 				},
 				error: function (data) {
