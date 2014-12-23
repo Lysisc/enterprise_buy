@@ -1,20 +1,29 @@
 'use strict';
 
 angular.module('EPBUY')
-	.controller('ForgetPasswordCtrl', function ($scope, $state, $timeout, $ionicPopup, Util, DataCachePool) {
+	.controller('ModifyPpCtrl', function ($scope, $state, $window, $stateParams, $timeout, Util, DataCachePool) {
 
+		$scope.modifiedType = $stateParams.type || 'phone';
 		$scope.validationDisabled = false; //验证码不可用
 		$scope.validationEnable = true; //验证码可用
 		$scope.inputVal = {}; //初始化ng-model
-		$scope.inputVal.phoneNumber = DataCachePool.pull('USERNAME');
 
 		$scope.getVerificationCode = function () { //获取验证码
+			if (!$scope.inputVal.newPhoneNumber) {
+				Util.msgToast($scope, '请输入手机号码');
+				return;
+			}
+
+			if ($scope.inputVal.newPhoneNumber === DataCachePool.pull('USERNAME')) {
+				Util.msgToast($scope, '请输入新的手机号码');
+				return;
+			}
 
 			Util.ajaxRequest({
 				noMask: true,
 				url: '$api/Tools/SendCheckCode',
 				data: {
-					Mobile: $scope.inputVal.phoneNumber // todo...
+					Mobile: $scope.inputVal.newPhoneNumber // todo...
 				},
 				success: function (data) {
 					var time = 30,
@@ -44,20 +53,50 @@ angular.module('EPBUY')
 
 		};
 
-		$scope.getNewPasswd = function () { //拿新密码
-
-			if (!$scope.inputVal.phoneNumber) {
-				Util.msgToast($scope, '请输入用户名');
+		$scope.modifiedPhone = function () { //修改手机号
+			if (!$scope.inputVal.newPhoneNumber) {
+				Util.msgToast($scope, '请输入手机号码');
 				return;
 			}
 
-			if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test($scope.inputVal.phoneNumber)) {
-				Util.msgToast($scope, '用户名格式不合法');
+			if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test($scope.inputVal.newPhoneNumber)) {
+				Util.msgToast($scope, '手机号码格式不合法');
 				return;
 			}
 
-			if (!$scope.inputVal.validationCode) {
-				Util.msgToast($scope, '请输入验证码');
+			if ($scope.inputVal.newPhoneNumber === DataCachePool.pull('USERNAME')) {
+				Util.msgToast($scope, '请输入新的手机号码');
+				return;
+			}
+
+			Util.ajaxRequest({
+				isPopup: true,
+				url: '$api/Account/PasswordForgotModify',
+				data: {
+					LoginName: $scope.inputVal.phoneNumber,
+					CheckCode: $scope.inputVal.validationCode,
+					newpassword: $scope.inputVal.newPassword
+				},
+				success: function (data) {
+					if (data && data.state === 200) {
+						Util.msgToast($scope, data.msg);
+						$timeout(function () {
+							$window.history.back();
+						}, 2000);
+					} else {
+						Util.msgToast($scope, data.msg);
+					}
+				},
+				error: function (data) {
+					Util.msgToast($scope, '修改失败，请检查网络');
+				}
+			});
+
+		};
+
+		$scope.getNewPasswd = function () { //修改密码
+			if (!$scope.inputVal.password) {
+				Util.msgToast($scope, '请输入当前密码');
 				return;
 			}
 
@@ -91,16 +130,10 @@ angular.module('EPBUY')
 				},
 				success: function (data) {
 					if (data && data.state === 200) {
-						$ionicPopup.alert({
-							template: '密码更新成功',
-							buttons: [{
-								text: '去登录',
-								type: 'button-positive',
-								onTap: function () {
-									$state.go('epbuy.login');
-								}
-							}]
-						});
+						Util.msgToast($scope, data.msg);
+						$timeout(function () {
+							$window.history.back();
+						}, 2000);
 					} else {
 						Util.msgToast($scope, data.msg);
 					}

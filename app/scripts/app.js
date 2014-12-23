@@ -96,11 +96,17 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 controller: 'PersonCtrl'
             })
             // 个人信息页
-            // .state('epbuy.person', {
-            //     url: '/person',
-            //     templateUrl: 'scripts/epbuy/person/person.html',
-            //     controller: 'PersonCtrl'
-            // })
+            .state('epbuy.personal-info', {
+                url: '/personal-info',
+                templateUrl: 'scripts/epbuy/personal-info/personal-info.html',
+                controller: 'PersonInfoCtrl'
+            })
+            // 修改手机号码&修改密码
+            .state('epbuy.modify-pp', {
+                url: '/modify-pp?type',
+                templateUrl: 'scripts/epbuy/modify-pp/modify-pp.html',
+                controller: 'ModifyPpCtrl'
+            })
             // 全部订单页
             .state('epbuy.order-list', {
                 url: '/order-list',

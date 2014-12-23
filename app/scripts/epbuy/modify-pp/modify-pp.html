@@ -1,0 +1,43 @@
+<ion-view title="{{modifiedType == 'password' ? '修改密码' : '修改手机号码'}}" class="ep-modified">
+
+    <ion-content scroll="false">
+
+        <dl ng-if="modifiedType == 'phone'" class="modified-ctrl">
+            <dd>
+                <label class="item-input">
+                    <input focus-effect ng-model="inputVal.newPhoneNumber" type="number" placeholder="请输入新手机号码"></label>
+            </dd>
+            <dd>
+                <button class="button button-positive validation-button" ng-class="{disabled: validationDisabled}" ng-click="getVerificationCode();">
+                    <span ng-if="validationEnable">获取验证码</span> <i ng-if="validationDisabled" ng-bind-html="validationHtml"></i>
+                </button>
+                <label class="item-input short-two"> <i class="icon placeholder-icon ion-key"></i>
+                    <input focus-effect ng-model="inputVal.validationCode" type="number" placeholder="验证码"></label>
+            </dd>
+            <dd>
+                <button ng-click="modifiedPhone();" class="button button-block button-positive">确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;认</button>
+            </dd>
+        </dl>
+
+        <dl ng-if="modifiedType == 'password'" class="modified-ctrl">
+            <dd>
+                <label class="item-input">
+                    <input focus-effect ng-model="inputVal.password" type="password" placeholder="请输入当前密码"></label>
+            </dd>
+            <dd class="tip">密码最少6位数的数字或字符组合</dd>
+            <dd>
+                <label class="item-input">
+                    <input focus-effect ng-model="inputVal.newPassword" type="password" placeholder="请输入新密码"></label>
+            </dd>
+            <dd>
+                <label class="item-input">
+                    <input focus-effect ng-model="inputVal.reenterPassword" type="password" placeholder="请再次输入新密码"></label>
+            </dd>
+            <dd>
+                <button ng-click="getNewPasswd();" class="button button-block button-positive">确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;认</button>
+            </dd>
+        </dl>
+
+    </ion-content>
+
+</ion-view>

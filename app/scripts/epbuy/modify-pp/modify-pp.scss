@@ -1,0 +1,58 @@
+.ep-modified {
+    .scroll-content {
+        background-color: #fff;
+    }
+    .modified-ctrl {
+        padding-top: 40px;
+        dd {
+            width: 224px;
+            margin: 0 auto;
+            margin-bottom: 16px;
+            .ion-person {
+                margin-top: 2px;
+                margin-left: -4px;
+                margin-right: 4px;
+            }
+            .ion-person:before {
+                content: "\f213";
+            }
+            .ion-key {
+                margin-right: 5px;
+            }
+            .ion-key:before {
+                display: inline-block;
+                -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
+                font-size: 17px;
+                margin-top: 2px;
+                content: "\f296";
+            }
+            &.tip {
+                color: #999;
+                padding-left: 10px;
+            }
+        }
+    }
+    .item-input {
+        border: 1px solid #999;
+        border-radius: 5px;
+        &.focus {
+            border-color: #4c97d8;
+            box-shadow: 0 0 1px 0 #4c97d8;
+        }
+    }
+    .short-two {
+        width: 55%;
+    }
+    .button {
+        border-radius: 5px;
+        .ion-search:before {
+            content: "\f4a4";
+        }
+    }
+    .validation-button {
+        float: right;
+        font-size: 12px;
+        width: 90px;
+    }
+}

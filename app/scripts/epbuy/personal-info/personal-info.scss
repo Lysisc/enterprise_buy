@@ -1,0 +1,26 @@
+.ep-personal-info {
+    .info-item {
+        margin-top: 2px;
+        .item {
+            height: 45px;
+            padding: 0 15px 0 25px;
+            line-height: 44px;
+            @include border-line;
+            border-bottom-width: 1px;
+            color: #999;
+            margin-bottom: 1px;
+            text-align: right;
+            span {
+                float: left;
+            }
+            &.ion-arrow-right {
+                &:before {
+                    float: right;
+                    margin-left: 10px;
+                    font-size: 18px;
+                    content: "\f3d1";
+                }
+            }
+        }
+    }
+}

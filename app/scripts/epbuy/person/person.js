@@ -16,6 +16,9 @@ angular.module('EPBUY')
 
 		$scope.toJump = function (type) {
 			switch (type) {
+			case 'personal-info':
+				$state.go('epbuy.personal-info');
+				break;
 			case 'order-list':
 				$state.go('epbuy.order-list');
 				break;

@@ -1,0 +1,19 @@
+<ion-view title="我的资料" class="ep-personal-info">
+
+    <ion-content scroll="false">
+
+        <div class="info-item">
+            <a ng-click="toJump('phone');" class="item icon ion-arrow-right">
+                <span>手机号码</span>
+                {{phoneNumber}}
+            </a>
+            <a ng-click="toJump('password');" class="item icon ion-arrow-right">
+                <span>修改密码</span>
+            </a>
+        </div>
+
+    </ion-content>
+
+    <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
+
+</ion-view>

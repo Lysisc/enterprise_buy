@@ -168,6 +168,11 @@ angular.module('EPBUY')
                 return;
             }
 
+            if ($scope.inputVal.passWord.length <= 5) {
+                Util.msgToast($scope, '密码必须大于或等于6位');
+                return;
+            }
+
             Util.ajaxRequest({
                 isPopup: true,
                 method: 'POST',
