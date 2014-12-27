@@ -21,7 +21,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				noMask: true,
-				url: '$api/Tools/SendCheckCode',
+				url: '$server/Tools/SendCheckCode',
 				data: {
 					Mobile: $scope.inputVal.newPhoneNumber // todo...
 				},
@@ -71,7 +71,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				isPopup: true,
-				url: '$api/Account/PasswordForgotModify',
+				url: '$server/Account/PasswordForgotModify',
 				data: {
 					Auth: DataCachePool.pull('USERAUTH'),
 					LoginName: $scope.inputVal.phoneNumber,
@@ -128,7 +128,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				isPopup: true,
-				url: '$api/Account/PasswordUpdate',
+				url: '$server/Account/PasswordUpdate',
 				data: {
 					Auth: DataCachePool.pull('USERAUTH'),
 					password: $scope.inputVal.password,

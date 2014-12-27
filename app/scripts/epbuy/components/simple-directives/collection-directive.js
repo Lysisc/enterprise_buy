@@ -15,7 +15,7 @@ angular.module('EPBUY')
                 } else {
                     hasClick = true;
                     Util.ajaxRequest({
-                        url: 'GetHomeRestaurantBannerInfo',
+                        url: '$local/GetHomeRestaurantBannerInfo.json',
                         data: {
                             enterpriseCode: scope.enterpriseCode // todo...
                         },

@@ -41,7 +41,7 @@ angular.module('EPBUY')
                 searchTimer = $timeout(function () {
                     Util.ajaxRequest({
                         noMask: true,
-                        url: '$api/Account/QueryEnterpriseByName',
+                        url: '$server/Account/QueryEnterpriseByName',
                         data: {
                             name: $scope.inputVal.searchVal // todo...
                         },
@@ -77,7 +77,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 isPopup: true,
-                url: '$api/Account/EnterpriseCheck',
+                url: '$server/Account/EnterpriseCheck',
                 data: {
                     Code: $scope.inputVal.enterpriseCode
                 },
@@ -109,7 +109,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 noMask: true,
-                url: '$api/Tools/SendCheckCode',
+                url: '$server/Tools/SendCheckCode',
                 data: {
                     Mobile: $scope.inputVal.phoneNumber // todo...
                 },
@@ -176,7 +176,7 @@ angular.module('EPBUY')
             Util.ajaxRequest({
                 isPopup: true,
                 method: 'POST',
-                url: '$api/Account/Regest',
+                url: '$server/Account/Regest',
                 data: {
                     LoginName: $scope.inputVal.phoneNumber, //电话号码
                     Password: $scope.inputVal.passWord, //密码

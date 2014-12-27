@@ -31,7 +31,7 @@ angular.module('EPBUY')
         if ($scope.addressId) {
 
             Util.ajaxRequest({
-                url: 'GetHomeRestaurantBannerInfo',
+                url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
                     enterpriseCode: $scope.enterpriseCode // todo...
                 },
@@ -58,7 +58,7 @@ angular.module('EPBUY')
                         onTap: function () {
                             Util.ajaxRequest({
                                 isPopup: true,
-                                url: 'GetHomeRestaurantBannerInfo',
+                                url: '$local/GetHomeRestaurantBannerInfo.json',
                                 data: {
                                     enterpriseCode: $scope.addressId // todo...
                                 },
@@ -117,7 +117,7 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
-                url: 'GetHomeRestaurantBannerInfo',
+                url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
                     enterpriseCode: $scope.enterpriseCode // todo...
                 },

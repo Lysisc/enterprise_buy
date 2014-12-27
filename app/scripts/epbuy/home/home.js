@@ -12,22 +12,21 @@ angular.module('EPBUY')
         } else {
             Util.ajaxRequest({
                 isPopup: true,
-                url: '$api/Home/Index',
+                url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
-                    enterpriseCode: $scope.enterpriseCode // todo...
+                    Auth: DataCachePool.pull('USERAUTH')
                 },
                 success: function (data) {
-
                     if (data.commentList && data.commentList.length > 0) {
                         $scope.hasActivity = true;
 
                         $cacheFactory('homeData', data);
 
                         $scope.bannerList = data.commentList;
-
                         $scope.goodsList = data.commentList; //取数据 todo...
 
                         if (DataCachePool.pull('STATEMENT') !== 1) {
+                            DataCachePool.push('STATEMENT', 1);
 
                             var statement = '我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明';
 
@@ -40,13 +39,16 @@ angular.module('EPBUY')
                                     type: 'button-positive'
                                 }]
                             });
-
-                            DataCachePool.push('STATEMENT', 1);
-
                         }
-
+                    } else {
+                        $scope.hasActivity = false;
+                        Util.backDrop.release();
                     }
 
+                },
+                error: function (data) {
+                    $scope.noNetwork = true;
+                    Util.backDrop.release();
                 }
             });
         }

@@ -4,15 +4,17 @@ angular.module('EPBUY')
 	.controller('PersonCtrl', function ($scope, $state, $location, $ionicActionSheet, $ionicPopup, Util, DataCachePool) {
 
 		Util.ajaxRequest({
-			url: 'GetHomeRestaurantBannerInfo',
+			url: '$local/GetHomeRestaurantBannerInfo.json',
 			data: {
 				enterpriseCode: $scope.enterpriseCode // todo...
 			},
 			success: function (data) {
 
-				$scope.phoneNumber = 13122183177;
+				// $scope.phoneNumber = 13122183177;
 			}
 		});
+
+		$scope.phoneNumber = DataCachePool.pull('USERNAME');
 
 		$scope.toJump = function (type) {
 			switch (type) {
@@ -57,7 +59,7 @@ angular.module('EPBUY')
 
 					Util.ajaxRequest({
 						noMask: true,
-						url: '$api/Account/Logout',
+						url: '$server/Account/Logout',
 						data: {
 							Auth: DataCachePool.pull('USERAUTH')
 						},

@@ -22,7 +22,7 @@ angular.module('EPBUY')
         // };
 
         Util.ajaxRequest({
-            url: 'GetHomeRestaurantBannerInfo',
+            url: '$local/GetHomeRestaurantBannerInfo.json',
             data: {
                 enterpriseCode: $scope.enterpriseCode // todo...
             },

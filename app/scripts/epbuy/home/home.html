@@ -3,21 +3,21 @@
     <ion-content scroll="false">
 
         <!-- 头部 -->
-        <div class="bar-positive bar">
+        <div class="bar-positive bar bar-header">
             <h1 class="title">企福惠</h1>
-            <shopping-cart ng-if="hasActivity"></shopping-cart>
+            <shopping-cart></shopping-cart>
         </div>
 
         <!-- 搜索 -->
-        <div class="item-input-inset" ng-if="!noNetwork && hasActivity">
+        <div class="item-input-inset" ng-if="hasActivity">
             <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
                 <input ng-click="showSearch();" type="search" readonly="true" placeholder="请输入关键字"></label>
         </div>
 
-        <div class="no-activity" ng-if="!noNetwork && !hasActivity">
-            <img ng-src="images/no_goods.png" alt=""></div>
+        <div class="no-activity" ng-if="hasActivity == false">
+            <img ng-src="images/no_goods.png"></div>
 
-        <ion-scroll ng-if="!noNetwork && hasActivity">
+        <ion-scroll ng-if="hasActivity">
 
             <ion-slide-box class="slide-box" ng-if="bannerList" auto-play="true" does-continue="true">
                 <ion-slide ng-repeat="(key, value) in bannerList">
@@ -48,6 +48,8 @@
             </div>
 
         </ion-scroll>
+
+        <no-network ng-if="noNetwork"></no-network>
 
     </ion-content>
 

@@ -145,67 +145,7 @@ input::-webkit-inner-spin-button {
         transform: rotate(360deg);
     }
 }
-// 无数据&无网络
-.no-result, .no-network {
-    margin-top: -5%;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    text-align: center;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-.no-network .icon-no-network {
-    display: inline-block;
-    width: 38px;
-    height: 38px;
-    background: url(../images/no-network.png) no-repeat 50% 50%;
-    background-size: 38px 38px;
-    vertical-align: 0;
-    margin-bottom: 12px;
-}
-.no-network span {
-    font-size: 16px;
-    color: #fff;
-    display: inline-block;
-    background-color: #ff9a14;
-    border-radius: 2px;
-    margin-top: 22px;
-    width: 90%;
-    height: 44px;
-    line-height: 44px;
-}
-.no-result .icon-search {
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    letter-spacing: normal;
-    word-spacing: normal;
-    width: 32px;
-    height: 32px;
-    margin: 0 0 20px -12px;
-    border: 3px solid #ccc;
-    border-radius: 50%;
-    position: relative;
-    left: auto;
-    top: auto;
-}
-.no-result .icon-search:after {
-    content: '';
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    letter-spacing: normal;
-    word-spacing: normal;
-    width: 3px;
-    height: 16px;
-    background-color: #ccc;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    position: absolute;
-    right: -5px;
-    bottom: -10px;
-}
+// toast样式
 .notifier {
     position: absolute;
     top: 45%;
@@ -349,22 +289,29 @@ input::-webkit-inner-spin-button {
 .scroll-view {
     height: 100%;
 }
-// 兼容hybird模式IOS7版本
+// ios7以上适配
 .hybirdIOS7 {
     .bar-header {
         height: 64px;
-        .title {
-            top: 20px;
-        }
-        .button, .btn-headfilter.button.button-icon {
+        .left-buttons, .right-buttons {
             margin-top: 20px;
         }
     }
-    .has-header, .top-filter-header {
+    .has-header {
         top: 64px;
     }
-    .tf-popblock, .findfoods .current-location {
-        top: 108px;
+    .ep-search .item-input-inset {
+        padding-top: 28px;
+    }
+    .ep-home .no-activity img {
+        bottom: 120px;
+    }
+    .ep-header-bg {
+        height: 175px;
+        padding-top: 20px;
+    }
+    .ep-person .user-details .scroll {
+        height: 620px;
     }
 }
 //page style

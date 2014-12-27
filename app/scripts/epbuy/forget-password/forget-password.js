@@ -12,7 +12,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				noMask: true,
-				url: '$api/Tools/SendCheckCode',
+				url: '$server/Tools/SendCheckCode',
 				data: {
 					Mobile: $scope.inputVal.phoneNumber // todo...
 				},
@@ -83,7 +83,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				isPopup: true,
-				url: '$api/Account/PasswordForgotModify',
+				url: '$server/Account/PasswordForgotModify',
 				data: {
 					LoginName: $scope.inputVal.phoneNumber,
 					CheckCode: $scope.inputVal.validationCode,

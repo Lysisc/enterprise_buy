@@ -21,7 +21,7 @@ angular.module('EPBUY')
         }
 
         Util.ajaxRequest({
-            url: 'GetHomeRestaurantBannerInfo',
+            url: '$local/GetHomeRestaurantBannerInfo.json',
             data: {
                 enterpriseCode: $stateParams.GoodsId // todo...
             },
@@ -54,7 +54,7 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
-                url: 'GetHomeRestaurantBannerInfo',
+                url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
                     enterpriseCode: goodsId // todo...
                 },

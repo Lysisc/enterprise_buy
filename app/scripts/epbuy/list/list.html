@@ -1,19 +1,19 @@
 <ion-view title="商品列表" class="ep-list" hide-nav-bar="isHeart">
 
-    <ion-content scroll="false">
+    <ion-content scroll="false" ng-class="{'is-heart':isHeart}">
 
         <!-- 头部 -->
-        <div ng-if="isHeart" class="bar-positive bar">
+        <div ng-if="isHeart" class="bar-positive bar bar-header">
             <h1 class="title">商品列表</h1>
-            <a ng-click="showSearch();" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
+            <a ng-click="showSearch();" ng-if="!noNetwork" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
             <shopping-cart></shopping-cart>
         </div>
 
-        <div ng-if="!isHeart" class="activity-date"> <i class="icon ion-time-alarm"></i>
+        <div ng-if="noNetwork == false && !isHeart" class="activity-date"> <i class="icon ion-time-alarm"></i>
             活动日期：{{startTime}}至{{endTime}}，距离结束还有：{{restTime}}
         </div>
 
-        <div class="filters">
+        <div ng-if="noNetwork == false" class="filters">
             <div ng-click="filtersCtrl('sort');" ng-class="{active:showSort}" class="cyan">
                 筛选 <i class="icon ion-ios-arrow-down"></i>
             </div>
@@ -41,7 +41,7 @@
             <div ng-class="{active:showSort}" ng-click="filtersCtrl('sort');" class="sort-backdrop"></div>
         </div>
 
-        <ion-scroll class="list-box" delegate-handle="listScroll">
+        <ion-scroll ng-if="!noNetwork" class="list-box" delegate-handle="listScroll">
 
             <div class="goods-list" ng-if="isSingle">
                 <a class="goods-item" ng-click="toGoodsDetail(1234);" ng-repeat="item in goodsList track by $index">
@@ -96,6 +96,8 @@
 
         </ion-scroll>
 
+        <no-network ng-if="noNetwork || noResults"></no-network>
+
     </ion-content>
 
     <bottom-bar></bottom-bar>
@@ -105,6 +107,6 @@
 <search-page></search-page>
 
 <ion-nav-buttons side="right">
-    <a ng-click="showSearch();" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
+    <a ng-click="showSearch();" ng-if="!noNetwork" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
     <shopping-cart></shopping-cart>
 </ion-nav-buttons>

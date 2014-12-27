@@ -5,7 +5,7 @@ angular.module('EPBUY')
 
         // Util.ajaxRequest({
         //     noMask: true,
-        //     url: '$api/Account/CheckLogin',
+        //     url: '$server/Account/CheckLogin',
         //     data: {
         //         Auth: DataCachePool.pull('USERAUTH')
         //     },
@@ -16,7 +16,7 @@ angular.module('EPBUY')
         // });
 
         Util.ajaxRequest({
-            url: 'GetHomeRestaurantBannerInfo',
+            url: '$local/GetHomeRestaurantBannerInfo.json',
             data: {
                 enterpriseCode: $scope.enterpriseCode // todo...
             },

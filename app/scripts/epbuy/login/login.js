@@ -5,7 +5,7 @@ angular.module('EPBUY')
 
 		Util.ajaxRequest({
 			noMask: true,
-			url: '$api/Account/CheckLogin',
+			url: '$server/Account/CheckLogin',
 			data: {
 				Auth: DataCachePool.pull('USERAUTH')
 			},
@@ -50,7 +50,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				noMask: true,
-				url: '$api/Account/Login',
+				url: '$server/Account/Login',
 				data: {
 					LoginName: $scope.inputVal.phoneNumber,
 					Password: $scope.inputVal.password

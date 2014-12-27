@@ -58,11 +58,13 @@ angular.module('EPBUY')
             Util.ajaxRequest({
                 noLoad: isLoading,
                 noMask: isMask,
-                url: 'GetHomeRestaurantBannerInfo',
+                url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
                     enterpriseCode: 'abs' // todo...
                 },
                 success: function (data) {
+
+                    $scope.noNetwork = false;
 
                     switch (sort) {
                     case 'price':
@@ -100,8 +102,12 @@ angular.module('EPBUY')
                             }
 
                         }
+                    } else {
+                        $scope.noResults = true;
                     }
-
+                },
+                error: function (data) {
+                    $scope.noNetwork = true;
                 }
             });
         }

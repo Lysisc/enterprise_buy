@@ -44,10 +44,10 @@ angular.module('EPBUY')
 
             switch ($scope.searchType) {
             case 'detail':
-                searchAjaxUrl = 'GetHomeRestaurantBannerInfo';
+                searchAjaxUrl = '$local/GetHomeRestaurantBannerInfo.json';
                 break;
             case 'want':
-                searchAjaxUrl = 'GetHomeRestaurantBannerInfo';
+                searchAjaxUrl = '$local/GetHomeRestaurantBannerInfo.json';
                 break;
             }
 
