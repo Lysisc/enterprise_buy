@@ -1,6 +1,6 @@
-<ion-view title="购物车" class="ep-cart" ng-init="bottomBarCur = 'home'">
+<ion-view title="购物车" class="ep-cart">
 
-    <ion-content>
+    <ion-content delegate-handle="goodsList">
 
         <div class="goods-list">
             <div class="goods-item" ng-if="!item.removed" ng-class="{'has-chosen':item.checked == {{$index}},'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in shoppingCartList track by $index">

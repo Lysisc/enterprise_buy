@@ -60,19 +60,14 @@ angular.module('EPBUY')
 			}).then(function (res) {
 				if (res) {
 
+					DataCachePool.remove('USERAUTH');
+					$state.go('epbuy.login');
+
 					Util.ajaxRequest({
 						noMask: true,
 						url: '$server/Account/Logout',
 						data: {
 							Auth: DataCachePool.pull('USERAUTH')
-						},
-						success: function (data) {
-							DataCachePool.remove('USERAUTH');
-							$state.go('epbuy.login');
-						},
-						error: function (data) {
-							DataCachePool.remove('USERAUTH');
-							$state.go('epbuy.login');
 						}
 					});
 

@@ -21,7 +21,7 @@ angular.module('EPBUY').factory('ENV', function () {
         var u = navigator.userAgent,
             app = navigator.appVersion;
 
-        return { //移动终端浏览器版本信息 
+        return {
             getLocalApi: '/api/',
             getServerApi: 'http://www.51mart.com.cn/Service/api/',
 

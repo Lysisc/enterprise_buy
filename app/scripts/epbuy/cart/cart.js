@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, DataCachePool) {
+    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, $ionicScrollDelegate, DataCachePool) {
 
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
@@ -94,7 +94,9 @@ angular.module('EPBUY')
                     deleteArr[i].removed = true;
                 }
 
-            }, 400);
+                $ionicScrollDelegate.$getByHandle('goodsList').scrollTo(0, 0, true);
+
+            }, 300);
         };
 
         $scope.deleteMoreGoods = function (e) {
@@ -110,7 +112,7 @@ angular.module('EPBUY')
                 $scope.moreGoodsChoos = false;
                 $timeout(function () {
                     $scope.deleteGoods(hasChosenList);
-                }, 400);
+                }, 300);
             }
         };
 

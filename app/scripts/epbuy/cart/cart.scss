@@ -5,7 +5,7 @@
     .goods-item {
         position: relative;
         z-index: 2;
-        -webkit-transition: all ease-out 400ms;
+        -webkit-transition: all ease-out 300ms;
         &.leave {
             z-index: -1;
             margin-top: -111px;

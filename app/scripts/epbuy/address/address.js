@@ -66,14 +66,15 @@ angular.module('EPBUY')
 
                 $window.history.back();
             } else {
+                var route = '';
+
                 if (angular.isNumber(isAdd)) {
-                    var route = isAdd ? 'p-address' : 'e-address';
+                    route = isAdd ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route);
                 } else {
-                    var addressId = obj.AddressId,
-                        route = index ? 'p-address' : 'e-address';
+                    route = index ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route, {
-                        AddressId: addressId
+                        AddressId: obj.AddressId // 拿到对应的地址id
                     });
                 }
             }
