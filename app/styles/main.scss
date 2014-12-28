@@ -293,12 +293,6 @@ input::-webkit-inner-spin-button, select {
 }
 // ios7以上适配
 .is-hybird {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
     .bar-header {
         height: 64px;
         .left-buttons, .right-buttons {
