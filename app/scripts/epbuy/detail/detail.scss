@@ -9,25 +9,16 @@
         position: relative;
         background-color: #fff;
         .slide-box {
-            width: 80%;
             box-sizing: content-box !important;
             padding-top: 10px;
             padding-bottom: 30px;
-            &.special {
-                padding-left: 10%;
-                padding-right: 10%;
-                .slider-pager {
-                    margin-left: -10%;
-                }
-            }
             .slider-slide {
-                width: 84%;
-                max-height: 320px;
                 overflow: hidden;
                 .slide-page {
-                    padding: 0 3%;
+                    padding: 0 20px;
                     img {
                         width: 100%;
+                        max-height: 160px;
                         border-radius: 5px;
                     }
                 }
@@ -47,16 +38,18 @@
             display: block;
             position: absolute;
             top: 10px;
-            right: 20%;
+            right: 50px;
             z-index: 1;
             background-color: #ef7430;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
             color: #fff;
             width: 40px;
-            height: 60px;
+            height: 40px;
             font-weight: bold;
             overflow: hidden;
             text-align: center;
-            line-height: 80px;
+            line-height: 40px;
         }
     }
     .goods-detail {
@@ -159,9 +152,14 @@
             border-bottom-width: 1px;
             select {
                 color: $Color888;
-                min-width: 100px;
-                max-width: 170px;
+                min-width: 150px;
+                max-width: 300px;
                 border: 0 none;
+            }
+            &.ion-ios-arrow-down:before {
+                float: right;
+                font-size: 18px;
+                content: "\f3d0";
             }
         }
     }
@@ -196,7 +194,7 @@
             position: absolute;
             width: 50%;
             height: 3px;
-            bottom: 0;
+            bottom: -1px;
             left: 0;
             -webkit-transition: left ease-out 200ms;
         }

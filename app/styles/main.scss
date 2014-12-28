@@ -48,8 +48,8 @@
 }
 
 /********************************** 公用样式 **********************************/
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none; /* 上下小箭头按钮，你丫太丑了，滚粗，负分 */
+input::-webkit-inner-spin-button, select {
+    -webkit-appearance: none; /* 干掉的默认样式 */
 }
 // icon字体
 .ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-ios-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d, .ion-arrow-right, .ion-share, .ion-star, .ion-add, .ion-remove, .ion-location {

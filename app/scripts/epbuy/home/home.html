@@ -5,14 +5,15 @@
         <!-- 头部 -->
         <div class="bar-positive bar bar-header">
             <h1 class="title">企福惠</h1>
+            <a ng-click="showSearch();" ng-if="hasActivity" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
             <shopping-cart></shopping-cart>
         </div>
 
         <!-- 搜索 -->
-        <div class="item-input-inset" ng-if="hasActivity">
+        <!-- <div class="item-input-inset" ng-if="hasActivity">
             <label class="item-input-wrapper"> <i class="icon ion-search placeholder-icon"></i>
                 <input ng-click="showSearch();" type="search" readonly="true" placeholder="请输入关键字"></label>
-        </div>
+        </div> -->
 
         <div class="no-activity" ng-if="hasActivity == false">
             <img ng-src="images/no_goods.png"></div>

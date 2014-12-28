@@ -16,7 +16,7 @@ angular.module('EPBUY')
             $scope.searchObj = {};
 
             $scope.showSearch = function () {
-                // var input = document.getElementById('searchInput').focus();
+                var input = document.getElementById('searchInput').focus();
                 $scope.searchObj.searchVal = null;
                 $scope.showSearchPage = true;
                 $scope.searchResultList = true;

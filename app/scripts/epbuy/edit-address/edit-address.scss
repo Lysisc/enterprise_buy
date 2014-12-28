@@ -27,11 +27,23 @@
             height: 44px;
             padding: 5px 15px 5px 4px;
         }
-        select {
-            border: 0 none;
-            width: 65%;
-            height: 44px;
+        .select-ctrl {
+            position: relative;
             margin-right: 15px;
+            height: 44px;
+            select {
+                border: 0 none;
+                width: 65%;
+                height: 44px;
+            }
+            &.ion-ios-arrow-down:before {
+                position: absolute;
+                top: 12px;
+                right: 10px;
+                z-index: 1;
+                font-size: 18px;
+                content: "\f3d0";
+            }
         }
         .disabled {
             float: left;

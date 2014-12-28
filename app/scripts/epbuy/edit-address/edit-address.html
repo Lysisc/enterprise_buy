@@ -11,38 +11,50 @@
                 <input ng-model="inputVal.phoneNumber" type="number"></li>
             <li ng-if="!addressId" class="edit-item">
                 <span>地址类型</span>
-                <select ng-model="inputVal.addressType" ng-change="getArea();">
-                    <option value="0">企业地址</option>
-                    <option value="1">个人地址</option>
-                </select>
+                <div class="select-ctrl ion-ios-arrow-down">
+                    <select ng-model="inputVal.addressType" ng-change="getArea();">
+                        <option value="0">企业地址</option>
+                        <option value="1">个人地址</option>
+                    </select>
+                </div>
             </li>
             <li ng-if="inputVal.addressType == 0" class="edit-item">
                 <span>选择地址</span>
-                <select ng-model="cpCode" ng-init="cpCode = 'a'">
-                    <option value="a" selected="a">我是公司地址1</option>
-                    <option value="b" selected="b">我是公司地址2</option>
-                    <option value="c" selected="c">我是公司地址3</option>
-                </select>
+                <div class="select-ctrl ion-ios-arrow-down">
+                    <select ng-model="cpCode" ng-init="cpCode = 'a'">
+                        <option value="a" selected="a">我是公司地址1</option>
+                        <option value="b" selected="b">我是公司地址2</option>
+                        <option value="c" selected="c">我是公司地址3</option>
+                    </select>
+                </div>
             </li>
             <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>所在省</span>
-                <select ng-model="inputVal.province" ng-change="getArea(inputVal.province);" ng-options="pDat for pDat in area.pDat">
-                    <option ng-if="area.pName == '选择省'" value="">{{area.pName}}</option>
-                </select>
+                <div class="select-ctrl ion-ios-arrow-down">
+                    <select ng-model="inputVal.province" ng-change="getArea(inputVal.province);" ng-options="pDat for pDat in area.pDat">
+                        <option ng-if="area.pName == '选择省'" value="">{{area.pName}}</option>
+                    </select>
+                </div>
             </li>
             <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>所在市</span>
                 <p ng-if="!area.cDat || area.cDat.length == 0" class="disabled">选择市</p>
-                <select ng-model="inputVal.city" ng-if="area.cDat && area.cDat.length > 0" ng-change="getArea(inputVal.province, inputVal.city || '选择市');" ng-options="cDat for cDat in area.cDat">
-                    <option ng-if="area.cName == '选择市'" ng-selected="!inputVal.city" value="">{{area.cName}}</option>
-                </select>
+                <div class="select-ctrl ion-ios-arrow-down">
+                    <select ng-model="inputVal.city" ng-if="area.cDat && area.cDat.length >
+                        0" ng-change="getArea(inputVal.province, inputVal.city || '选择市');" ng-options="cDat for cDat in area.cDat">
+                        <option ng-if="area.cName == '选择市'" ng-selected="!inputVal.city" value="">{{area.cName}}</option>
+                    </select>
+                </div>
             </li>
             <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>所在区</span>
                 <p ng-if="!area.dDat || area.dDat.length == 0" class="disabled">选择区</p>
-                <select ng-model="inputVal.district" ng-if="area.dDat && area.dDat.length > 0" ng-change="getArea(inputVal.province, inputVal.city, inputVal.district || '选择区');" ng-options="dDat for dDat in area.dDat">
-                    <option ng-if="area.dName == '选择区'" value="">{{area.dName}}</option>
-                </select>
+                <div class="select-ctrl ion-ios-arrow-down">
+                    <select ng-model="inputVal.district" ng-if="area.dDat && area.dDat.length >
+                        0" ng-change="getArea(inputVal.province, inputVal.city, inputVal.district || '选择区');" ng-options="dDat for dDat in area.dDat">
+                        <option ng-if="area.dName == '选择区'" value="">{{area.dName}}</option>
+                    </select>
+                </div>
             </li>
             <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>详细地址</span>
