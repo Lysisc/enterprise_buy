@@ -24,6 +24,9 @@ angular.module('EPBUY')
 			case 'order-list':
 				$state.go('epbuy.order-list');
 				break;
+			case 'address':
+				$state.go('epbuy.address');
+				break;
 			}
 		};
 

@@ -237,7 +237,8 @@ input::-webkit-inner-spin-button {
             margin: 0;
             padding: 0;
             border: 0;
-            border-top: 1px solid #B2B2B2;
+            @include border-line;
+            border-top-width: 1px;
             background: #fff;
             height: 44px;
             min-height: 44px;
@@ -252,8 +253,9 @@ input::-webkit-inner-spin-button {
             border: 0;
             height: 44px;
             min-height: 44px;
-            border-top: 1px solid #B2B2B2;
-            border-left: 1px solid #B2B2B2;
+            @include border-line;
+            border-top-width: 1px;
+            border-left-width: 1px;
             margin-left: -1px;
             background: #fff;
         }
@@ -290,11 +292,20 @@ input::-webkit-inner-spin-button {
     height: 100%;
 }
 // ios7以上适配
-.hybirdIOS7 {
+.is-hybird {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
     .bar-header {
         height: 64px;
         .left-buttons, .right-buttons {
             margin-top: 20px;
+        }
+        .right-buttons .ep-list-search {
+            bottom: -5px;
         }
     }
     .has-header {

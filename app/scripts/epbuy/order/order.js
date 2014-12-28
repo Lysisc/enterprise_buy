@@ -33,6 +33,12 @@ angular.module('EPBUY')
             }
         });
 
+        $scope.toJump = function (e, index) {
+            $state.go('epbuy.choice', {
+                idx: index
+            });
+        };
+
         var remarkText = null;
         $scope.checkRemark = function (e, remark) { // 备注要求
             var el = angular.element(e.target),

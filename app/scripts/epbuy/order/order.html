@@ -2,7 +2,7 @@
 
     <ion-content ng-init="showReceive = false;choice = '周一至周日全天'">
 
-        <a class="receive-info" epbuy-jump="address" address-type="choice" address-index="0|3" style="display:-webkit-box;">
+        <a class="receive-info" ng-click="toJump($event, '0|3');" style="display:-webkit-box;">
             <span class="icon ion-location"></span>
             <div ng-if="!hasAddress">暂无收货地址，请添加</div>
             <div ng-if="hasAddress">
@@ -20,7 +20,9 @@
         <div class="delivery-item">
             <a class="set-item">
                 <div>
-                    <span>配送方式</span>
+                    <span class="time">
+                        配送方式 <em>首期活动满百免运费</em>
+                    </span>
                     快递 20元
                 </div>
             </a>

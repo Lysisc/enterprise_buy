@@ -5,12 +5,11 @@ angular.module('EPBUY')
 
         $scope.addressId = $stateParams.AddressId;
         $scope.inputVal = {}; //初始化所有输入选择model
-        $scope.inputVal.addressType = parseInt($stateParams.type, 0) || 0;
+        $scope.inputVal.addressType = $state.is('epbuy.p-address') ? 1 : 0;
 
         $scope.getArea = function (province, city, district) {
-            var type = $scope.inputVal.addressType;
 
-            if (parseInt(type, 0)) {
+            if ($scope.inputVal.addressType) {
                 if (!province && !city && !district) {
                     $scope.area = new AREA.GetArea();
                 } else if (!city && !district) {
@@ -23,8 +22,6 @@ angular.module('EPBUY')
                 }
 
             }
-
-            $scope.inputVal.addressType = parseInt(type, 0);
 
         };
 

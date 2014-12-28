@@ -1,13 +1,18 @@
 'use strict';
 
-var iosVersion = navigator.userAgent.match(/OS \d+/i);
-if (iosVersion) {
-    iosVersion = iosVersion[0].replace('OS ', '');
-    iosVersion = parseInt(iosVersion, 0);
-    if (iosVersion > 6) {
-        document.getElementById('wrap').className = 'hybirdIOS7';
-    }
+var isHybrid = !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/) || !!navigator.userAgent.match(/AppleWebKit/);
+if (isHybrid) {
+    document.getElementById('wrap').className = 'is-hybird';
 }
+
+// var iosVersion = navigator.userAgent.match(/OS \d+/i);
+// if (iosVersion) {
+//     iosVersion = iosVersion[0].replace('OS ', '');
+//     iosVersion = parseInt(iosVersion, 0);
+//     if (iosVersion > 6) {
+//         document.getElementById('wrap').className = 'is-hybird';
+//     }
+// }
 
 angular.module('EPBUY').factory('ENV', function () {
 

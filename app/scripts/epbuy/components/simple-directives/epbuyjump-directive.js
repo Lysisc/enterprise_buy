@@ -31,14 +31,6 @@ angular.module('EPBUY')
                 case 'person':
                     $state.go('epbuy.person');
                     break;
-                case 'address':
-                    var type = attr.addressType,
-                        index = attr.addressIndex;
-                    $state.go('epbuy.address', {
-                        Type: type,
-                        idx: index
-                    });
-                    break;
                 }
             });
         }

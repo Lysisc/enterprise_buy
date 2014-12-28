@@ -77,15 +77,27 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/order/order.html',
                 controller: 'OrderCtrl'
             })
-            // 收货地址页
+            // 管理收货地址页
             .state('epbuy.address', {
-                url: '/address/:Type?idx',
+                url: '/address',
                 templateUrl: 'scripts/epbuy/address/address.html',
                 controller: 'AddressCtrl'
             })
-            // 编辑收货地址页
-            .state('epbuy.edit-address', {
-                url: '/edit-address/:AddressId?type',
+            // 选择收货地址页
+            .state('epbuy.choice', {
+                url: '/choice/:idx',
+                templateUrl: 'scripts/epbuy/address/address.html',
+                controller: 'AddressCtrl'
+            })
+            // 编辑&添加企业收货地址页
+            .state('epbuy.e-address', {
+                url: '/e-address?AddressId',
+                templateUrl: 'scripts/epbuy/edit-address/edit-address.html',
+                controller: 'EditAddressCtrl'
+            })
+            // 编辑&添加个人收货地址页
+            .state('epbuy.p-address', {
+                url: '/p-address?AddressId',
                 templateUrl: 'scripts/epbuy/edit-address/edit-address.html',
                 controller: 'EditAddressCtrl'
             })

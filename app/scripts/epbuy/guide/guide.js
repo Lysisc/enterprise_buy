@@ -14,7 +14,7 @@ angular.module('EPBUY')
                 angular.element(pager[0].firstElementChild).html('1');
                 angular.element(pager[0].lastElementChild).remove();
 
-            });
+            }, 0);
 
         });
 
