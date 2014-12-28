@@ -5,9 +5,11 @@ angular.module('EPBUY')
 
         $scope.isChoice = $state.is('epbuy.choice');
         $scope.addressTitle = $scope.isChoice ? '选择' : '管理';
+        $scope.tabIndex = 0;
+        $scope.choicedIndex = 0;
 
         Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json',
+            url: '$local/GetHomeRestaurantBannerInfo.json1',
             data: {
                 enterpriseCode: $scope.enterpriseCode // todo...
             },
@@ -54,7 +56,11 @@ angular.module('EPBUY')
         $scope.addressEdit = function (isAdd) {
             var type = $scope.tabIndex,
                 index = $scope.choicedIndex,
+                obj = {};
+
+            if (type && index) {
                 obj = type ? $scope.enterpriseList[type] : $scope.personageList[index];
+            }
 
             if ($scope.isChoice && !angular.isNumber(isAdd)) {
 
