@@ -6,7 +6,7 @@ angular.module('EPBUY')
         $scope.isChoice = $state.is('epbuy.choice');
 
         Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json',
+            url: '$local/GetHomeRestaurantBannerInfo.json1',
             data: {
                 enterpriseCode: $scope.enterpriseCode // todo...
             },
@@ -62,8 +62,6 @@ angular.module('EPBUY')
 
             if ($scope.editable) {
                 obj = type ? $scope.enterpriseList[type] : $scope.personageList[index];
-            } else {
-                return;
             }
 
             if ($scope.isChoice && !angular.isNumber(isAdd)) {
