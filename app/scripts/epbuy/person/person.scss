@@ -68,7 +68,16 @@
             font-size: 18px;
             padding-top: 5px;
             i {
-                @include icon-bg(68px, 60px, url(../images/person_delivery.png), inline-block);
+                @include icon-bg(68px, 60px, url(), inline-block);
+                &.all-order {
+                    background-image: url(../images/person_order.png);
+                }
+                &.pay-order {
+                    background-image: url(../images/person_pay.png);
+                }
+                &.rec-order {
+                    background-image: url(../images/person_delivery.png);
+                }
             }
             span {
                 display: block;

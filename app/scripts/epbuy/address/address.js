@@ -1,13 +1,9 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('AddressCtrl', function ($rootScope, $scope, $state, $location, $window, Util) {
+    .controller('AddressCtrl', function ($rootScope, $scope, $state, $stateParams, $window, Util) {
 
         $scope.isChoice = $state.is('epbuy.choice');
-        $scope.addressTitle = $scope.isChoice ? '选择' : '管理';
-        $scope.tabIndex = 0;
-        $scope.choicedIndex = 0;
-        $scope.editable = false;
 
         Util.ajaxRequest({
             url: '$local/GetHomeRestaurantBannerInfo.json',
@@ -15,9 +11,6 @@ angular.module('EPBUY')
                 enterpriseCode: $scope.enterpriseCode // todo...
             },
             success: function (data) {
-
-                // $scope.tabIndex = 1;
-                $scope.choicedIndex = 3;
 
                 $scope.enterpriseList = data.commentList || []; //取数据 todo...
                 $scope.personageList = data.commentList || []; //取数据 todo...
@@ -28,9 +21,12 @@ angular.module('EPBUY')
                 }
 
                 //当选择收货地址时，取order页传过来的index和type，来确定是否企业或是个人的地址索引
-                if ($scope.isChoice && $location.search() && $location.search().idx) {
-                    $scope.choicedIndex = parseInt($location.search().idx.split('|')[1], 0);
-                    $scope.tabIndex = parseInt($location.search().idx.split('|')[0], 0);
+                if ($scope.isChoice) {
+                    $scope.choicedIndex = parseInt($stateParams.idx.split('|')[1], 0);
+                    $scope.tabIndex = parseInt($stateParams.idx.split('|')[0], 0);
+                } else {
+                    // $scope.tabIndex = 1;
+                    $scope.choicedIndex = 3;
                 }
 
                 $scope.addressCheck($scope.tabIndex, $scope.choicedIndex);
@@ -86,7 +82,7 @@ angular.module('EPBUY')
                     route = isAdd ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route);
                 } else {
-                    route = index ? 'p-address' : 'e-address';
+                    route = type ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route, {
                         AddressId: obj.AddressId || 0 // 拿到对应的地址id
                     });

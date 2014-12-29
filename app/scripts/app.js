@@ -121,7 +121,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 全部订单页
             .state('epbuy.order-list', {
-                url: '/order-list',
+                url: '/order-list?type',
                 templateUrl: 'scripts/epbuy/order-list/order-list.html',
                 controller: 'OrderListCtrl'
             })

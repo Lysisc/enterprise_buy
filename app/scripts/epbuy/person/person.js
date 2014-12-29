@@ -21,8 +21,18 @@ angular.module('EPBUY')
 			case 'personal-info':
 				$state.go('epbuy.personal-info');
 				break;
-			case 'order-list':
+			case 'all-order':
 				$state.go('epbuy.order-list');
+				break;
+			case 'pay-order':
+				$state.go('epbuy.order-list', {
+					type: 'pay'
+				});
+				break;
+			case 'rec-order':
+				$state.go('epbuy.order-list', {
+					type: 'rec'
+				});
 				break;
 			case 'address':
 				$state.go('epbuy.address');

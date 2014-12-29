@@ -1,7 +1,23 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderListCtrl', function ($scope, $state, Util, DataCachePool) {
+    .controller('OrderListCtrl', function ($scope, $state, $location, Util, DataCachePool) {
+
+        if ($location.search() && $location.search().type) {
+            var type = $location.search().type;
+            switch (type) {
+            case 'pay':
+                $scope.orderListTitle = '代付款';
+                break;
+            case 'rec':
+                $scope.orderListTitle = '代收货';
+                break;
+            default:
+                $scope.orderListTitle = '全部';
+            }
+        } else {
+            $scope.orderListTitle = '全部';
+        }
 
         // Util.ajaxRequest({
         //     noMask: true,

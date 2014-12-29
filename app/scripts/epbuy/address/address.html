@@ -1,4 +1,4 @@
-<ion-view title="{{addressTitle}}收货地址" class="ep-address" ng-init="tabIndex = 0;choicedIndex = 0">
+<ion-view title="{{isChoice ? '选择' : '管理'}}收货地址" class="ep-address" ng-init="tabIndex = 0;choicedIndex = 0;editable = false">
 
     <ion-content scroll="false" ng-class="{'has-bottom':!isChoice}">
 

@@ -33,15 +33,15 @@ angular.module('EPBUY')
                     enterpriseCode: $scope.enterpriseCode // todo...
                 },
                 success: function (data) {
-                    if (true) {
-                        $scope.title = '个人';
+                    if ($scope.inputVal.addressType) {
+                        $scope.editAddressTitle = '个人';
                         $scope.inputVal.addressType = 1;
                         $scope.inputVal.province = '北京市';
                         $scope.inputVal.city = '市辖区';
                         $scope.inputVal.district = '市辖区';
                         $scope.area = new AREA.GetArea($scope.inputVal.province, $scope.inputVal.city, $scope.inputVal.district);
                     } else {
-                        $scope.title = '企业';
+                        $scope.editAddressTitle = '企业';
                     }
                 }
             });
