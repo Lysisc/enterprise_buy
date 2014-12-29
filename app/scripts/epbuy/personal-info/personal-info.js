@@ -3,16 +3,16 @@
 angular.module('EPBUY')
 	.controller('PersonInfoCtrl', function ($scope, $state, Util, DataCachePool) {
 
-		Util.ajaxRequest({ //请求数据
-			url: '$local/GetHomeRestaurantBannerInfo.json',
-			data: {
-				enterpriseCode: $scope.enterpriseCode // todo...
-			},
-			success: function (data) {
+		// Util.ajaxRequest({ //请求数据
+		// 	url: '$local/GetHomeRestaurantBannerInfo.json',
+		// 	data: {
+		// 		enterpriseCode: $scope.enterpriseCode // todo...
+		// 	},
+		// 	success: function (data) {
 
-				$scope.phoneNumber = 13122183177;
-			}
-		});
+		// 		$scope.phoneNumber = 13122183177;
+		// 	}
+		// });
 
 		$scope.phoneNumber = DataCachePool.pull('USERNAME');
 

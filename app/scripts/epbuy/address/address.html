@@ -8,7 +8,7 @@
         </div>
         <ion-scroll ng-if="tabIndex == 0" class="address-list">
             <div ng-if="!enterpriseList || enterpriseList.length == 0" class="no-address">您还没有添加过地址</div>
-            <div ng-if="enterpriseList" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in enterpriseList track by $index">
+            <div ng-if="enterpriseList &&  enterpriseList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in enterpriseList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
                 <div class="item-detail">
@@ -25,7 +25,7 @@
         </ion-scroll>
         <ion-scroll ng-if="tabIndex == 1" class="address-list">
             <div ng-if="!personageList || personageList.length == 0" class="no-address">您还没有添加过地址</div>
-            <div ng-if="personageList" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in personageList track by $index">
+            <div ng-if="personageList && personageList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in personageList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
                 <div class="item-detail">
@@ -52,5 +52,5 @@
 </ion-view>
 
 <ion-nav-buttons side="right">
-    <a ng-click="addressEdit();" class="ep-edit">{{isChoice ? '确定' : '编辑'}}</a>
+    <a ng-click="addressEdit();" ng-if="editable" class="ep-edit">{{isChoice ? '确定' : '编辑'}}</a>
 </ion-nav-buttons>

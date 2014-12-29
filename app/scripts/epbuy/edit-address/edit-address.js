@@ -3,7 +3,7 @@
 angular.module('EPBUY')
     .controller('EditAddressCtrl', function ($rootScope, $scope, $state, $location, $ionicPopup, $stateParams, $window, Util, AREA) {
 
-        $scope.addressId = $stateParams.AddressId;
+        $scope.addressId = parseInt($stateParams.AddressId, 0);
         $scope.inputVal = {}; //初始化所有输入选择model
         $scope.inputVal.addressType = $state.is('epbuy.p-address') ? 1 : 0;
 

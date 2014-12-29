@@ -7,9 +7,10 @@ angular.module('EPBUY')
         $scope.addressTitle = $scope.isChoice ? '选择' : '管理';
         $scope.tabIndex = 0;
         $scope.choicedIndex = 0;
+        $scope.editable = false;
 
         Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json1',
+            url: '$local/GetHomeRestaurantBannerInfo.json',
             data: {
                 enterpriseCode: $scope.enterpriseCode // todo...
             },
@@ -18,8 +19,13 @@ angular.module('EPBUY')
                 // $scope.tabIndex = 1;
                 $scope.choicedIndex = 3;
 
-                $scope.enterpriseList = data.commentList; //取数据 todo...
-                $scope.personageList = data.commentList; //取数据 todo...
+                $scope.enterpriseList = data.commentList || []; //取数据 todo...
+                $scope.personageList = data.commentList || []; //取数据 todo...
+
+                //页面右上角‘确定’或‘编辑’是否可用
+                if ($scope.enterpriseList.length > 0 && $scope.personageList.length > 0) {
+                    $scope.editable = true;
+                }
 
                 //当选择收货地址时，取order页传过来的index和type，来确定是否企业或是个人的地址索引
                 if ($scope.isChoice && $location.search() && $location.search().idx) {
@@ -58,8 +64,10 @@ angular.module('EPBUY')
                 index = $scope.choicedIndex,
                 obj = {};
 
-            if (type && index) {
+            if ($scope.editable) {
                 obj = type ? $scope.enterpriseList[type] : $scope.personageList[index];
+            } else {
+                return;
             }
 
             if ($scope.isChoice && !angular.isNumber(isAdd)) {
@@ -80,7 +88,7 @@ angular.module('EPBUY')
                 } else {
                     route = index ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route, {
-                        AddressId: obj.AddressId // 拿到对应的地址id
+                        AddressId: obj.AddressId || 0 // 拿到对应的地址id
                     });
                 }
             }
