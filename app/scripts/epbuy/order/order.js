@@ -3,8 +3,8 @@
 angular.module('EPBUY')
     .controller('OrderCtrl', function ($rootScope, $scope, $state, $stateParams, $ionicPopup, Util) {
 
-        $scope.cartNum = parseInt($stateParams.CartNum, 0);
-        $scope.cartPrice = parseInt($stateParams.CartPrice, 0);
+        $scope.cartNum = 0;
+        $scope.cartPrice = 0;
 
         // var jmz = {}; //js判断字符串长度（含中文）
         // jmz.GetLength = function (str) {

@@ -1,9 +1,9 @@
 <ion-view title="购物车" class="ep-cart">
 
-    <ion-content delegate-handle="goodsList">
+    <ion-content>
 
         <div class="goods-list">
-            <div class="goods-item" ng-if="!item.removed" ng-class="{'has-chosen':item.checked == {{$index}},'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in shoppingCartList track by $index">
+            <div class="goods-item" ng-if="!item.removed" ng-class="{'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in shoppingCartList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-click="hasChosenItem($event,$index);" ng-checked="!moreGoodsChoos"></label>
                 <div class="img">

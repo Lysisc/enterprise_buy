@@ -73,7 +73,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 订单页
             .state('epbuy.order', {
-                url: '/order/:CartNum&:CartPrice',
+                url: '/order/:OrderId',
                 templateUrl: 'scripts/epbuy/order/order.html',
                 controller: 'OrderCtrl'
             })
@@ -113,17 +113,35 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/personal-info/personal-info.html',
                 controller: 'PersonInfoCtrl'
             })
+            // 我的收藏
+            .state('epbuy.favorite', {
+                url: '/favorite',
+                templateUrl: 'scripts/epbuy/favorite/favorite.html',
+                controller: 'FavoriteCtrl'
+            })
+            // 我的积分
+            .state('epbuy.integral', {
+                url: '/integral',
+                templateUrl: 'scripts/epbuy/integral/integral.html',
+                controller: 'IntegralCtrl'
+            })
             // 修改手机号码&修改密码
             .state('epbuy.modify-pp', {
                 url: '/modify-pp?type',
                 templateUrl: 'scripts/epbuy/modify-pp/modify-pp.html',
                 controller: 'ModifyPpCtrl'
             })
-            // 全部订单页
+            // 订单列表页
             .state('epbuy.order-list', {
                 url: '/order-list?type',
                 templateUrl: 'scripts/epbuy/order-list/order-list.html',
                 controller: 'OrderListCtrl'
+            })
+            // 订单详情页
+            .state('epbuy.order-detail', {
+                url: '/order-detail/:OrderId',
+                templateUrl: 'scripts/epbuy/order-detail/order-detail.html',
+                controller: 'OrderDetailCtrl'
             })
 
 

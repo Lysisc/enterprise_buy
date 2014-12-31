@@ -1,2 +1,56 @@
 .ep-order-list {
+	.scroll {
+		padding-bottom: 100px;
+	}
+	.no-orders {
+		color: #999;
+		padding-top: 50px;
+		text-align: center;
+	}
+	.order-item {
+		width: 100%;
+		height: 95px;
+		background-color: #fff;
+		@include border-line;
+		border-bottom-width: 1px;
+		-webkit-box-align: center;
+		.detail {
+			width: 55%;
+			margin: 0 25px;
+			p {
+				height: 26px;
+				line-height: 26px;
+				overflow: hidden;
+				margin-bottom: 0;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				color: #999;
+				&.date {
+					color: #4a87ee;
+				}
+				.red {
+					color: #e85454;
+					&:first-child {
+						margin-right: 15px;
+					}
+				}
+			}
+		}
+		.status {
+			width: 70px;
+			height: 46px;
+			line-height: 44px;
+			text-align: center;
+			color: #999;
+			border: 1px solid #999;
+			&.red {
+				color: #e85454;
+				border: 1px solid #e85454;
+			}
+			&.bule {
+				color: #4a87ee;
+				border-color: #4a87ee;
+			}
+		}
+	}
 }

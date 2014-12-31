@@ -1,0 +1,37 @@
+.ep-integral {
+    .scroll {
+        padding-bottom: 150px;
+    }
+    .integral-info {
+        background-color: #f2f2f2;
+        color: #999;
+        padding: 7px 25px;
+        @include border-line;
+        border-bottom-width: 1px;
+        p {
+            margin-bottom: 0;
+            line-height: 24px;
+            .blue {
+                color: #4a87ee;
+            }
+            .red {
+                color: #e85454;
+            }
+        }
+    }
+    .integral-item {
+        color: #999;
+        margin-bottom: 0;
+        line-height: 44px;
+        @include border-line;
+        border-bottom-width: 1px;
+        .blue {
+            color: #4a87ee;
+            margin-left: 25px;
+            margin-right: 20px;
+        }
+        .red {
+            color: #e85454;
+        }
+    }
+}

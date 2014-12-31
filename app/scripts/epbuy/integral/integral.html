@@ -1,0 +1,35 @@
+<ion-view title="我的积分" class="ep-integral">
+
+    <ion-content scroll="false">
+
+        <div ng-if="!noNetwork" class="integral-info">
+            <p>
+                <span class="blue">全部积分：</span>
+                <span class="red">1000</span>
+                积分
+            </p>
+            <p>
+                <span class="blue">可用积分：</span>
+                <span class="red">500</span>
+                积分
+            </p>
+        </div>
+
+        <ion-scroll ng-if="!noNetwork">
+
+            <p class="integral-item" ng-repeat="item in integralList track by $index">
+                <span class="blue">2013-10-30</span>
+                后台积分充值
+                <span class="red">+1000</span>
+                积分
+            </p>
+
+        </ion-scroll>
+
+        <no-network ng-if="noNetwork"></no-network>
+
+    </ion-content>
+
+    <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
+
+</ion-view>

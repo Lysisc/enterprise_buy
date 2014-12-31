@@ -1,0 +1,84 @@
+.ep-order-detail {
+    .scroll {
+        padding-bottom: 70px;
+    }
+    .order-info {
+        position: relative;
+        z-index: 1;
+        padding: 8px 10px;
+        color: #333;
+        background-color: #f2f2f2;
+        -webkit-box-orient: horizontal;
+        -webkit-box-align: center;
+        div {
+            width: 90%;
+            max-height: 60px;
+            p {
+                margin-bottom: 0;
+                line-height: 20px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                &.status {
+                    color: #000;
+                }
+                &.address {
+                    color: #999;
+                    height: 40px;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                }
+                &.exp {
+                    color: #73b88b;
+                    span {
+                        margin-left: 10px;
+                    }
+                }
+                .name {
+                    letter-spacing: 7px;
+                    margin-right: -7px;
+                }
+                .rec {
+                    letter-spacing: 28px;
+                    margin-right: -28px;
+                }
+                .red {
+                    color: #e85454;
+                }
+            }
+            &.order-detail {
+                width: 60%;
+            }
+        }
+        .go-order {
+            display: block;
+            width: 80px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #4a87ee;
+            color: #fff;
+        }
+        .ion-location {
+            font-size: 24px;
+            display: inline-block;
+            width: 30px;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 5px;
+            &:before {
+                content: "\f455";
+            }
+        }
+    }
+    .goods-list {
+        padding-top: 5px;
+        .goods-item .detail .p-red {
+            line-height: 32px;
+            font-size: 18px;
+            color: #999;
+            span {
+                margin-left: 0;
+            }
+        }
+    }
+}

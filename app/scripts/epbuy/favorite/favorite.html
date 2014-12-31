@@ -1,0 +1,31 @@
+<ion-view title="我的收藏" class="ep-favorite">
+
+    <ion-content scroll="false">
+
+        <div ng-if="noResults" class="no-goods">您还没有收藏过任何东东</div>
+
+        <ion-scroll ng-if="!noNetwork" class="goods-list">
+
+            <a class="goods-item" ng-if="!item.removed" ng-click="toDetail(item.Id);" ng-class="{'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in goodsList track by $index">
+                <label class="checkbox">
+                    <input type="checkbox" ng-click="hasChosenItem($event,$index);$event.stopPropagation();" ng-checked="!moreGoodsChoos"></label>
+                <div class="img">
+                    <img ng-src="{{item.ImgUrl}}"></div>
+                <h4>{{item.Title}}</h4>
+            </a>
+
+            <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
+
+        </ion-scroll>
+
+        <no-network ng-if="noNetwork"></no-network>
+
+    </ion-content>
+
+    <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
+
+</ion-view>
+
+<ion-nav-buttons side="right">
+    <a ng-click="deleteMoreGoods($event);" ng-show="!noResults" ng-if="!noNetwork" class="ep-edit">编辑</a>
+</ion-nav-buttons>

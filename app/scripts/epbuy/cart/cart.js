@@ -94,8 +94,6 @@ angular.module('EPBUY')
                     deleteArr[i].removed = true;
                 }
 
-                $ionicScrollDelegate.$getByHandle('goodsList').scrollTo(0, 0, true);
-
             }, 300);
         };
 
@@ -118,8 +116,7 @@ angular.module('EPBUY')
 
         $scope.goOrder = function () {
             $state.go('epbuy.order', {
-                CartNum: $scope.cartNum,
-                CartPrice: $scope.cartPrice
+                OrderId: 1234
             });
         };
 

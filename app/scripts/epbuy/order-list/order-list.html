@@ -1,9 +1,33 @@
 <ion-view title="{{orderListTitle}}订单" class="ep-order-list">
 
-    <ion-content>
+	<ion-content scroll="false">
 
-    </ion-content>
+		<div ng-if="noResults" class="no-orders">您还没有订单记录</div>
 
-    <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
+		<ion-scroll ng-if="!noNetwork">
+
+			<a class="order-item" style="display:-webkit-box;" ng-click="toOrderDetail(1234);" ng-repeat="item in orderList track by $index">
+				<div class="detail">
+					<p class="date">2013-10-30</p>
+					<p>我是名称我是名称我是名称我是名称我是名称</p>
+					<p>总价：<span class="red">&yen;148</span>共<span class="red">10</span>件商品</p>
+				</div>
+				<!-- <div class="status">已完成</div> -->
+				<div class="status red">待支付</div>
+				<!-- <div class="status">已取消</div> -->
+				<!-- <div class="status bule">待收货</div> -->
+			</a>
+
+			<div ng-if="noMordResults" class="no-more-orders">没有更多结果了</div>
+
+			<ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
+
+		</ion-scroll>
+
+		<no-network ng-if="noNetwork"></no-network>
+
+	</ion-content>
+
+	<bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
 
 </ion-view>

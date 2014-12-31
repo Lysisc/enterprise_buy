@@ -34,6 +34,12 @@ angular.module('EPBUY')
 					type: 'rec'
 				});
 				break;
+			case 'favorite':
+				$state.go('epbuy.favorite');
+				break;
+			case 'integral':
+				$state.go('epbuy.integral');
+				break;
 			case 'address':
 				$state.go('epbuy.address');
 				break;

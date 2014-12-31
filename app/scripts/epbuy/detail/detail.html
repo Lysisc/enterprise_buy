@@ -15,9 +15,9 @@
         <div class="goods-detail">
             <div class="goods-name" style="display:-webkit-box;">
                 <p ng-class="{'is-detail':!isWant}">我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称</p>
-                <a collection-ctrl ng-if="!isWant" ng-class="{hasCollection:hasCollection}" class="collection-btn"> <i class="icon ion-star"></i>
+                <a ng-if="!isWant" collection-ctrl ng-class="{hasCollection:isCollect}" data-id="1234" data-title="我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称" data-img="images/default_goods.jpg" class="collection-btn"> <i class="icon ion-star"></i>
                     <br>
-                    <span>{{hasCollection ? '已收藏' : '收藏'}}</span>
+                    <span>{{isCollect ? '已收藏' : '收藏'}}</span>
                 </a>
             </div>
             <p class="price">

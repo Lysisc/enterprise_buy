@@ -1,0 +1,65 @@
+<ion-view title="订单详情" class="ep-order-detail">
+
+    <ion-content>
+
+        <div class="order-info" style="display:-webkit-box;">
+            <span class="icon ion-location"></span>
+            <div class="order-detail">
+                <p class="status">交易成功</p>
+                <p>
+                    订单金额：
+                    <span class="red">&yen;800</span>
+                </p>
+                <p>
+                    <span class="rec">运费</span>
+                    ：
+                    <span class="red">&yen;0</span>
+                </p>
+            </div>
+            <a class="go-order" ng-click="goOrder();">去下单</a>
+        </div>
+
+        <div class="order-info" style="display:-webkit-box;background-color: #fff;">
+            <span class="icon ion-location"></span>
+            <div>
+                <p style="white-space: nowrap;">
+                    <span class="name">收货人</span>
+                    ： 我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名
+                </p>
+                <p class="address" style="display:-webkit-box;">
+                    <span>收货地址</span>
+                    ： 上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市
+                </p>
+            </div>
+        </div>
+
+        <div class="order-info" style="display:-webkit-box;">
+            <span class="icon ion-location"></span>
+            <div>
+                <p>快递信息</p>
+                <p class="exp">
+                    快递已签收
+                    <span>2014-10-30</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="goods-list">
+            <a class="goods-item" ng-if="$index < 3" ng-repeat="item in goodsList track by $index">
+                <div class="img">
+                    <img ng-src=""></div>
+                <div ng-if="!isHeart" class="detail">
+                    <h3>我是产品名称我是产品名称我是产品名称</h3>
+                    <p class="text">尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等</p>
+                    <p class="p-red">
+                        <span>&yen;148</span> * 2
+                    </p>
+                </div>
+            </a>
+        </div>
+
+    </ion-content>
+
+    <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
+
+</ion-view>

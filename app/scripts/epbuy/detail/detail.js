@@ -26,14 +26,9 @@ angular.module('EPBUY')
             success: function (data) {
 
                 $scope.titleName = '我是商品名称';
-
-                $scope.hasCollection = false;
                 $scope.tabIndex = 1;
                 spanSlide($scope.tabIndex);
                 $scope.goodsPictureList = data.commentList; //取数据 todo...
-                // $timeout(function () { // 给幻灯片补充样式
-                //     $scope.specialList = true;
-                // }, 100);
             }
         });
 
@@ -57,7 +52,7 @@ angular.module('EPBUY')
                     enterpriseCode: goodsId // todo...
                 },
                 success: function (data) {
-                    
+
                     $scope.hasHeart = true; // todo...
 
                 }

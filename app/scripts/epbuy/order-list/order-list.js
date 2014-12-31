@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderListCtrl', function ($scope, $state, $location, Util, DataCachePool) {
+    .controller('OrderListCtrl', function ($scope, $state, $location, Util) {
 
         if ($location.search() && $location.search().type) {
             var type = $location.search().type;
@@ -19,28 +19,49 @@ angular.module('EPBUY')
             $scope.orderListTitle = '全部';
         }
 
-        // Util.ajaxRequest({
-        //     noMask: true,
-        //     url: '$server/Account/CheckLogin',
-        //     data: {
-        //         Auth: DataCachePool.pull('USERAUTH')
-        //     },
-        //     success: function (data) {
-        //         if (data && data.IsLogin) {} else {}
-        //     },
-        //     error: function (data) {}
-        // });
+        $scope.pageIndex = 1;
+        $scope.orderList = [];
 
-        Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json',
-            data: {
-                enterpriseCode: $scope.enterpriseCode // todo...
-            },
-            success: function (data) {
+        $scope.loadMore = function () { //翻页加载
+            Util.ajaxRequest({
+                noLoad: true,
+                noMask: true,
+                url: '$local/GetHomeRestaurantBannerInfo.json',
+                data: {
+                    enterpriseCode: 'abs' // todo...
+                },
+                success: function (data) {
 
-                console.log('我是确认订单页');
-                // todo...
+                    $scope.noNetwork = false;
+
+                    if (data.commentList && data.commentList.length > 0) {
+
+                        $scope.orderList = $scope.orderList.concat(data.commentList); //拼接数据
+                        $scope.pageIndex++;
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+
+                    } else {
+                        if ($scope.orderList.length === 0) {
+                            $scope.noResults = true;
+                        } else {
+                            $scope.noMordResults = true;
+                        }
+                    }
+                },
+                error: function (data) {
+                    $scope.noNetwork = true;
+                }
+            });
+        };
+
+        $scope.toOrderDetail = function (orderId) {
+            if (!orderId) {
+                return;
             }
-        });
+
+            $state.go('epbuy.order-detail', {
+                OrderId: orderId
+            });
+        };
 
     });

@@ -1,0 +1,33 @@
+.ep-favorite {
+    .no-goods {
+        color: #999;
+        padding-top: 50px;
+        text-align: center;
+    }
+    .goods-list .goods-item {
+        position: relative;
+        z-index: 2;
+        -webkit-transition: all ease-out 300ms;
+        &.leave {
+            z-index: -1;
+            margin-top: -111px;
+        }
+        &.check-delete {
+            overflow: visible;
+            margin-left: 50px;
+        }
+        .checkbox {
+            position: absolute;
+            top: 50%;
+            left: -45px;
+            margin-top: -21px;
+        }
+        h4 {
+            height: 40px;
+            color: #333;
+            font-size: 14px;
+            line-height: 20px;
+            margin: 5px 0;
+        }
+    }
+}
