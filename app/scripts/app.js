@@ -53,6 +53,12 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
                 templateUrl: 'scripts/epbuy/list/list.html',
                 controller: 'ListCtrl'
             })
+            // 还想要页
+            .state('epbuy.want-more', {
+                url: '/want-more',
+                templateUrl: 'scripts/epbuy/want-more/want-more.html',
+                controller: 'WantMoreCtrl'
+            })
             // 商品详情页
             .state('epbuy.detail', {
                 url: '/detail/:GoodsId',

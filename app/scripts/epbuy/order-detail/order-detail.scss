@@ -11,7 +11,7 @@
         -webkit-box-orient: horizontal;
         -webkit-box-align: center;
         div {
-            width: 90%;
+            width: 87%;
             max-height: 60px;
             p {
                 margin-bottom: 0;
@@ -58,15 +58,17 @@
             background-color: #4a87ee;
             color: #fff;
         }
-        .ion-location {
-            font-size: 24px;
-            display: inline-block;
-            width: 30px;
-            height: 40px;
-            line-height: 40px;
-            padding-left: 5px;
-            &:before {
-                content: "\f455";
+        .icon {
+            margin-right: 12px;
+            @include icon-bg(52px, 52px, url(), inline-block);
+            &.icon-suc {
+                background-image: url(../images/order_suc.png);
+            }
+            &.icon-man {
+                background-image: url(../images/order_man.png);
+            }
+            &.icon-car {
+                background-image: url(../images/order_car.png);
             }
         }
     }

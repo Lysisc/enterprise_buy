@@ -1,11 +1,7 @@
-<div class="ep-status">
-    <div ng-if="noNetwork" class="no-network">
+<div ng-if="noNetwork" class="ep-status">
+    <div class="no-network">
         <i class="icon-no-network"></i>
         网络不给力，刷新页面重试
         <button ng-click="refreshPage();" class="button button-block button-positive">刷新页面</button>
-    </div>
-    <div ng-if="noResults" class="no-results">
-        <i class="icon-search"></i>
-        抱歉，查询无结果
     </div>
 </div>

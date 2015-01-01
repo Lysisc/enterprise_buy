@@ -142,7 +142,6 @@ angular.module('EPBUY')
         };
 
         $scope.submitRegistered = function () {
-            console.log($scope.inputVal.enterpriseCode);
             if (!$scope.inputVal.phoneNumber) {
                 Util.msgToast($scope, '请输入手机号码');
                 return;

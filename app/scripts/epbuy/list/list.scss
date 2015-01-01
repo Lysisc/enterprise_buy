@@ -7,6 +7,8 @@
         }
     }
     .activity-date {
+        position: relative;
+        z-index: 12;
         margin-top: 1px;
         height: 25px;
         line-height: 25px;
@@ -132,7 +134,7 @@
         }
         .sort-backdrop {
             position: fixed;
-            top: 117px;
+            top: 0;
             left: 0;
             z-index: -1;
             width: 100%;
@@ -154,10 +156,31 @@
             padding-top: 4px;
         }
     }
+    .is-heart .list-box .scroll {
+        padding-bottom: 221px;
+    }
     .load-more-bar {
         margin-top: -11px;
         .ion-loading-d:before {
             content: "\f29d";
+        }
+    }
+    .want-more-ctrl {
+        position: absolute;
+        bottom: 49px;
+        left: 0;
+        z-index: 12;
+        width: 100%;
+        padding: 5px 10px 0;
+        background-color: #fff;
+        @include border-line;
+        border-top-width: 1px;
+        overflow: hidden;
+        .button-positive {
+            border-radius: 5px;
+        }
+        &.has-bottom {
+            padding-bottom: 49px;
         }
     }
 }

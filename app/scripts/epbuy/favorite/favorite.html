@@ -2,9 +2,9 @@
 
     <ion-content scroll="false">
 
-        <div ng-if="noResults" class="no-goods">您还没有收藏过任何东东</div>
+        <no-results ng-if="noResults" data-text="您还没有收藏过任何东东"></no-results>
 
-        <ion-scroll ng-if="!noNetwork" class="goods-list">
+        <ion-scroll class="goods-list">
 
             <a class="goods-item" ng-if="!item.removed" ng-click="toDetail(item.Id);" ng-class="{'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in goodsList track by $index">
                 <label class="checkbox">
@@ -18,9 +18,9 @@
 
         </ion-scroll>
 
-        <no-network ng-if="noNetwork"></no-network>
-
     </ion-content>
+
+    <no-network></no-network>
 
     <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
 

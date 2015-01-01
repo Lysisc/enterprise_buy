@@ -1,0 +1,16 @@
+<ion-view title="还想要" class="ep-want-more">
+
+    <ion-content scroll="false">
+
+        <div ng-click="showTextarea = true" class="want-text">
+            <p ng-hide="showTextarea">{{wantText ? wantText : '有什么想要的，有什么建议请告诉我们'}}</p>
+            <textarea focus-me="{{showTextarea}}" ng-show="showTextarea" ng-blur="showTextarea = false;checkRemark($event,wantText);" ng-model="wantText" ng-maxlength="200" placeholder="有什么想要的，有什么建议请告诉我们"></textarea>
+        </div>
+
+        <div class="wantButton">
+            <button class="button button-block button-positive" ng-click="submitForm();" ng-class="{disabled: stepOneDisabled}">还 想 要</button>
+        </div>
+
+    </ion-content>
+
+</ion-view>

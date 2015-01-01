@@ -6,7 +6,7 @@ angular.module('EPBUY')
         $scope.isChoice = $state.is('epbuy.choice');
 
         Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json1',
+            url: '$local/GetHomeRestaurantBannerInfo.json',
             data: {
                 enterpriseCode: $scope.enterpriseCode // todo...
             },

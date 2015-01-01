@@ -2,9 +2,9 @@
 
 	<ion-content scroll="false">
 
-		<div ng-if="noResults" class="no-orders">您还没有订单记录</div>
+		<no-results ng-if="noResults" data-text="您还没有订单记录"></no-results>
 
-		<ion-scroll ng-if="!noNetwork">
+		<ion-scroll>
 
 			<a class="order-item" style="display:-webkit-box;" ng-click="toOrderDetail(1234);" ng-repeat="item in orderList track by $index">
 				<div class="detail">
@@ -24,9 +24,9 @@
 
 		</ion-scroll>
 
-		<no-network ng-if="noNetwork"></no-network>
-
 	</ion-content>
+
+	<no-network></no-network>
 
 	<bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
 

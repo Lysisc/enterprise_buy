@@ -16,7 +16,7 @@
         height: 100%;
         background-color: #f5f5f5;
         .search-item {
-            padding-left: 20px;
+            font-size: 14px;
             span {
                 display: inline-block;
                 width: 150px;
@@ -52,8 +52,10 @@
                 padding: 0 20px;
             }
         }
-        .no-results {
+        .no-search-results {
             text-align: center;
+            font-size: 14px;
+            padding: 12px 16px;
         }
     }
     .ep-registered-step {

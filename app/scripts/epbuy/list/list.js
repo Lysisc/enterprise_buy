@@ -187,4 +187,8 @@ angular.module('EPBUY')
 
         };
 
+        $scope.wantMore = function () {
+            $state.go('epbuy.want-more');
+        };
+
     });

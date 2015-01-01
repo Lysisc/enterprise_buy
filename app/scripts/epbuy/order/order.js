@@ -39,7 +39,6 @@ angular.module('EPBUY')
             });
         };
 
-        var remarkText = null;
         $scope.checkRemark = function (e, remark) { // 备注要求
             var el = angular.element(e.target),
                 text = el.val();
@@ -50,8 +49,9 @@ angular.module('EPBUY')
 
             if (remark) {
                 $scope.remark = text;
+                el.parent().find('p').text(text);
             } else {
-                remarkText = text;
+                $scope.remark = 1;
                 el.parent().find('p').text('请不要超过100个字');
             }
         };
@@ -89,12 +89,22 @@ angular.module('EPBUY')
                 return;
             }
 
-            if (remarkText && !$scope.remark) {
+            if ($scope.remark === 1) {
                 Util.msgToast($scope, '备注超过100个字，请删减');
                 return;
             }
 
-            //todo...
+            Util.ajaxRequest({
+                url: '$local/GetHomeRestaurantBannerInfo.json',
+                data: {
+                    enterpriseCode: $scope.enterpriseCode // todo...
+                },
+                success: function (data) {
+
+                    console.log('我是确认订单页');
+                    // todo...
+                }
+            });
         };
 
     });

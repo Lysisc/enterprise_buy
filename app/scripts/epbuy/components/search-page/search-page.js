@@ -72,7 +72,7 @@ angular.module('EPBUY')
                                 enterpriseCode: $scope.enterpriseCode // todo...
                             },
                             success: function (data) {
-                                if (data.commentList && data.commentList.length > 0) {
+                                if (data.commentList1 && data.commentList.length > 0) {
                                     $scope.searchResultList = data.commentList; //取数据 todo...
                                 } else {
                                     $scope.searchResultList = false;

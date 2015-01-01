@@ -1,0 +1,21 @@
+.ep-want-more {
+    .want-text {
+        margin: 10px;
+        @include border-line;
+        border-width: 1px;
+        background-color: #fff;
+        p, textarea {
+            padding: 5px;
+            line-height: 20px;
+            height: 200px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+    }
+    .wantButton {
+        padding: 0 10px;
+        .button-positive {
+            border-radius: 5px;
+        }
+    }
+}

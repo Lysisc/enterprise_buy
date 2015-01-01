@@ -8,6 +8,6 @@
 
     <ion-scroll class="list" delegate-handle="searchScroll">
         <label ng-repeat="(index, item) in searchResultList" class="item search-item" ng-click="chooseItemSearch(item.commentPrize)">上海通用汽车{{item.commentPrize}}</label>
-        <div class="item no-results" ng-if="!searchResultList && searchObj.searchVal">抱歉，没有结果</div>
+        <div class="item no-search-results" ng-if="!searchResultList && searchObj.searchVal">抱歉，没有结果</div>
     </ion-scroll>
 </div>

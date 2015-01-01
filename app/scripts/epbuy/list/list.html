@@ -5,7 +5,7 @@
         <!-- 头部 -->
         <div ng-if="isHeart" class="bar-positive bar bar-header">
             <h1 class="title">商品列表</h1>
-            <a ng-click="showSearch();" ng-if="!noNetwork" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
+            <a ng-click="showSearch();" ng-show="showGlass" class="icon ion-search ep-list-search"></a>
             <shopping-cart></shopping-cart>
         </div>
 
@@ -41,7 +41,9 @@
             <div ng-class="{active:showSort}" ng-click="filtersCtrl('sort');" class="sort-backdrop"></div>
         </div>
 
-        <ion-scroll ng-if="!noNetwork" class="list-box" delegate-handle="listScroll">
+        <no-results ng-if="noResults" data-text="抱歉，查询无结果" data-glass="true"></no-results>
+
+        <ion-scroll ng-if="!noResults" class="list-box" delegate-handle="listScroll">
 
             <div class="goods-list" ng-if="isSingle">
                 <a class="goods-item" ng-click="toGoodsDetail(1234);" ng-repeat="item in goodsList track by $index">
@@ -96,9 +98,13 @@
 
         </ion-scroll>
 
-        <no-network ng-if="noNetwork || noResults"></no-network>
-
     </ion-content>
+
+    <div ng-if="isHeart" class="want-more-ctrl">
+        <button class="button button-block button-positive" ng-click="wantMore();" ng-class="{disabled: stepOneDisabled}">还 想 要</button>
+    </div>
+
+    <no-network></no-network>
 
     <bottom-bar></bottom-bar>
 

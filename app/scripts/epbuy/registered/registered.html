@@ -11,7 +11,7 @@
                 <label ng-repeat="item in searchResultList track by $index" class="item search-item cur" ng-click="chooseItemSearch(item.Code);"> <!-- <i class="icon ion-checkmark"></i> -->
                     <span>{{item.Name}}</span>{{item.Code}}
                 </label>
-                <div class="item no-results" ng-if="!searchResultList && inputVal.searchVal">抱歉，没有结果</div>
+                <div class="item no-search-results" ng-if="!searchResultList && inputVal.searchVal">抱歉，没有结果</div>
             </ion-scroll>
         </div>
 
