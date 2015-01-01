@@ -1,17 +1,24 @@
 'use strict';
 
 angular.module('EPBUY')
-	.controller('IntegralCtrl', function ($scope, $state, Util) {
+	.controller('IntegralCtrl', function ($scope, $state, Util, DataCachePool) {
+
+		$scope.pageIndex = 1; //初始化第一页
 
 		Util.ajaxRequest({
-			url: '$local/GetHomeRestaurantBannerInfo.json',
+			url: '$server/Account/GetIntegralListByAuth',
 			data: {
-				enterpriseCode: $scope.enterpriseCode // todo...
+				Auth: DataCachePool.pull('USERAUTH'),
+				pagesize: 10,
+				pageindex: $scope.pageIndex
 			},
 			success: function (data) {
 				$scope.noNetwork = false;
 
-				$scope.integralList = data.commentList;
+				if (data) {
+					$scope.data = data;
+					$scope.pageIndex++;
+				}
 			},
 			error: function (data) {
 				$scope.noNetwork = true;

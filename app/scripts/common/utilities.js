@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading, $timeout) {
+angular.module('EPBUY').factory('Util', function ($http, $state, $compile, $ionicLoading, $timeout) {
 
     var backDropDom = angular.element(document.querySelector('.backdrop'));
 
@@ -168,7 +168,14 @@ angular.module('EPBUY').factory('Util', function ($http, $compile, $ionicLoading
         }).success(function (data) {
             console.log(data);
 
-            if (typeof success === 'function') {
+            if (data && data.state === -200) { //判断登录
+                $state.go('epbuy.login', {
+                    OtherPage: 1
+                });
+                return;
+            }
+
+            if (data && typeof success === 'function') {
                 success(data);
             }
 

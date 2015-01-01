@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('WantMoreCtrl', function ($scope, Util) {
+    .controller('WantMoreCtrl', function ($scope, $window, $ionicPopup, Util) {
 
         $scope.checkRemark = function (e, wantText) { // 备注要求
             var el = angular.element(e.target),
@@ -33,15 +33,25 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
+                isPopup: true,
                 url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
                     enterpriseCode: 'abs' // todo...
                 },
                 success: function (data) {
-
+                    $ionicPopup.alert({
+                        template: '提交成功！',
+                        buttons: [{
+                            text: '返回上一页',
+                            type: 'button-positive',
+                            onTap: function () {
+                                $window.history.back();
+                            }
+                        }]
+                    });
                 },
                 error: function (data) {
-                    
+                    Util.msgToast($scope, '提交失败');
                 }
             });
         };

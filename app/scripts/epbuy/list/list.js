@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('ListCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicPopup, $timeout, Util) {
+    .controller('ListCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicLoading, $ionicPopup, $timeout, Util) {
 
         $scope.showSort = false; //初始化筛选列表
         $scope.isSingle = true; //初始化单列列表
@@ -9,6 +9,12 @@ angular.module('EPBUY')
         $scope.discountUp = true; //初始化折扣升序
         $scope.pageIndex = 1; //初始化第一页
         $scope.isHeart = $state.is('epbuy.heart');
+
+        $ionicLoading.show({
+            template: '<span class="ion-load-d"></span>'
+        });
+
+        Util.backDrop.retain();
 
         if ($scope.isHeart) { //底部bar高亮判断
             $scope.bottomBarCur = 'heart';
@@ -51,13 +57,13 @@ angular.module('EPBUY')
 
         }
 
-        function renderData(sort, isLoading, isMask) {
+        function renderData(sort) {
 
             $scope.showSort = false;
+            $scope.pageIndex = sort ? 1 : $scope.pageIndex;
 
             Util.ajaxRequest({
-                noLoad: isLoading,
-                noMask: isMask,
+                noMask: sort ? false : true,
                 url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
                     enterpriseCode: 'abs' // todo...
@@ -66,42 +72,34 @@ angular.module('EPBUY')
 
                     $scope.noNetwork = false;
 
-                    switch (sort) {
-                    case 'price':
-                        $scope.priceUp = $scope.priceUp ? false : true;
-                        break;
-                    case 'discount':
-                        $scope.discountUp = $scope.discountUp ? false : true;
-                        break;
-                    }
-
                     if (data.commentList && data.commentList.length > 0) {
 
                         $scope.startTime = '2014-12-20 12:43:16'.substr(5, 5);
                         $scope.endTime = '2014-12-22 12:43:16'.substr(5, 5);
                         $scope.restTime = dateSubtract('2014-12-20 12:53:16', '2014-12-22 12:43:16');
 
+                        $scope.pageIndex++;
+                        $scope.goodsList = sort ? [] : ($scope.goodsList || []);
+                        $scope.goodsList = $scope.goodsList.concat(data.commentList); //拼接数据
+
+                        $timeout(function () {
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                        }, 300);
+
                         if (sort) { // 处理筛选&首屏加载
 
-                            $scope.pageIndex = 1;
-                            $scope.goodsList = data.commentList; //取数据 todo...
-                            $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
-
-                        } else { // 处理翻页
-
-                            if (angular.isArray($scope.goodsList)) {
-                                $scope.goodsList = $scope.goodsList.concat(data.commentList); //拼接数据
-                                $scope.pageIndex++;
-
-                                $timeout(function () {
-                                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                                }, 300);
-
-                            } else {
-                                console.log('加载错误');
+                            switch (sort) {
+                            case 'price':
+                                $scope.priceUp = $scope.priceUp ? false : true;
+                                break;
+                            case 'discount':
+                                $scope.discountUp = $scope.discountUp ? false : true;
+                                break;
                             }
 
+                            $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
                         }
+
                     } else {
                         $scope.noResults = true;
                     }
@@ -112,10 +110,8 @@ angular.module('EPBUY')
             });
         }
 
-        renderData(true);
-
         $scope.loadMore = function () { //翻页加载
-            renderData(false, true, true);
+            renderData(false);
         };
 
         $scope.filtersCtrl = function (type) {

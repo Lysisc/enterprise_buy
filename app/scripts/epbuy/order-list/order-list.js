@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderListCtrl', function ($scope, $state, $location, Util) {
+    .controller('OrderListCtrl', function ($scope, $state, $ionicLoading, $location, Util) {
 
         if ($location.search() && $location.search().type) {
             var type = $location.search().type;
@@ -21,10 +21,14 @@ angular.module('EPBUY')
 
         $scope.pageIndex = 1;
         $scope.orderList = [];
+        $ionicLoading.show({
+            template: '<span class="ion-load-d"></span>'
+        });
+
+        Util.backDrop.retain();
 
         $scope.loadMore = function () { //翻页加载
             Util.ajaxRequest({
-                noLoad: true,
                 noMask: true,
                 url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {

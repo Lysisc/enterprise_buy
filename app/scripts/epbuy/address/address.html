@@ -6,9 +6,9 @@
             <a ng-class="{current: tabIndex == 0}" ng-click="tabIndex = 0;addressCheck(0, choicedIndex);">企业地址</a>
             <a ng-class="{current: tabIndex == 1}" ng-click="tabIndex = 1;addressCheck(1, choicedIndex);">个人地址</a>
         </div>
+        <div ng-if="tabIndex == 0 && enterpriseList.length == 0" class="no-address">您还没有添加过企业地址</div>
         <ion-scroll ng-if="tabIndex == 0" class="address-list">
-            <div ng-if="!enterpriseList || enterpriseList.length == 0" class="no-address">您还没有添加过地址</div>
-            <div ng-if="enterpriseList &&  enterpriseList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in enterpriseList track by $index">
+            <div ng-if="enterpriseList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in enterpriseList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
                 <div class="item-detail">
@@ -23,9 +23,9 @@
                 </div>
             </div>
         </ion-scroll>
+        <div ng-if="tabIndex == 1 && personageList.length == 0" class="no-address">您还没有添加过个人地址</div>
         <ion-scroll ng-if="tabIndex == 1" class="address-list">
-            <div ng-if="!personageList || personageList.length == 0" class="no-address">您还没有添加过地址</div>
-            <div ng-if="personageList && personageList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in personageList track by $index">
+            <div ng-if="personageList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in personageList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
                 <div class="item-detail">

@@ -94,13 +94,13 @@
                 </a>
             </div>
 
-            <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="-60px"></ion-infinite-scroll>
+            <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
 
         </ion-scroll>
 
     </ion-content>
 
-    <div ng-if="isHeart" class="want-more-ctrl">
+    <div ng-if="noNetwork == false && isHeart" class="want-more-ctrl">
         <button class="button button-block button-positive" ng-click="wantMore();" ng-class="{disabled: stepOneDisabled}">还 想 要</button>
     </div>
 

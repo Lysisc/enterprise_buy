@@ -1,19 +1,30 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('AddressCtrl', function ($rootScope, $scope, $state, $stateParams, $window, Util) {
+    .controller('AddressCtrl', function ($rootScope, $scope, $state, $stateParams, $window, Util, DataCachePool) {
 
         $scope.isChoice = $state.is('epbuy.choice');
 
         Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json',
+            url: '$server/Account/GetAddressListByAuth',
             data: {
-                enterpriseCode: $scope.enterpriseCode // todo...
+                Auth: DataCachePool.pull('USERAUTH'),
+                Id: 0,
+                Province: '',
+                City: '',
+                Village: '',
+                AreaId: '',
+                Address: '',
+                Zipcode: '',
+                EmailAddress: '',
+                PhoneNumber: '',
+                IsDefault: '',
+                Remark: ''
             },
             success: function (data) {
 
-                $scope.enterpriseList = data.commentList || []; //取数据 todo...
-                $scope.personageList = data.commentList || []; //取数据 todo...
+                $scope.enterpriseList = data.enterpriseAddressList || [];
+                $scope.personageList = data.personAddressList || [];
 
                 //页面右上角‘确定’或‘编辑’是否可用
                 if ($scope.enterpriseList.length > 0 && $scope.personageList.length > 0) {

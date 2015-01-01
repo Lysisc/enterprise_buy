@@ -13,7 +13,6 @@ angular.module('EPBUY')
             }
 
             // Util.ajaxRequest({
-            //     noLoad: true,
             //     noMask: true,
             //     url: '$local/GetHomeRestaurantBannerInfo.json',
             //     data: {

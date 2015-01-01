@@ -39,7 +39,7 @@ angular.module('EPBUY')
 							}
 						};
 
-					if (data && data.ShortMessage) {
+					if (data.ShortMessage) {
 						Util.msgToast($scope, data.ShortMessage);
 						$scope.validationDisabled = true;
 						$scope.validationEnable = false;
@@ -78,7 +78,7 @@ angular.module('EPBUY')
 					CheckCode: $scope.inputVal.validationCode
 				},
 				success: function (data) {
-					if (data && data.state === 200) {
+					if (data.state === 200) {
 						Util.msgToast($scope, data.msg);
 						$timeout(function () {
 							DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
@@ -135,7 +135,7 @@ angular.module('EPBUY')
 					newpassword: $scope.inputVal.newPassword
 				},
 				success: function (data) {
-					if (data && data.state === 200) {
+					if (data.state === 200) {
 						Util.msgToast($scope, data.msg);
 						$timeout(function () {
 							$window.history.back();

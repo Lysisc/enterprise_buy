@@ -30,7 +30,7 @@ angular.module('EPBUY')
 							}
 						};
 
-					if (data && data.ShortMessage) {
+					if (data.ShortMessage) {
 						Util.msgToast($scope, data.ShortMessage);
 						$scope.validationDisabled = true;
 						$scope.validationEnable = false;
@@ -90,7 +90,7 @@ angular.module('EPBUY')
 					newpassword: $scope.inputVal.newPassword
 				},
 				success: function (data) {
-					if (data && data.state === 200) {
+					if (data.state === 200) {
 						$ionicPopup.alert({
 							template: '密码更新成功',
 							buttons: [{

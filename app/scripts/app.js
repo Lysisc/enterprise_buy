@@ -19,7 +19,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 登陆页
             .state('epbuy.login', {
-                url: '/login',
+                url: '/login?OtherPage',
                 templateUrl: 'scripts/epbuy/login/login.html',
                 controller: 'LoginCtrl'
             })

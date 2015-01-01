@@ -38,7 +38,7 @@ angular.module('EPBUY')
                     Auth: DataCachePool.pull('USERAUTH')
                 },
                 success: function (data) {
-                    if (data && data.IsLogin) {
+                    if (data.IsLogin) {
                         $state.go('epbuy.home');
                     } else {
                         $state.go('epbuy.login');

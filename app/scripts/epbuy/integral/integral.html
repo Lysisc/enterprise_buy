@@ -5,19 +5,19 @@
         <div ng-if="noNetwork == false" class="integral-info">
             <p>
                 <span class="blue">全部积分：</span>
-                <span class="red">1000</span>
+                <span class="red">{{data.allIntegral}}</span>
                 积分
             </p>
             <p>
                 <span class="blue">可用积分：</span>
-                <span class="red">500</span>
+                <span class="red">{{data.AvailableIntegral}}</span>
                 积分
             </p>
         </div>
 
         <ion-scroll>
 
-            <p class="integral-item" ng-repeat="item in integralList track by $index">
+            <p class="integral-item" ng-repeat="item in data.integralList track by $index">
                 <span class="blue">2013-10-30</span>
                 后台积分充值
                 <span class="red">+1000</span>

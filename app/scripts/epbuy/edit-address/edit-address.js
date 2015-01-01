@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('EditAddressCtrl', function ($rootScope, $scope, $state, $location, $ionicPopup, $stateParams, $window, Util, AREA) {
+    .controller('EditAddressCtrl', function ($rootScope, $scope, $state, $location, $ionicPopup, $stateParams, $window, Util, DataCachePool, AREA) {
 
         $scope.addressId = parseInt($stateParams.AddressId, 0);
         $scope.inputVal = {}; //初始化所有输入选择model
@@ -30,7 +30,18 @@ angular.module('EPBUY')
             Util.ajaxRequest({
                 url: '$local/GetHomeRestaurantBannerInfo.json',
                 data: {
-                    enterpriseCode: $scope.enterpriseCode // todo...
+                    Auth: DataCachePool.pull('USERAUTH'),
+                    Id: 0,
+                    Province: '',
+                    City: '',
+                    Village: '',
+                    AreaId: '',
+                    Address: '',
+                    Zipcode: '',
+                    EmailAddress: '',
+                    PhoneNumber: '',
+                    IsDefault: '',
+                    Remark: ''
                 },
                 success: function (data) {
                     if ($scope.inputVal.addressType) {
@@ -47,27 +58,41 @@ angular.module('EPBUY')
             });
 
             $scope.deleteAddress = function () {
-                $ionicPopup.alert({
+                $ionicPopup.confirm({
                     template: '确定要删除该地址吗？',
-                    buttons: [{
-                        text: '确定',
-                        type: 'button-positive',
-                        onTap: function () {
-                            Util.ajaxRequest({
-                                isPopup: true,
-                                url: '$local/GetHomeRestaurantBannerInfo.json',
-                                data: {
-                                    enterpriseCode: $scope.addressId // todo...
-                                },
-                                success: function (data) {
+                    cancelText: '取消',
+                    okText: '确定'
+                }).then(function (res) {
+                    if (res) {
+
+                        Util.ajaxRequest({
+                            method: 'POST',
+                            url: '$server/Account/AddressDelete',
+                            data: {
+                                Auth: DataCachePool.pull('USERAUTH'),
+                                Id: 0,
+                                Province: '',
+                                City: '',
+                                Village: '',
+                                AreaId: '',
+                                Address: '',
+                                Zipcode: '',
+                                EmailAddress: '',
+                                PhoneNumber: '',
+                                IsDefault: '',
+                                Remark: ''
+                            },
+                            success: function (data) {
+                                if (data.state === 200) {
                                     $window.history.back();
-                                },
-                                error: function (data) {
-                                    Util.msgToast($scope, '删除失败，请重试或查看网络');
                                 }
-                            });
-                        }
-                    }]
+                            },
+                            error: function (data) {
+                                Util.msgToast($scope, '删除失败，请重试或查看网络');
+                            }
+                        });
+
+                    }
                 });
             };
 
@@ -114,9 +139,21 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
-                url: '$local/GetHomeRestaurantBannerInfo.json',
+                method: 'POST',
+                url: '$server/Account/Address' + ($scope.addressId ? 'Update' : 'Add'),
                 data: {
-                    enterpriseCode: $scope.enterpriseCode // todo...
+                    Auth: DataCachePool.pull('USERAUTH'),
+                    Id: 0,
+                    Province: '',
+                    City: '',
+                    Village: '',
+                    AreaId: '',
+                    Address: '',
+                    Zipcode: '',
+                    EmailAddress: '',
+                    PhoneNumber: '',
+                    IsDefault: '',
+                    Remark: ''
                 },
                 success: function (data) {
                     $window.history.back();

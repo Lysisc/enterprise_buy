@@ -1,20 +1,27 @@
 'use strict';
 
 angular.module('EPBUY')
-	.controller('LoginCtrl', function ($scope, $state, Util, DataCachePool) {
+	.controller('LoginCtrl', function ($scope, $state, $window, $ionicLoading, $stateParams, Util, DataCachePool) {
 
-		Util.ajaxRequest({
-			noMask: true,
-			url: '$server/Account/CheckLogin',
-			data: {
-				Auth: DataCachePool.pull('USERAUTH')
-			},
-			success: function (data) {
-				if (data && data.IsLogin) {
-					$state.go('epbuy.home');
+		$scope.otherPage = $stateParams.OtherPage;
+
+		if (!$scope.otherPage) {
+			Util.ajaxRequest({
+				noMask: true,
+				url: '$server/Account/CheckLogin',
+				data: {
+					Auth: DataCachePool.pull('USERAUTH')
+				},
+				success: function (data) {
+					if (data.IsLogin) {
+						$state.go('epbuy.home');
+					}
 				}
-			}
-		});
+			});
+		} else {
+			Util.backDrop.release();
+			$ionicLoading.hide();
+		}
 
 		$scope.inputVal = {}; //初始化ng-model
 		$scope.inputVal.checked = DataCachePool.pull('REMEMBER_LOGIN') ? true : false;
@@ -56,7 +63,7 @@ angular.module('EPBUY')
 					Password: $scope.inputVal.password
 				},
 				success: function (data) {
-					if (data && data.UserEntity) {
+					if (data.UserEntity) {
 
 						if ($scope.inputVal.checked) { //记住我
 							DataCachePool.push('REMEMBER_LOGIN', 1);
@@ -66,7 +73,13 @@ angular.module('EPBUY')
 
 						DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
 						DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
-						$state.go('epbuy.home');
+
+						if ($scope.otherPage) {
+							$window.history.back();
+						} else {
+							$state.go('epbuy.home');
+						}
+
 					} else {
 						Util.msgToast($scope, data.msg || '用户名或密码错误');
 					}

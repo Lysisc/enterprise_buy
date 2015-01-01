@@ -12,10 +12,7 @@ angular.module('EPBUY')
         } else {
             Util.ajaxRequest({
                 isPopup: true,
-                url: '$local/GetHomeRestaurantBannerInfo.json',
-                data: {
-                    Auth: DataCachePool.pull('USERAUTH')
-                },
+                url: '$server/Home/Index',
                 success: function (data) {
                     if (data.commentList && data.commentList.length > 0) {
                         $scope.hasActivity = true;

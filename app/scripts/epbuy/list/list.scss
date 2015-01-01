@@ -1,6 +1,7 @@
 .ep-list {
     .bar-positive {
-        position: static;
+        position: relative;
+        z-index: 12;
         .ion-search {
             margin-top: 5px;
             margin-right: 4px;
@@ -151,13 +152,13 @@
         top: 112px;
     }
     .list-box .scroll {
-        padding-bottom: 111px;
+        padding-bottom: 110px;
         .goods-list-double {
             padding-top: 4px;
         }
     }
     .is-heart .list-box .scroll {
-        padding-bottom: 221px;
+        padding-bottom: 220px;
     }
     .load-more-bar {
         margin-top: -11px;
