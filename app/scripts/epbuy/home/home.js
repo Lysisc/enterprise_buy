@@ -9,6 +9,7 @@ angular.module('EPBUY')
             $scope.hasActivity = true;
             $scope.bannerList = homeData.info().commentList; //取缓存数据
             $scope.goodsList = homeData.info().commentList; //取缓存数据
+            Util.backDrop.release();
         } else {
             Util.ajaxRequest({
                 isPopup: true,
