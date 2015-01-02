@@ -41,17 +41,17 @@ angular.module('EPBUY')
 		$scope.getLogin = function () { //首页跳转
 
 			if (!$scope.inputVal.phoneNumber) {
-				Util.msgToast($scope, '请输入用户名');
+				Util.msgToast('请输入用户名');
 				return;
 			}
 
 			if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test($scope.inputVal.phoneNumber)) {
-				Util.msgToast($scope, '用户名格式不合法');
+				Util.msgToast('用户名格式不合法');
 				return;
 			}
 
 			if (!$scope.inputVal.password) {
-				Util.msgToast($scope, '请输入密码');
+				Util.msgToast('请输入密码');
 				return;
 			}
 
@@ -81,11 +81,11 @@ angular.module('EPBUY')
 						}
 
 					} else {
-						Util.msgToast($scope, data.msg || '用户名或密码错误');
+						Util.msgToast(data.msg || '用户名或密码错误');
 					}
 				},
 				error: function (data) {
-					Util.msgToast($scope, '登录失败请重试');
+					Util.msgToast('登录失败请重试');
 				}
 			});
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderListCtrl', function ($scope, $state, $ionicLoading, $location, Util) {
+    .controller('OrderListCtrl', function ($scope, $state, $timeout, $ionicLoading, $location, Util) {
 
         if ($location.search() && $location.search().type) {
             var type = $location.search().type;
@@ -42,7 +42,10 @@ angular.module('EPBUY')
 
                         $scope.orderList = $scope.orderList.concat(data.commentList); //拼接数据
                         $scope.pageIndex++;
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
+
+                        $timeout(function () {
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                        }, 300);
 
                     } else {
                         if ($scope.orderList.length === 0) {

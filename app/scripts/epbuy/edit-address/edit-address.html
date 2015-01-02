@@ -31,8 +31,8 @@
             <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>所在省</span>
                 <div class="select-ctrl ion-ios-arrow-down">
-                    <select ng-model="inputVal.province" ng-change="getArea(inputVal.province);" ng-options="pDat for pDat in area.pDat">
-                        <option ng-if="area.pName == '选择省'" value="">{{area.pName}}</option>
+                    <select ng-model="inputVal.province" ng-change="getArea(inputVal.province);" ng-options="pDat for pDat in province">
+                        <option ng-if="area.pName == '选择省'" value="">选择省</option>
                     </select>
                 </div>
             </li>

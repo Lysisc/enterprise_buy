@@ -64,7 +64,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 noMask: sort ? false : true,
-                url: '$local/GetHomeRestaurantBannerInfo.json',
+                url: '$server/InternalPurchase/GetProductList',
                 data: {
                     enterpriseCode: 'abs' // todo...
                 },

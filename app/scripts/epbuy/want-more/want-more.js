@@ -23,12 +23,12 @@ angular.module('EPBUY')
         $scope.submitForm = function () { //翻页加载
 
             if (!$scope.wantText) {
-                Util.msgToast($scope, '请输入你想要的内容');
+                Util.msgToast('请输入你想要的内容');
                 return;
             }
 
             if ($scope.wantText === 1) {
-                Util.msgToast($scope, '内容超过200个字，请删减');
+                Util.msgToast('内容超过200个字，请删减');
                 return;
             }
 
@@ -51,7 +51,7 @@ angular.module('EPBUY')
                     });
                 },
                 error: function (data) {
-                    Util.msgToast($scope, '提交失败');
+                    Util.msgToast('提交失败');
                 }
             });
         };

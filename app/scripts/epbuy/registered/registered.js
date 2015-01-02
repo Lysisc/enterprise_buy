@@ -7,8 +7,6 @@ angular.module('EPBUY')
         $scope.stepOneDisabled = true; //step1 submit
         $scope.stepOnePass = false; //step2 view
         $scope.stepTwoDisabled = true; //step2 submit
-        $scope.validationDisabled = false; //验证码不可用
-        $scope.validationEnable = true; //验证码可用
         $scope.inputVal = {}; //ng-model变量容器
 
         $scope.showSearch = function () {
@@ -105,70 +103,29 @@ angular.module('EPBUY')
 
         };
 
-        $scope.getVerificationCode = function () { //获取验证码
-
-            Util.ajaxRequest({
-                noMask: true,
-                url: '$server/Tools/SendCheckCode',
-                data: {
-                    Mobile: $scope.inputVal.phoneNumber // todo...
-                },
-                success: function (data) {
-                    var time = 30,
-                        countdown = function () { //倒计时
-                            if (time > 0) {
-                                $scope.validationHtml = '重新发送' + time;
-                                time--;
-                                $timeout(countdown, 1000);
-                            } else {
-                                $scope.validationHtml = '重新发送' + time;
-                                $scope.validationEnable = true;
-                                $scope.validationDisabled = false;
-                            }
-                        };
-
-                    if (data.ShortMessage) {
-                        Util.msgToast($scope, data.ShortMessage);
-                        $scope.validationDisabled = true;
-                        $scope.validationEnable = false;
-                        $timeout(countdown, 0);
-                    } else {
-                        Util.msgToast($scope, data.msg || '手机号无效');
-                    }
-
-                }
-            });
-
-        };
-
         $scope.submitRegistered = function () {
             if (!$scope.inputVal.phoneNumber) {
-                Util.msgToast($scope, '请输入手机号码');
+                Util.msgToast('请输入手机号码');
                 return;
             }
 
             if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test($scope.inputVal.phoneNumber)) {
-                Util.msgToast($scope, '联系手机格式不合法');
+                Util.msgToast('联系手机格式不合法');
                 return;
             }
 
             if (!$scope.inputVal.validationCode) {
-                Util.msgToast($scope, '请输入验证码');
+                Util.msgToast('请输入验证码');
                 return;
             }
 
-            // if ($scope.inputVal.validationCode && $scope.inputVal.validationCode !== $scope.validationDataCode) {
-            //     Util.msgToast($scope, '验证码不正确');
-            //     return;
-            // }
-
             if (!$scope.inputVal.passWord) {
-                Util.msgToast($scope, '请输入密码');
+                Util.msgToast('请输入密码');
                 return;
             }
 
             if ($scope.inputVal.passWord.length <= 5) {
-                Util.msgToast($scope, '密码必须大于或等于6位');
+                Util.msgToast('密码必须大于或等于6位');
                 return;
             }
 
@@ -184,10 +141,30 @@ angular.module('EPBUY')
                 },
                 success: function (data) {
                     if (data.state === 999) {
-                        Util.msgToast($scope, data.msg);
-                    }
 
-                    if (data.state === 200) {
+                        $ionicPopup.alert({
+                            template: data.msg,
+                            buttons: [{
+                                text: '知道了',
+                                type: 'button-positive'
+                            }]
+                        });
+
+                    } else if (data.state === 888) {
+
+                        $ionicPopup.alert({
+                            template: data.msg,
+                            buttons: [{
+                                text: '知道了',
+                                type: 'button-positive',
+                                onTap: function () {
+                                    $state.go('epbuy.login');
+                                }
+                            }]
+                        });
+
+                    } else if (data.state === 200) {
+
                         DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
                         DataCachePool.push('USERAUTH', data.Auth, 2 / 24); //存入用户Auth，并设置过期时间
 
@@ -204,10 +181,10 @@ angular.module('EPBUY')
                             }]
                         });
                     }
-                    
+
                 },
                 error: function (data) {
-                    Util.msgToast($scope, '注册失败请重试或检查网络');
+                    Util.msgToast('注册失败请重试或检查网络');
                 }
             });
 

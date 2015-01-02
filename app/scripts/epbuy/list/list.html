@@ -9,6 +9,8 @@
             <shopping-cart></shopping-cart>
         </div>
 
+        <no-network></no-network>
+
         <div ng-if="noNetwork == false && !isHeart" class="activity-date"> <i class="icon ion-time-alarm"></i>
             活动日期：{{startTime}}至{{endTime}}，距离结束还有：{{restTime}}
         </div>
@@ -94,7 +96,7 @@
                 </a>
             </div>
 
-            <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
+            <ion-infinite-scroll ng-show="noNetwork == false" class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
 
         </ion-scroll>
 
@@ -103,8 +105,6 @@
     <div ng-if="noNetwork == false && isHeart" class="want-more-ctrl">
         <button class="button button-block button-positive" ng-click="wantMore();" ng-class="{disabled: stepOneDisabled}">还 想 要</button>
     </div>
-
-    <no-network></no-network>
 
     <bottom-bar></bottom-bar>
 

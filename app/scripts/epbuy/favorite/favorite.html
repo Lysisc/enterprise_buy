@@ -2,6 +2,8 @@
 
     <ion-content scroll="false">
 
+        <no-network></no-network>
+
         <no-results ng-if="noResults" data-text="您还没有收藏过任何东东"></no-results>
 
         <ion-scroll class="goods-list">
@@ -19,8 +21,6 @@
         </ion-scroll>
 
     </ion-content>
-
-    <no-network></no-network>
 
     <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
 

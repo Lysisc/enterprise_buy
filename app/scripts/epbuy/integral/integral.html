@@ -2,6 +2,8 @@
 
     <ion-content scroll="false">
 
+        <no-network></no-network>
+
         <div ng-if="noNetwork == false" class="integral-info">
             <p>
                 <span class="blue">全部积分：</span>
@@ -27,8 +29,6 @@
         </ion-scroll>
 
     </ion-content>
-
-    <no-network></no-network>
 
     <bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
 

@@ -15,15 +15,17 @@
                 <input ng-click="showSearch();" type="search" readonly="true" placeholder="请输入关键字"></label>
         </div> -->
 
+        <no-network></no-network>
+
         <div class="no-activity" ng-if="hasActivity == false">
             <img ng-src="images/no_goods.png"></div>
 
         <ion-scroll ng-if="hasActivity">
 
             <ion-slide-box class="slide-box" ng-if="bannerList" auto-play="true" does-continue="true">
-                <ion-slide ng-repeat="(key, value) in bannerList">
+                <ion-slide ng-click="toDetail(item.Id);" ng-repeat="item in bannerList track by $index">
                     <div class="slide-page">
-                        <img ng-src="images/bottom_bg.png"></div>
+                        <img ng-src="{{item.Image}}"></div>
                 </ion-slide>
             </ion-slide-box>
 
@@ -33,17 +35,15 @@
             </h3>
 
             <div class="goods-list-double">
-                <a class="goods-item" ng-click="toGoodsDetail(1234);" ng-repeat="(index, item) in goodsList">
+                <a class="goods-item" ng-click="toDetail(item.Id);" ng-repeat="item in goodsList track by $index">
                     <div class="img">
-                        <img ng-src="">
-                        <div class="mask" style="display:-webkit-box;">
-                            水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                        </div>
+                        <img ng-src="{{item.Picture}}">
+                        <div class="mask" style="display:-webkit-box;">{{item.Name}}</div>
                     </div>
                     <div class="price">
-                        <span class="p-discount">5.5折</span>
-                        <span class="p-red">&yen;148</span>
-                        <s class="p-gray">&yen;260</s>
+                        <span class="p-discount">{{item.Discount}}折</span>
+                        <span class="p-red">&yen;{{item.InnerPrice}}</span>
+                        <s class="p-gray">&yen;{{item.MarketPrice}}</s>
                     </div>
                 </a>
             </div>
@@ -51,8 +51,6 @@
         </ion-scroll>
 
     </ion-content>
-
-    <no-network></no-network>
 
     <bottom-bar ng-init="bottomBarCur = 'home'"></bottom-bar>
 

@@ -80,17 +80,17 @@ angular.module('EPBUY')
 
         $scope.placeTheOrder = function () {
             if (!$scope.hasAddress) {
-                Util.msgToast($scope, '请添加收货地址');
+                Util.msgToast('请添加收货地址');
                 return;
             }
 
             if (!$scope.activityCheck.checked) {
-                Util.msgToast($scope, '请查看活动及售后服务说明');
+                Util.msgToast('请查看活动及售后服务说明');
                 return;
             }
 
             if ($scope.remark === 1) {
-                Util.msgToast($scope, '备注超过100个字，请删减');
+                Util.msgToast('备注超过100个字，请删减');
                 return;
             }
 

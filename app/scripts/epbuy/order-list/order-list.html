@@ -2,6 +2,8 @@
 
 	<ion-content scroll="false">
 
+		<no-network></no-network>
+
 		<no-results ng-if="noResults" data-text="您还没有订单记录"></no-results>
 
 		<ion-scroll>
@@ -25,8 +27,6 @@
 		</ion-scroll>
 
 	</ion-content>
-
-	<no-network></no-network>
 
 	<bottom-bar ng-init="bottomBarCur = 'person'"></bottom-bar>
 

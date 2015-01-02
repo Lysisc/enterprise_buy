@@ -5,10 +5,10 @@
         <dl ng-if="modifiedType == 'phone'" class="modified-ctrl">
             <dd>
                 <label class="item-input">
-                    <input focus-effect ng-model="inputVal.newPhoneNumber" type="number" placeholder="请输入新手机号码"></label>
+                    <input focus-effect ng-model="inputVal.phoneNumber" type="number" placeholder="请输入新手机号码"></label>
             </dd>
             <dd>
-                <button class="button button-positive validation-button" ng-class="{disabled: validationDisabled}" ng-click="getVerificationCode();">
+                <button get-verificationcode data-change="1" class="button button-positive validation-button" ng-class="{disabled: validationDisabled}">
                     <span ng-if="validationEnable">获取验证码</span> <i ng-if="validationDisabled" ng-bind-html="validationHtml"></i>
                 </button>
                 <label class="item-input short-two"> <i class="icon placeholder-icon ion-key"></i>

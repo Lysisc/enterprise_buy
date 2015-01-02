@@ -10,6 +10,14 @@ angular.module('EPBUY')
         $scope.getArea = function (province, city, district) {
 
             if ($scope.inputVal.addressType) {
+
+                Util.ajaxRequest({
+                    url: '$server/Address/GetSubAreaList',
+                    success: function (data) {
+                        $scope.province = data.AreaList;
+                    }
+                });
+
                 if (!province && !city && !district) {
                     $scope.area = new AREA.GetArea();
                 } else if (!city && !district) {
@@ -88,7 +96,7 @@ angular.module('EPBUY')
                                 }
                             },
                             error: function (data) {
-                                Util.msgToast($scope, '删除失败，请重试或查看网络');
+                                Util.msgToast('删除失败，请重试或查看网络');
                             }
                         });
 
@@ -102,38 +110,38 @@ angular.module('EPBUY')
 
         $scope.saveAddress = function () {
             if (!$scope.inputVal.consignee) {
-                Util.msgToast($scope, '请输入收货人姓名');
+                Util.msgToast('请输入收货人姓名');
                 return;
             }
 
             if (!$scope.inputVal.phoneNumber) {
-                Util.msgToast($scope, '请输入手机号码');
+                Util.msgToast('请输入手机号码');
                 return;
             }
 
             if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test($scope.inputVal.phoneNumber)) {
-                Util.msgToast($scope, '联系手机格式不合法');
+                Util.msgToast('联系手机格式不合法');
                 return;
             }
 
             if ($scope.inputVal.addressType) {
                 if (!$scope.inputVal.province) {
-                    Util.msgToast($scope, '请选择所在省');
+                    Util.msgToast('请选择所在省');
                     return;
                 }
 
                 if (!$scope.inputVal.city || $scope.inputVal.city === '选择市') {
-                    Util.msgToast($scope, '请选择所在市');
+                    Util.msgToast('请选择所在市');
                     return;
                 }
 
                 if (!$scope.inputVal.district) {
-                    Util.msgToast($scope, '请选择所在区');
+                    Util.msgToast('请选择所在区');
                     return;
                 }
 
                 if (!$scope.inputVal.detailedAddress) {
-                    Util.msgToast($scope, '请输入详细地址');
+                    Util.msgToast('请输入详细地址');
                     return;
                 }
             }

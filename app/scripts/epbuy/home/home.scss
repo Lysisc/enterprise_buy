@@ -1,6 +1,7 @@
 .ep-home {
     .bar-positive {
-        position: static;
+        position: relative;
+        z-index: 1;
     }
     .slide-box {
         width: 100%;

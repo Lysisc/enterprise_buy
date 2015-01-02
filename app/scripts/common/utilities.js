@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('EPBUY').factory('Util', function ($http, $state, $compile, $ionicLoading, $timeout) {
+angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $compile, $ionicPopup, $ionicLoading, $timeout) {
 
     var backDropDom = angular.element(document.querySelector('.backdrop'));
 
@@ -22,23 +22,25 @@ angular.module('EPBUY').factory('Util', function ($http, $state, $compile, $ioni
 
     /**
      * toast提示层
-     * @param scope, msg, time
+     * @param msg, time
      */
     var toastTimer = null;
-    var msgToast = function (scope, msg, time) {
+    var msgToast = function (msg, time) {
         var toastDom = angular.element(document.querySelector('.notifier'));
 
         if (!toastDom.length) {
             var toastTpl = $compile('<div class="notifier" ng-click="notification=null" ng-show="notification"><span>{{notification}}</span></div>');
-            angular.element(document.getElementsByTagName('ion-nav-view')[0]).append(toastTpl(scope));
+            angular.element(document.getElementsByTagName('ion-nav-view')[0]).append(toastTpl($rootScope));
         }
 
-        scope.notification = msg;
+        $timeout(function () {
+            $rootScope.notification = msg;
+        });
 
         $timeout.cancel(toastTimer);
 
         toastTimer = $timeout(function () {
-            scope.notification = '';
+            $rootScope.notification = '';
         }, time || 2000);
 
     };
@@ -169,8 +171,18 @@ angular.module('EPBUY').factory('Util', function ($http, $state, $compile, $ioni
             console.log(data);
 
             if (data && data.state === -200) { //判断登录
-                $state.go('epbuy.login', {
-                    OtherPage: 1
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                    template: '请重新登录',
+                    buttons: [{
+                        text: '知道了',
+                        type: 'button-positive',
+                        onTap: function () {
+                            $state.go('epbuy.login', {
+                                OtherPage: 1
+                            });
+                        }
+                    }]
                 });
                 return;
             }

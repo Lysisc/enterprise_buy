@@ -26,7 +26,10 @@ angular.module('EPBUY')
 
             //             $scope.goodsList = $scope.goodsList.concat(data.commentList); //拼接数据
             //             $scope.pageIndex++;
-            //             $scope.$broadcast('scroll.infiniteScrollComplete');
+                        
+            //             $timeout(function () {
+            //                 $scope.$broadcast('scroll.infiniteScrollComplete');
+            //             }, 300);
 
             //         } else {
             //             if ($scope.goodsList.length === 0) {
