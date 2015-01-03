@@ -33,9 +33,9 @@ angular.module('EPBUY')
             }
         });
 
-        $scope.toJump = function (e, index) {
+        $scope.toAdress = function (addressId) {
             $state.go('epbuy.choice', {
-                idx: index
+                AddressId: addressId
             });
         };
 
@@ -71,15 +71,12 @@ angular.module('EPBUY')
             });
         };
 
-        if ($rootScope.addressObj) {
-            $scope.hasAddress = $rootScope.addressObj;
-            console.log($scope.hasAddress);
-        } else {
-            $scope.hasAddress = false; //是否有收货地址
-        }
+        $scope.address = $rootScope.addressObj;
+
+        console.log($scope.address);
 
         $scope.placeTheOrder = function () {
-            if (!$scope.hasAddress) {
+            if (!$scope.address) {
                 Util.msgToast('请添加收货地址');
                 return;
             }

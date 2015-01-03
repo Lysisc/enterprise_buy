@@ -4,96 +4,85 @@ angular.module('EPBUY')
     .controller('AddressCtrl', function ($rootScope, $scope, $state, $stateParams, $window, Util, DataCachePool) {
 
         $scope.isChoice = $state.is('epbuy.choice');
+        $scope.tabSwitch = 0;
 
-        Util.ajaxRequest({
-            url: '$server/Account/GetAddressListByAuth',
-            data: {
-                Auth: DataCachePool.pull('USERAUTH'),
-                Id: 0,
-                Province: '',
-                City: '',
-                Village: '',
-                AreaId: '',
-                Address: '',
-                Zipcode: '',
-                EmailAddress: '',
-                PhoneNumber: '',
-                IsDefault: '',
-                Remark: ''
-            },
-            success: function (data) {
-
-                $scope.enterpriseList = data.enterpriseAddressList || [];
-                $scope.personageList = data.personAddressList || [];
-
-                //页面右上角‘确定’或‘编辑’是否可用
-                if ($scope.enterpriseList.length > 0 && $scope.personageList.length > 0) {
-                    $scope.editable = true;
-                }
-
-                //当选择收货地址时，取order页传过来的index和type，来确定是否企业或是个人的地址索引
-                if ($scope.isChoice) {
-                    $scope.choicedIndex = parseInt($stateParams.idx.split('|')[1], 0);
-                    $scope.tabIndex = parseInt($stateParams.idx.split('|')[0], 0);
-                } else {
-                    // $scope.tabIndex = 1;
-                    $scope.choicedIndex = 3;
-                }
-
-                $scope.addressCheck($scope.tabIndex, $scope.choicedIndex);
-            }
-        });
-
-        $scope.addressCheck = function (type, index) {
-            if (!angular.isNumber(type)) {
-                return;
-            } else {
+        $scope.addressCheck = function (type) {
+            if (angular.isNumber(type)) {
+                $scope.tabSwitch = type;
                 if (type === $scope.tabIndex) {
-                    $scope.checked = index || 0;
+                    $scope.checked = $scope.choicedIndex || 0;
                 } else {
                     $scope.checked = -1;
                 }
             }
         };
 
+        Util.ajaxRequest({
+            url: '$server/Address/GetAddressListByAuth',
+            data: {
+                Auth: DataCachePool.pull('USERAUTH')
+            },
+            success: function (data) {
+
+                $scope.eList = data.enterpriseAddressList || [];
+                $scope.pList = data.personAddressList || [];
+
+                //当选择收货地址时，取order页传过来的id，来确定是否企业或是个人的地址索引
+                $scope.addressId = $stateParams.AddressId || 0;
+
+                for (var i = 0; i < $scope.eList.length; i++) {
+                    if ($scope.eList[i].Id === $scope.addressId) {
+                        $scope.tabIndex = 0;
+                        $scope.choicedIndex = i;
+                        break;
+                    } else if ($scope.eList[i].IsDefault) {
+                        $scope.tabIndex = 0;
+                        $scope.choicedIndex = i;
+                    }
+                }
+
+                for (var j = 0; j < $scope.pList.length; j++) {
+                    if ($scope.pList[j].Id === $scope.addressId) {
+                        $scope.tabIndex = 1;
+                        $scope.choicedIndex = j;
+                        break;
+                    } else if ($scope.pList[j].IsDefault) {
+                        $scope.tabIndex = 1;
+                        $scope.choicedIndex = j;
+                    }
+                }
+
+                $scope.addressCheck($scope.tabIndex);
+            }
+        });
+
         $scope.addressChoice = function (type, index) {
-            if (!angular.isNumber(type) || !angular.isNumber(index)) {
-                return;
-            } else {
+            if (angular.isNumber(type) && angular.isNumber(index)) {
                 $scope.tabIndex = type;
                 $scope.choicedIndex = index;
-                $scope.addressCheck(type, index);
+                $scope.addressCheck(type);
             }
         };
 
         $scope.addressEdit = function (isAdd) {
-            var type = $scope.tabIndex,
-                index = $scope.choicedIndex,
-                obj = {};
+            var obj = {};
 
-            if ($scope.editable) {
-                obj = type ? $scope.enterpriseList[type] : $scope.personageList[index];
+            if ($scope.eList.length > 0 || $scope.pList.length > 0) {
+                obj = $scope.tabIndex ? $scope.pList[$scope.choicedIndex] : $scope.eList[$scope.choicedIndex];
             }
 
-            if ($scope.isChoice && !angular.isNumber(isAdd)) {
-
-                $rootScope.addressObj = {
-                    Type: type,
-                    Index: index,
-                    Obj: obj
-                };
-
+            if ($scope.isChoice && !angular.isNumber(isAdd)) { // 订单地址选择
+                $rootScope.addressObj = obj;
                 $window.history.back();
             } else {
                 var route = '';
-
-                if (angular.isNumber(isAdd)) {
+                if (angular.isNumber(isAdd)) { // 添加地址
                     route = isAdd ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route);
-                } else {
-                    route = type ? 'p-address' : 'e-address';
+                } else { // 编辑地址
+                    route = $scope.tabIndex ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route, {
-                        AddressId: obj.AddressId || 0 // 拿到对应的地址id
+                        AddressId: obj.Id || 0 // 拿到对应的地址id
                     });
                 }
             }

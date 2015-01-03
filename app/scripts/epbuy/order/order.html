@@ -2,17 +2,17 @@
 
     <ion-content ng-init="showReceive = false;choice = '周一至周日全天'">
 
-        <a class="receive-info" ng-click="toJump($event, '0|3');" style="display:-webkit-box;">
+        <a class="receive-info" ng-click="toAdress(address.Id);" style="display:-webkit-box;">
             <span class="icon ion-location"></span>
-            <div ng-if="!hasAddress">暂无收货地址，请添加</div>
-            <div ng-if="hasAddress">
+            <div ng-if="!address">暂无收货地址，请添加</div>
+            <div ng-if="address">
                 <p class="name">
                     <span>收货人</span>
-                    ： 我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名
+                    ： {{address.Name}}
                 </p>
                 <p class="address" style="display:-webkit-box;">
                     <span>收货地址</span>
-                    ： 上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市
+                    ： {{address.Address}}
                 </p>
             </div> <i class="icon ion-arrow-right"></i>
         </a>

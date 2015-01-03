@@ -12,7 +12,7 @@
             <li ng-if="!addressId" class="edit-item">
                 <span>地址类型</span>
                 <div class="select-ctrl ion-ios-arrow-down">
-                    <select ng-model="inputVal.addressType" ng-change="getArea();">
+                    <select ng-model="inputVal.addressType" ng-change="getArea('', 1);">
                         <option value="0">企业地址</option>
                         <option value="1">个人地址</option>
                     </select>
@@ -31,28 +31,28 @@
             <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>所在省</span>
                 <div class="select-ctrl ion-ios-arrow-down">
-                    <select ng-model="inputVal.province" ng-change="getArea(inputVal.province);" ng-options="pDat for pDat in province">
-                        <option ng-if="area.pName == '选择省'" value="">选择省</option>
+                    <select ng-model="inputVal.provinceId" ng-change="getArea(inputVal.provinceId, 2);">
+                        <option value="">选择省</option>
+                        <option value="{{item.Id}}" ng-repeat="item in province track by $index">{{item.Name}}</option>
                     </select>
                 </div>
             </li>
             <li ng-if="inputVal.addressType == 1" class="edit-item">
                 <span>所在市</span>
-                <p ng-if="!area.cDat || area.cDat.length == 0" class="disabled">选择市</p>
+                <p ng-if="!city" class="disabled">选择市</p>
                 <div class="select-ctrl ion-ios-arrow-down">
-                    <select ng-model="inputVal.city" ng-if="area.cDat && area.cDat.length >
-                        0" ng-change="getArea(inputVal.province, inputVal.city || '选择市');" ng-options="cDat for cDat in area.cDat">
-                        <option ng-if="area.cName == '选择市'" ng-selected="!inputVal.city" value="">{{area.cName}}</option>
+                    <select ng-model="inputVal.cityId" ng-if="city" ng-change="getArea(inputVal.cityId, 3);">
+                        <option value="">选择市</option>
+                        <option value="{{item.Id}}" ng-repeat="item in city track by $index">{{item.Name}}</option>
                     </select>
                 </div>
             </li>
-            <li ng-if="inputVal.addressType == 1" class="edit-item">
+            <li ng-if="inputVal.addressType == 1 && village" class="edit-item">
                 <span>所在区</span>
-                <p ng-if="!area.dDat || area.dDat.length == 0" class="disabled">选择区</p>
                 <div class="select-ctrl ion-ios-arrow-down">
-                    <select ng-model="inputVal.district" ng-if="area.dDat && area.dDat.length >
-                        0" ng-change="getArea(inputVal.province, inputVal.city, inputVal.district || '选择区');" ng-options="dDat for dDat in area.dDat">
-                        <option ng-if="area.dName == '选择区'" value="">{{area.dName}}</option>
+                    <select ng-model="inputVal.villageId" ng-change="getArea(inputVal.villageId);">
+                        <option value="">选择区</option>
+                        <option value="{{item.Id}}" ng-repeat="item in village track by $index">{{item.Name}}</option>
                     </select>
                 </div>
             </li>
@@ -61,7 +61,7 @@
                 <input ng-model="inputVal.detailedAddress" type="text"></li>
             <li class="edit-item">
                 <span>邮编</span>
-                <input type="number" placeholder="可选" ng-maxlength="6"></li>
+                <input ng-model="inputVal.zipCode" type="number" placeholder="可选" ng-maxlength="6"></li>
             <li ng-if="addressId" ng-click="deleteAddress();" class="edit-item delete">删除收货地址</li>
             <li class="edit-item save-address">
                 <button class="button button-block button-positive" ng-click="saveAddress();">保 存</button>

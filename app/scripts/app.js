@@ -91,7 +91,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 选择收货地址页
             .state('epbuy.choice', {
-                url: '/choice/:idx',
+                url: '/choice?AddressId',
                 templateUrl: 'scripts/epbuy/address/address.html',
                 controller: 'AddressCtrl'
             })

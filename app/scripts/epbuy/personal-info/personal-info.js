@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('EPBUY')
-	.controller('PersonInfoCtrl', function ($scope, $state, Util, DataCachePool) {
+	.controller('PersonInfoCtrl', function ($scope, $state, DataCachePool) {
 
 		// Util.ajaxRequest({ //请求数据
-		// 	url: '$local/GetHomeRestaurantBannerInfo.json',
+		// 	url: '$server/Account/QueryEnterpriseByName',
 		// 	data: {
 		// 		enterpriseCode: $scope.enterpriseCode // todo...
 		// 	},

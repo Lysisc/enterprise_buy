@@ -19,36 +19,45 @@
             <div ng-click="filtersCtrl('sort');" ng-class="{active:showSort}" class="cyan">
                 筛选 <i class="icon ion-ios-arrow-down"></i>
             </div>
-            <div ng-click="filtersCtrl('brand');">品牌</div>
+            <div ng-click="filtersCtrl('brand');" ng-class="{active:showBrand}">品牌</div>
             <div ng-click="filtersCtrl('price');">
                 价格
-                <i ng-class="{'ion-arrow-up':priceUp,'ion-arrow-down':!priceUp}" class="icon"></i>
+                <i ng-class="{'ion-arrow-up':priceUp == 'asc','ion-arrow-down':priceUp == 'desc'}" class="icon"></i>
             </div>
             <div ng-click="filtersCtrl('discount');">
                 折扣
-                <i ng-class="{'ion-arrow-up':discountUp,'ion-arrow-down':!discountUp}" class="icon"></i>
+                <i ng-class="{'ion-arrow-up':discountUp == 'asc','ion-arrow-down':discountUp == 'desc'}" class="icon"></i>
             </div>
             <div ng-if="!isHeart" class="switch-style" ng-click="filtersCtrl();">
                 <i ng-class="{'ion-double-row':isSingle,'ion-single-row':!isSingle}" class="icon"></i>
             </div>
         </div>
 
-        <div class="sort-nav" ng-show="showSort">
+        <div class="sort-nav" ng-if="showSort">
+            <p ng-if="!sortPrimary && !loadFail" class="sort-loading">加载中...</p>
+            <button ng-if="loadFail" class="button button-positive button-block" ng-click="getCategoryList();">重新加载</button>
             <ion-scroll class="sort-lvl-1" ng-if="sortPrimary" delegate-handle="sortPrimary">
-                <a class="icon ion-arrow-right" ng-click="sortSelect($index);" ng-class="{active:sortPrimarySelected == $index}" ng-repeat="item in sortPrimary">一级分类({{$index + 1}})</a>
+                <a class="icon ion-arrow-right" ng-click="sortSelect($index);" ng-class="{active:sortPrimarySelected == $index}" ng-repeat="item in sortPrimary track by $index">{{item.Name}}</a>
             </ion-scroll>
             <ion-scroll class="sort-lvl-2" ng-if="sortPrimary" delegate-handle="sortSecondary">
-                <a ng-click="sortSelect(item);" ng-repeat="item in sortSecondary track by $index">二级分类({{item}})</a>
+                <a ng-click="sortSelect(item.Id);" ng-repeat="item in sortSecondary track by $index">{{item.Name}}</a>
             </ion-scroll>
-            <div ng-class="{active:showSort}" ng-click="filtersCtrl('sort');" class="sort-backdrop"></div>
         </div>
+
+        <div class="sort-brand" ng-if="showBrand">
+            <p ng-if="!brandList && !loadFail" class="sort-loading">加载中...</p>
+            <button ng-if="loadFail" class="button button-positive button-block" ng-click="getBrandList();">重新加载</button>
+            <a ng-click="brandSelect(item.Id);" ng-repeat="item in brandList track by $index">{{item.Name}}</a>
+        </div>
+
+        <div ng-class="{active:showSort || showBrand}" ng-click="filtersCtrl('backdrop');" class="filter-backdrop"></div>
 
         <no-results ng-if="noResults" data-text="抱歉，查询无结果" data-glass="true"></no-results>
 
         <ion-scroll ng-if="!noResults" class="list-box" delegate-handle="listScroll">
 
             <div class="goods-list" ng-if="isSingle">
-                <a class="goods-item" ng-click="toGoodsDetail(1234);" ng-repeat="item in goodsList track by $index">
+                <a class="goods-item" ng-click="toDetail(1234);" ng-repeat="item in goodsList track by $index">
                     <div class="img">
                         <img ng-src=""></div>
                     <div ng-if="!isHeart" class="detail">
@@ -96,7 +105,7 @@
                 </a>
             </div>
 
-            <ion-infinite-scroll ng-show="noNetwork == false" class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
+            <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
 
         </ion-scroll>
 

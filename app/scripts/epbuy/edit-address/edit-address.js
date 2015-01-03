@@ -1,64 +1,81 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('EditAddressCtrl', function ($rootScope, $scope, $state, $location, $ionicPopup, $stateParams, $window, Util, DataCachePool, AREA) {
+    .controller('EditAddressCtrl', function ($scope, $state, $location, $timeout, $ionicPopup, $stateParams, $window, Util, DataCachePool) {
 
-        $scope.addressId = parseInt($stateParams.AddressId, 0);
+        $scope.addressId = $stateParams.AddressId;
         $scope.inputVal = {}; //初始化所有输入选择model
         $scope.inputVal.addressType = $state.is('epbuy.p-address') ? 1 : 0;
 
-        $scope.getArea = function (province, city, district) {
+        $scope.getArea = function (areaId, level) {
+
+            $scope.inputVal.addressType = parseInt($scope.inputVal.addressType, 0);
 
             if ($scope.inputVal.addressType) {
 
-                Util.ajaxRequest({
-                    url: '$server/Address/GetSubAreaList',
-                    success: function (data) {
-                        $scope.province = data.AreaList;
-                    }
-                });
+                if (level) {
+                    Util.ajaxRequest({
+                        url: '$server/Address/GetSubAreaList',
+                        data: {
+                            Auth: DataCachePool.pull('USERAUTH'),
+                            Id: areaId
+                        },
+                        success: function (data) {
+                            if (level === 1) {
 
-                if (!province && !city && !district) {
-                    $scope.area = new AREA.GetArea();
-                } else if (!city && !district) {
-                    $scope.inputVal.city = null;
-                    $scope.inputVal.district = null;
-                    $scope.area.getCity(province);
-                } else if (!district) {
-                    $scope.inputVal.district = null;
-                    $scope.area.getDistrict(city);
+                                $scope.province = data.AreaList;
+
+                            } else if (level === 2) {
+
+                                $scope.inputVal.cityId = '';
+                                $scope.village = false;
+                                if (areaId) {
+                                    $scope.city = data.AreaList;
+                                } else {
+                                    $scope.city = false;
+                                }
+
+                            } else if (level === 3) {
+
+                                $scope.inputVal.villageId = '';
+                                if (areaId) {
+                                    $scope.village = data.AreaList;
+                                } else {
+                                    $scope.village = false;
+                                }
+
+                            }
+
+                            $scope.selectedAreaId = areaId;
+                        }
+                    });
+
+                } else {
+                    $scope.selectedAreaId = areaId;
                 }
 
+            } else {
+                $scope.inputVal.provinceId = '';
+                $scope.inputVal.cityId = '';
+                $scope.inputVal.villageId = '';
             }
-
         };
 
         if ($scope.addressId) {
 
             Util.ajaxRequest({
-                url: '$local/GetHomeRestaurantBannerInfo.json',
+                url: '$server/Address/GetAddressByAddressID',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
-                    Id: 0,
-                    Province: '',
-                    City: '',
-                    Village: '',
-                    AreaId: '',
-                    Address: '',
-                    Zipcode: '',
-                    EmailAddress: '',
-                    PhoneNumber: '',
-                    IsDefault: '',
-                    Remark: ''
+                    AddressId: $scope.addressId
                 },
                 success: function (data) {
+
+                    $scope.getArea('', 1);
+
                     if ($scope.inputVal.addressType) {
                         $scope.editAddressTitle = '个人';
                         $scope.inputVal.addressType = 1;
-                        $scope.inputVal.province = '北京市';
-                        $scope.inputVal.city = '市辖区';
-                        $scope.inputVal.district = '市辖区';
-                        $scope.area = new AREA.GetArea($scope.inputVal.province, $scope.inputVal.city, $scope.inputVal.district);
                     } else {
                         $scope.editAddressTitle = '企业';
                     }
@@ -74,21 +91,10 @@ angular.module('EPBUY')
                     if (res) {
 
                         Util.ajaxRequest({
-                            method: 'POST',
-                            url: '$server/Account/AddressDelete',
+                            url: '$server/Address/AddressDelete',
                             data: {
                                 Auth: DataCachePool.pull('USERAUTH'),
-                                Id: 0,
-                                Province: '',
-                                City: '',
-                                Village: '',
-                                AreaId: '',
-                                Address: '',
-                                Zipcode: '',
-                                EmailAddress: '',
-                                PhoneNumber: '',
-                                IsDefault: '',
-                                Remark: ''
+                                AddressId: $scope.addressId
                             },
                             success: function (data) {
                                 if (data.state === 200) {
@@ -105,7 +111,10 @@ angular.module('EPBUY')
             };
 
         } else {
-            $scope.getArea();
+            $scope.getArea('', 1);
+            $scope.inputVal.provinceId = '';
+            $scope.inputVal.cityId = '';
+            $scope.inputVal.villageId = '';
         }
 
         $scope.saveAddress = function () {
@@ -125,17 +134,18 @@ angular.module('EPBUY')
             }
 
             if ($scope.inputVal.addressType) {
-                if (!$scope.inputVal.province) {
+
+                if (!$scope.inputVal.provinceId) {
                     Util.msgToast('请选择所在省');
                     return;
                 }
 
-                if (!$scope.inputVal.city || $scope.inputVal.city === '选择市') {
+                if (!$scope.inputVal.cityId) {
                     Util.msgToast('请选择所在市');
                     return;
                 }
 
-                if (!$scope.inputVal.district) {
+                if ($scope.village.length > 0 && !$scope.inputVal.villageId) {
                     Util.msgToast('请选择所在区');
                     return;
                 }
@@ -148,18 +158,19 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 method: 'POST',
-                url: '$server/Account/Address' + ($scope.addressId ? 'Update' : 'Add'),
+                url: '$server/Address/Address' + ($scope.addressId ? 'Update' : 'Add'),
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
-                    Id: 0,
-                    Province: '',
-                    City: '',
-                    Village: '',
-                    AreaId: '',
-                    Address: '',
-                    Zipcode: '',
+                    Id: $scope.addressId || '',
+                    Name: $scope.inputVal.consignee,
+                    Province: $scope.inputVal.provinceId,
+                    City: $scope.inputVal.cityId,
+                    Village: $scope.inputVal.villageId,
+                    AreaId: $scope.selectedAreaId,
+                    Address: $scope.inputVal.detailedAddress,
+                    Zipcode: $scope.inputVal.zipCode,
                     EmailAddress: '',
-                    PhoneNumber: '',
+                    PhoneNumber: $scope.inputVal.phoneNumber,
                     IsDefault: '',
                     Remark: ''
                 },
