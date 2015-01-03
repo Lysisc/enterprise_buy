@@ -55,6 +55,8 @@ angular.module('EPBUY')
                                 type: 'button-positive'
                             }]
                         });
+                    } else {
+                        Util.backDrop.release();
                     }
                 } else {
                     $scope.hasActivity = false;
