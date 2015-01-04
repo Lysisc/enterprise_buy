@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('WantMoreCtrl', function ($scope, $window, $ionicPopup, Util) {
+    .controller('WantMoreCtrl', function ($scope, $window, $ionicPopup, Util, DataCachePool) {
 
         $scope.checkRemark = function (e, wantText) { // 备注要求
             var el = angular.element(e.target),
@@ -34,9 +34,11 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 isPopup: true,
-                url: '$local/GetHomeRestaurantBannerInfo.json',
+                url: '$server/Wish/WantMoreAdd',
                 data: {
-                    enterpriseCode: 'abs' // todo...
+                    Auth: DataCachePool.pull('USERAUTH'),
+                    // Remark: '',
+                    WantMessage: $scope.wantText
                 },
                 success: function (data) {
                     $ionicPopup.alert({

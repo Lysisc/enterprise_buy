@@ -23,6 +23,31 @@ angular.module('EPBUY')
                 $state.go('epbuy.want-more');
             };
 
+            $scope.wantToHeart = function (index, itemId) {
+                if ($scope.goodsList[index].HasVote) {
+                    return;
+                }
+
+                Util.ajaxRequest({
+                    url: '$server/Wish/ProductVote',
+                    data: {
+                        Auth: DataCachePool.pull('USERAUTH'),
+                        ProductId: itemId,
+                    },
+                    success: function (data) {
+                        if (data.state === 200) {
+                            $scope.goodsList[index].HasVote = true;
+                            $scope.goodsList[index].VoteCount++;
+                        } else {
+                            Util.msgToast(data.msg);
+                        }
+                    },
+                    error: function () {
+                        Util.msgToast('投票失败，请查看网络');
+                    }
+                });
+            };
+
         } else {
             $scope.bottomBarCur = 'home';
             $scope.searchType = 'detail'; //列表页搜索接口类型定义
@@ -31,7 +56,7 @@ angular.module('EPBUY')
         $scope.getCategoryList = function () {
             Util.ajaxRequest({ // 分类接口。参数传来Auth, 返回一级产品分类 和二级产品分类列表
                 noMask: true,
-                url: '$server/InternalPurchase/GetProductCategoryList' + ($scope.isHeart ? '' : ''),
+                url: '$server/InternalPurchase/GetProductCategoryList',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH')
                 },
@@ -51,12 +76,13 @@ angular.module('EPBUY')
         $scope.getBrandList = function () {
             Util.ajaxRequest({ // 品牌接口，参数传来Auth, 返回品牌列表
                 noMask: true,
-                url: '$server/InternalPurchase/GetProductBrandList' + ($scope.isHeart ? '' : ''),
+                url: '$server/InternalPurchase/GetProductBrandList',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH')
                 },
                 success: function (data) {
                     if (data.List.length > 0) {
+                        $scope.brandSelected = 'clear';
                         $scope.brandList = data.List;
                     }
                 },
@@ -65,9 +91,6 @@ angular.module('EPBUY')
                 }
             });
         };
-
-        $scope.getCategoryList();
-        $scope.getBrandList();
 
         $scope.filtersCtrl = function (type) {
             switch (type) {
@@ -116,21 +139,28 @@ angular.module('EPBUY')
             }
         };
 
-        $scope.brandSelect = function (brandId) {
-            $scope.brandId = brandId;
+        $scope.brandSelect = function (brandId, index) {
+            if (brandId === 'clear') {
+                $scope.brandSelected = 'clear';
+                $scope.brandId = '';
+            } else {
+                $scope.brandSelected = index;
+                $scope.brandId = brandId;
+            }
+
             renderData(true);
         };
 
-        function dateSubtract(startDate, endDate) { // 活动时间处理
+        function dateSubtract(endDate) { // 活动时间处理
 
-            var sDate = new Date(Date.parse(startDate.replace(/-/g, '/'))),
+            var sDate = Date.now(),
                 eDate = new Date(Date.parse(endDate.replace(/-/g, '/'))),
                 rest = '';
 
-            if (sDate.getTime() > eDate.getTime()) {
+            if (sDate > eDate.getTime()) {
                 console.log('数据错误，开始日期不能大于结束日期！');
             } else {
-                var diff = eDate.getTime() - sDate.getTime(),
+                var diff = eDate.getTime() - sDate,
                     days = Math.floor(diff / (1000 * 60 * 60 * 24));
 
                 diff = diff - days * (1000 * 60 * 60 * 24);
@@ -162,7 +192,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 noMask: !sort,
-                url: '$server/InternalPurchase/GetActivityProductList' + ($scope.isHeart ? '' : ''),
+                url: '$server/' + ($scope.isHeart ? 'Wish/GetWantMoreProductList' : 'InternalPurchase/GetActivityProductList'),
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
                     PageNo: $scope.pageIndex,
@@ -177,12 +207,13 @@ angular.module('EPBUY')
                     $scope.noNetwork = false;
                     $scope.noResults = false;
 
+                    if (data.Activity) {
+                        $scope.startTime = data.Activity.StartTime.replace('T00:00:00Z', '');
+                        $scope.endTime = data.Activity.OverTime.replace('T00:00:00Z', '');
+                        $scope.restTime = dateSubtract($scope.endTime);
+                    }
+
                     if (data.List && data.List.length > 0) {
-
-                        $scope.startTime = '2014-12-20 12:43:16'.substr(5, 5);
-                        $scope.endTime = '2014-12-22 12:43:16'.substr(5, 5);
-                        $scope.restTime = dateSubtract('2014-12-20 12:53:16', '2014-12-22 12:43:16');
-
                         $scope.goodsList = sort ? [] : ($scope.goodsList || []);
                         $scope.goodsList = $scope.goodsList.concat(data.List); //拼接数据
 
@@ -193,7 +224,6 @@ angular.module('EPBUY')
                             $scope.pageIndex++;
                             $scope.loadMoreAble = true;
                         }
-
                     } else {
                         $scope.noResults = true;
                     }
@@ -217,6 +247,8 @@ angular.module('EPBUY')
         }
 
         renderData(true); //首屏加载
+        $scope.getCategoryList();
+        $scope.getBrandList();
 
         $scope.loadMore = function () { //翻页加载
             renderData(false);
@@ -227,26 +259,6 @@ angular.module('EPBUY')
             $state.go('epbuy.' + router, {
                 GoodsId: goodsId
             });
-        };
-
-        $scope.wantToHeart = function (index, item) {
-            if ($scope.goodsList[index].hasHeart) {
-                return;
-            }
-
-            Util.ajaxRequest({
-                url: 'GetHomeRestaurantBannerInfo',
-                data: {
-                    enterpriseCode: item.commentPrize // todo...
-                },
-                success: function (data) {
-
-                    $scope.goodsList[index].hasHeart = true; // todo...
-                    $scope.goodsList[index].commentPrize++;
-
-                }
-            });
-
         };
 
     });

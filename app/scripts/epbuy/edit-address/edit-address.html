@@ -42,7 +42,7 @@
                 <p ng-if="!city" class="disabled">选择市</p>
                 <div class="select-ctrl ion-ios-arrow-down">
                     <select ng-model="inputVal.cityId" ng-if="city" ng-change="getArea(inputVal.cityId, 3);">
-                        <option value="">选择市</option>
+                        <option value="" selected>选择市</option>
                         <option value="{{item.Id}}" ng-repeat="item in city track by $index">{{item.Name}}</option>
                     </select>
                 </div>
@@ -51,7 +51,7 @@
                 <span>所在区</span>
                 <div class="select-ctrl ion-ios-arrow-down">
                     <select ng-model="inputVal.villageId" ng-change="getArea(inputVal.villageId);">
-                        <option value="">选择区</option>
+                        <option value="" selected>选择区</option>
                         <option value="{{item.Id}}" ng-repeat="item in village track by $index">{{item.Name}}</option>
                     </select>
                 </div>

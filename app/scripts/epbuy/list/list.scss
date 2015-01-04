@@ -18,7 +18,7 @@
         color: #999;
         .ion-time-alarm {
             font-size: 18px;
-            margin: 0 5px 0 8px;
+            margin: 0 3px 0 8px;
             vertical-align: middle;
         }
         .ion-time-alarm:before {
@@ -184,8 +184,11 @@
             line-height: 28px;
             padding: 0 10px;
             margin-bottom: 10px;
-            background-color: #4a87ee;
+            background-color: #ccc;
             color: #fff;
+            &.active, &.activated {
+                background-color: #4a87ee;
+            }
         }
     }
     .filter-backdrop {
@@ -203,9 +206,6 @@
             z-index: 1;
         }
     }
-    .is-heart .sort-nav {
-        top: 112px;
-    }
     .list-box .scroll {
         margin-top: 1px;
         padding-bottom: 110px;
@@ -213,8 +213,13 @@
             padding-top: 4px;
         }
     }
-    .is-heart .list-box .scroll {
-        padding-bottom: 220px;
+    .is-heart {
+        .sort-nav, .sort-brand {
+            top: 112px;
+        }
+        .list-box .scroll {
+            padding-bottom: 235px;
+        }
     }
     .no-more-results {
         color: #666;
@@ -267,6 +272,7 @@
         .img {
             width: 90px;
             height: 90px;
+            position: relative;
             overflow: hidden;
             @include border-line;
             border-width: 1px;
@@ -277,6 +283,15 @@
             margin-right: 10px;
             img {
                 width: 100%;
+            }
+            i {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #ef7430;
+                color: #fff;
+                font-size: 12px;
+                padding: 3px;
             }
         }
         .detail {
@@ -396,6 +411,15 @@
             background-size: 150px 150px;
             img {
                 width: 100%;
+            }
+            i {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: #ef7430;
+                color: #fff;
+                font-size: 12px;
+                padding: 3px;
             }
             .mask {
                 position: absolute;

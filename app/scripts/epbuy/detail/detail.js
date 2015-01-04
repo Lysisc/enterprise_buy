@@ -1,63 +1,69 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('DetailCtrl', function ($scope, $state, $stateParams, $timeout, $ionicScrollDelegate, Util) {
+    .controller('DetailCtrl', function ($scope, $state, $stateParams, $ionicScrollDelegate, Util, DataCachePool) {
 
         $scope.isWant = $state.is('epbuy.want');
+        $scope.tabIndex = 0;
 
         if ($scope.isWant) { //底部bar高亮判断
             $scope.bottomBarCur = 'heart';
+
+            $scope.wantToHeart = function (goodsId) {
+                if ($scope.product.HasVote) {
+                    return;
+                }
+
+                Util.ajaxRequest({
+                    url: '$server/Wish/ProductVote',
+                    data: {
+                        Auth: DataCachePool.pull('USERAUTH'),
+                        ProductId: goodsId,
+                    },
+                    success: function (data) {
+                        if (data.state === 200) {
+                            $scope.product.HasVote = true;
+                            $scope.product.VoteCount++;
+                        } else {
+                            Util.msgToast(data.msg);
+                        }
+                    },
+                    error: function () {
+                        Util.msgToast('投票失败，请查看网络');
+                    }
+                });
+            };
+
         } else {
             $scope.bottomBarCur = 'home';
-        }
 
-        function spanSlide(index) {
-            $scope.tabIndex = index;
-            $scope.tabSlide = {
-                'left': $scope.tabIndex ? ($scope.tabIndex * 50 + '%') : '0'
+            $scope.addToCart = function () {
+                //todo...加入购物车
             };
         }
 
         Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json',
+            url: '$server/InternalPurchase/GetProductDetail',
             data: {
-                enterpriseCode: $stateParams.GoodsId // todo...
+                Auth: DataCachePool.pull('USERAUTH'),
+                productType: $scope.isWant ? 2 : 1,
+                productID: $stateParams.GoodsId
             },
             success: function (data) {
-
-                $scope.titleName = '我是商品名称';
-                $scope.tabIndex = 1;
-                spanSlide($scope.tabIndex);
-                $scope.goodsPictureList = data.commentList; //取数据 todo...
+                if (data.product) {
+                    $scope.product = data.product;
+                } else {
+                    Util.msgToast(data.msg);
+                }
             }
         });
 
         $scope.switchTab = function (index) {
-            spanSlide(index);
+            $scope.tabIndex = index;
+            $scope.tabSlide = {
+                'left': $scope.tabIndex ? ($scope.tabIndex * 50 + '%') : '0'
+            };
             $ionicScrollDelegate.$getByHandle('contentHandle').scrollBottom();
-        };
-
-        $scope.addToCart = function () {
-            //todo...加入购物车
-        };
-
-        $scope.wantToHeart = function (goodsId) {
-            if ($scope.hasHeart) {
-                return;
-            }
-
-            Util.ajaxRequest({
-                url: '$local/GetHomeRestaurantBannerInfo.json',
-                data: {
-                    enterpriseCode: goodsId // todo...
-                },
-                success: function (data) {
-
-                    $scope.hasHeart = true; // todo...
-
-                }
-            });
-
         };
 
     });

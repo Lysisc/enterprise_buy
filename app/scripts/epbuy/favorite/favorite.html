@@ -6,7 +6,7 @@
 
         <no-results ng-if="noResults" data-text="您还没有收藏过任何东东"></no-results>
 
-        <ion-scroll class="goods-list">
+        <ion-scroll ng-if="goodsList" class="goods-list">
 
             <a class="goods-item" ng-if="!item.removed" ng-click="toDetail(item.Id);" ng-class="{'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in goodsList track by $index">
                 <label class="checkbox">
@@ -16,7 +16,7 @@
                 <h4>{{item.Title}}</h4>
             </a>
 
-            <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
+            <!-- <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll> -->
 
         </ion-scroll>
 

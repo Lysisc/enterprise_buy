@@ -1,9 +1,9 @@
-<ion-view title="{{titleName ? titleName : '商品详情'}}" class="ep-detail">
+<ion-view title="商品详情" class="ep-detail">
 
     <ion-content delegate-handle="contentHandle">
 
         <!-- 商品幻灯区 -->
-        <div class="goods-slide"> <i class="special-offer">特价</i>
+        <div class="goods-slide" ng-if="goodsPictureList"> <i ng-if="product.Bargains" class="special-offer">特价</i>
             <ion-slide-box class="slide-box" does-continue="true" ng-if="goodsPictureList" ng-class="{special:specialList}">
                 <ion-slide ng-repeat="(key, value) in goodsPictureList">
                     <div class="slide-page">
@@ -14,22 +14,22 @@
 
         <div class="goods-detail">
             <div class="goods-name" style="display:-webkit-box;">
-                <p ng-class="{'is-detail':!isWant}">我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称</p>
-                <a ng-if="!isWant" collection-ctrl ng-class="{hasCollection:isCollect}" data-id="1234" data-title="我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称" data-img="images/default_goods.jpg" class="collection-btn"> <i class="icon ion-star"></i>
+                <p ng-class="{'is-detail':!isWant}">{{product.Name}}</p>
+                <a ng-if="!isWant && product.ProductID" collection-ctrl ng-class="{hasCollection:isCollect}" data-id="{{product.ProductID}}" data-title="{{product.Name}}" data-img="{{product.Picture}}" class="collection-btn"> <i class="icon ion-star"></i>
                     <br>
                     <span>{{isCollect ? '已收藏' : '收藏'}}</span>
                 </a>
             </div>
             <p class="price">
-                <span class="p-discount">5.5折</span>
+                <span class="p-discount">{{product.Discount}}折</span>
                 内购价：
-                <span class="p-red">&yen;130</span>
+                <span class="p-red">&yen;{{product.InnerPrice}}</span>
                 市场价：
-                <s class="p-gray">&yen;260</s>
+                <s class="p-gray">&yen;{{product.MarketPrice}}</s>
             </p>
             <p ng-if="!isWant" class="integral">
                 积分：
-                <span class="p-red">13</span>
+                <span class="p-red">{{product.Integral}}</span>
             </p>
         </div>
 
@@ -37,15 +37,15 @@
             <ul>
                 <li>
                     <span>保质期：</span>
-                    2014.10.30-2014.12.30
+                    {{product.ShelfLife}}
                 </li>
                 <li>
                     <span>库存量：</span>
-                    1000件
+                    {{product.Inventory}}件
                 </li>
                 <li>
                     <span>限购数：</span>
-                    5件
+                    {{product.NumPurchasing}}件
                 </li>
             </ul>
             <div class="select-bar ion-ios-arrow-down">
@@ -64,10 +64,8 @@
                 <a ng-class="{current: tabIndex == 1}" ng-click="switchTab(1)">其他备注</a>
                 <span ng-style="tabSlide"></span>
             </div>
-            <p ng-if="tabIndex == 0" class="switch-conts">
-                文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍文字介绍
-            </p>
-            <p ng-if="tabIndex == 1" class="switch-conts">备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明</p>
+            <p ng-if="tabIndex == 0" class="switch-conts">{{product.Description || '暂无商品描述'}}</p>
+            <p ng-if="tabIndex == 1" class="switch-conts">{{product.Remark || '暂无备注'}}</p>
         </div>
 
     </ion-content>
@@ -76,9 +74,9 @@
         <a class="share-btn">
             <i class="icon ion-share"></i>
         </a>
-        <p ng-if="isWant" class="want-to icon" ng-class="{'ion-bar-heart':!hasHeart,'ion-ios-heart':hasHeart}">
-            <span ng-click="wantToHeart(1234);">{{hasHeart ? '已投票':'我想要'}}</span>
-            {{1234}}
+        <p ng-if="isWant" class="want-to icon" ng-class="{'ion-bar-heart':!product.HasVote,'ion-ios-heart':product.HasVote}">
+            <span ng-click="wantToHeart(1234);">{{product.HasVote ? '已投票':'我想要'}}</span>
+            {{product.VoteCount}}
         </p>
         <a ng-if="!isWant" ng-click="addToCart();" ng-class="{disabled:hasAdded}" class="add-to-cart">{{hasAdded ? '已加入购物车' : '加入购物车'}}</a>
     </div>

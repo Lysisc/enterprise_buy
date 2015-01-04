@@ -11,8 +11,8 @@
 
         <no-network></no-network>
 
-        <div ng-if="noNetwork == false && !isHeart" class="activity-date"> <i class="icon ion-time-alarm"></i>
-            活动日期：{{startTime}}至{{endTime}}，距离结束还有：{{restTime}}
+        <div ng-if="noNetwork == false && !isHeart && restTime" class="activity-date"> <i class="icon ion-time-alarm"></i>
+            活动日期：{{startTime.substr(5, 5)}}至{{endTime.substr(5, 5)}}，距离结束还有：{{restTime}}
         </div>
 
         <div ng-if="noNetwork == false" class="filters">
@@ -47,7 +47,8 @@
         <div class="sort-brand" ng-if="showBrand">
             <p ng-if="!brandList && !loadFail" class="sort-loading">加载中...</p>
             <button ng-if="loadFail" class="button button-positive button-block" ng-click="getBrandList();">重新加载</button>
-            <a ng-click="brandSelect(item.Id);" ng-repeat="item in brandList track by $index">{{item.Name}}</a>
+            <a ng-click="brandSelect('clear');" ng-class="{active:brandSelected == 'clear'}">全部品牌</a>
+            <a ng-click="brandSelect(item.Id, $index);" ng-class="{active:brandSelected == $index}" ng-repeat="item in brandList track by $index">{{item.Name}}</a>
         </div>
 
         <div ng-class="{active:showSort || showBrand}" ng-click="filtersCtrl('backdrop');" class="filter-backdrop"></div>
@@ -57,32 +58,34 @@
         <ion-scroll ng-if="!noResults" class="list-box" delegate-handle="listScroll">
 
             <div class="goods-list" ng-if="isSingle">
-                <a class="goods-item" ng-click="toDetail(1234);" ng-repeat="item in goodsList track by $index">
+                <a class="goods-item" ng-click="toDetail(isHeart ? item.Id : item.InnerProductId);" ng-repeat="item in goodsList track by $index">
                     <div class="img">
-                        <img ng-src=""></div>
+                        <img ng-src="{{item.Picture}}">
+                        <i ng-if="item.Bargains">特价</i>
+                    </div>
                     <div ng-if="!isHeart" class="detail">
-                        <h3>我是产品名称我是产品名称我是产品名称</h3>
-                        <p class="text">尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等</p>
+                        <h3>{{item.Name}}</h3>
+                        <p class="text">{{item.CategoryName}}</p>
                         <p class="p-gray">
                             市场价
-                            <s>&yen;260</s>
+                            <s>&yen;{{item.MarketPrice}}</s>
                         </p>
                         <p class="p-red">
                             内购价
-                            <span>&yen;148</span>
+                            <span>&yen;{{item.InnerPrice}}</span>
                         </p>
                     </div>
 
                     <div ng-if="isHeart" class="detail">
-                        <h3>我是产品名称我是产品名称我是产品名称</h3>
+                        <h3>{{item.Name}}</h3>
                         <p class="p-heart">
-                            <span class="p-red">&yen;148</span>
-                            <s>&yen;260</s>
-                            <span class="p-discount">5.5折</span>
+                            <span class="p-red">&yen;{{item.InnerPrice}}</span>
+                            <s>&yen;{{item.MarketPrice}}</s>
+                            <span ng-if="item.Discount" class="p-discount">{{item.Discount}}折</span>
                         </p>
-                        <p ng-init="item.hasHeart = false" class="want-to icon" ng-class="{'ion-bar-heart':!item.hasHeart,'ion-ios-heart':item.hasHeart}">
-                            <span ng-click="wantToHeart($index,item.commentPrize);$event.stopPropagation();">{{item.hasHeart ? '已投票':'我想要'}}</span>
-                            {{item.commentPrize}}
+                        <p class="want-to icon" ng-class="{'ion-bar-heart':!item.HasVote,'ion-ios-heart':item.HasVote}">
+                            <span ng-click="wantToHeart($index,item.Id);$event.stopPropagation();">{{item.HasVote ? '已投票':'我想要'}}</span>
+                            {{item.VoteCount}}
                         </p>
                     </div>
 
@@ -90,17 +93,16 @@
             </div>
 
             <div class="goods-list-double" ng-if="!isHeart && !isSingle">
-                <a class="goods-item" ng-click="toGoodsDetail(1234);" ng-repeat="item in goodsList track by $index">
+                <a class="goods-item" ng-click="toDetail(isHeart ? item.Id : item.InnerProductId);" ng-repeat="item in goodsList track by $index">
                     <div class="img">
-                        <img ng-src="">
-                        <div class="mask" style="display:-webkit-box;">
-                            水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)水之密语 凝润水护套装（洗发水600ml+护发素600ml+亲水沐)
-                        </div>
+                        <img ng-src="{{item.Picture}}">
+                        <i ng-if="item.Bargains">特价</i>
+                        <div class="mask" style="display:-webkit-box;">{{item.CategoryName}}</div>
                     </div>
                     <div class="price">
-                        <span class="p-discount">5.5折</span>
-                        <span class="p-red">&yen;148</span>
-                        <s class="p-gray">&yen;260</s>
+                        <span ng-if="item.Discount" class="p-discount">{{item.Discount}}折</span>
+                        <span class="p-red">&yen;{{item.InnerPrice}}</span>
+                        <s class="p-gray">&yen;{{item.MarketPrice}}</s>
                     </div>
                 </a>
             </div>

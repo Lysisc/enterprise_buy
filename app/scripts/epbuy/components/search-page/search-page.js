@@ -3,7 +3,7 @@
 angular.module('EPBUY')
 
 // 搜索页
-.directive('searchPage', function ($timeout, $state, $ionicScrollDelegate, Util) {
+.directive('searchPage', function ($timeout, $state, $ionicScrollDelegate, Util, DataCachePool) {
     return {
         restrict: 'E',
         templateUrl: 'scripts/epbuy/components/search-page/search-page.html',
@@ -44,10 +44,10 @@ angular.module('EPBUY')
 
             switch ($scope.searchType) {
             case 'detail':
-                searchAjaxUrl = '$local/GetHomeRestaurantBannerInfo.json';
+                searchAjaxUrl = '$server/InternalPurchase/GetActivityProductList';
                 break;
             case 'want':
-                searchAjaxUrl = '$local/GetHomeRestaurantBannerInfo.json';
+                searchAjaxUrl = '$server/Wish/GetWantMoreProductList';
                 break;
             }
 
@@ -69,11 +69,14 @@ angular.module('EPBUY')
                             noMask: true,
                             url: searchAjaxUrl,
                             data: {
-                                enterpriseCode: $scope.enterpriseCode // todo...
+                                Auth: DataCachePool.pull('USERAUTH'),
+                                Keyworks: $scope.searchObj.searchVal,
+                                PageNo: 1,
+                                PageSize: 30
                             },
                             success: function (data) {
-                                if (data.commentList1 && data.commentList.length > 0) {
-                                    $scope.searchResultList = data.commentList; //取数据 todo...
+                                if (data.List && data.List.length > 0) {
+                                    $scope.searchResultList = data.List;
                                 } else {
                                     $scope.searchResultList = false;
                                 }

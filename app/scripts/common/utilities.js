@@ -134,6 +134,7 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         isPopup: 请求结果是否有popup
      }
      */
+    var loginPopupTimer = null;
     var ajaxRequest = function (param) {
         var method = param && param.method || 'GET',
             url = param && param.url || '',
@@ -169,21 +170,24 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
             timeout: 15000,
         }).success(function (data) {
             console.log(data);
-
+            
             if (data && data.state === -200) { //判断登录
                 $ionicLoading.hide();
-                $ionicPopup.alert({
-                    template: '请重新登录',
-                    buttons: [{
-                        text: '知道了',
-                        type: 'button-positive',
-                        onTap: function () {
-                            $state.go('epbuy.login', {
-                                OtherPage: 1
-                            });
-                        }
-                    }]
-                });
+                $timeout.cancel(loginPopupTimer);
+                loginPopupTimer = $timeout(function () {
+                    $ionicPopup.alert({
+                        template: '请重新登录',
+                        buttons: [{
+                            text: '知道了',
+                            type: 'button-positive',
+                            onTap: function () {
+                                $state.go('epbuy.login', {
+                                    OtherPage: 1
+                                });
+                            }
+                        }]
+                    });
+                }, 100);
                 return;
             }
 

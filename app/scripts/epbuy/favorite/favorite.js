@@ -6,44 +6,44 @@ angular.module('EPBUY')
         $scope.pageIndex = 1;
         $scope.goodsList = [];
 
-        $scope.loadMore = function () { //翻页加载
-            $scope.goodsList = DataCachePool.pull('COLLECTION_GOODS') || [];
-            if ($scope.goodsList.length === 0) {
-                $scope.noResults = true;
-            }
+        $scope.goodsList = DataCachePool.pull('COLLECTION_GOODS') || [];
+        if ($scope.goodsList.length === 0) {
+            $scope.noResults = true;
+        }
 
-            // Util.ajaxRequest({
-            //     noMask: true,
-            //     url: '$local/GetHomeRestaurantBannerInfo.json',
-            //     data: {
-            //         enterpriseCode: 'abs' // todo...
-            //     },
-            //     success: function (data) {
+        // $scope.loadMore = function () { //翻页加载
+        //     Util.ajaxRequest({
+        //         noMask: true,
+        //         url: '$local/GetHomeRestaurantBannerInfo.json',
+        //         data: {
+        //             enterpriseCode: 'abs' // todo...
+        //         },
+        //         success: function (data) {
 
-            //         $scope.noNetwork = false;
+        //             $scope.noNetwork = false;
 
-            //         if (data.commentList && data.commentList.length > 0) {
+        //             if (data.commentList && data.commentList.length > 0) {
 
-            //             $scope.goodsList = $scope.goodsList.concat(data.commentList); //拼接数据
-            //             $scope.pageIndex++;
-                        
-            //             $timeout(function () {
-            //                 $scope.$broadcast('scroll.infiniteScrollComplete');
-            //             }, 300);
+        //                 $scope.goodsList = $scope.goodsList.concat(data.commentList); //拼接数据
+        //                 $scope.pageIndex++;
 
-            //         } else {
-            //             if ($scope.goodsList.length === 0) {
-            //                 $scope.noResults = true;
-            //             } else {
-            //                 $scope.noMordResults = true;
-            //             }
-            //         }
-            //     },
-            //     error: function (data) {
-            //         $scope.noNetwork = true;
-            //     }
-            // });
-        };
+        //                 $timeout(function () {
+        //                     $scope.$broadcast('scroll.infiniteScrollComplete');
+        //                 }, 300);
+
+        //             } else {
+        //                 if ($scope.goodsList.length === 0) {
+        //                     $scope.noResults = true;
+        //                 } else {
+        //                     $scope.noMordResults = true;
+        //                 }
+        //             }
+        //         },
+        //         error: function (data) {
+        //             $scope.noNetwork = true;
+        //         }
+        //     });
+        // };
 
         var hasChosenList = ''; // 多选待删除的数组
 
@@ -84,6 +84,7 @@ angular.module('EPBUY')
                 } else {
                     DataCachePool.remove('COLLECTION_GOODS');
                     $scope.noResults = true;
+                    $scope.goodsList = [];
                 }
 
                 for (var i = 0; i < deleteArr.length; i++) { //移除隐藏元素
