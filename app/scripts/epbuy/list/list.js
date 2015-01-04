@@ -175,6 +175,7 @@ angular.module('EPBUY')
                 success: function (data) {
 
                     $scope.noNetwork = false;
+                    $scope.noResults = false;
 
                     if (data.List && data.List.length > 0) {
 
@@ -182,28 +183,31 @@ angular.module('EPBUY')
                         $scope.endTime = '2014-12-22 12:43:16'.substr(5, 5);
                         $scope.restTime = dateSubtract('2014-12-20 12:53:16', '2014-12-22 12:43:16');
 
-                        $scope.pageIndex++;
                         $scope.goodsList = sort ? [] : ($scope.goodsList || []);
                         $scope.goodsList = $scope.goodsList.concat(data.List); //拼接数据
 
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-
-                        if (sort) { // 处理筛选&首屏加载
-
-                            switch (sort) {
-                            case 'price':
-                                $scope.priceUp = $scope.priceUp === 'asc' ? 'desc' : 'asc';
-                                break;
-                            case 'discount':
-                                $scope.discountUp = $scope.discountUp === 'asc' ? 'desc' : 'asc';
-                                break;
-                            }
-
-                            $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
+                        if ($scope.pageIndex * 10 >= data.Total) {
+                            $scope.loadMoreAble = false;
+                        } else {
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            $scope.pageIndex++;
+                            $scope.loadMoreAble = true;
                         }
 
                     } else {
                         $scope.noResults = true;
+                    }
+
+                    if (sort) { //处理筛选
+                        switch (sort) {
+                        case 'price':
+                            $scope.priceUp = $scope.priceUp === 'asc' ? 'desc' : 'asc';
+                            break;
+                        case 'discount':
+                            $scope.discountUp = $scope.discountUp === 'asc' ? 'desc' : 'asc';
+                            break;
+                        }
+                        $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
                     }
                 },
                 error: function (data) {
@@ -211,6 +215,8 @@ angular.module('EPBUY')
                 }
             });
         }
+
+        renderData(true); //首屏加载
 
         $scope.loadMore = function () { //翻页加载
             renderData(false);

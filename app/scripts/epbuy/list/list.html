@@ -105,7 +105,9 @@
                 </a>
             </div>
 
-            <ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
+            <div class="no-more-results" ng-class="{'for-double':!isSingle}" ng-if="!loadMoreAble">没有更多结果了</div>
+
+            <ion-infinite-scroll ng-if="loadMoreAble" class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
 
         </ion-scroll>
 

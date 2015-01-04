@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderListCtrl', function ($scope, $state, $timeout, $ionicLoading, $location, Util) {
+    .controller('OrderListCtrl', function ($scope, $state, $timeout, $ionicLoading, $location, Util, DataCachePool) {
 
         if ($location.search() && $location.search().type) {
             var type = $location.search().type;
@@ -30,17 +30,19 @@ angular.module('EPBUY')
         $scope.loadMore = function () { //翻页加载
             Util.ajaxRequest({
                 noMask: true,
-                url: '$local/GetHomeRestaurantBannerInfo.json',
+                url: '$server/InternalPurchase/GetActivityProductList' + ($scope.isHeart ? '' : ''),
                 data: {
-                    enterpriseCode: 'abs' // todo...
+                    Auth: DataCachePool.pull('USERAUTH'),
+                    PageNo: $scope.pageIndex,
+                    PageSize: 10
                 },
                 success: function (data) {
 
                     $scope.noNetwork = false;
 
-                    if (data.commentList && data.commentList.length > 0) {
+                    if (data.List && data.List.length > 0) {
 
-                        $scope.orderList = $scope.orderList.concat(data.commentList); //拼接数据
+                        $scope.orderList = $scope.orderList.concat(data.List); //拼接数据
                         $scope.pageIndex++;
 
                         $timeout(function () {

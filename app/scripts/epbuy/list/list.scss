@@ -200,12 +200,14 @@
         transition: 0.1s opacity linear;
         &.active {
             opacity: 1;
+            z-index: 1;
         }
     }
     .is-heart .sort-nav {
         top: 112px;
     }
     .list-box .scroll {
+        margin-top: 1px;
         padding-bottom: 110px;
         .goods-list-double {
             padding-top: 4px;
@@ -213,6 +215,14 @@
     }
     .is-heart .list-box .scroll {
         padding-bottom: 220px;
+    }
+    .no-more-results {
+        color: #666;
+        line-height: 42px;
+        text-align: center;
+        &.for-double {
+            padding-bottom: 15px;
+        }
     }
     .load-more-bar {
         margin-top: -11px;
@@ -242,12 +252,12 @@
 // 列表样式
 .goods-item {
     display: block;
-    background-color: #fff;
     text-decoration: none;
     overflow: hidden;
 }
 .goods-list {
     width: 100%;
+    background-color: #fff;
     .goods-item {
         width: 100%;
         @include border-line;
@@ -369,6 +379,7 @@
 .goods-list-double {
     width: 100%;
     overflow: hidden;
+    background-color: #fff;
     @include clear-float;
     .goods-item {
         float: left;
