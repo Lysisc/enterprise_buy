@@ -75,7 +75,7 @@
             <i class="icon ion-share"></i>
         </a>
         <p ng-if="isWant" class="want-to icon" ng-class="{'ion-bar-heart':!product.HasVote,'ion-ios-heart':product.HasVote}">
-            <span ng-click="wantToHeart(1234);">{{product.HasVote ? '已投票':'我想要'}}</span>
+            <span ng-click="wantToHeart(product.ProductID);">{{product.HasVote ? '已投票':'我想要'}}</span>
             {{product.VoteCount}}
         </p>
         <a ng-if="!isWant" ng-click="addToCart();" ng-class="{disabled:hasAdded}" class="add-to-cart">{{hasAdded ? '已加入购物车' : '加入购物车'}}</a>

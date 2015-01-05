@@ -225,9 +225,7 @@
         color: #666;
         line-height: 42px;
         text-align: center;
-        &.for-double {
-            padding-bottom: 15px;
-        }
+        padding-bottom: 15px;
     }
     .load-more-bar {
         margin-top: -11px;
@@ -403,7 +401,8 @@
         .img {
             position: relative;
             z-index: 1;
-            min-height: 150px;
+            height: 150px;
+            overflow: hidden;
             @include border-line;
             border-width: 1px;
             background-color: #f3f3f3;

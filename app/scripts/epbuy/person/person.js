@@ -15,6 +15,7 @@ angular.module('EPBUY')
 		});
 
 		$scope.phoneNumber = DataCachePool.pull('USERNAME');
+		$scope.favoriteList = DataCachePool.pull('COLLECTION_GOODS') || [];
 
 		$scope.toJump = function (type) {
 			switch (type) {

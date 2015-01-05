@@ -78,6 +78,7 @@ angular.module('EPBUY')
                         $scope.inputVal.phoneNumber = parseInt(data.address.PhoneNumber, 0);
                         $scope.inputVal.detailedAddress = data.address.Address;
                         $scope.inputVal.zipCode = parseInt(data.address.Zipcode, 0);
+                        $scope.inputVal.isDefault = data.address.IsDefault;
 
                         $scope.getArea('', 1, data.address.Province);
                         $scope.getArea(data.address.Province, 2, data.address.City);
@@ -178,7 +179,7 @@ angular.module('EPBUY')
                     Zipcode: $scope.inputVal.zipCode,
                     EmailAddress: '',
                     PhoneNumber: $scope.inputVal.phoneNumber,
-                    IsDefault: '',
+                    IsDefault: $scope.inputVal.isDefault,
                     Remark: ''
                 },
                 success: function (data) {
