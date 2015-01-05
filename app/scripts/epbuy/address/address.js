@@ -67,7 +67,10 @@ angular.module('EPBUY')
         $scope.addressEdit = function (isAdd) {
             var obj = {};
 
-            if ($scope.eList.length > 0 || $scope.pList.length > 0) {
+            if ($scope.tabIndex === undefined && isAdd === undefined) {
+                Util.msgToast('请选择一个地址');
+                return;
+            } else {
                 obj = $scope.tabIndex ? $scope.pList[$scope.choicedIndex] : $scope.eList[$scope.choicedIndex];
             }
 

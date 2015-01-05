@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('EditAddressCtrl', function ($scope, $state, $location, $timeout, $ionicPopup, $stateParams, $window, Util, DataCachePool) {
+    .controller('EditAddressCtrl', function ($scope, $state, $timeout, $ionicPopup, $stateParams, $window, Util, DataCachePool) {
 
         $scope.addressId = $stateParams.AddressId;
         $scope.inputVal = {}; //初始化所有输入选择model
         $scope.inputVal.addressType = $state.is('epbuy.p-address') ? 1 : 0;
 
-        $scope.getArea = function (areaId, level) {
+        $scope.getArea = function (areaId, level, selectId) {
 
             $scope.inputVal.addressType = parseInt($scope.inputVal.addressType, 0);
 
@@ -23,11 +23,12 @@ angular.module('EPBUY')
                         success: function (data) {
                             if (level === 1) {
 
+                                $scope.inputVal.provinceId = selectId || '';
                                 $scope.province = data.AreaList;
 
                             } else if (level === 2) {
 
-                                $scope.inputVal.cityId = '';
+                                $scope.inputVal.cityId = selectId || '';
                                 $scope.village = false;
                                 if (areaId) {
                                     $scope.city = data.AreaList;
@@ -37,7 +38,7 @@ angular.module('EPBUY')
 
                             } else if (level === 3) {
 
-                                $scope.inputVal.villageId = '';
+                                $scope.inputVal.villageId = selectId || '';
                                 if (areaId) {
                                     $scope.village = data.AreaList;
                                 } else {
@@ -70,14 +71,20 @@ angular.module('EPBUY')
                     AddressId: $scope.addressId
                 },
                 success: function (data) {
+                    if (data.address) {
+                        $scope.inputVal.addressType = 1; //todo...
 
-                    $scope.getArea('', 1);
+                        $scope.inputVal.consignee = data.address.Name;
+                        $scope.inputVal.phoneNumber = parseInt(data.address.PhoneNumber, 0);
+                        $scope.inputVal.detailedAddress = data.address.Address;
+                        $scope.inputVal.zipCode = parseInt(data.address.Zipcode, 0);
 
-                    if ($scope.inputVal.addressType) {
-                        $scope.editAddressTitle = '个人';
-                        $scope.inputVal.addressType = 1;
+                        $scope.getArea('', 1, data.address.Province);
+                        $scope.getArea(data.address.Province, 2, data.address.City);
+                        $scope.getArea(data.address.City, 3, data.address.Village);
+
                     } else {
-                        $scope.editAddressTitle = '企业';
+                        Util.msgToast(data.msg);
                     }
                 }
             });

@@ -1,4 +1,4 @@
-<ion-view title="{{addressId ? '修改' + editAddressTitle + '收货地址' : '新增收货地址'}}" class="ep-edit-address">
+<ion-view title="{{addressId ? '修改' + (inputVal.addressType ? '个人' : '企业') + '收货地址' : '新增收货地址'}}" class="ep-edit-address">
 
     <ion-content>
 
@@ -33,7 +33,7 @@
                 <div class="select-ctrl ion-ios-arrow-down">
                     <select ng-model="inputVal.provinceId" ng-change="getArea(inputVal.provinceId, 2);">
                         <option value="">选择省</option>
-                        <option value="{{item.Id}}" ng-repeat="item in province track by $index">{{item.Name}}</option>
+                        <option value="{{item.Id}}" ng-selected="inputVal.provinceId == item.Id" ng-repeat="item in province track by $index">{{item.Name}}</option>
                     </select>
                 </div>
             </li>
@@ -42,8 +42,8 @@
                 <p ng-if="!city" class="disabled">选择市</p>
                 <div class="select-ctrl ion-ios-arrow-down">
                     <select ng-model="inputVal.cityId" ng-if="city" ng-change="getArea(inputVal.cityId, 3);">
-                        <option value="" selected>选择市</option>
-                        <option value="{{item.Id}}" ng-repeat="item in city track by $index">{{item.Name}}</option>
+                        <option value="">选择市</option>
+                        <option value="{{item.Id}}" ng-selected="inputVal.cityId == item.Id" ng-repeat="item in city track by $index">{{item.Name}}</option>
                     </select>
                 </div>
             </li>
@@ -51,8 +51,8 @@
                 <span>所在区</span>
                 <div class="select-ctrl ion-ios-arrow-down">
                     <select ng-model="inputVal.villageId" ng-change="getArea(inputVal.villageId);">
-                        <option value="" selected>选择区</option>
-                        <option value="{{item.Id}}" ng-repeat="item in village track by $index">{{item.Name}}</option>
+                        <option value="">选择区</option>
+                        <option value="{{item.Id}}" ng-selected="inputVal.villageId == item.Id" ng-repeat="item in village track by $index">{{item.Name}}</option>
                     </select>
                 </div>
             </li>
