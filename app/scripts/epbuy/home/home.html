@@ -38,7 +38,7 @@
                 <a class="goods-item" ng-click="toDetail(item.Id);" ng-repeat="item in goodsList track by $index">
                     <div class="img">
                         <img ng-src="{{item.Picture}}">
-                        <i ng-if="item.Bargains">特价</i>
+                        <i ng-if="item.Bargains == '是'">特价</i>
                         <div class="mask" style="display:-webkit-box;">{{item.Name}}</div>
                     </div>
                     <div class="price">

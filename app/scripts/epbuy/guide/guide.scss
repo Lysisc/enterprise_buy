@@ -25,6 +25,8 @@
         }
     }
     .slider-pager {
+        opacity: 0;
+        -webkit-transition: all ease-out 300ms;
         span {
             opacity: 1;
             color: #666;
@@ -37,6 +39,9 @@
                 background-color: #4c97d8;
                 color: #fff;
             }
+        }
+        &.show-pager {
+            opacity: 1;
         }
     }
 }

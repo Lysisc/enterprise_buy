@@ -36,10 +36,6 @@ angular.module('EPBUY')
 
         } else {
             $scope.bottomBarCur = 'home';
-
-            $scope.addToCart = function () {
-                //todo...加入购物车
-            };
         }
 
         Util.ajaxRequest({
@@ -52,6 +48,21 @@ angular.module('EPBUY')
             success: function (data) {
                 if (data.product) {
                     $scope.product = data.product;
+
+                    // 判断是否已加入购物车
+                    var shoppingCart = DataCachePool.pull('SHOPPING_CART') || [];
+                    for (var i = 0; i < shoppingCart.length; i++) {
+                        if (shoppingCart[i].Id === $scope.product.ProductID) {
+                            $scope.hasAdded = true;
+                            break;
+                        }
+                    }
+
+                    if (data.SpecificationList && data.SpecificationList.length > 0) {
+                        $scope.specification = data.SpecificationList;
+                        $scope.specificationId = data.SpecificationList[0].Id;
+                    }
+
                 } else {
                     Util.msgToast(data.msg);
                 }

@@ -5,18 +5,18 @@ angular.module('EPBUY')
 
         var pager = null;
 
-        $scope.$on('$viewContentLoaded', function () { //页面初始化处理
+        // $scope.$on('$viewContentLoaded', function () {}); //页面初始化处理
 
-            $timeout(function () {
+        $timeout(function () {
 
-                pager = angular.element(document.querySelector('.slider-pager'));
+            pager = angular.element(document.querySelector('.slider-pager'));
 
-                angular.element(pager[0].firstElementChild).html('1');
-                angular.element(pager[0].lastElementChild).remove();
+            angular.element(pager[0].firstElementChild).html('1');
+            angular.element(pager[0].lastElementChild).remove();
 
-            }, 0);
+            pager.addClass('show-pager');
 
-        });
+        }, 500);
 
         $scope.slideHasChanged = function (index) { //引导页滑动时触发该事件
 

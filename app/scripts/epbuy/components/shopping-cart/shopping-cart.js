@@ -5,23 +5,37 @@ angular.module('EPBUY')
         return {
             restrict: 'E',
             templateUrl: 'scripts/epbuy/components/shopping-cart/shopping-cart.html',
-            controller: function ($rootScope, $scope, $timeout, $ionicPopup, $state, DataCachePool) {
-                $rootScope.shoppingCartShow = false;
+            controller: function ($scope, $timeout, $ionicPopup, $state, DataCachePool) {
+
                 $timeout(function () {
-                    $rootScope.shoppingCartShow = true;
-                    $rootScope.shoppingCartNum = 11; //todo...取locaStorage数据
+                    $scope.shoppingCart = DataCachePool.pull('SHOPPING_CART') || [];
+                    $scope.shoppingCartNum = 0;
+                    for (var i = 0; i < $scope.shoppingCart.length; i++) {
+                        $scope.shoppingCartNum += $scope.shoppingCart[i].Num;
+                    }
                 }, 200);
 
                 $scope.addToCart = function () {
+
                     if (!$scope.hasAdded) {
                         $scope.hasAdded = true;
-                        $rootScope.shoppingCartNum++;
+                        $scope.shoppingCartNum++;
                         //todo...
                     }
+
+                    var goodsObj = {
+                        Id: '20141228155233094911123536fb569',
+                        ImgUrl: 'images/default_goods.jpg',
+                        Title: '我是商品名称',
+                        Note: '我是备注信息我是备注信息我是备注信息我是备注信息',
+                        Price: 1451,
+                        Limit: 5,
+                        Num: 1
+                    };
                 };
 
                 $scope.goShoppingCart = function () {
-                    if ($rootScope.shoppingCartNum) {
+                    if ($scope.shoppingCartNum) {
                         $state.go('epbuy.cart');
                     } else {
                         $ionicPopup.alert({
@@ -36,6 +50,7 @@ angular.module('EPBUY')
 
                 //取数据
                 var shoppingGoods = [{
+                    Id: '20141228155233094911123536fb569',
                     ImgUrl: 'images/default_goods.jpg',
                     Title: '我是商品名称',
                     Note: '我是备注信息我是备注信息我是备注信息我是备注信息',

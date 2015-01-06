@@ -3,7 +3,7 @@
     <ion-content delegate-handle="contentHandle">
 
         <!-- 商品幻灯区 -->
-        <div class="goods-slide" ng-if="goodsPictureList"> <i ng-if="product.Bargains" class="special-offer">特价</i>
+        <div class="goods-slide" ng-if="goodsPictureList"> <i ng-if="product.Bargains == '是'" class="special-offer">特价</i>
             <ion-slide-box class="slide-box" does-continue="true" ng-if="goodsPictureList" ng-class="{special:specialList}">
                 <ion-slide ng-repeat="(key, value) in goodsPictureList">
                     <div class="slide-page">
@@ -21,13 +21,13 @@
                 </a>
             </div>
             <p class="price">
-                <span class="p-discount">{{product.Discount}}折</span>
+                <span ng-if="product.Discount" class="p-discount">{{product.Discount}}折</span>
                 内购价：
                 <span class="p-red">&yen;{{product.InnerPrice}}</span>
                 市场价：
                 <s class="p-gray">&yen;{{product.MarketPrice}}</s>
             </p>
-            <p ng-if="!isWant" class="integral">
+            <p ng-if="!isWant && product.Integral" class="integral">
                 积分：
                 <span class="p-red">{{product.Integral}}</span>
             </p>
@@ -48,12 +48,10 @@
                     {{product.NumPurchasing}}件
                 </li>
             </ul>
-            <div class="select-bar ion-ios-arrow-down">
+            <div ng-if="specification" class="select-bar ion-ios-arrow-down">
                 请选择商品规格：
-                <select>
-                    <option selected>Green</option>
-                    <option>Blue</option>
-                    <option>Red</option>
+                <select ng-model="specificationId">
+                    <option value="{{item.Id}}" ng-selected="$index == 0" ng-repeat="item in specification track by $index">{{item.Name}}</option>
                 </select>
             </div>
         </div>

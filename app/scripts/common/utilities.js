@@ -170,7 +170,7 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
             timeout: 15000,
         }).success(function (data) {
             console.log(data);
-            
+
             if (data && data.state === -200) { //判断登录
                 $ionicLoading.hide();
                 $timeout.cancel(loginPopupTimer);
