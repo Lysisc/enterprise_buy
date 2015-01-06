@@ -3,14 +3,26 @@
 angular.module('EPBUY')
 	.controller('PersonCtrl', function ($scope, $state, $location, $ionicActionSheet, $ionicPopup, Util, DataCachePool) {
 
-		Util.ajaxRequest({
-			url: '$local/GetHomeRestaurantBannerInfo.json',
+		Util.ajaxRequest({ // 取订三种单数
+			url: '$server/Myself/GetOrderStatusCountByAuth',
 			data: {
-				enterpriseCode: $scope.enterpriseCode // todo...
+				Auth: DataCachePool.pull('USERAUTH')
 			},
 			success: function (data) {
+				$scope.order = {
+					ordercount: data.ordercount,
+					ordercountpaying: data.ordercountpaying,
+					ordercountreceive: data.ordercountreceive
+				};
+			}
+		});
 
-				// $scope.phoneNumber = 13122183177;
+		Util.ajaxRequest({ // 取剩余数据
+			url: '$server/Myself/GetOrderStatusCountByAuth',
+			data: {
+				Auth: DataCachePool.pull('USERAUTH')
+			},
+			success: function (data) {
 			}
 		});
 

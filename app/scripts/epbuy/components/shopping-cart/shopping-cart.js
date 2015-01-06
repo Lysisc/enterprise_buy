@@ -15,23 +15,20 @@ angular.module('EPBUY')
                     }
                 }, 200);
 
-                $scope.addToCart = function () {
+                $scope.addToCart = function (e, goodsObj) {
+                    var $this = angular.element(e.target);
 
-                    if (!$scope.hasAdded) {
-                        $scope.hasAdded = true;
-                        $scope.shoppingCartNum++;
-                        //todo...
+                    if ($this.hasClass('disabled')) {
+                        return;
                     }
 
-                    var goodsObj = {
-                        Id: '20141228155233094911123536fb569',
-                        ImgUrl: 'images/default_goods.jpg',
-                        Title: '我是商品名称',
-                        Note: '我是备注信息我是备注信息我是备注信息我是备注信息',
-                        Price: 1451,
-                        Limit: 5,
-                        Num: 1
-                    };
+                    $this.addClass('disabled');
+
+                    $scope.shoppingCartNum++;
+
+                    $scope.shoppingCart.push(goodsObj);
+                    DataCachePool.push('SHOPPING_CART', $scope.shoppingCart);
+
                 };
 
                 $scope.goShoppingCart = function () {

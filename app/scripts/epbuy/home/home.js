@@ -25,7 +25,7 @@ angular.module('EPBUY')
         });
 
         Util.ajaxRequest({ //取热门区数据
-            isPopup: true,
+            // isPopup: true,
             url: '$server/InternalPurchase/GetHotProductList',
             data: {
                 Auth: DataCachePool.pull('USERAUTH'),
@@ -42,19 +42,36 @@ angular.module('EPBUY')
                     $scope.goodsList = data.List; //取数据 todo...
 
                     if (DataCachePool.pull('STATEMENT') !== 1) {
-                        DataCachePool.push('STATEMENT', 1);
 
-                        var statement = '我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明';
+                        var statement = '';
 
-                        Util.backDrop.retain();
+                        Util.ajaxRequest({ //取活动说明文案
+                            isPopup: true,
+                            url: '$server/InternalPurchase/GetCurActivity',
+                            data: {
+                                Auth: DataCachePool.pull('USERAUTH')
+                            },
+                            success: function (data) {
+                                if (data.Activity) {
+                                    statement = data.Activity.Description || '企褔惠欢迎您';
+                                } else {
+                                    statement = '企褔惠欢迎您';
+                                }
 
-                        $ionicPopup.alert({
-                            template: '<h4>活动声明</h4><ion-scroll>' + statement + '</ion-scroll>',
-                            buttons: [{
-                                text: '朕知道了',
-                                type: 'button-positive'
-                            }]
+                                var descPopup = $ionicPopup.alert({
+                                    template: '<h4>活动声明</h4><ion-scroll>' + statement + '</ion-scroll>',
+                                    buttons: [{
+                                        text: '朕知道了',
+                                        type: 'button-positive',
+                                        onTap: function () {
+                                            DataCachePool.push('STATEMENT', 1);
+                                            descPopup.close();
+                                        }
+                                    }]
+                                });
+                            }
                         });
+
                     } else {
                         Util.backDrop.release();
                     }

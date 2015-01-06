@@ -22,7 +22,7 @@
 
 			<div ng-if="noMordResults" class="no-more-orders">没有更多结果了</div>
 
-			<ion-infinite-scroll class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
+			<ion-infinite-scroll ng-if="loadMoreAble" class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
 
 		</ion-scroll>
 

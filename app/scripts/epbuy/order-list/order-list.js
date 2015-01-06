@@ -3,19 +3,24 @@
 angular.module('EPBUY')
     .controller('OrderListCtrl', function ($scope, $state, $timeout, $ionicLoading, $location, Util, DataCachePool) {
 
+        var orderStatus = '';
         if ($location.search() && $location.search().type) {
             var type = $location.search().type;
             switch (type) {
             case 'pay':
+                orderStatus = '未支付';
                 $scope.orderListTitle = '代付款';
                 break;
             case 'rec':
+                orderStatus = '已发货';
                 $scope.orderListTitle = '代收货';
                 break;
             default:
+                orderStatus = '全部';
                 $scope.orderListTitle = '全部';
             }
         } else {
+            orderStatus = '全部';
             $scope.orderListTitle = '全部';
         }
 
@@ -27,12 +32,13 @@ angular.module('EPBUY')
 
         Util.backDrop.retain();
 
-        $scope.loadMore = function () { //翻页加载
+        function renderData() {
             Util.ajaxRequest({
                 noMask: true,
-                url: '$server/InternalPurchase/GetActivityProductList' + ($scope.isHeart ? '' : ''),
+                url: '$server/Myself/GetOrderListByAuth',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
+                    OrderStatus: orderStatus,
                     PageNo: $scope.pageIndex,
                     PageSize: 10
                 },
@@ -40,14 +46,17 @@ angular.module('EPBUY')
 
                     $scope.noNetwork = false;
 
-                    if (data.List && data.List.length > 0) {
+                    if (data.orderList && data.orderList.length > 0) {
 
-                        $scope.orderList = $scope.orderList.concat(data.List); //拼接数据
-                        $scope.pageIndex++;
+                        $scope.orderList = $scope.orderList.concat(data.orderList);
 
-                        $timeout(function () {
+                        if ($scope.pageIndex * 10 >= data.ordercount) {
+                            $scope.loadMoreAble = false;
+                        } else {
                             $scope.$broadcast('scroll.infiniteScrollComplete');
-                        }, 300);
+                            $scope.pageIndex++;
+                            $scope.loadMoreAble = true;
+                        }
 
                     } else {
                         if ($scope.orderList.length === 0) {
@@ -61,6 +70,12 @@ angular.module('EPBUY')
                     $scope.noNetwork = true;
                 }
             });
+        }
+
+        renderData();
+
+        $scope.loadMore = function () { //翻页加载
+            renderData();
         };
 
         $scope.toOrderDetail = function (orderId) {

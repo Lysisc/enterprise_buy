@@ -217,7 +217,7 @@ angular.module('EPBUY')
                         $scope.goodsList = sort ? [] : ($scope.goodsList || []);
                         $scope.goodsList = $scope.goodsList.concat(data.List); //拼接数据
 
-                        if ($scope.pageIndex * 10 >= data.Total) {
+                        if ($scope.pageIndex >= data.Total) {
                             $scope.loadMoreAble = false;
                         } else {
                             $scope.$broadcast('scroll.infiniteScrollComplete');

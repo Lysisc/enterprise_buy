@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderDetailCtrl', function ($scope, $state, Util) {
+    .controller('OrderDetailCtrl', function ($scope, $state, Util, DataCachePool) {
 
         Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json',
+            url: '$server/Myself/GetOrderDetail',
             data: {
-                enterpriseCode: 'abs' // todo...
+                Auth: DataCachePool.pull('USERAUTH')
             },
             success: function (data) {
 

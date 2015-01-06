@@ -8,6 +8,7 @@
     .goods-slide {
         position: relative;
         background-color: #fff;
+        height: 205px;
         .slide-box {
             box-sizing: content-box !important;
             padding-top: 10px;
@@ -51,6 +52,11 @@
             text-align: center;
             line-height: 40px;
         }
+        .goods-no-img {
+            color: #999;
+            line-height: 200px;
+            text-align: center;
+        }
     }
     .goods-detail {
         padding-left: 15px;
@@ -60,9 +66,7 @@
         border-bottom-width: 1px;
         margin-bottom: 3px;
         .goods-name {
-            @include clear-float;
             -webkit-box-orient: horizontal;
-            -webkit-box-pack: center;
             -webkit-box-align: center;
             margin-bottom: 10px;
             p {
