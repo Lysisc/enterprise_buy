@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderCtrl', function ($rootScope, $scope, $state, $stateParams, $ionicPopup, Util) {
+    .controller('OrderCtrl', function ($rootScope, $scope, $state, $stateParams, $ionicPopup, Util, DataCachePool) {
 
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
@@ -21,17 +21,37 @@ angular.module('EPBUY')
         //     return realLength;
         // };
 
-        Util.ajaxRequest({
-            url: '$local/GetHomeRestaurantBannerInfo.json',
-            data: {
-                enterpriseCode: $scope.enterpriseCode // todo...
-            },
-            success: function (data) {
+        $scope.address = $rootScope.addressObj || DataCachePool.pull('DEFAULT_ADDRESS');
 
-                console.log('我是确认订单页');
-                // todo...
+        if ($scope.address) { //当选好地址或者有默认地址时，请求接口拿到优惠信息
+
+            var shoppingCart = DataCachePool.pull('SHOPPING_CART'),
+                productList = [];
+
+            for (var i = 0; i < shoppingCart.length; i++) {
+                productList.push({
+                    Id: shoppingCart[i].Id,
+                    Count: shoppingCart[i].Count,
+                    SpecificationIds: shoppingCart[i].SpecificationIds
+                });
             }
-        });
+
+            Util.ajaxRequest({
+                method: 'POST',
+                url: '$server/Order/CaculateOrder',
+                data: {
+                    Auth: DataCachePool.pull('USERAUTH'),
+                    CaculateOrder: {
+                        AddressId: $scope.address.Id,
+                        ProductList: productList
+                    }
+                },
+                success: function (data) {
+
+                    // todo...
+                }
+            });
+        }
 
         $scope.toAdress = function (addressId) {
             $state.go('epbuy.choice', {
@@ -71,10 +91,6 @@ angular.module('EPBUY')
             });
         };
 
-        $scope.address = $rootScope.addressObj;
-
-        console.log($scope.address);
-
         $scope.placeTheOrder = function () {
             if (!$scope.address) {
                 Util.msgToast('请添加收货地址');
@@ -82,7 +98,7 @@ angular.module('EPBUY')
             }
 
             if (!$scope.activityCheck.checked) {
-                Util.msgToast('请查看活动及售后服务说明');
+                Util.msgToast('请阅读活动及售后服务说明');
                 return;
             }
 
@@ -97,6 +113,10 @@ angular.module('EPBUY')
                     enterpriseCode: $scope.enterpriseCode // todo...
                 },
                 success: function (data) {
+
+                    DataCachePool.push('DEFAULT_ADDRESS', {
+                        Data: $scope.address
+                    });
 
                     console.log('我是确认订单页');
                     // todo...

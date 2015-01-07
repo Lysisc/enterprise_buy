@@ -7,15 +7,15 @@
                 <label class="checkbox">
                     <input type="checkbox" ng-click="hasChosenItem($event,$index);" ng-checked="!moreGoodsChoos"></label>
                 <div class="img">
-                    <img ng-src="{{item.ImgUrl}}"></div>
+                    <img ng-src="{{item.Picture}}"></div>
                 <div class="detail">
-                    <span class="red">&yen;{{item.Price}}</span>
-                    <h3>{{item.Title}}</h3>
-                    <p class="text">{{item.Note}}</p>
-                    <div class="number-ctrl"> <i class="icon ion-remove" ng-if="item.Num > 1" ng-click="item.Num = item.Num - 1;totalNumber(item.Price);"></i> <i class="icon ion-add" ng-if="item.Num < item.Limit" ng-click="item.Num = item.Num + 1;totalNumber(item.Price,true);"></i>
-                        <span class="delete" ng-if="item.Num == 1 && !moreGoodsChoos" ng-click="deleteGoods($index+'|');">删除</span>
-                        <span class="most" ng-if="item.Num == item.Limit">限购{{item.Limit}}件</span>
-                        <span class="num">{{item.Num}}</span>
+                    <span class="red">&yen;{{item.InnerPrice}}</span>
+                    <h3>{{item.Name}}</h3>
+                    <p class="text">{{item.Remark}}</p>
+                    <div class="number-ctrl"> <i class="icon ion-remove" ng-if="item.Count > 1" ng-click="item.Count = item.Count - 1;totalNumber(item.InnerPrice);"></i> <i class="icon ion-add" ng-if="item.Count < item.NumPurchasing" ng-click="item.Count = item.Count + 1;totalNumber(item.InnerPrice,true);"></i>
+                        <span class="delete" ng-if="item.Count == 1 && !moreGoodsChoos" ng-click="deleteGoods($index+'|');">删除</span>
+                        <span class="most" ng-if="item.Count == item.NumPurchasing">限购{{item.NumPurchasing}}件</span>
+                        <span class="num">{{item.Count}}</span>
                     </div>
                 </div>
             </div>

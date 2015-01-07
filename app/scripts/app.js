@@ -79,7 +79,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 订单页
             .state('epbuy.order', {
-                url: '/order/:OrderId',
+                url: '/order',
                 templateUrl: 'scripts/epbuy/order/order.html',
                 controller: 'OrderCtrl'
             })

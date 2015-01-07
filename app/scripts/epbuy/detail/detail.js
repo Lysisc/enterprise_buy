@@ -49,7 +49,8 @@ angular.module('EPBUY')
                 if (data.product) {
                     $scope.product = data.product;
                     $scope.product.description = decodeURIComponent(data.product.Description || '暂无商品描述');
-                    $scope.product.remark = decodeURIComponent(data.product.remark || '暂无备注');
+                    $scope.product.remark = decodeURIComponent(data.product.Remark || '暂无备注');
+                    $scope.goodsPictureList = data.product.Picture2 ? data.product.Picture2.split(',') : null;
 
                     // 判断是否已加入购物车
                     var shoppingCart = DataCachePool.pull('SHOPPING_CART') || [];

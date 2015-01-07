@@ -4,6 +4,7 @@
     }
     .goods-item {
         position: relative;
+        background-color: #fff;
         z-index: 2;
         -webkit-transition: all ease-out 300ms;
         &.leave {

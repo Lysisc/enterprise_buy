@@ -9,8 +9,8 @@ angular.module('EPBUY')
         $scope.totalNumber = function (n, p) { // 计算商品总&总价
             if (angular.isArray(n)) {
                 for (var i = 0; i < n.length; i++) {
-                    $scope.cartNum += n[i].Num;
-                    $scope.cartPrice += n[i].Price * n[i].Num;
+                    $scope.cartNum += n[i].Count;
+                    $scope.cartPrice += n[i].InnerPrice * n[i].Count;
                 }
             } else {
                 $scope.cartNum = p ? $scope.cartNum + 1 : $scope.cartNum - 1;
@@ -23,6 +23,8 @@ angular.module('EPBUY')
         if (shoppingCart && shoppingCart.length > 0) {
             $scope.totalNumber(shoppingCart);
             $scope.shoppingCartList = shoppingCart;
+
+            $scope.shoppingCartList[0].NumPurchasing = 10;
         } else {
             $ionicPopup.alert({
                 template: '购物车为空，请返回',
@@ -76,6 +78,7 @@ angular.module('EPBUY')
 
                 if (tempArr.length > 0) {
                     DataCachePool.push('SHOPPING_CART', tempArr);
+                    shoppingCart = tempArr;
                 } else {
                     DataCachePool.remove('SHOPPING_CART');
                     $ionicPopup.alert({
@@ -115,9 +118,8 @@ angular.module('EPBUY')
         };
 
         $scope.goOrder = function () {
-            $state.go('epbuy.order', {
-                OrderId: 1234
-            });
+            DataCachePool.push('SHOPPING_CART', shoppingCart);
+            $state.go('epbuy.order');
         };
 
     });
