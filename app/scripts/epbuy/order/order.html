@@ -1,6 +1,6 @@
 <ion-view title="确认订单" class="ep-order">
 
-    <ion-content ng-init="showReceive = false;choice = '周一至周日全天'">
+    <ion-content ng-init="showReceive = false">
 
         <a class="receive-info" ng-click="toAdress(address.Id);" style="display:-webkit-box;">
             <span class="icon ion-location"></span>
@@ -31,7 +31,7 @@
                     <span class="time">
                         收货时间 <em>将于7日内完成配送</em>
                     </span>
-                    {{choice}} <i class="icon ion-arrow-right"></i>
+                    {{checkVal.receiving}} <i class="icon ion-arrow-right"></i>
                 </div>
             </a>
             <div ng-init="remark = null" ng-click="showTextarea = true;remarkStyle={'height':'80px'}" class="remark">
@@ -41,14 +41,14 @@
             <div class="explain">
                 <a ng-click="activityExplain();">活动及售后服务说明</a>
                 <label class="checkbox">
-                    <input type="checkbox" ng-checked="activityCheck.checked" ng-model="activityCheck.checked"></label>
+                    <input type="checkbox" ng-checked="checkVal.checked" ng-model="checkVal.checked"></label>
             </div>
         </div>
 
         <div ng-class="{enter:showReceive,leave:!showReceive}" class="slide-right-left-n receive-setting">
-            <ion-radio ng-click="showReceive = false" ng-model="choice" ng-value="'周一至周日全天'">周一至周日全天</ion-radio>
-            <ion-radio ng-click="showReceive = false" ng-model="choice" ng-value="'周一至周五工作时间'">周一至周五工作时间</ion-radio>
-            <ion-radio ng-click="showReceive = false" ng-model="choice" ng-value="'周六及周日全天'">周六及周日全天</ion-radio>
+            <ion-radio ng-click="showReceive = false;checkVal.receiving = '周一至周日全天'" ng-model="checkVal.receiving" ng-value="'周一至周日全天'">周一至周日全天</ion-radio>
+            <ion-radio ng-click="showReceive = false;checkVal.receiving = '周一至周五工作时间'" ng-model="checkVal.receiving" ng-value="'周一至周五工作时间'">周一至周五工作时间</ion-radio>
+            <ion-radio ng-click="showReceive = false;checkVal.receiving = '周六及周日全天'" ng-model="checkVal.receiving" ng-value="'周六及周日全天'">周六及周日全天</ion-radio>
         </div>
 
         <div ng-class="{enter:showReceive,leave:!showReceive}" ng-click="showReceive = false" class="slide-right-left-n set-backdrop"></div>

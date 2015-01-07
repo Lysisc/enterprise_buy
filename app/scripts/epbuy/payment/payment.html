@@ -1,0 +1,24 @@
+<ion-view title="支付" class="ep-payment">
+
+    <ion-content scroll="false">
+        <p class="total-prices">
+            您的订单金额：
+            <span>&yen;{{500}}</span>
+        </p>
+        <p class="remind">请在1小时内完成支付，超过订单将被自动取消</p>
+        <p class="choice-title">请选择支付方式：</p>
+        <label class="checkbox alipay">
+            <input ng-checked="modeOfPayment == 'alipay'" ng-click="modeOfPayment = 'alipay'" type="checkbox">
+            <img ng-src="images/alipay.png"></label>
+        <label class="checkbox integral">
+            <input ng-checked="modeOfPayment == 'integral'" ng-click="modeOfPayment = 'integral'" type="checkbox">
+            积分支付，可用积分：
+            <span>{{500}}</span>
+            分
+        </label>
+        <div class="payment-button">
+            <button class="button button-block button-positive" ng-click="submitPayment();">确认并支付</button>
+        </div>
+    </ion-content>
+
+</ion-view>

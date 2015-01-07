@@ -1,0 +1,69 @@
+.ep-payment {
+    .scroll-content {
+        background-color: #fff;
+    }
+    .total-prices {
+        margin: 50px 0;
+        text-align: center;
+        font-size: 16px;
+        span {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ff9900;
+        }
+    }
+    .remind {
+        color: #ef762e;
+        margin-left: 16px;
+    }
+    .choice-title {
+        color: #999;
+        padding-top: 10px;
+        margin-left: 16px;
+    }
+    .checkbox {
+        height: 20px;
+        display: block;
+        color: #625548;
+        margin: 15px 0;
+        input {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 10px;
+        }
+        input:before {
+            border-radius: 4px;
+            border-color: #999;
+            border-width: 1px;
+            background-color: #fff;
+        }
+        input:after {
+            width: 10px;
+            height: 6px;
+            border-width: 2px;
+            border-color: #4c97d8;
+        }
+        &.alipay {
+            height: 40px;
+            img {
+                width: 115px;
+                height: 40px;
+                vertical-align: middle;
+            }
+        }
+        &.integral {
+            span {
+                color: #ef762e;
+                font-size: 20px;
+            }
+        }
+    }
+    .payment-button {
+        padding: 20px 16px 0;
+        .button-positive {
+            border-radius: 5px;
+        }
+    }
+}

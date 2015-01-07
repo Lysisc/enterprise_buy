@@ -44,6 +44,7 @@ angular.module('EPBUY')
 
                     $scope.shoppingCartNum++;
                     $scope.shoppingCart.push(obj);
+                    console.log($scope.shoppingCart);
                     DataCachePool.push('SHOPPING_CART', $scope.shoppingCart);
 
                 };

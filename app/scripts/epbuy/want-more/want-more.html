@@ -7,7 +7,7 @@
             <textarea focus-me="{{showTextarea}}" ng-show="showTextarea" ng-blur="showTextarea = false;checkRemark($event,wantText);" ng-model="wantText" ng-maxlength="200" placeholder="有什么想要的，有什么建议请告诉我们"></textarea>
         </div>
 
-        <div class="wantButton">
+        <div class="want-button">
             <button class="button button-block button-positive" ng-click="submitForm();" ng-class="{disabled: stepOneDisabled}">还 想 要</button>
         </div>
 

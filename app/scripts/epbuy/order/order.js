@@ -5,6 +5,7 @@ angular.module('EPBUY')
 
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
+        $scope.checkVal = {};
 
         // var jmz = {}; //js判断字符串长度（含中文）
         // jmz.GetLength = function (str) {
@@ -41,14 +42,13 @@ angular.module('EPBUY')
                 url: '$server/Order/CaculateOrder',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
-                    CaculateOrder: {
+                    CaculateOrderStr: JSON.stringify({
                         AddressId: $scope.address.Id,
                         ProductList: productList
-                    }
+                    })
                 },
                 success: function (data) {
-
-                    // todo...
+                    // alert(1);
                 }
             });
         }
@@ -76,8 +76,7 @@ angular.module('EPBUY')
             }
         };
 
-        $scope.activityCheck = {};
-        $scope.activityCheck.checked = false;
+        $scope.checkVal.checked = false;
         $scope.activityExplain = function () { // 活动声明
             $ionicPopup.alert({
                 template: '<h4>活动声明</h4><ion-scroll>我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明</ion-scroll>',
@@ -85,19 +84,20 @@ angular.module('EPBUY')
                     text: '朕知道了',
                     type: 'button-positive',
                     onTap: function () {
-                        $scope.activityCheck.checked = true;
+                        $scope.checkVal.checked = true;
                     }
                 }]
             });
         };
 
+        $scope.checkVal.receiving = '周一至周日全天';
         $scope.placeTheOrder = function () {
             if (!$scope.address) {
                 Util.msgToast('请添加收货地址');
                 return;
             }
 
-            if (!$scope.activityCheck.checked) {
+            if (!$scope.checkVal.checked) {
                 Util.msgToast('请阅读活动及售后服务说明');
                 return;
             }
@@ -108,18 +108,23 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
-                url: '$local/GetHomeRestaurantBannerInfo.json',
+                method: 'POST',
+                url: '$server/Order/AddOrder',
                 data: {
-                    enterpriseCode: $scope.enterpriseCode // todo...
+                    Auth: DataCachePool.pull('USERAUTH'),
+                    DeliveryWayId: '',
+                    ReceiptTime: $scope.checkVal.receiving,
+                    Note: $scope.remark,
+                    CaculateOrderStr: {
+                        AddressId: $scope.address.Id,
+                        ProductList: productList
+                    }
                 },
                 success: function (data) {
-
                     DataCachePool.push('DEFAULT_ADDRESS', {
                         Data: $scope.address
                     });
-
-                    console.log('我是确认订单页');
-                    // todo...
+                    // $state.go('epbuy.payment');
                 }
             });
         };
