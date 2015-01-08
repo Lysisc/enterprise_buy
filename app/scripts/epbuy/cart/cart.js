@@ -119,6 +119,7 @@ angular.module('EPBUY')
 
         $scope.goOrder = function () {
             DataCachePool.push('SHOPPING_CART', shoppingCart);
+            $rootScope.orderId = 1;
             $state.go('epbuy.order');
         };
 

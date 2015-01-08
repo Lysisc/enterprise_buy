@@ -3,6 +3,21 @@
 angular.module('EPBUY')
     .controller('OrderCtrl', function ($rootScope, $scope, $state, $stateParams, $ionicPopup, Util, DataCachePool) {
 
+        var shoppingCart = DataCachePool.pull('SHOPPING_CART');
+
+        if (!shoppingCart || shoppingCart.length === 0) {
+            $ionicPopup.alert({
+                template: '购物车为空，请返回',
+                buttons: [{
+                    text: '朕知道了',
+                    type: 'button-positive',
+                    onTap: function () {
+                        $state.go('epbuy.home');
+                    }
+                }]
+            });
+        }
+
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
         $scope.checkVal = {};
@@ -119,6 +134,20 @@ angular.module('EPBUY')
                 return;
             }
 
+            if ($rootScope.orderId !== 1) {
+                $ionicPopup.alert({
+                    template: '不能重复提交订单',
+                    buttons: [{
+                        text: '朕知道了',
+                        type: 'button-positive',
+                        onTap: function () {
+                            $state.go('epbuy.home');
+                        }
+                    }]
+                });
+                return;
+            }
+
             Util.ajaxRequest({
                 isPopup: true,
                 isForm: true,
@@ -139,6 +168,7 @@ angular.module('EPBUY')
                         DataCachePool.push('DEFAULT_ADDRESS', {
                             Data: $scope.address
                         });
+                        $rootScope.orderId = data.Id;
                         $state.go('epbuy.payment');
                     } else if (data.state === 999) {
                         $ionicPopup.alert({

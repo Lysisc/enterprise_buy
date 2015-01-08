@@ -47,7 +47,7 @@
         <div class="sort-brand" ng-if="showBrand">
             <p ng-if="!brandList && !loadFail" class="sort-loading">加载中...</p>
             <button ng-if="loadFail" class="button button-positive button-block" ng-click="getBrandList();">重新加载</button>
-            <a ng-click="brandSelect('clear');" ng-class="{active:brandSelected == 'clear'}">全部品牌</a>
+            <a ng-if="brandList" ng-click="brandSelect('clear');" ng-class="{active:brandSelected == 'clear'}">全部品牌</a>
             <a ng-click="brandSelect(item.Id, $index);" ng-class="{active:brandSelected == $index}" ng-repeat="item in brandList track by $index">{{item.Name}}</a>
         </div>
 
