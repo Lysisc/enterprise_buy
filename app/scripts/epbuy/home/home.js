@@ -25,7 +25,6 @@ angular.module('EPBUY')
         });
 
         Util.ajaxRequest({ //取热门区数据
-            // isPopup: true,
             url: '$server/InternalPurchase/GetHotProductList',
             data: {
                 Auth: DataCachePool.pull('USERAUTH'),
@@ -39,7 +38,7 @@ angular.module('EPBUY')
 
                     // $cacheFactory('homeData', data);
 
-                    $scope.goodsList = data.List; //取数据 todo...
+                    $scope.goodsList = data.List;
 
                     if (DataCachePool.pull('STATEMENT') !== 1) {
 
@@ -55,7 +54,9 @@ angular.module('EPBUY')
                                 if (data.Activity) {
                                     statement = data.Activity.Description || '企褔惠欢迎您';
                                 } else {
-                                    statement = '企褔惠欢迎您';
+                                    DataCachePool.remove('STATEMENT');
+                                    Util.backDrop.release();
+                                    return;
                                 }
 
                                 var descPopup = $ionicPopup.alert({
@@ -64,6 +65,7 @@ angular.module('EPBUY')
                                         text: '朕知道了',
                                         type: 'button-positive',
                                         onTap: function () {
+                                            DataCachePool.remove('SHOPPING_CART');
                                             DataCachePool.push('STATEMENT', 1);
                                             descPopup.close();
                                         }
@@ -76,6 +78,7 @@ angular.module('EPBUY')
                         Util.backDrop.release();
                     }
                 } else {
+                    DataCachePool.remove('STATEMENT');
                     $scope.hasActivity = false;
                     Util.backDrop.release();
                 }

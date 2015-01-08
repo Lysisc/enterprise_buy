@@ -18,11 +18,16 @@ angular.module('EPBUY')
 		});
 
 		Util.ajaxRequest({ // 取剩余数据
-			url: '$server/Myself/GetOrderStatusCountByAuth',
+			url: '$server/Myself/GetMySelfInfo',
 			data: {
 				Auth: DataCachePool.pull('USERAUTH')
 			},
 			success: function (data) {
+				$scope.info = {
+					integral: data.AvailableIntegral,
+					companyId: data.AffiliatedCompanyId,
+					companyName: data.AffiliatedCompanyName
+				};
 			}
 		});
 

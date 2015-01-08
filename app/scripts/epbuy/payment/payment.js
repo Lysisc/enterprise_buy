@@ -1,28 +1,38 @@
 'use strict';
 
 angular.module('EPBUY')
-	.controller('PaymentCtrl', function ($scope, $state, $window, $ionicPopup, Util, DataCachePool) {
+	.controller('PaymentCtrl', function ($scope, $state, $stateParams, $window, $ionicPopup, Util, DataCachePool) {
 
 		$scope.modeOfPayment = 'alipay';
+		$scope.orderId = $stateParams.OrderId || 0;
 
-		$scope.getNewPasswd = function () { //修改密码
-			if (!$scope.inputVal.password) {
-				Util.msgToast('请输入当前密码');
-				return;
+		Util.ajaxRequest({
+			url: '$server/Order/GetPayOrderDetail',
+			data: {
+				Auth: DataCachePool.pull('USERAUTH'),
+				Id: $scope.orderId
+			},
+			success: function (data) {
+				if (data.state === 200) {
+					$scope.data = data;
+				} else {
+					Util.msgToast(data.msg);
+				}
 			}
+		});
 
-			if (!$scope.inputVal.newPassword) {
-				Util.msgToast('请输入新密码');
+		$scope.getNewPasswd = function () {
+			if (!$scope.modeOfPayment) {
+				Util.msgToast('请输入当前密码');
 				return;
 			}
 
 			Util.ajaxRequest({
 				isPopup: true,
-				url: '$server/Account/PasswordUpdate',
+				url: '$server/Order/GetPayOrderDetail',
 				data: {
 					Auth: DataCachePool.pull('USERAUTH'),
-					password: $scope.inputVal.password,
-					newpassword: $scope.inputVal.newPassword
+					Id: $scope.inputVal.password
 				},
 				success: function (data) {
 					if (data.state === 200) {

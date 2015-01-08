@@ -170,7 +170,9 @@ angular.module('EPBUY')
                             Data: $scope.address
                         });
                         $rootScope.orderId = data.Id;
-                        $state.go('epbuy.payment');
+                        $state.go('epbuy.payment', {
+                            OrderId: data.Id
+                        });
                     } else if (data.state === 999) {
                         $ionicPopup.alert({
                             template: data.msg,

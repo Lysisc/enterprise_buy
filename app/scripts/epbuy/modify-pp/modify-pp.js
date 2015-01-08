@@ -29,7 +29,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				isPopup: true,
-				url: '$server/Account/PhoneUpdate',
+				url: '$server/Myself/PhoneUpdate',
 				data: {
 					Auth: DataCachePool.pull('USERAUTH'),
 					LoginName: $scope.inputVal.phoneNumber,
@@ -92,7 +92,7 @@ angular.module('EPBUY')
 
 			Util.ajaxRequest({
 				isPopup: true,
-				url: '$server/Account/PasswordUpdate',
+				url: '$server/Myself/PasswordUpdate',
 				data: {
 					Auth: DataCachePool.pull('USERAUTH'),
 					password: $scope.inputVal.password,

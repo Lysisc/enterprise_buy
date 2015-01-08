@@ -8,7 +8,7 @@
 
             <a ng-click="toJump('personal-info');" class="user-info icon ion-arrow-right">
                 <span>{{phoneNumber}}</span>
-                上汽集团 - 000 001
+                {{info.companyName}} - {{info.companyId}}
             </a>
 
             <shopping-cart></shopping-cart>
@@ -37,7 +37,7 @@
             </a>
             <a ng-click="toJump('integral');" class="item icon ion-arrow-right">
                 <span>我的积分</span>
-                1200
+                {{info.integral}}
             </a>
             <a ng-click="toJump('address');" class="item icon ion-arrow-right">
                 <span>管理收货地址</span>

@@ -3,7 +3,7 @@
     <ion-content scroll="false">
         <p class="total-prices">
             您的订单金额：
-            <span>&yen;{{500}}</span>
+            <span>&yen;{{data.Money}}</span>
         </p>
         <p class="remind">请在1小时内完成支付，超过订单将被自动取消</p>
         <p class="choice-title">请选择支付方式：</p>
@@ -13,7 +13,7 @@
         <label class="checkbox integral">
             <input ng-checked="modeOfPayment == 'integral'" ng-click="modeOfPayment = 'integral'" type="checkbox">
             积分支付，可用积分：
-            <span>{{500}}</span>
+            <span>{{data.Integral || 0}}</span>
             分
         </label>
         <div class="payment-button">

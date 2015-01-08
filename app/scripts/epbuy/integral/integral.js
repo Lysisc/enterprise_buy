@@ -6,7 +6,7 @@ angular.module('EPBUY')
 		$scope.pageIndex = 1; //初始化第一页
 
 		Util.ajaxRequest({
-			url: '$server/Account/GetIntegralListByAuth',
+			url: '$server/Myself/GetIntegralListByAuth',
 			data: {
 				Auth: DataCachePool.pull('USERAUTH'),
 				pagesize: 10,

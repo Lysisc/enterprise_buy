@@ -248,6 +248,8 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
 
             if (typeof error === 'function') {
                 error(data);
+            } else {
+                msgToast('请检查你的网络');
             }
 
             effect();

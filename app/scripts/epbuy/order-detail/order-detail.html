@@ -8,12 +8,12 @@
                 <p class="status">交易成功</p>
                 <p>
                     订单金额：
-                    <span class="red">&yen;800</span>
+                    <span class="red">&yen;{{data.OrderAmount}}</span>
                 </p>
                 <p>
                     <span class="rec">运费</span>
                     ：
-                    <span class="red">&yen;0</span>
+                    <span class="red">&yen;{{data.OrderAmount}}</span>
                 </p>
             </div>
             <a class="go-order" ng-click="goOrder();">去下单</a>
@@ -24,11 +24,11 @@
             <div>
                 <p style="white-space: nowrap;">
                     <span class="name">收货人</span>
-                    ： 我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名我是姓名
+                    ： {{data.OrderAmount}}
                 </p>
                 <p class="address" style="display:-webkit-box;">
                     <span>收货地址</span>
-                    ： 上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市上海市
+                    ： {{data.OrderAmount}}
                 </p>
             </div>
         </div>
@@ -39,7 +39,7 @@
                 <p>快递信息</p>
                 <p class="exp">
                     快递已签收
-                    <span>2014-10-30</span>
+                    <span>{{data.OrderAmount}}</span>
                 </p>
             </div>
         </div>

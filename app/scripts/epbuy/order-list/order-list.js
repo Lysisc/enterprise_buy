@@ -39,8 +39,8 @@ angular.module('EPBUY')
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
                     OrderStatus: orderStatus,
-                    PageNo: $scope.pageIndex,
-                    PageSize: 10
+                    pageIndex: $scope.pageIndex,
+                    pageSize: 10
                 },
                 success: function (data) {
 
