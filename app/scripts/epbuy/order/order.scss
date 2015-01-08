@@ -178,17 +178,41 @@
             font-size: 18px;
         }
     }
-    .receive-setting {
+    .order-setting {
         background-color: #fff;
         position: fixed;
-        top: 12%;
+        top: 0;
         left: 0;
         z-index: 2;
         width: 100%;
-        .ion-checkmark {
-            font-size: 18px;
+        @include border-line;
+        border-top-width: 1px;
+        span {
+            color: #999;
+            font-size: 12px;
+            display: block;
+            text-align: right;
+            padding-right: 10px;
+        }
+        a {
+            display: block;
+            padding: 0 15px;
+            color: #666;
+            height: 44px;
+            line-height: 44px;
+            @include border-line;
+            border-bottom-width: 1px;
+            &.activated {
+                background-color: #f2f2f2;
+            }
+            &.current.ion-checkmark:before {
+                display: block;
+            }
         }
         .ion-checkmark:before {
+            display: none;
+            float: right;
+            font-size: 18px;
             color: #4a87ee;
             content: "\f122";
         }

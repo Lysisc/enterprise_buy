@@ -1,6 +1,6 @@
 <ion-view title="确认订单" class="ep-order">
 
-    <ion-content ng-init="showReceive = false">
+    <ion-content ng-init="delivery = false;receiving = false;showBackdrop = false">
 
         <a class="receive-info" ng-click="toAdress(address.Id);" style="display:-webkit-box;">
             <span class="icon ion-location"></span>
@@ -18,20 +18,27 @@
         </a>
 
         <div class="delivery-item">
-            <a class="set-item">
+            <a class="set-item" ng-click="delivery = true;showBackdrop = true">
                 <div>
                     <span class="time">
                         配送方式 <em>首期活动满百免运费</em>
                     </span>
-                    快递 20元
+                    {{checkVal.delivery.Name}}{{checkVal.delivery.Money}} <i class="icon ion-arrow-right"></i>
                 </div>
             </a>
-            <a class="set-item" ng-click="showReceive = true">
+            <a class="set-item" ng-click="receiving = true;showBackdrop = true">
                 <div>
                     <span class="time">
                         收货时间 <em>将于7日内完成配送</em>
                     </span>
-                    {{checkVal.receiving}} <i class="icon ion-arrow-right"></i>
+                    {{checkVal.receiving}}
+                    <i class="icon ion-arrow-right"></i>
+                </div>
+            </a>
+            <a ng-if="favoritePlanList && item.Money || item.Integral" class="set-item" ng-repeat="item in favoritePlanList track by $index">
+                <div>
+                    <span>{{item.Name}}</span>
+                    {{item.Money || item.Integral}}
                 </div>
             </a>
             <div ng-init="remark = null" ng-click="showTextarea = true;remarkStyle={'height':'80px'}" class="remark">
@@ -45,13 +52,19 @@
             </div>
         </div>
 
-        <div ng-class="{enter:showReceive,leave:!showReceive}" class="slide-right-left-n receive-setting">
-            <ion-radio ng-click="showReceive = false;checkVal.receiving = '周一至周日全天'" ng-model="checkVal.receiving" ng-value="'周一至周日全天'">周一至周日全天</ion-radio>
-            <ion-radio ng-click="showReceive = false;checkVal.receiving = '周一至周五工作时间'" ng-model="checkVal.receiving" ng-value="'周一至周五工作时间'">周一至周五工作时间</ion-radio>
-            <ion-radio ng-click="showReceive = false;checkVal.receiving = '周六及周日全天'" ng-model="checkVal.receiving" ng-value="'周六及周日全天'">周六及周日全天</ion-radio>
+        <div ng-if="deliveryWayList" ng-class="{enter:delivery,leave:!delivery}" class="slide-right-left-n order-setting">
+            <a class="icon ion-checkmark" ng-class="{current:checkVal.delivery == item}" ng-click="checkVal.delivery = item" ng-repeat="item in deliveryWayList track by $index">{{item.Name}}{{item.Money}}元</a>
+            <span>请点击下方阴影返回</span>
         </div>
 
-        <div ng-class="{enter:showReceive,leave:!showReceive}" ng-click="showReceive = false" class="slide-right-left-n set-backdrop"></div>
+        <div ng-class="{enter:receiving,leave:!receiving}" class="slide-right-left-n order-setting">
+            <a class="icon ion-checkmark" ng-class="{current:checkVal.receiving == '周一至周日全天'}" ng-click="checkVal.receiving = '周一至周日全天'">周一至周日全天</a>
+            <a class="icon ion-checkmark" ng-class="{current:checkVal.receiving == '周一至周五工作时间'}" ng-click="checkVal.receiving = '周一至周五工作时间'">周一至周五工作时间</a>
+            <a class="icon ion-checkmark" ng-class="{current:checkVal.receiving == '周六及周日全天'}" ng-click="checkVal.receiving = '周六及周日全天'">周六及周日全天</a>
+            <span>请点击下方阴影返回</span>
+        </div>
+
+        <div ng-class="{enter:showBackdrop,leave:!showBackdrop}" ng-click="delivery = false;receiving = false;showBackdrop = false" class="slide-right-left-n set-backdrop"></div>
 
     </ion-content>
 

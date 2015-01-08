@@ -80,7 +80,10 @@ angular.module('EPBUY')
                     Code: $scope.inputVal.enterpriseCode
                 },
                 success: function (data) {
-                    if (data.state === 999) {
+                    if (data.state === 200) {
+                        $scope.stepInit = false;
+                        $scope.stepOnePass = true;
+                    } else if (data.state === 999) {
                         var alertPopup = $ionicPopup.alert({
                             template: '抱歉，企业码不存在',
                             buttons: [{
@@ -90,11 +93,8 @@ angular.module('EPBUY')
                         // alertPopup.then(function (res) {
                         //     console.log(res);
                         // });
-                    }
-
-                    if (data.state === 200) {
-                        $scope.stepInit = false;
-                        $scope.stepOnePass = true;
+                    } else {
+                        Util.msgToast(data.msg);
                     }
 
                 },

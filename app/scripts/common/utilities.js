@@ -122,6 +122,42 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
     };
 
     /**
+     * 重写angular的param方法，使angular使用jquery一样的数据序列化方式  The workhorse; converts an object to x-www-form-urlencoded serialization.
+     * @param {Object} obj
+     * @return {String}
+     */
+    var paramObj = function (obj) {
+        var query = '',
+            name, value, fullSubName, subName, subValue, innerObj, i;
+
+        for (name in obj) {
+            value = obj[name];
+
+            if (value instanceof Array) {
+                for (i = 0; i < value.length; ++i) {
+                    subValue = value[i];
+                    fullSubName = name + '[' + i + ']';
+                    innerObj = {};
+                    innerObj[fullSubName] = subValue;
+                    query += paramObj(innerObj) + '&';
+                }
+            } else if (value instanceof Object) {
+                for (subName in value) {
+                    subValue = value[subName];
+                    fullSubName = name + '[' + subName + ']';
+                    innerObj = {};
+                    innerObj[fullSubName] = subValue;
+                    query += paramObj(innerObj) + '&';
+                }
+            } else if (value !== undefined && value !== null) {
+                query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
+            }
+        }
+
+        return query.length ? query.substr(0, query.length - 1) : query;
+    };
+
+    /**
      * ajax请求
      * @param param = {
         method: 请求方式,
@@ -131,19 +167,30 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         data: 'POST数据',
         noLoad: 请求结果是否需要loading效果,
         noMask: 请求结果是否需要mask效果,
-        isPopup: 请求结果是否有popup
+        isPopup: 请求结果是否有popup,
+        isForm: 请求形式改为形式，增加param方法来封装postData
      }
      */
     var loginPopupTimer = null;
     var ajaxRequest = function (param) {
-        var method = param && param.method || 'GET',
-            url = param && param.url || '',
-            data = param && param.data || {},
-            success = param && param.success,
-            error = param && param.error,
+        if (!param) {
+            return;
+        }
+
+        var data = param.data || {},
+            success = param.success,
+            error = param.error,
             noLoad = !param.noLoad,
             noMask = !param.noMask,
             isPopup = !param.isPopup,
+            isForm = param.isForm,
+            configObj = {
+                method: param.method || 'GET',
+                url: param.url || '',
+                params: /POST/ig.test(param.method) ? null : data,
+                data: /POST/ig.test(param.method) ? (isForm ? paramObj(data) : data) : null,
+                timeout: 15000,
+            },
             effect = function () {
                 if (noLoad) {
                     $ionicLoading.hide();
@@ -152,6 +199,12 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
                     backDrop.release();
                 }
             };
+
+        if (isForm) {
+            configObj.headers = {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            };
+        }
 
         if (noMask) {
 
@@ -162,13 +215,7 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
             backDrop.retain();
         }
 
-        $http({
-            method: method,
-            url: url,
-            params: /(POST)/ig.test(method) ? null : data,
-            data: /(POST)/ig.test(method) ? data : null,
-            timeout: 15000,
-        }).success(function (data) {
+        $http(configObj).success(function (data) {
             console.log(data);
 
             if (data && data.state === -200) { //判断登录

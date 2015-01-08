@@ -6,6 +6,8 @@ angular.module('EPBUY')
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
         $scope.checkVal = {};
+        $scope.checkVal.checked = false;
+        $scope.checkVal.receiving = '周一至周日全天';
 
         // var jmz = {}; //js判断字符串长度（含中文）
         // jmz.GetLength = function (str) {
@@ -38,17 +40,24 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
+                isForm: true,
                 method: 'POST',
                 url: '$server/Order/CaculateOrder',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
-                    CaculateOrderStr: JSON.stringify({
+                    CaculateOrder: {
                         AddressId: $scope.address.Id,
                         ProductList: productList
-                    })
+                    }
                 },
                 success: function (data) {
-                    // alert(1);
+                    if (data.state === 200) {
+                        $scope.deliveryWayList = data.DeliveryWayList || [];
+                        $scope.favoritePlanList = data.FavoritePlanList || [];
+                        $scope.checkVal.delivery = $scope.deliveryWayList[0];
+                    } else {
+                        Util.msgToast(data.msg);
+                    }
                 }
             });
         }
@@ -76,7 +85,6 @@ angular.module('EPBUY')
             }
         };
 
-        $scope.checkVal.checked = false;
         $scope.activityExplain = function () { // 活动声明
             $ionicPopup.alert({
                 template: '<h4>活动声明</h4><ion-scroll>我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明</ion-scroll>',
@@ -90,10 +98,14 @@ angular.module('EPBUY')
             });
         };
 
-        $scope.checkVal.receiving = '周一至周日全天';
         $scope.placeTheOrder = function () {
             if (!$scope.address) {
                 Util.msgToast('请添加收货地址');
+                return;
+            }
+
+            if (!$scope.checkVal.delivery || $scope.checkVal.delivery.id) {
+                Util.msgToast('您还没有选择配送方式');
                 return;
             }
 
@@ -108,23 +120,40 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
+                isPopup: true,
+                isForm: true,
                 method: 'POST',
                 url: '$server/Order/AddOrder',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH'),
-                    DeliveryWayId: '',
+                    DeliveryWayId: $scope.checkVal.delivery.Id,
                     ReceiptTime: $scope.checkVal.receiving,
                     Note: $scope.remark,
-                    CaculateOrderStr: {
+                    CaculateOrder: {
                         AddressId: $scope.address.Id,
                         ProductList: productList
                     }
                 },
                 success: function (data) {
-                    DataCachePool.push('DEFAULT_ADDRESS', {
-                        Data: $scope.address
-                    });
-                    // $state.go('epbuy.payment');
+                    if (data.state === 200) {
+                        DataCachePool.push('DEFAULT_ADDRESS', {
+                            Data: $scope.address
+                        });
+                        $state.go('epbuy.payment');
+                    } else if (data.state === 999) {
+                        $ionicPopup.alert({
+                            template: data.msg,
+                            buttons: [{
+                                text: '朕知道了',
+                                type: 'button-positive',
+                                onTap: function () {
+                                    $state.go('epbuy.home');
+                                }
+                            }]
+                        });
+                    } else {
+                        Util.msgToast(data.msg);
+                    }
                 }
             });
         };

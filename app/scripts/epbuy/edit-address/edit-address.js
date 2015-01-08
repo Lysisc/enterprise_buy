@@ -107,6 +107,8 @@ angular.module('EPBUY')
                             success: function (data) {
                                 if (data.state === 200) {
                                     $window.history.back();
+                                } else {
+                                    Util.msgToast(data.msg);
                                 }
                             },
                             error: function (data) {
@@ -183,7 +185,11 @@ angular.module('EPBUY')
                     Remark: ''
                 },
                 success: function (data) {
-                    $window.history.back();
+                    if (data.state === 200) {
+                        $window.history.back();
+                    } else {
+                        Util.msgToast(data.msg);
+                    }
                 }
             });
         };
