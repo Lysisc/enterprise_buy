@@ -11,8 +11,9 @@
 
         <no-network></no-network>
 
-        <div ng-if="noNetwork == false && !isHeart && restTime" class="activity-date"> <i class="icon ion-time-alarm"></i>
-            活动日期：{{startTime.substr(5, 5)}}至{{endTime.substr(5, 5)}}，距离结束还有：{{restTime}}
+        <div ng-if="noNetwork == false && !isHeart" class="activity-date"> <i class="icon ion-time-alarm"></i>
+            <span ng-if="restTime">活动日期：{{startTime.substr(5, 5)}}至{{endTime.substr(5, 5)}}，距离结束还有：{{restTime}}</span>
+            <span ng-if="!restTime">抱歉，活动日期获取失败</span>
         </div>
 
         <div ng-if="noNetwork == false" class="filters">

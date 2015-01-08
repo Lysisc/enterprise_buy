@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-	.controller('PaymentCtrl', function ($scope, $state, $stateParams, $window, $ionicPopup, Util, DataCachePool) {
+	.controller('PaymentCtrl', function ($scope, $state, $stateParams, Util, DataCachePool) {
 
 		$scope.modeOfPayment = 'alipay';
 		$scope.orderId = $stateParams.OrderId || 0;
@@ -21,40 +21,15 @@ angular.module('EPBUY')
 			}
 		});
 
-		$scope.getNewPasswd = function () {
-			if (!$scope.modeOfPayment) {
-				Util.msgToast('请输入当前密码');
+		$scope.submitPayment = function (mode) {
+			if (!mode) {
+				Util.msgToast('请选择支付方式');
 				return;
+			} else if (mode === 'alipay') {
+				window.location.href = 'http://www.51mart.com.cn/Service/Pay/AliPayPage/Default.aspx?Id=' + $scope.orderId + '&Auth=' + DataCachePool.pull('USERAUTH');
+			} else if (mode === 'integral') {
+				window.location.href = 'http://www.51mart.com.cn/Service/api/Order/IntegralPay?Id=' + $scope.orderId + '&Auth=' + DataCachePool.pull('USERAUTH');
 			}
-
-			Util.ajaxRequest({
-				isPopup: true,
-				url: '$server/Order/GetPayOrderDetail',
-				data: {
-					Auth: DataCachePool.pull('USERAUTH'),
-					Id: $scope.inputVal.password
-				},
-				success: function (data) {
-					if (data.state === 200) {
-						$ionicPopup.alert({
-							template: data.msg,
-							buttons: [{
-								text: '知道了',
-								type: 'button-positive',
-								onTap: function () {
-									$window.history.back();
-								}
-							}]
-						});
-					} else {
-						Util.msgToast('修改失败，请重试');
-					}
-				},
-				error: function (data) {
-					Util.msgToast('修改失败，请检查网络');
-				}
-			});
-
 		};
 
 	});

@@ -8,17 +8,16 @@
         <p class="remind">请在1小时内完成支付，超过订单将被自动取消</p>
         <p class="choice-title">请选择支付方式：</p>
         <label class="checkbox alipay">
-            <input ng-checked="modeOfPayment == 'alipay'" ng-click="modeOfPayment = 'alipay'" type="checkbox">
+            <input ng-checked="modeOfPayment == 'alipay'" ng-click="modeOfPayment = 'alipay'" type="radio">
             <img ng-src="images/alipay.png"></label>
         <label class="checkbox integral">
-            <input ng-checked="modeOfPayment == 'integral'" ng-click="modeOfPayment = 'integral'" type="checkbox">
+            <input ng-checked="modeOfPayment == 'integral'" ng-click="modeOfPayment = 'integral'" type="radio">
             积分支付，可用积分：
             <span>{{data.Integral || 0}}</span>
             分
         </label>
         <div class="payment-button">
-            <a ng-href="http://www.51mart.com.cn/Service/Pay/AliPayPage/call_back_url.aspx">确认并支付</a>
-            <button class="button button-block button-positive" ng-click="submitPayment();">确认并支付</button>
+            <button class="button button-block button-positive" ng-click="submitPayment(modeOfPayment);">确认并支付</button>
         </div>
     </ion-content>
 

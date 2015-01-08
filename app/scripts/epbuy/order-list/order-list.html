@@ -8,19 +8,19 @@
 
 		<ion-scroll>
 
-			<a class="order-item" style="display:-webkit-box;" ng-click="toOrderDetail(1234);" ng-repeat="item in orderList track by $index">
+			<a class="order-item" style="display:-webkit-box;" ng-click="toOrderDetail(item.OrderId);" ng-repeat="item in orderList track by $index">
 				<div class="detail">
-					<p class="date">2013-10-30</p>
-					<p>我是名称我是名称我是名称我是名称我是名称</p>
-					<p>总价：<span class="red">&yen;148</span>共<span class="red">10</span>件商品</p>
+					<p class="date">{{item.OrderDate}}</p>
+					<p>{{item.Name}}</p>
+					<p>总价：<span class="red">&yen;{{item.OrderAmount}}</span><!--共<span class="red" ng-bind="item.Num"></span>件商品--></p>
 				</div>
-				<!-- <div class="status">已完成</div> -->
-				<div class="status red">待支付</div>
-				<!-- <div class="status">已取消</div> -->
-				<!-- <div class="status bule">待收货</div> -->
+				<div ng-if="item.OrderStatus == '已完成'" class="status">已完成</div>
+				<div ng-if="item.OrderStatus == '已取消'" class="status">已取消</div>
+				<div ng-if="item.OrderStatus == '未支付'" class="status red">未支付</div>
+				<div ng-if="item.OrderStatus == '已发货'" class="status bule">待收货</div>
 			</a>
 
-			<div ng-if="noMordResults" class="no-more-orders">没有更多结果了</div>
+			<div ng-if="noMordResults" class="no-more-results">没有更多结果了</div>
 
 			<ion-infinite-scroll ng-if="loadMoreAble" class="load-more-bar" on-infinite="loadMore();" distance="10px"></ion-infinite-scroll>
 

@@ -35,7 +35,7 @@
                     <i class="icon ion-arrow-right"></i>
                 </div>
             </a>
-            <a ng-if="favoritePlanList && item.Money || item.Integral" class="set-item" ng-repeat="item in favoritePlanList track by $index">
+            <a ng-if="item.Money || item.Integral" class="set-item" ng-repeat="item in favoritePlanList track by $index">
                 <div>
                     <span>{{item.Name}}</span>
                     {{item.Money || item.Integral}}

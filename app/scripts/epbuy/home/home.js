@@ -12,7 +12,6 @@ angular.module('EPBUY')
         //     Util.backDrop.release();
         // } else {
         Util.ajaxRequest({ //取banner区数据
-            isPopup: true,
             url: '$server/Advertisement/GetHomepageSlideList',
             data: {
                 Auth: DataCachePool.pull('USERAUTH')
@@ -42,6 +41,8 @@ angular.module('EPBUY')
 
                     if (DataCachePool.pull('STATEMENT') !== 1) {
 
+                        DataCachePool.remove('SHOPPING_CART');
+
                         var statement = '';
 
                         Util.ajaxRequest({ //取活动说明文案
@@ -65,7 +66,6 @@ angular.module('EPBUY')
                                         text: '朕知道了',
                                         type: 'button-positive',
                                         onTap: function () {
-                                            DataCachePool.remove('SHOPPING_CART');
                                             DataCachePool.push('STATEMENT', 1);
                                             descPopup.close();
                                         }
@@ -78,6 +78,7 @@ angular.module('EPBUY')
                         Util.backDrop.release();
                     }
                 } else {
+                    DataCachePool.remove('SHOPPING_CART');
                     DataCachePool.remove('STATEMENT');
                     $scope.hasActivity = false;
                     Util.backDrop.release();

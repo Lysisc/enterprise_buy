@@ -2,57 +2,62 @@
 
     <ion-content>
 
-        <div class="order-info" style="display:-webkit-box;">
-            <span class="icon icon-suc"></span>
-            <div class="order-detail">
-                <p class="status">交易成功</p>
-                <p>
-                    订单金额：
-                    <span class="red">&yen;{{data.OrderAmount}}</span>
-                </p>
-                <p>
-                    <span class="rec">运费</span>
-                    ：
-                    <span class="red">&yen;{{data.OrderAmount}}</span>
-                </p>
+        <no-network></no-network>
+
+        <div ng-if="noNetwork == false">
+            <div class="order-info" style="display:-webkit-box;">
+                <span class="icon icon-suc"></span>
+                <div class="order-detail">
+                    <p class="status">交易成功</p>
+                    <p>
+                        订单金额：
+                        <span class="red">&yen;{{data.OrderAmount}}</span>
+                    </p>
+                    <p>
+                        <span class="rec">运费</span>
+                        ：
+                        <span class="red">&yen;{{data.Freight}}</span>
+                    </p>
+                </div>
+                <a ng-if="data.OrderStatus == '未支付'" class="go-order" ng-click="goOrder();">去下单</a>
             </div>
-            <a class="go-order" ng-click="goOrder();">去下单</a>
+
+            <div class="order-info" style="display:-webkit-box;background-color: #fff;">
+                <span class="icon icon-man"></span>
+                <div>
+                    <p style="white-space: nowrap;">
+                        <span class="name">收货人</span>
+                        ： {{data.DeliveredName}}
+                    </p>
+                    <p class="address" style="display:-webkit-box;">
+                        <span>收货地址</span>
+                        ： {{data.DeliveredAddress}}
+                    </p>
+                </div>
+            </div>
+
+            <div class="order-info" style="display:-webkit-box;">
+                <span class="icon icon-car"></span>
+                <div>
+                    <p>快递信息</p>
+                    <p class="exp">
+                        快递已签收
+                        <span>{{data.ExpressInfo}}</span>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div class="order-info" style="display:-webkit-box;background-color: #fff;">
-            <span class="icon icon-man"></span>
-            <div>
-                <p style="white-space: nowrap;">
-                    <span class="name">收货人</span>
-                    ： {{data.OrderAmount}}
-                </p>
-                <p class="address" style="display:-webkit-box;">
-                    <span>收货地址</span>
-                    ： {{data.OrderAmount}}
-                </p>
-            </div>
-        </div>
-
-        <div class="order-info" style="display:-webkit-box;">
-            <span class="icon icon-car"></span>
-            <div>
-                <p>快递信息</p>
-                <p class="exp">
-                    快递已签收
-                    <span>{{data.OrderAmount}}</span>
-                </p>
-            </div>
-        </div>
-
-        <div class="goods-list">
-            <a class="goods-item" ng-if="$index < 3" ng-repeat="item in goodsList track by $index">
+        <div class="goods-list" ng-if="data.orderDetailList">
+            <a class="goods-item" ng-if="$index < 3" ng-repeat="item in data.orderDetailList track by $index">
                 <div class="img">
-                    <img ng-src=""></div>
+                    <img ng-src="{{item.Picture}}"></div>
                 <div ng-if="!isHeart" class="detail">
-                    <h3>我是产品名称我是产品名称我是产品名称</h3>
-                    <p class="text">尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等尺寸，备注等</p>
+                    <h3>{{item.ProductName}}</h3>
+                    <p ng-if="item.ProductSpecificationName" class="text">{{item.ProductSpecificationName}},{{item.Remark}}</p>
                     <p class="p-red">
-                        <span>&yen;148</span> * 2
+                        <span>&yen;{{item.SalePrice}}</span>
+                        * {{item.CountNum}}
                     </p>
                 </div>
             </a>

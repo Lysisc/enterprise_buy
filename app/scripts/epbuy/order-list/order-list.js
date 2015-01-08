@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('OrderListCtrl', function ($scope, $state, $timeout, $ionicLoading, $location, Util, DataCachePool) {
+    .controller('OrderListCtrl', function ($scope, $state, $ionicLoading, $location, Util, DataCachePool) {
 
         var orderStatus = '';
         if ($location.search() && $location.search().type) {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('ListCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicLoading, $ionicPopup, $timeout, Util, DataCachePool) {
+    .controller('ListCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicLoading, $ionicPopup, Util, DataCachePool) {
 
         $scope.isSingle = true; //初始化单列列表
         $scope.priceUp = 'asc'; //初始化价格升序

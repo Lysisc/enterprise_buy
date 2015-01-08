@@ -13,11 +13,16 @@ angular.module('EPBUY')
                     OrderID: $scope.orderId
                 },
                 success: function (data) {
+                    $scope.noNetwork = false;
+
                     if (data.state === 200) {
                         $scope.data = data;
                     } else {
                         Util.msgToast(data.msg);
                     }
+                },
+                error: function () {
+                    $scope.noNetwork = true;
                 }
             });
         }

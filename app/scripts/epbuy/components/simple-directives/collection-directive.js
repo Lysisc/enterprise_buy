@@ -21,13 +21,15 @@ angular.module('EPBUY')
                     }
                 };
 
-            for (var i = 0; i < collectGoods.length; i++) {
-                if (collectGoods[i].Id === attr.id) {
-                    collectIndex = i;
-                    isCollect(true);
-                    break;
+            $timeout(function () {
+                for (var i = 0; i < collectGoods.length; i++) {
+                    if (collectGoods[i].Id === attr.id) {
+                        collectIndex = i;
+                        isCollect(true);
+                        break;
+                    }
                 }
-            }
+            }, 0);
 
             element.on('click', function (e) {
                 if (isCollect()) {
