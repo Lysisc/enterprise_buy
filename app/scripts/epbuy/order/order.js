@@ -7,7 +7,7 @@ angular.module('EPBUY')
 
         if (!shoppingCart || shoppingCart.length === 0) {
             $ionicPopup.alert({
-                template: '购物车为空，请返回',
+                template: '购物车为空，请去添加',
                 buttons: [{
                     text: '朕知道了',
                     type: 'button-positive',
@@ -16,6 +16,7 @@ angular.module('EPBUY')
                     }
                 }]
             });
+            return;
         }
 
         $scope.cartNum = 0;
@@ -43,8 +44,7 @@ angular.module('EPBUY')
 
         if ($scope.address) { //当选好地址或者有默认地址时，请求接口拿到优惠信息
 
-            var shoppingCart = DataCachePool.pull('SHOPPING_CART'),
-                productList = [];
+            var productList = [];
 
             for (var i = 0; i < shoppingCart.length; i++) {
                 productList.push({
@@ -165,6 +165,7 @@ angular.module('EPBUY')
                 },
                 success: function (data) {
                     if (data.state === 200) {
+                        DataCachePool.remove('SHOPPING_CART');
                         DataCachePool.push('DEFAULT_ADDRESS', {
                             Data: $scope.address
                         });

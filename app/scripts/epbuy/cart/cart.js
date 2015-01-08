@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('CartCtrl', function ($scope, $state, $ionicPopup, $timeout, $ionicScrollDelegate, DataCachePool) {
+    .controller('CartCtrl', function ($rootScope, $scope, $state, $ionicPopup, $timeout, $ionicScrollDelegate, DataCachePool) {
 
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
