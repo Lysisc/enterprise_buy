@@ -19,7 +19,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 登陆页
             .state('epbuy.login', {
-                url: '/login?OtherPage',
+                url: '/login?OtherPage&OrderId',
                 templateUrl: 'scripts/epbuy/login/login.html',
                 controller: 'LoginCtrl'
             })
@@ -151,7 +151,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 订单详情页
             .state('epbuy.order-detail', {
-                url: '/order-detail/:OrderId',
+                url: '/order-detail/:OrderId?from',
                 templateUrl: 'scripts/epbuy/order-detail/order-detail.html',
                 controller: 'OrderDetailCtrl'
             })

@@ -21,6 +21,12 @@ angular.module('EPBUY')
 
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
+
+        for (var i = 0; i < shoppingCart.length; i++) {
+            $scope.cartNum += shoppingCart[i].Count;
+            $scope.cartPrice += shoppingCart[i].InnerPrice;
+        }
+
         $scope.checkVal = {};
         $scope.checkVal.checked = false;
         $scope.checkVal.receiving = '周一至周日全天';
@@ -46,11 +52,11 @@ angular.module('EPBUY')
 
             var productList = [];
 
-            for (var i = 0; i < shoppingCart.length; i++) {
+            for (var j = 0; j < shoppingCart.length; j++) {
                 productList.push({
-                    Id: shoppingCart[i].Id,
-                    Count: shoppingCart[i].Count,
-                    SpecificationIds: shoppingCart[i].SpecificationIds
+                    Id: shoppingCart[j].Id,
+                    Count: shoppingCart[j].Count,
+                    SpecificationIds: shoppingCart[j].SpecificationIds
                 });
             }
 
