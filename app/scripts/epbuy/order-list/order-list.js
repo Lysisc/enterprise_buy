@@ -48,11 +48,11 @@ angular.module('EPBUY')
 
                     if (data.orderList && data.orderList.length > 0) {
 
-                        $scope.orderList = $scope.orderList.concat(data.orderList);
-
-                        for (var i = 0; i < $scope.orderList.length; i++) {
-                            $scope.orderList[i].OrderDate = $scope.orderList[i].OrderDate.replace(/:{1}\w{2}\.{1}.+$/g, '').replace('T', ' ');
+                        for (var i = 0; i < data.orderList.length; i++) {
+                            data.orderList[i].OrderDate = data.orderList[i].OrderDate.replace(/:{1}\w{2}\.{1}.+$/g, '').replace('T', ' ');
                         }
+
+                        $scope.orderList = $scope.orderList.concat(data.orderList);
 
                         if ($scope.pageIndex * 10 >= data.ordercount) {
                             $scope.loadMoreAble = false;
