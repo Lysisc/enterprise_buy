@@ -40,7 +40,7 @@ angular.module('EPBUY')
                     Auth: DataCachePool.pull('USERAUTH'),
                     OrderStatus: orderStatus,
                     pageIndex: $scope.pageIndex,
-                    pageSize: 10
+                    pageSize: 100
                 },
                 success: function (data) {
 
@@ -54,13 +54,13 @@ angular.module('EPBUY')
 
                         $scope.orderList = $scope.orderList.concat(data.orderList);
 
-                        if ($scope.pageIndex * 10 >= data.ordercount) {
-                            $scope.loadMoreAble = false;
-                        } else {
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            $scope.pageIndex++;
-                            $scope.loadMoreAble = true;
-                        }
+                        // if ($scope.pageIndex * 10 >= data.ordercount) {
+                        //     $scope.loadMoreAble = false;
+                        // } else {
+                        //     $scope.$broadcast('scroll.infiniteScrollComplete');
+                        //     $scope.pageIndex++;
+                        //     $scope.loadMoreAble = true;
+                        // }
 
                     } else {
                         if ($scope.orderList.length === 0) {

@@ -1,6 +1,7 @@
 'use strict';
 
-var isHybrid = !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/) || !!navigator.userAgent.match(/AppleWebKit/);
+// var isHybrid = !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/) || !!navigator.userAgent.match(/AppleWebKit/);
+var isHybrid = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 if (isHybrid) {
     document.getElementById('wrap').className = 'is-hybird';
 }

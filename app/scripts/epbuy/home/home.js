@@ -24,7 +24,7 @@ angular.module('EPBUY')
         });
 
         Util.ajaxRequest({ //取热门区数据
-            url: '$server/InternalPurchase/GetHotProductList',
+            url: '$server/InternalPurchase/GetActivityProductList',
             data: {
                 Auth: DataCachePool.pull('USERAUTH'),
                 PageSize: 20,
