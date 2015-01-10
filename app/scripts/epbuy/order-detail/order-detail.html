@@ -19,7 +19,7 @@
                         <span class="red">&yen;{{data.Freight}}</span>
                     </p>
                 </div>
-                <a ng-if="data.OrderStatus == '未支付'" class="go-order" ng-click="goOrder();">去支付</a>
+                <a ng-if="data.OrderStatus == '待支付'" class="go-order" ng-click="goOrder();">去支付</a>
             </div>
 
             <div class="order-info" style="display:-webkit-box;background-color: #fff;">

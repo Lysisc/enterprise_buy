@@ -50,6 +50,7 @@
 /********************************** 公用样式 **********************************/
 input::-webkit-inner-spin-button, select {
     -webkit-appearance: none; /* 干掉的默认样式 */
+    background-color: transparent;
 }
 // icon字体
 .ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-ios-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d, .ion-arrow-right, .ion-share, .ion-star, .ion-add, .ion-remove, .ion-location {
@@ -317,6 +318,9 @@ input::-webkit-inner-spin-button, select {
     }
     .ep-person .user-details .scroll {
         height: 620px;
+    }
+    .ep-list .is-heart .sort-nav, .ep-list .is-heart .sort-brand {
+        top: 112px;
     }
 }
 //page style
