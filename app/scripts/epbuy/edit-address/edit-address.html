@@ -9,7 +9,7 @@
             <li class="edit-item">
                 <span>手机号码</span>
                 <input ng-model="inputVal.phoneNumber" type="number"></li>
-            <li ng-if="!addressId" class="edit-item">
+            <li ng-if="!addressId && false" class="edit-item">
                 <span>地址类型</span>
                 <div class="select-ctrl ion-ios-arrow-down">
                     <select ng-model="inputVal.addressType" ng-change="getArea('', 1);">

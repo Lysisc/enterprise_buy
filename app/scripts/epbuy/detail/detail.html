@@ -6,9 +6,9 @@
         <div class="goods-slide"> <i ng-if="product.Bargains == '是'" class="special-offer">特价</i>
             <div class="goods-no-img" ng-if="!goodsPictureList">抱歉，该商品暂无大图</div>
             <ion-slide-box class="slide-box" does-continue="true" ng-if="goodsPictureList" ng-class="{special:specialList}">
-                <ion-slide ng-repeat="(key, value) in goodsPictureList">
+                <ion-slide ng-repeat="item in goodsPictureList track by $index">
                     <div class="slide-page">
-                        <img ng-src="images/guide_page_04.png"></div>
+                        <img ng-src="{{item}}"></div>
                 </ion-slide>
             </ion-slide-box>
         </div>
