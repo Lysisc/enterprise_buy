@@ -22,13 +22,14 @@ angular.module('EPBUY')
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
 
+        var price = 0;
         for (var i = 0; i < shoppingCart.length; i++) {
             $scope.cartNum += shoppingCart[i].Count;
-            $scope.cartPrice += shoppingCart[i].InnerPrice;
+            price += shoppingCart[i].InnerPrice * shoppingCart[i].Count;
         }
+        $scope.cartPrice = Math.round(price * 100) / 100;
 
         $scope.checkVal = {};
-        $scope.checkVal.checked = false;
         $scope.checkVal.receiving = '周一至周日全天';
 
         // var jmz = {}; //js判断字符串长度（含中文）
@@ -106,19 +107,6 @@ angular.module('EPBUY')
             }
         };
 
-        $scope.activityExplain = function () { // 活动声明
-            $ionicPopup.alert({
-                template: '<h4>活动声明</h4><ion-scroll>我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明我是活动声明</ion-scroll>',
-                buttons: [{
-                    text: '朕知道了',
-                    type: 'button-positive',
-                    onTap: function () {
-                        $scope.checkVal.checked = true;
-                    }
-                }]
-            });
-        };
-
         $scope.placeTheOrder = function () {
             if (!$scope.address) {
                 Util.msgToast('请添加收货地址');
@@ -127,11 +115,6 @@ angular.module('EPBUY')
 
             if (!$scope.checkVal.delivery || $scope.checkVal.delivery.id) {
                 Util.msgToast('您还没有选择配送方式');
-                return;
-            }
-
-            if (!$scope.checkVal.checked) {
-                Util.msgToast('请阅读活动及售后服务说明');
                 return;
             }
 

@@ -28,7 +28,6 @@ angular.module('EPBUY')
         }
 
         $scope.goOrder = function () {
-            window.alert(window.location.href);
             $state.go('epbuy.payment', {
                 OrderId: $scope.orderId
             });

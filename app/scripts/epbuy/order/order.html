@@ -45,14 +45,10 @@
                 <p ng-hide="showTextarea">{{remark ? remark : '备注要求'}}</p>
                 <textarea focus-me="{{showTextarea}}" ng-style="remarkStyle" ng-show="showTextarea" ng-blur="showTextarea = false;remarkStyle={'height':'40px'};checkRemark($event,remark);" ng-model="remark" ng-maxlength="100" placeholder="备注要求"></textarea>
             </div>
-            <div class="explain">
-                <a ng-click="activityExplain();">活动及售后服务说明</a>
-                <label class="checkbox">
-                    <input type="checkbox" ng-checked="checkVal.checked" ng-model="checkVal.checked"></label>
-            </div>
         </div>
 
-        <div ng-if="deliveryWayList" ng-class="{enter:delivery,leave:!delivery}" class="slide-right-left-n order-setting">
+        <div ng-class="{enter:delivery,leave:!delivery}" class="slide-right-left-n order-setting">
+            <a ng-if="!deliveryWayList">没有获取到运费信息，请查看网络</a>
             <a class="icon ion-checkmark" ng-class="{current:checkVal.delivery == item}" ng-click="checkVal.delivery = item" ng-repeat="item in deliveryWayList track by $index">{{item.Name}}{{item.Money}}元</a>
             <span>请点击下方阴影返回</span>
         </div>
@@ -73,7 +69,7 @@
         共
         <span>{{cartNum}}</span>
         件商品&nbsp;&nbsp;合计
-        <span>&yen;{{cartPrice}}</span>
+        <span>&yen;{{cartPrice + checkVal.delivery.Money}}</span>
     </div>
 
 </ion-view>
