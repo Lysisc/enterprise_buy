@@ -4,6 +4,7 @@ angular.module('EPBUY')
     .controller('RegisteredCtrl', function ($cacheFactory, $scope, $state, $ionicPopup, $timeout, Util, DataCachePool) {
 
         $scope.stepInit = true; //step1 view
+        $scope.legalNotice = true;
         $scope.stepOneDisabled = true; //step1 submit
         $scope.stepOnePass = false; //step2 view
         $scope.stepTwoDisabled = true; //step2 submit
@@ -69,6 +70,10 @@ angular.module('EPBUY')
             } else {
                 $scope.stepOneDisabled = true;
             }
+        };
+
+        $scope.hasAgreed = function () {
+            $scope.legalNotice = false;
         };
 
         $scope.goStepTwo = function () { //去第二步

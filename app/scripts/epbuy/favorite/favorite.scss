@@ -2,6 +2,7 @@
     .goods-list .goods-item {
         position: relative;
         z-index: 2;
+        background-color: #fff;
         -webkit-transition: all ease-out 300ms;
         &.leave {
             z-index: -1;

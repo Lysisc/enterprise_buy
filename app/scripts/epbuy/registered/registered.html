@@ -31,7 +31,10 @@
             </ul>
         </div>
 
-        <ion-scroll class="legal-notice">
+        <ion-scroll class="legal-notice" ng-if="legalNotice">
+            <div class="notarize">
+                <button ng-click="hasAgreed();" class="button button-positive">我已阅读并同意该声明</button>
+            </div>
             <h3>法律声明</h3>
             企福惠提醒您：在使用企福惠平台各项服务前，请您务必仔细阅读并透彻理解本声明。您可以选择不使用企福惠平台服务，但如果您使用企福惠平台服务的，您的使用行为将被视为对本声明全部内容的认可。“企福惠平台”指由上海企福商贸有限公司（简称“企福惠”）运营的网络交易平台，域名为51mart.com.cn以及企福惠启用的其他域名。
             <br>
