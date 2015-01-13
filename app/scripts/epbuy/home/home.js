@@ -52,9 +52,11 @@ angular.module('EPBUY')
                             success: function (data) {
 
                                 if (data.Activity) {
+                                    $timeout(function () {
+                                        Util.backDrop.retain();
+                                    }, 100);
                                     statement = data.Activity.Description || '企褔惠欢迎您';
                                 } else {
-                                    DataCachePool.remove('STATEMENT');
                                     Util.backDrop.release();
                                     return;
                                 }
@@ -74,20 +76,17 @@ angular.module('EPBUY')
                             }
                         });
 
-                    } else {
-                        Util.backDrop.release();
                     }
+
                 } else {
                     DataCachePool.remove('SHOPPING_CART');
                     DataCachePool.remove('STATEMENT');
                     $scope.hasActivity = false;
-                    Util.backDrop.release();
                 }
 
             },
             error: function (data) {
                 $scope.noNetwork = true;
-                Util.backDrop.release();
             }
         });
         // }
