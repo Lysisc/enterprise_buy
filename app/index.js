@@ -34,8 +34,6 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function () {
         app.receivedEvent('deviceready');
-
-        console.log(cordova);
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
@@ -54,4 +52,4 @@ var app = {
 app.initialize();
 
 // var uri = entry.toURI();
-
+// console.log(cordova);

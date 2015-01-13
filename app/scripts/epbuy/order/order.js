@@ -63,6 +63,7 @@ angular.module('EPBUY')
 
             Util.ajaxRequest({
                 isForm: true,
+                isPopup: true,
                 method: 'POST',
                 url: '$server/Order/CaculateOrder',
                 data: {
@@ -78,7 +79,15 @@ angular.module('EPBUY')
                         $scope.favoritePlanList = data.FavoritePlanList || [];
                         $scope.checkVal.delivery = $scope.deliveryWayList[0];
                     } else {
-                        Util.msgToast(data.msg);
+                        $ionicPopup.confirm({
+                            template: '重新选择地址',
+                            cancelText: '取消',
+                            okText: '确定'
+                        }).then(function (res) {
+                            if (res) {
+                                $scope.toAdress($scope.address.Id);
+                            }
+                        });
                     }
                 }
             });
@@ -162,16 +171,15 @@ angular.module('EPBUY')
                         $state.go('epbuy.payment', {
                             OrderId: data.Id
                         });
-                    } else if (data.state === 999) {
-                        $ionicPopup.alert({
-                            template: data.msg,
-                            buttons: [{
-                                text: '朕知道了',
-                                type: 'button-positive',
-                                onTap: function () {
-                                    $state.go('epbuy.home');
-                                }
-                            }]
+                    } else if (data.state === 808) {
+                        $ionicPopup.confirm({
+                            template: '重新选择地址',
+                            cancelText: '取消',
+                            okText: '确定'
+                        }).then(function (res) {
+                            if (res) {
+                                $scope.toAdress($scope.address.Id);
+                            }
                         });
                     } else {
                         Util.msgToast(data.msg);

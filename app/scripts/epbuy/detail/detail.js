@@ -42,7 +42,7 @@ angular.module('EPBUY')
             url: '$server/InternalPurchase/GetProductDetail',
             data: {
                 Auth: DataCachePool.pull('USERAUTH'),
-                productType: $scope.isWant ? 2 : 1,
+                productType: $scope.isWant ? 1 : 2,
                 productID: $stateParams.GoodsId
             },
             success: function (data) {

@@ -12,9 +12,9 @@
                     <span class="red">&yen;{{item.InnerPrice}}</span>
                     <h3>{{item.Name}}</h3>
                     <p class="text">{{item.Remark}}</p>
-                    <div class="number-ctrl"> <i class="icon ion-remove" ng-if="item.Count > 1" ng-click="item.Count = item.Count - 1;totalNumber(item.InnerPrice);"></i> <i class="icon ion-add" ng-if="item.Count < item.NumPurchasing" ng-click="item.Count = item.Count + 1;totalNumber(item.InnerPrice,true);"></i>
+                    <div class="number-ctrl"> <i class="icon ion-remove" ng-if="item.Count > 1" ng-click="item.Count = item.Count - 1;totalNumber(item.InnerPrice);"></i> <i class="icon ion-add" ng-if="item.Count < item.Inventory && item.Count < item.NumPurchasing" ng-click="item.Count = item.Count + 1;totalNumber(item.InnerPrice,true);"></i>
                         <span class="delete" ng-if="item.Count == 1 && !moreGoodsChoos" ng-click="deleteGoods($index+'|');">删除</span>
-                        <span class="most" ng-if="item.Count == item.NumPurchasing">限购{{item.NumPurchasing}}件</span>
+                        <span class="most" ng-if="item.Count == item.NumPurchasing || item.Count == item.Inventory">限购{{item.Count == item.Inventory ? item.Inventory : item.NumPurchasing}}件</span>
                         <span class="num">{{item.Count}}</span>
                     </div>
                 </div>

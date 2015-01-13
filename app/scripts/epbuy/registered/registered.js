@@ -173,10 +173,8 @@ angular.module('EPBUY')
                         DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
                         DataCachePool.push('USERAUTH', data.Auth, 2 / 24); //存入用户Auth，并设置过期时间
 
-                        var disclaimer = '我是免责我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明我是免责声明';
-
                         $ionicPopup.alert({
-                            template: '<h4>免责声明</h4><ion-scroll>' + disclaimer + '</ion-scroll><h3>恭喜您，注册成功</h3>',
+                            template: '<h3>恭喜您，注册成功</h3>',
                             buttons: [{
                                 text: '开始购物吧',
                                 type: 'button-positive',

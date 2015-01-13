@@ -38,6 +38,7 @@ angular.module('EPBUY')
                         InnerPrice: goodsObj.InnerPrice,
                         Remark: goodsObj.Remark,
                         NumPurchasing: goodsObj.NumPurchasing,
+                        Inventory: goodsObj.Inventory,
                         SpecificationIds: $scope.specificationId,
                         Count: 1
                     };

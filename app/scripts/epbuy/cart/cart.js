@@ -25,8 +25,6 @@ angular.module('EPBUY')
         if (shoppingCart && shoppingCart.length > 0) {
             $scope.totalNumber(shoppingCart);
             $scope.shoppingCartList = shoppingCart;
-
-            $scope.shoppingCartList[0].NumPurchasing = 10;
         } else {
             $ionicPopup.alert({
                 template: '购物车为空，请返回',
