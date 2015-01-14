@@ -87,7 +87,6 @@ angular.module('EPBUY')
                             Util.msgToast('请选择支付方式');
                             return;
                         } else if (mode === 'alipay') {
-
                             window.location.href = 'http://www.51mart.com.cn/Service/Pay/AliPayPage/Default.aspx?Id=' + $scope.orderId + '&Auth=' + DataCachePool.pull('USERAUTH');
                         } else if (mode === 'integral') {
                             Util.ajaxRequest({
