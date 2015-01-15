@@ -228,6 +228,7 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
                             text: '知道了',
                             type: 'button-positive',
                             onTap: function () {
+                                localStorage.removeItem('EPBUY_USERAUTH');
                                 $state.go('epbuy.login', {
                                     OtherPage: 1
                                 });

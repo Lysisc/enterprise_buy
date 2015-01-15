@@ -17,6 +17,7 @@ angular.module('EPBUY')
 
                     if (data.state === 200) {
                         $scope.data = data;
+                        $scope.data.Address = data.DeliveredAddress.replace(/,|市辖区/g, '');
                     } else {
                         Util.msgToast(data.msg);
                     }

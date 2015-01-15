@@ -20,6 +20,7 @@
                     </p>
                 </div>
                 <a ng-if="data.OrderStatus == '待支付'" class="go-order" ng-click="goOrder();">去支付</a>
+                <span ng-if="data.OrderStatus != '待支付'" class="now-order">{{data.OrderStatus}}</span>
             </div>
 
             <div class="order-info" style="display:-webkit-box;background-color: #fff;">
@@ -31,7 +32,7 @@
                     </p>
                     <p class="address" style="display:-webkit-box;">
                         <span>收货地址</span>
-                        ： {{data.DeliveredAddress}}
+                        ： {{data.Address}}
                     </p>
                 </div>
             </div>
@@ -40,10 +41,11 @@
                 <span class="icon icon-car"></span>
                 <div>
                     <p>快递信息</p>
-                    <p class="exp">
+                    <p ng-if="data.ExpressInfo" class="exp">
                         快递已签收
                         <span>{{data.ExpressInfo}}</span>
                     </p>
+                    <p class="exp">暂无快递信息</p>
                 </div>
             </div>
         </div>

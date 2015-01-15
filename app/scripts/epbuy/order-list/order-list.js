@@ -8,12 +8,12 @@ angular.module('EPBUY')
             var type = $location.search().type;
             switch (type) {
             case 'pay':
-                orderStatus = '未支付';
-                $scope.orderListTitle = '代付款';
+                orderStatus = '待支付';
+                $scope.orderListTitle = '待付款';
                 break;
             case 'rec':
-                orderStatus = '已发货';
-                $scope.orderListTitle = '代收货';
+                orderStatus = '待收货';
+                $scope.orderListTitle = '待收货';
                 break;
             default:
                 orderStatus = '全部';
