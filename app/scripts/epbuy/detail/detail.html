@@ -70,7 +70,7 @@
     </ion-content>
 
     <div class="goods-bar">
-        <a class="share-btn">
+        <a class="share-btn" onclick="window.plugins.socialsharing.shareViaSMS('My cool message', null, function(msg) {console.log('ok: ' + msg)}, function(msg) {alert('error: ' + msg)})">
             <i class="icon ion-share"></i>
         </a>
         <p ng-if="isWant" class="want-to icon" ng-class="{'ion-bar-heart':!product.HasVote,'ion-ios-heart':product.HasVote}">

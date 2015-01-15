@@ -25,7 +25,7 @@ angular.module('EPBUY')
 			success: function (data) {
 				$scope.info = {
 					integral: data.AvailableIntegral,
-					companyId: data.AffiliatedCompanyId,
+					companyId: data.AffiliatedCompanyCode,
 					companyName: data.AffiliatedCompanyName
 				};
 			}
