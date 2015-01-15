@@ -85,7 +85,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 支付页
             .state('epbuy.payment', {
-                url: '/payment/:OrderId',
+                url: '/payment/:OrderId?from',
                 templateUrl: 'scripts/epbuy/payment/payment.html',
                 controller: 'PaymentCtrl'
             })

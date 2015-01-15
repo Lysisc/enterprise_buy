@@ -3,7 +3,7 @@
 angular.module('EPBUY')
 
 // 回退逻辑判断
-.directive('epbuyBack', function ($window, $state, $stateParams, $location) {
+.directive('epbuyBack', function ($window, $state, $stateParams) {
     return {
         restrict: 'A',
         link: function (scope, element) {
@@ -14,9 +14,21 @@ angular.module('EPBUY')
 
                 } else if ($state.is('epbuy.order-detail')) {
 
-                    var hasfrom = $stateParams.from;
-                    if (hasfrom === 'paid') {
+                    var hasFrom = $stateParams.from;
+                    if (hasFrom === 'paid') {
                         $state.go('epbuy.person');
+                    } else {
+                        $window.history.back();
+                    }
+
+                } else if ($state.is('epbuy.payment')) {
+                    var orderId = $stateParams.OrderId,
+                        hasFrom = $stateParams.from;
+                    if (hasFrom === 'paid') {
+                        $state.go('epbuy.order-detail', {
+                            OrderId: orderId,
+                            from: hasFrom
+                        });
                     } else {
                         $window.history.back();
                     }

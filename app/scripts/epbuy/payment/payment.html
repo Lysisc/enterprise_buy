@@ -1,6 +1,7 @@
 <ion-view title="支付" class="ep-payment">
 
     <ion-content scroll="false">
+
         <p class="total-prices">
             您的订单金额：
             <span>&yen;{{data.Money}}</span>
@@ -19,8 +20,9 @@
         <div class="payment-button">
             <button class="button button-block button-positive" ng-click="submitPayment(modeOfPayment);">确认并支付</button>
         </div>
+
+        <div id="iframeBox" class="iframe-box"></div>
+
     </ion-content>
 
 </ion-view>
-
-<div id="iframeBox" class="iframe-box"></div>
