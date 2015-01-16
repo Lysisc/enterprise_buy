@@ -71,6 +71,12 @@ angular.module('EPBUY')
                 Util.msgToast('请选择一个地址');
                 return;
             } else {
+
+                if ($scope.tabIndex === 0) { // 目前只能编辑个人地址
+                    Util.msgToast('请选择一个地址');
+                    return;
+                }
+
                 obj = $scope.tabIndex ? $scope.pList[$scope.choicedIndex] : $scope.eList[$scope.choicedIndex];
             }
 

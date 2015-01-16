@@ -15,7 +15,7 @@
 					<p>总价：<span class="red">&yen;{{item.OrderAmount}}</span><!--共<span class="red" ng-bind="item.Num"></span>件商品--></p>
 				</div>
 				<div ng-if="item.OrderStatus == '全部'" class="status">已完成</div>
-				<div ng-if="item.OrderStatus == '全部'" class="status">已取消</div>
+				<div ng-if="item.OrderStatus == '已取消'" class="status">已取消</div>
 				<div ng-if="item.OrderStatus == '待支付'" class="status red">待支付</div>
 				<div ng-if="item.OrderStatus == '待收货'" class="status bule">待收货</div>
 			</a>
