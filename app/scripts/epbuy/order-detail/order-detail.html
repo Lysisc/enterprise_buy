@@ -45,7 +45,7 @@
                         快递已签收
                         <span>{{data.ExpressInfo}}</span>
                     </p>
-                    <p class="exp">暂无快递信息</p>
+                    <p ng-if="!data.ExpressInfo" class="exp">暂无快递信息</p>
                 </div>
             </div>
         </div>

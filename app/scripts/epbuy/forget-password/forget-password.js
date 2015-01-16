@@ -13,7 +13,7 @@ angular.module('EPBUY')
 				return;
 			}
 
-			if (!/^1[3|4|5|8][0-9]\d{4,8}$/.test($scope.inputVal.phoneNumber)) {
+			if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test($scope.inputVal.phoneNumber)) {
 				Util.msgToast('用户名格式不合法');
 				return;
 			}

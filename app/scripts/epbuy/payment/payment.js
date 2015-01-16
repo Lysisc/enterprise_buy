@@ -21,6 +21,16 @@ angular.module('EPBUY')
             }
         });
 
+        Util.ajaxRequest({ // 取积分
+            url: '$server/Myself/GetMySelfInfo',
+            data: {
+                Auth: DataCachePool.pull('USERAUTH')
+            },
+            success: function (data) {
+                $scope.integral = data.AvailableIntegral;
+            }
+        });
+
         /**
          * 动态创建iframe
          * @param dom 创建iframe的容器，即在dom中创建iframe。dom可以是div、span或者其他标签。

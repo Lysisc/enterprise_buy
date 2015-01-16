@@ -18,6 +18,11 @@ angular.module('EPBUY')
                     return;
                 }
 
+                if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test(scope.inputVal.phoneNumber)) {
+                    Util.msgToast('手机号码格式不合法');
+                    return;
+                }
+
                 if (attr.change && scope.inputVal.phoneNumber === DataCachePool.pull('USERNAME')) {
                     Util.msgToast('请输入新的手机号码');
                     return;

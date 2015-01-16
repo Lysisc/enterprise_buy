@@ -80,4 +80,9 @@ angular.module('EPBUY')
             $ionicScrollDelegate.$getByHandle('contentHandle').scrollBottom();
         };
 
+        //分享控件
+        $scope.shareCtrl = function () {
+            window.plugins.socialsharing.share('我是分享文案', null, $scope.product.Picture, 'http://www.51mart.com.cn/h5/#/epbuy/' + ($scope.isWant ? 'want/' : 'detail/') + $scope.product.ProductID);
+        };
+
     });

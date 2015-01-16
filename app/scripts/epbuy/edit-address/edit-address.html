@@ -62,7 +62,7 @@
             <li class="edit-item">
                 <span>邮编</span>
                 <input ng-model="inputVal.zipCode" type="number" placeholder="可选" ng-maxlength="6"></li>
-            <li ng-if="addressId" ng-click="deleteAddress();" class="edit-item delete">删除收货地址</li>
+            <li ng-if="addressId && inputVal.addressType == 1" ng-click="deleteAddress();" class="edit-item delete">删除收货地址</li>
             <li class="edit-item save-address">
                 <button class="button button-block button-positive" ng-click="saveAddress();">保 存</button>
             </li>

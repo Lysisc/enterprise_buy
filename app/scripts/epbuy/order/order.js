@@ -80,7 +80,7 @@ angular.module('EPBUY')
                         $scope.checkVal.delivery = $scope.deliveryWayList[0];
                     } else {
                         $ionicPopup.confirm({
-                            template: '重新选择地址',
+                            template: '该地址不支持配送，请重新选择',
                             cancelText: '取消',
                             okText: '确定'
                         }).then(function (res) {
@@ -173,7 +173,7 @@ angular.module('EPBUY')
                         });
                     } else if (data.state === 808) {
                         $ionicPopup.confirm({
-                            template: '重新选择地址',
+                            template: '该地址不支持配送，请重新选择',
                             cancelText: '取消',
                             okText: '确定'
                         }).then(function (res) {
