@@ -55,7 +55,7 @@ angular.module('EPBUY')
                                     $timeout(function () {
                                         Util.backDrop.retain();
                                     }, 100);
-                                    statement = data.Activity.Description || '企褔惠欢迎您';
+                                    statement = data.Activity.Description || '企福惠欢迎您';
                                 } else {
                                     Util.backDrop.release();
                                     return;

@@ -71,13 +71,8 @@ angular.module('EPBUY')
                 Util.msgToast('请选择一个地址');
                 return;
             } else {
-
-                if ($scope.tabIndex === 0) { // 目前只能编辑个人地址
-                    Util.msgToast('请选择一个地址');
-                    return;
-                }
-
                 obj = $scope.tabIndex ? $scope.pList[$scope.choicedIndex] : $scope.eList[$scope.choicedIndex];
+                obj.type = $scope.tabIndex;
             }
 
             if ($scope.isChoice && !angular.isNumber(isAdd)) { // 订单地址选择
@@ -89,6 +84,12 @@ angular.module('EPBUY')
                     route = isAdd ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route);
                 } else { // 编辑地址
+
+                    if ($scope.tabIndex === 0) { // 目前只能编辑个人地址
+                        Util.msgToast('请选择个人地址');
+                        return;
+                    }
+
                     route = $scope.tabIndex ? 'p-address' : 'e-address';
                     $state.go('epbuy.' + route, {
                         AddressId: obj.Id || 0 // 拿到对应的地址id

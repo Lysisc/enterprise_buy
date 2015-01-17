@@ -94,8 +94,6 @@ angular.module('EPBUY')
 			}).then(function (res) {
 				if (res) {
 
-					DataCachePool.remove('SHOPPING_CART');
-					DataCachePool.remove('STATEMENT');
 					DataCachePool.remove('USERAUTH');
 					$state.go('epbuy.login');
 

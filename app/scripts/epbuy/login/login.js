@@ -72,6 +72,17 @@ angular.module('EPBUY')
                             DataCachePool.remove('REMEMBER_LOGIN');
                         }
 
+                        console.log($scope.inputVal.phoneNumber);
+                        console.log(DataCachePool.pull('USERNAME'));
+
+                        if ($scope.inputVal.phoneNumber !== DataCachePool.pull('USERNAME')) {
+                            DataCachePool.remove('DEFAULT_ADDRESS');
+                            DataCachePool.remove('DEFAULT_CONSIGNEE');
+                            DataCachePool.remove('SHOPPING_CART');
+                            DataCachePool.remove('COLLECTION_GOODS');
+                            DataCachePool.remove('STATEMENT');
+                        }
+
                         DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
                         DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
 

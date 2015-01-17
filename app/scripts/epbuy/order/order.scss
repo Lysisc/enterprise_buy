@@ -59,6 +59,21 @@
             }
         }
     }
+    .edit-ctrl {
+        padding: 0 12px;
+        li {
+            padding: 0 10px;
+            @include border-line;
+            border-bottom-width: 1px;
+            color: #666;
+            input {
+                display: inline-block;
+                width: 67%;
+                height: 44px;
+                padding: 5px 0 5px 4px;
+            }
+        }
+    }
     .delivery-item {
         background-color: #fff;
         padding-top: 5px;

@@ -47,6 +47,7 @@ angular.module('EPBUY')
         //     return realLength;
         // };
 
+        $scope.inputVal = {};
         $scope.address = $rootScope.addressObj || DataCachePool.pull('DEFAULT_ADDRESS');
 
         if ($scope.address) { //当选好地址或者有默认地址时，请求接口拿到优惠信息
@@ -70,7 +71,9 @@ angular.module('EPBUY')
                     Auth: DataCachePool.pull('USERAUTH'),
                     CaculateOrder: {
                         AddressId: $scope.address.Id,
-                        ProductList: productList
+                        ProductList: productList,
+                        DeliveredName: $scope.inputVal.name,
+                        DeliveredPhone: $scope.inputVal.phone
                     }
                 },
                 success: function (data) {
@@ -78,6 +81,9 @@ angular.module('EPBUY')
                         $scope.deliveryWayList = data.DeliveryWayList || [];
                         $scope.favoritePlanList = data.FavoritePlanList || [];
                         $scope.checkVal.delivery = $scope.deliveryWayList[0];
+                        DataCachePool.push('DEFAULT_CONSIGNEE', {
+                            Data: $scope.inputVal
+                        });
                     } else {
                         $ionicPopup.confirm({
                             template: '该地址不支持配送，请重新选择',
@@ -122,6 +128,25 @@ angular.module('EPBUY')
                 return;
             }
 
+            if ($scope.address.type === 0) {
+
+                if (!$scope.inputVal.name) {
+                    Util.msgToast('请填写收货人姓名');
+                    return;
+                }
+
+                if (!$scope.inputVal.phone) {
+                    Util.msgToast('请填写收货人手机');
+                    return;
+                }
+
+                if (!/^1[3|4|5|7|8][0-9]\d{4,8}$/.test($scope.inputVal.phone)) {
+                    Util.msgToast('手机号码格式不合法');
+                    return;
+                }
+
+            }
+
             if (!$scope.checkVal.delivery || $scope.checkVal.delivery.id) {
                 Util.msgToast('您还没有选择配送方式');
                 return;
@@ -158,7 +183,9 @@ angular.module('EPBUY')
                     Note: $scope.remark,
                     CaculateOrder: {
                         AddressId: $scope.address.Id,
-                        ProductList: productList
+                        ProductList: productList,
+                        DeliveredName: $scope.inputVal.name,
+                        DeliveredPhone: $scope.inputVal.phone
                     }
                 },
                 success: function (data) {

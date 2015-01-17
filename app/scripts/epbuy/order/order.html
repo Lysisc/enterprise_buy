@@ -7,7 +7,7 @@
             <div ng-if="!address">暂无收货地址，请添加</div>
             <div ng-if="address">
                 <p class="name">
-                    <span>收货人</span>
+                    <span>{{address.type == 0 ? '企业名' : '收货人'}}</span>
                     ： {{address.Name}}
                 </p>
                 <p class="address" style="display:-webkit-box;">
@@ -16,6 +16,15 @@
                 </p>
             </div> <i class="icon ion-arrow-right"></i>
         </a>
+        
+        <ul class="edit-ctrl" ng-if="address.type == 0">
+            <li>
+                <span>收货人姓名：</span>
+                <input ng-model="inputVal.name" type="text" placeholder="必填"></li>
+            <li>
+                <span>收货人手机：</span>
+                <input ng-model="inputVal.phone" type="number" placeholder="必填"></li>
+        </ul>
 
         <div class="delivery-item">
             <a class="set-item" ng-click="delivery = true;showBackdrop = true">
