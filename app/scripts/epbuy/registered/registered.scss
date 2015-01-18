@@ -60,32 +60,27 @@
     }
     .ep-registered-step {
         position: relative;
-        background-color: #fff;
         height: 100%;
         padding-top: 18%;
+        z-index: 1;
         ul {
             width: 224px;
             margin: 0 auto;
             li {
                 margin-bottom: 16px;
-                .ion-key {
-                    margin-right: 5px;
-                }
                 .ion-key:before {
                     display: inline-block;
                     -webkit-transform: rotate(135deg);
                     transform: rotate(135deg);
                     font-size: 17px;
-                    margin-top: 2px;
-                    content: "\f296";
-                }
-                .ion-iphone {
+                    margin-top: -3px;
                     margin-right: 5px;
+                    content: "\f296";
                 }
                 .ion-iphone:before {
                     content: "\f1fa";
                     font-size: 21px;
-                    margin-top: 2px;
+                    line-height: 18px;
                     margin-left: -2px;
                 }
             }
@@ -109,6 +104,7 @@
             float: right;
             font-size: 12px;
             width: 90px;
+            padding: 0 10px;
         }
     }
     .legal-notice {

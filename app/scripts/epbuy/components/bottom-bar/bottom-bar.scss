@@ -3,6 +3,7 @@
     background-color: #333;
     color: #fff;
     .tab-item {
+        -webkit-box-flex: 1;
         height: 49px;
         margin-top: -2px;
         font-size: 14px;

@@ -9,7 +9,7 @@ angular.module('EPBUY')
 			url: '$server/Myself/GetIntegralListByAuth',
 			data: {
 				Auth: DataCachePool.pull('USERAUTH'),
-				pagesize: 10,
+				pagesize: 1000,
 				pageindex: $scope.pageIndex
 			},
 			success: function (data) {
@@ -17,7 +17,7 @@ angular.module('EPBUY')
 
 				if (data) {
 					$scope.data = data;
-					$scope.pageIndex++;
+					// $scope.pageIndex++;
 				}
 			},
 			error: function (data) {

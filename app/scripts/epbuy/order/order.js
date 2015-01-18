@@ -28,7 +28,7 @@ angular.module('EPBUY')
             price += shoppingCart[i].InnerPrice * shoppingCart[i].Count;
         }
         $scope.cartPrice = Math.round(price * 100) / 100;
-
+        $scope.inputVal = {};
         $scope.checkVal = {};
         $scope.checkVal.receiving = '周一至周日全天';
 
@@ -47,7 +47,6 @@ angular.module('EPBUY')
         //     return realLength;
         // };
 
-        $scope.inputVal = {};
         $scope.address = $rootScope.addressObj || DataCachePool.pull('DEFAULT_ADDRESS');
 
         if ($scope.address) { //当选好地址或者有默认地址时，请求接口拿到优惠信息
@@ -71,9 +70,7 @@ angular.module('EPBUY')
                     Auth: DataCachePool.pull('USERAUTH'),
                     CaculateOrder: {
                         AddressId: $scope.address.Id,
-                        ProductList: productList,
-                        DeliveredName: $scope.inputVal.name,
-                        DeliveredPhone: $scope.inputVal.phone
+                        ProductList: productList
                     }
                 },
                 success: function (data) {
@@ -81,9 +78,6 @@ angular.module('EPBUY')
                         $scope.deliveryWayList = data.DeliveryWayList || [];
                         $scope.favoritePlanList = data.FavoritePlanList || [];
                         $scope.checkVal.delivery = $scope.deliveryWayList[0];
-                        DataCachePool.push('DEFAULT_CONSIGNEE', {
-                            Data: $scope.inputVal
-                        });
                     } else {
                         $ionicPopup.confirm({
                             template: '该地址不支持配送，请重新选择',
@@ -170,6 +164,10 @@ angular.module('EPBUY')
                 });
                 return;
             }
+
+            DataCachePool.push('DEFAULT_CONSIGNEE', {
+                Data: $scope.inputVal
+            });
 
             Util.ajaxRequest({
                 isPopup: true,

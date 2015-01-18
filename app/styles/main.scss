@@ -56,14 +56,40 @@ input::-webkit-inner-spin-button, select {
 .ion-search, .ion-checkmark, .ion-key, .ion-iphone, .ion-person, .ion-cart, .ion-load-d, .ion-bar-home, .ion-bar-heart, .ion-ios-heart, .ion-bar-person, .ion-time-alarm, .ion-single-row, .ion-double-row, .ion-arrow-up, .ion-arrow-down, .ion-ios-arrow-down, .ion-loading-d, .ion-arrow-right, .ion-share, .ion-star, .ion-add, .ion-remove, .ion-location {
     font-family: "Ionicons";
 }
+.item-input {
+    display: block;
+    padding-left: 30px;
+    background-color: #fff;
+    i {
+        position: absolute;
+        top: 50%;
+        left: 16px;
+        margin-top: -9px;
+        &.ion-person:before {
+            content: "\f213";
+            margin-left: -4px;
+        }
+        &.ion-key:before {
+            display: inline-block;
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+            content: "\f296";
+        }
+    }
+}
 // 搜索框
 .item-input-inset {
     background-color: #eee;
     padding: 8px 11px;
     .item-input-wrapper {
+        padding-left: 20px;
+        display: inline-block;
+        position: relative;
         background-color: #fff;
-        input {
-            background-color: #fff;
+        i {
+            position: absolute;
+            top: 8px;
+            left: 10px;
         }
     }
     .ion-search:before {
@@ -292,15 +318,21 @@ input::-webkit-inner-spin-button, select {
 .scroll-view {
     height: 100%;
 }
+.bar .title {
+    left: 50% !important;
+    width: 200px !important;
+    margin-right: 0;
+    margin-left: -100px;
+}
+.left-buttons, .right-buttons {
+    bottom: 0 !important;
+}
 // ios7以上适配
 .is-hybird {
     .bar-header {
         height: 64px;
         .left-buttons, .right-buttons {
             margin-top: 20px;
-        }
-        .right-buttons .ep-list-search {
-            bottom: -5px;
         }
     }
     .has-header {

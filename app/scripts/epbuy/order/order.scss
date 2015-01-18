@@ -68,7 +68,7 @@
             color: #666;
             input {
                 display: inline-block;
-                width: 67%;
+                width: 65%;
                 height: 44px;
                 padding: 5px 0 5px 4px;
             }
@@ -166,7 +166,7 @@
     }
     .order-setting {
         background-color: #fff;
-        position: fixed;
+        position: absolute;
         top: 0;
         left: 0;
         z-index: 2;

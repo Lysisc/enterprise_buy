@@ -30,15 +30,12 @@
         height: 48px;
         position: relative;
         z-index: 12;
-        display: -webkit-flex;
-        display: flex;
         background-color: #474747;
         color: #fff;
         div {
             text-align: center;
             line-height: 48px;
-            -webkit-flex: 1;
-            flex: 1;
+            -webkit-box-flex: 1;
             font-weight: bold;
             overflow: hidden;
             max-width: 150px;
@@ -50,8 +47,7 @@
         }
         .cyan {
             background-color: #29ccc9;
-            -webkit-flex: 1.6;
-            flex: 1.6;
+            -webkit-box-flex: 1.6;
             .ion-ios-arrow-down {
                 vertical-align: middle;
                 font-size: 20px;
@@ -62,8 +58,7 @@
             }
         }
         .switch-style {
-            -webkit-flex: 0.8;
-            flex: 0.8;
+            -webkit-box-flex: 0.8;
         }
         .ion-single-row {
             font-size: 24px;

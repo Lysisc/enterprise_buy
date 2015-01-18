@@ -51,16 +51,13 @@
         }
     }
     .user-record {
-        display: -webkit-flex;
-        display: flex;
         -webkit-justify-content: center;
-        -moz-justify-content: center;
         justify-content: center;
         background-color: #fff;
         height: 80px;
         a {
-            -webkit-flex: 1;
-            flex: 1;
+            -webkit-box-flex: 1;
+            display: block;
             max-width: 150px;
             text-align: center;
             color: #4a87ee;

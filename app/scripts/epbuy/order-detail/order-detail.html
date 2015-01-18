@@ -51,7 +51,7 @@
         </div>
 
         <div class="goods-list" ng-if="data.orderDetailList">
-            <a class="goods-item" ng-if="$index < 3" ng-repeat="item in data.orderDetailList track by $index">
+            <a class="goods-item" ng-repeat="item in data.orderDetailList track by $index">
                 <div class="img">
                     <img ng-src="{{item.Picture}}"></div>
                 <div ng-if="!isHeart" class="detail">

@@ -20,9 +20,9 @@
         <ion-scroll>
 
             <p class="integral-item" ng-repeat="item in data.integralList track by $index">
-                <span class="blue">2013-10-30</span>
-                后台积分充值
-                <span class="red">+1000</span>
+                <span class="blue">{{item.TopupTime.substr(0, 10)}}</span>
+                {{item.TopupType}}
+                <span class="red">{{item.TopupIntegral > 0 ? '+' + item.TopupIntegral : item.TopupIntegral }}</span>
                 积分
             </p>
 
