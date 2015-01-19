@@ -24,6 +24,8 @@ angular.module('EPBUY')
             },
             success: function (data) {
 
+                $scope.noNetwork = false;
+
                 $scope.eList = data.enterpriseAddressList || [];
                 $scope.pList = data.personAddressList || [];
 
@@ -53,6 +55,9 @@ angular.module('EPBUY')
                 }
 
                 $scope.addressCheck($scope.tabIndex);
+            },
+            error: function (data) {
+                $scope.noNetwork = true;
             }
         });
 

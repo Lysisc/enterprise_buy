@@ -2,7 +2,9 @@
 
     <ion-content scroll="false" ng-class="{'has-bottom':!isChoice}">
 
-        <div class="switch-tabs" style="display: -webkit-box;">
+        <no-network></no-network>
+
+        <div ng-if="noNetwork == false" class="switch-tabs" style="display: -webkit-box;">
             <a ng-class="{current: tabSwitch == 0}" ng-click="addressCheck(0);">企业地址</a>
             <a ng-class="{current: tabSwitch == 1}" ng-click="addressCheck(1);">个人地址</a>
         </div>
@@ -18,7 +20,7 @@
                     </p>
                     <p class="text" style="display:-webkit-box;">
                         <span ng-if="item.IsDefault == '是'">[默认]</span>
-                        {{item.Address}}
+                        {{item.ProvinceName}}{{item.CityName.replace('市辖区', '')}}{{item.VillageName}}{{item.Address}}
                     </p>
                 </div>
             </div>
@@ -35,7 +37,7 @@
                     </p>
                     <p class="text" style="display:-webkit-box;">
                         <span ng-if="item.IsDefault == '是'">[默认]</span>
-                        {{item.ProvinceName}}{{item.CityName}}{{item.VillageName}}{{item.Address}}
+                        {{item.ProvinceName}}{{item.CityName.replace('市辖区', '')}}{{item.VillageName}}{{item.Address}}
                     </p>
                 </div>
             </div>

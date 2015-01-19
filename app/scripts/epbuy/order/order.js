@@ -28,9 +28,16 @@ angular.module('EPBUY')
             price += shoppingCart[i].InnerPrice * shoppingCart[i].Count;
         }
         $scope.cartPrice = Math.round(price * 100) / 100;
-        $scope.inputVal = {};
+
         $scope.checkVal = {};
         $scope.checkVal.receiving = '周一至周日全天';
+
+        $scope.inputVal = {};
+        var consignee = DataCachePool.pull('DEFAULT_CONSIGNEE');
+        if (consignee) { //读缓存数据
+            $scope.inputVal.name = consignee.name;
+            $scope.inputVal.phone = consignee.phone;
+        }
 
         // var jmz = {}; //js判断字符串长度（含中文）
         // jmz.GetLength = function (str) {
@@ -165,10 +172,6 @@ angular.module('EPBUY')
                 return;
             }
 
-            DataCachePool.push('DEFAULT_CONSIGNEE', {
-                Data: $scope.inputVal
-            });
-
             Util.ajaxRequest({
                 isPopup: true,
                 isForm: true,
@@ -188,10 +191,15 @@ angular.module('EPBUY')
                 },
                 success: function (data) {
                     if (data.state === 200) {
+
                         DataCachePool.remove('SHOPPING_CART');
                         DataCachePool.push('DEFAULT_ADDRESS', {
                             Data: $scope.address
                         });
+                        DataCachePool.push('DEFAULT_CONSIGNEE', {
+                            Data: $scope.inputVal
+                        });
+
                         $rootScope.orderId = data.Id;
                         $state.go('epbuy.payment', {
                             OrderId: data.Id

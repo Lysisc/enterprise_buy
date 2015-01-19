@@ -12,11 +12,11 @@
                 </p>
                 <p class="address" style="display:-webkit-box;">
                     <span>收货地址</span>
-                    ： {{address.Address}}
+                    ： {{address.ProvinceName}}{{address.CityName.replace('市辖区', '')}}{{address.VillageName}}{{address.Address}}
                 </p>
             </div> <i class="icon ion-arrow-right"></i>
         </a>
-        
+
         <ul class="edit-ctrl" ng-if="address.type == 0">
             <li>
                 <span>收货人姓名：</span>
@@ -57,7 +57,7 @@
         </div>
 
         <div ng-class="{enter:delivery,leave:!delivery}" class="slide-right-left-n order-setting">
-            <a ng-if="!deliveryWayList">没有获取到运费信息，请查看网络</a>
+            <a ng-if="!deliveryWayList">抱歉，没有获取到运费信息，请重新选择地址</a>
             <a class="icon ion-checkmark" ng-class="{current:checkVal.delivery == item}" ng-click="checkVal.delivery = item" ng-repeat="item in deliveryWayList track by $index">{{item.Name}}{{item.Money}}元</a>
             <span>请点击下方阴影返回</span>
         </div>
