@@ -274,8 +274,9 @@
             background-size: 90px 90px;
             float: left;
             margin-right: 10px;
+            text-align: center;
             img {
-                width: 100%;
+                max-height: 90px;
             }
             i {
                 position: absolute;
@@ -404,8 +405,9 @@
             background-color: #f3f3f3;
             // background: #f8f8f8 url(../images/default_image.png) center center no-repeat;
             background-size: 150px 150px;
+            text-align: center;
             img {
-                width: 100%;
+                max-height: 150px;
             }
             i {
                 position: absolute;

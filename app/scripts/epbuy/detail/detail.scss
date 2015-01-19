@@ -14,11 +14,12 @@
             padding-top: 10px;
             padding-bottom: 30px;
             .slider-slide {
+                height: 160px;
                 overflow: hidden;
                 .slide-page {
                     padding: 0 20px;
+                    text-align: center;
                     img {
-                        width: 100%;
                         max-height: 160px;
                         border-radius: 5px;
                     }
