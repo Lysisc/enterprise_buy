@@ -1,8 +1,8 @@
 .ep-address {
-    .scroll-content {
-        padding-bottom: 107px;
-        &.has-bottom {
-           padding-bottom: 156px; 
+    .scroll-content .scroll-view {
+        margin-top: 0;
+        .scroll {
+            padding-bottom: 165px;
         }
     }
     .switch-tabs {
@@ -63,7 +63,7 @@
         left: 0;
         z-index: 1;
         width: 100%;
-        padding: 5px 10px 0;
+        padding: 0 10px;
         background-color: #fff;
         @include border-line;
         border-top-width: 1px;

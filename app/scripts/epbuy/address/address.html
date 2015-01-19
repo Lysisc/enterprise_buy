@@ -1,6 +1,6 @@
 <ion-view title="{{isChoice ? '选择' : '管理'}}收货地址" class="ep-address">
 
-    <ion-content scroll="false" ng-class="{'has-bottom':!isChoice}">
+    <ion-content scroll="false">
 
         <no-network></no-network>
 
@@ -9,7 +9,7 @@
             <a ng-class="{current: tabSwitch == 1}" ng-click="addressCheck(1);">个人地址</a>
         </div>
         <div ng-if="tabSwitch == 0 && eList.length == 0" class="no-address">您还没有添加过企业地址</div>
-        <ion-scroll ng-if="tabSwitch == 0" class="address-list">
+        <ion-scroll ng-if="tabSwitch == 0">
             <div ng-if="eList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(0, $index);" ng-repeat="item in eList track by $index">
                 <label ng-if="isChoice" class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
@@ -26,7 +26,7 @@
             </div>
         </ion-scroll>
         <div ng-if="tabSwitch == 1 && pList.length == 0" class="no-address">您还没有添加过个人地址</div>
-        <ion-scroll ng-if="tabSwitch == 1" class="address-list">
+        <ion-scroll ng-if="tabSwitch == 1">
             <div ng-if="pList.length > 0" class="address-item" style="display:-webkit-box;" ng-click="addressChoice(1, $index);" ng-repeat="item in pList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-checked="checked == $index"></label>
