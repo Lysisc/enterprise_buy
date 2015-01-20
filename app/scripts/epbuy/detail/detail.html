@@ -16,7 +16,7 @@
         <div class="goods-detail">
             <div class="goods-name" style="display:-webkit-box;">
                 <p ng-class="{'is-detail':!isWant}">{{product.Name}}</p>
-                <a ng-if="!isWant && product.ProductID" collection-ctrl ng-class="{hasCollection:isCollect}" data-id="{{product.ProductID}}" data-title="{{product.Name}}" data-img="{{product.Picture}}" class="collection-btn"> <i class="icon ion-star"></i>
+                <a ng-if="!isWant && product.InnerId" collection-ctrl ng-class="{hasCollection:isCollect}" data-item="{{product | json}}" class="collection-btn"> <i class="icon ion-star"></i>
                     <br>
                     <span>{{isCollect ? '已收藏' : '收藏'}}</span>
                 </a>
@@ -44,7 +44,7 @@
                     <span>库存量：</span>
                     {{product.Inventory}}件
                 </li>
-                <li>
+                <li ng-if="product.NumPurchasing">
                     <span>限购数：</span>
                     {{product.NumPurchasing}}件
                 </li>

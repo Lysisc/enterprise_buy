@@ -8,7 +8,7 @@
 
         <ion-scroll ng-if="goodsList" class="goods-list">
 
-            <a class="goods-item" ng-if="!item.removed" ng-click="toDetail(item.Id);" ng-class="{'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in goodsList track by $index">
+            <a class="goods-item" ng-if="!item.removed" ng-click="toDetail(item.Id, item.InnerId);" ng-class="{'check-delete':moreGoodsChoos,leave:item.removing}" ng-repeat="item in goodsList track by $index">
                 <label class="checkbox">
                     <input type="checkbox" ng-click="hasChosenItem($event,$index);$event.stopPropagation();" ng-checked="!moreGoodsChoos"></label>
                 <div class="img">

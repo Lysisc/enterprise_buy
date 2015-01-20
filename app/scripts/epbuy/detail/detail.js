@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('DetailCtrl', function ($scope, $state, $stateParams, $ionicScrollDelegate, Util, DataCachePool) {
+    .controller('DetailCtrl', function ($scope, $state, $stateParams, $ionicScrollDelegate, Util, DataCachePool, ENV) {
 
         $scope.isWant = $state.is('epbuy.want');
         $scope.tabIndex = 0;
@@ -18,7 +18,7 @@ angular.module('EPBUY')
                     url: '$server/Wish/ProductVote',
                     data: {
                         Auth: DataCachePool.pull('USERAUTH'),
-                        ProductId: goodsId,
+                        ProductId: goodsId
                     },
                     success: function (data) {
                         if (data.state === 200) {
@@ -43,11 +43,13 @@ angular.module('EPBUY')
             data: {
                 Auth: DataCachePool.pull('USERAUTH'),
                 productType: $scope.isWant ? 1 : 2,
-                productID: $stateParams.GoodsId
+                productID: $stateParams.GoodsId,
+                InnerProductId: $scope.isWant ? null : $stateParams.InnerId
             },
             success: function (data) {
                 if (data.product) {
                     $scope.product = data.product;
+                    $scope.product.InnerId = $stateParams.InnerId;
                     $scope.product.description = decodeURIComponent(data.product.Description || '暂无商品描述');
                     $scope.product.remark = decodeURIComponent(data.product.Remark || '暂无备注');
                     $scope.goodsPictureList = data.product.Picture2 ? data.product.Picture2.split(',') : null;
@@ -82,7 +84,9 @@ angular.module('EPBUY')
 
         //分享控件
         $scope.shareCtrl = function () {
-            window.plugins.socialsharing.share('我是分享文案', null, $scope.product.Picture, 'http://www.51mart.com.cn/h5/#/epbuy/' + ($scope.isWant ? 'want/' : 'detail/') + $scope.product.ProductID);
+            if (ENV.isHybrid) {
+                window.plugins.socialsharing.share('我是分享文案', null, $scope.product.Picture, 'http://www.51mart.com.cn/h5/#/epbuy/' + ($scope.isWant ? 'want/' : 'detail/') + $scope.product.ProductID);
+            }
         };
 
     });

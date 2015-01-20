@@ -7,6 +7,12 @@ angular.module('EPBUY')
     return {
         restrict: 'A',
         link: function (scope, element, attr) {
+            var goodsObj = JSON.parse(attr.item ? attr.item : false);
+
+            if (!goodsObj) {
+                return;
+            }
+
             var collectGoods = DataCachePool.pull('COLLECTION_GOODS') || [],
                 collectIndex = -1,
                 isCollect = function (is) {
@@ -23,7 +29,7 @@ angular.module('EPBUY')
 
             $timeout(function () {
                 for (var i = 0; i < collectGoods.length; i++) {
-                    if (collectGoods[i].Id === attr.id) {
+                    if (collectGoods[i].InnerId == goodsObj.InnerId) {
                         collectIndex = i;
                         isCollect(true);
                         break;
@@ -43,9 +49,10 @@ angular.module('EPBUY')
                         isCollect(true);
                     }, 100);
                     var obj = {
-                        Id: attr.id,
-                        Title: attr.title,
-                        ImgUrl: attr.img
+                        Id: goodsObj.ProductID,
+                        InnerId: goodsObj.InnerId,
+                        Title: goodsObj.Name,
+                        ImgUrl: goodsObj.Picture
                     };
                     collectGoods.unshift(obj);
                     DataCachePool.push('COLLECTION_GOODS', collectGoods);

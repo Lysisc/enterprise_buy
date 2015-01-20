@@ -72,9 +72,6 @@ angular.module('EPBUY')
                             DataCachePool.remove('REMEMBER_LOGIN');
                         }
 
-                        console.log($scope.inputVal.phoneNumber);
-                        console.log(DataCachePool.pull('USERNAME'));
-
                         if ($scope.inputVal.phoneNumber !== DataCachePool.pull('USERNAME')) {
                             DataCachePool.remove('DEFAULT_ADDRESS');
                             DataCachePool.remove('DEFAULT_CONSIGNEE');

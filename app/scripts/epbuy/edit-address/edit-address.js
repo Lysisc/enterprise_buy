@@ -72,7 +72,7 @@ angular.module('EPBUY')
                 },
                 success: function (data) {
                     if (data.address) {
-                        $scope.inputVal.addressType = 1; //todo...
+                        $scope.inputVal.addressType = 1;
 
                         $scope.inputVal.consignee = data.address.Name;
                         $scope.inputVal.phoneNumber = parseInt(data.address.PhoneNumber, 0);

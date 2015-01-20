@@ -37,6 +37,7 @@ angular.module('EPBUY').factory('ENV', function () {
     return {
         getLocalApi: ENV.getLocalApi,
         getServerApi: ENV.getServerApi, //取服务器接口domain
-        isHybrid: ENV.isHybrid //判断是app还是browser
+        isHybrid: ENV.mobile //是否为移动终端
     };
+
 });

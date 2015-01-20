@@ -54,6 +54,17 @@ angular.module('EPBUY')
 
                         $scope.orderList = $scope.orderList.concat(data.orderList);
 
+                        // 待支付
+                        // 待收货
+                        // 已取消
+                        // 已完成
+                        // 已退货
+                        // 已退款
+                        // 已发货
+                        // 已签收
+                        // 已拒收
+                        // 已完成
+
                         // if ($scope.pageIndex * 10 >= data.ordercount) {
                         //     $scope.loadMoreAble = false;
                         // } else {

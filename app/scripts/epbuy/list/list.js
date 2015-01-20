@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('ListCtrl', function ($scope, $state, $ionicScrollDelegate, $ionicLoading, $ionicPopup, Util, DataCachePool) {
+    .controller('ListCtrl', function ($scope, $state, $timeout, $ionicScrollDelegate, $ionicLoading, $ionicPopup, Util, DataCachePool) {
 
         $scope.isSingle = true; //初始化单列列表
         $scope.priceUp = 'asc'; //初始化价格升序
@@ -51,6 +51,103 @@ angular.module('EPBUY')
         } else {
             $scope.bottomBarCur = 'home';
             $scope.searchType = 'detail'; //列表页搜索接口类型定义
+        }
+
+        function dateSubtract(endDate) { // 活动时间处理
+
+            var sDate = Date.now(),
+                eDate = new Date(Date.parse(endDate.replace(/-/g, '/'))),
+                rest = '';
+
+            if (sDate > eDate.getTime()) {
+                console.log('数据错误，开始日期不能大于结束日期！');
+            } else {
+                var diff = eDate.getTime() - sDate,
+                    days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+                diff = diff - days * (1000 * 60 * 60 * 24);
+
+                var hours = Math.floor(diff / (1000 * 60 * 60));
+
+                diff = diff - hours * (1000 * 60 * 60);
+
+                var minutes = diff / 1000;
+
+                if (parseInt(days, 0)) {
+                    rest = days + '天' + hours + '小时';
+                } else if (parseInt(hours, 0)) {
+                    rest = hours + '小时';
+                } else {
+                    rest = minutes + '分钟';
+                }
+
+                return rest;
+            }
+
+        }
+
+        function renderData(sort) {
+
+            $scope.showSort = false;
+            $scope.showBrand = false;
+            $scope.pageIndex = sort ? 1 : $scope.pageIndex;
+
+            Util.ajaxRequest({
+                noMask: !sort,
+                url: '$server/' + ($scope.isHeart ? 'Wish/GetWantMoreProductList' : 'InternalPurchase/GetActivityProductList'),
+                data: {
+                    Auth: DataCachePool.pull('USERAUTH'),
+                    PageNo: $scope.pageIndex,
+                    PageSize: 10,
+                    Con_CategoryIds: $scope.categoryId || '',
+                    Con_BrandIds: $scope.brandId || '',
+                    Con_Price: $scope.priceUp,
+                    Con_Discount: $scope.discountUp
+                },
+                success: function (data) {
+
+                    $scope.noNetwork = false;
+                    $scope.noResults = false;
+
+                    if (data.Activity) {
+                        $scope.startTime = data.Activity.StartTime.replace('T00:00:00Z', '');
+                        $scope.endTime = data.Activity.OverTime.replace('T00:00:00Z', '');
+                        $scope.restTime = dateSubtract($scope.endTime);
+                    }
+
+                    if (data.List && data.List.length > 0) {
+                        $scope.goodsList = sort ? [] : ($scope.goodsList || []);
+                        $scope.goodsList = $scope.goodsList.concat(data.List); //拼接数据
+
+                        if ($scope.pageIndex >= data.Total) {
+                            $scope.loadMoreAble = false;
+                        } else {
+                            $scope.loadMoreAble = true;
+                            $scope.pageIndex++;
+                            $timeout(function () {
+                                $scope.$broadcast('scroll.infiniteScrollComplete');
+                            }, 0);
+                        }
+                    } else {
+                        $scope.noResults = true;
+                    }
+
+                    if (sort) { //处理筛选
+                        switch (sort) {
+                        case 'price':
+                            $scope.priceUp = $scope.priceUp === 'asc' ? 'desc' : 'asc';
+                            break;
+                        case 'discount':
+                            $scope.discountUp = $scope.discountUp === 'asc' ? 'desc' : 'asc';
+                            break;
+                        }
+                        $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
+                    }
+                },
+                error: function (data) {
+                    $scope.noNetwork = true;
+                }
+            });
         }
 
         $scope.getCategoryList = function () {
@@ -151,101 +248,6 @@ angular.module('EPBUY')
             renderData(true);
         };
 
-        function dateSubtract(endDate) { // 活动时间处理
-
-            var sDate = Date.now(),
-                eDate = new Date(Date.parse(endDate.replace(/-/g, '/'))),
-                rest = '';
-
-            if (sDate > eDate.getTime()) {
-                console.log('数据错误，开始日期不能大于结束日期！');
-            } else {
-                var diff = eDate.getTime() - sDate,
-                    days = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-                diff = diff - days * (1000 * 60 * 60 * 24);
-
-                var hours = Math.floor(diff / (1000 * 60 * 60));
-
-                diff = diff - hours * (1000 * 60 * 60);
-
-                var minutes = diff / 1000;
-
-                if (parseInt(days, 0)) {
-                    rest = days + '天' + hours + '小时';
-                } else if (parseInt(hours, 0)) {
-                    rest = hours + '小时';
-                } else {
-                    rest = minutes + '分钟';
-                }
-
-                return rest;
-            }
-
-        }
-
-        function renderData(sort) {
-
-            $scope.showSort = false;
-            $scope.showBrand = false;
-            $scope.pageIndex = sort ? 1 : $scope.pageIndex;
-
-            Util.ajaxRequest({
-                noMask: !sort,
-                url: '$server/' + ($scope.isHeart ? 'Wish/GetWantMoreProductList' : 'InternalPurchase/GetActivityProductList'),
-                data: {
-                    Auth: DataCachePool.pull('USERAUTH'),
-                    PageNo: $scope.pageIndex,
-                    PageSize: 10,
-                    Con_CategoryIds: $scope.categoryId || '',
-                    Con_BrandIds: $scope.brandId || '',
-                    Con_Price: $scope.priceUp,
-                    Con_Discount: $scope.discountUp
-                },
-                success: function (data) {
-
-                    $scope.noNetwork = false;
-                    $scope.noResults = false;
-
-                    if (data.Activity) {
-                        $scope.startTime = data.Activity.StartTime.replace('T00:00:00Z', '');
-                        $scope.endTime = data.Activity.OverTime.replace('T00:00:00Z', '');
-                        $scope.restTime = dateSubtract($scope.endTime);
-                    }
-
-                    if (data.List && data.List.length > 0) {
-                        $scope.goodsList = sort ? [] : ($scope.goodsList || []);
-                        $scope.goodsList = $scope.goodsList.concat(data.List); //拼接数据
-
-                        if ($scope.pageIndex >= data.Total) {
-                            $scope.loadMoreAble = false;
-                        } else {
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            $scope.pageIndex++;
-                            $scope.loadMoreAble = true;
-                        }
-                    } else {
-                        $scope.noResults = true;
-                    }
-
-                    if (sort) { //处理筛选
-                        switch (sort) {
-                        case 'price':
-                            $scope.priceUp = $scope.priceUp === 'asc' ? 'desc' : 'asc';
-                            break;
-                        case 'discount':
-                            $scope.discountUp = $scope.discountUp === 'asc' ? 'desc' : 'asc';
-                            break;
-                        }
-                        $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
-                    }
-                },
-                error: function (data) {
-                    $scope.noNetwork = true;
-                }
-            });
-        }
-
         renderData(true); //首屏加载
         $scope.getCategoryList();
         $scope.getBrandList();
@@ -254,11 +256,18 @@ angular.module('EPBUY')
             renderData(false);
         };
 
-        $scope.toDetail = function (goodsId) {
-            var router = $scope.isHeart ? 'want' : 'detail';
-            $state.go('epbuy.' + router, {
-                GoodsId: goodsId
-            });
+        $scope.toDetail = function (goodsId, innerId) {
+            if ($scope.isHeart) {
+                $state.go('epbuy.want', {
+                    GoodsId: goodsId
+                });
+            } else {
+                $state.go('epbuy.detail', {
+                    GoodsId: goodsId,
+                    InnerId: innerId
+                });
+            }
+
         };
 
     });

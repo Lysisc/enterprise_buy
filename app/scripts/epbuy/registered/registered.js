@@ -42,7 +42,7 @@ angular.module('EPBUY')
                         noMask: true,
                         url: '$server/Account/QueryEnterpriseByName',
                         data: {
-                            name: $scope.inputVal.searchVal // todo...
+                            name: $scope.inputVal.searchVal
                         },
                         success: function (data) {
                             if (data.enterpriselist && data.enterpriselist.length > 0) {
@@ -52,7 +52,6 @@ angular.module('EPBUY')
                             }
                         },
                         error: function (data) {
-                            console.log('验证码接口不可用');
                             $scope.searchResultList = false;
                         }
                     });

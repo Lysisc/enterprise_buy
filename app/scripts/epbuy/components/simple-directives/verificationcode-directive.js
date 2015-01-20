@@ -32,7 +32,7 @@ angular.module('EPBUY')
                     noMask: true,
                     url: '$server/Tools/SendCheckCode',
                     data: {
-                        Mobile: scope.inputVal.phoneNumber // todo...
+                        Mobile: scope.inputVal.phoneNumber
                     },
                     success: function (data) {
                         var time = 30,

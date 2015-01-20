@@ -61,7 +61,7 @@ angular.module('EPBUY', ['ionic', 'pasvaz.bindonce'])
             })
             // 商品详情页
             .state('epbuy.detail', {
-                url: '/detail/:GoodsId',
+                url: '/detail/:GoodsId/:InnerId',
                 templateUrl: 'scripts/epbuy/detail/detail.html',
                 controller: 'DetailCtrl'
             })

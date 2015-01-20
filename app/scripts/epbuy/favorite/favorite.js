@@ -111,13 +111,10 @@ angular.module('EPBUY')
             }
         };
 
-        $scope.toDetail = function (goodsId) {
-            if (!goodsId) {
-                return;
-            }
-
+        $scope.toDetail = function (goodsId, innerId) {
             $state.go('epbuy.detail', {
-                GoodsId: goodsId
+                GoodsId: goodsId,
+                InnerId: innerId
             });
         };
 
