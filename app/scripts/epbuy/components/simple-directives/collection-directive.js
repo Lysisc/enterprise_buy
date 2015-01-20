@@ -29,7 +29,7 @@ angular.module('EPBUY')
 
             $timeout(function () {
                 for (var i = 0; i < collectGoods.length; i++) {
-                    if (collectGoods[i].InnerId == goodsObj.InnerId) {
+                    if (collectGoods[i].InnerId === goodsObj.InnerId) {
                         collectIndex = i;
                         isCollect(true);
                         break;

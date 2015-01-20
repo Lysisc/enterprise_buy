@@ -14,7 +14,7 @@
 					<p>{{item.Name}}</p>
 					<p>总价：<span class="red">&yen;{{item.OrderAmount}}</span><!--共<span class="red" ng-bind="item.Num"></span>件商品--></p>
 				</div>
-				<div ng-class="{red:item.OrderStatus == '待支付',bule:item.OrderStatus == '待收货' || '已发货'}" class="status">{{item.OrderStatus}}</div>
+				<div ng-class="{red:item.OrderStatus == '待支付',bule:item.OrderStatus == '待收货' || item.OrderStatus == '已发货'}" class="status">{{item.OrderStatus}}</div>
 			</a>
 
 			<div ng-if="noMordResults" class="no-more-results">没有更多结果了</div>
