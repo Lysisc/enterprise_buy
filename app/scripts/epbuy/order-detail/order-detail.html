@@ -41,9 +41,7 @@
                 <span class="icon icon-car"></span>
                 <div>
                     <p>快递信息</p>
-                    <p ng-if="data.ExpressInfo" class="exp">
-                        已签收&nbsp;&nbsp;&nbsp;{{data.ExpressInfo}}
-                    </p>
+                    <p ng-if="data.ExpressInfo" class="exp">{{data.ExpressInfo}}</p>
                     <p ng-if="!data.ExpressInfo" class="exp">暂无快递信息</p>
                 </div>
             </div>

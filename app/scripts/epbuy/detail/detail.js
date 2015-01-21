@@ -5,6 +5,7 @@ angular.module('EPBUY')
 
         $scope.isWant = $state.is('epbuy.want');
         $scope.tabIndex = 0;
+        $scope.isInApp = ENV.isHybrid && window.plugins && window.plugins.socialsharing;
 
         if ($scope.isWant) { //底部bar高亮判断
             $scope.bottomBarCur = 'heart';
@@ -84,8 +85,46 @@ angular.module('EPBUY')
 
         //分享控件
         $scope.shareCtrl = function () {
-            if (ENV.isHybrid) {
-                window.plugins.socialsharing.share('我是分享文案', null, $scope.product.Picture, 'http://www.51mart.com.cn/h5/#/epbuy/' + ($scope.isWant ? 'want/' : 'detail/') + $scope.product.ProductID);
+            var shareUrl = 'http://www.51mart.com.cn/h5/#/epbuy/';
+
+            if ($scope.isWant) {
+                shareUrl += 'want/' + $scope.product.ProductID;
+            } else {
+                shareUrl += 'detail/' + $scope.product.ProductID + '/' + $scope.product.InnerId;
+            }
+
+            if ($scope.isInApp) {
+                window.plugins.socialsharing.share($scope.product.Name, null, null, shareUrl);
+            } else {
+                if ($scope.shareHtml) {
+                    $scope.shareHtml = false;
+                } else {
+                    $scope.shareHtml = true;
+                }
+                if (document.getElementById('shareBtnCtrl')) {
+                    return;
+                }
+                window._bd_share_config = {
+                    common: {
+                        bdSnsKey: {},
+                        bdText: '',
+                        bdMini: '2',
+                        bdMiniList: false,
+                        bdPic: '',
+                        bdStyle: '0',
+                        bdSize: '32'
+                    },
+                    share: {},
+                    image: {
+                        viewList: ['tsina', 'tqq', 'weixin', 'sqq'],
+                        viewSize: '32'
+                    }
+                };
+                var domHead = document.getElementsByTagName('head')[0],
+                    domScript = document.createElement('script');
+                domScript.id = 'shareBtnCtrl';
+                domScript.src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + new Date().getTime();
+                domHead.appendChild(domScript);
             }
         };
 

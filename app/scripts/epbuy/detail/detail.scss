@@ -208,6 +208,23 @@
         padding: 10px 15px;
         margin-bottom: 0;
     }
+    .share-ctrl {
+        position: fixed;
+        width: 100%;
+        height: 44px;
+        bottom: 93px;
+        left: 0;
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.5);
+        .bdsharebuttonbox {
+            margin: 0 auto;
+            height: 44px;
+            a {
+                float: right;
+                border-radius: 3px;
+            }
+        }
+    }
     .goods-bar {
         position: absolute;
         bottom: 49px;
@@ -240,10 +257,11 @@
             text-align: center;
             background-color: #ddd;
             color: $Color999;
-            .ion-share {
-                font-size: 28px;
+            &.current {
+                background-color: #fff;
             }
             .ion-share:before {
+                font-size: 28px;
                 content: "\f220";
             }
         }
@@ -288,5 +306,16 @@
                 content: "\f443";
             }
         }
+    }
+}
+#bdshare_weixin_qrcode_dialog {
+    box-sizing: content-box;
+    overflow: hidden;
+    .bd_weixin_popup_close {
+        font-family: arial;
+        font-size: 20px;
+    }
+    .bd_weixin_popup_main {
+        padding-bottom: 20px;
     }
 }

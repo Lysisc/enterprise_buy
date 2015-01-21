@@ -10,8 +10,10 @@ angular.module('EPBUY')
                 $timeout(function () {
                     $scope.shoppingCart = DataCachePool.pull('SHOPPING_CART') || [];
                     $scope.shoppingCartNum = 0;
-                    for (var i = 0; i < $scope.shoppingCart.length; i++) {
-                        $scope.shoppingCartNum += $scope.shoppingCart[i].Count;
+                    if ($scope.shoppingCart.length > 0) {
+                        for (var i = 0; i < $scope.shoppingCart.length; i++) {
+                            $scope.shoppingCartNum += $scope.shoppingCart[i].Count;
+                        }
                     }
                 }, 200);
 
