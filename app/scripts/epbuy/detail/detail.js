@@ -39,6 +39,31 @@ angular.module('EPBUY')
             $scope.bottomBarCur = 'home';
         }
 
+        if (!$scope.isInApp && !document.getElementById('shareBtnScript')) {
+            window._bd_share_config = {
+                common: {
+                    bdSnsKey: {},
+                    bdText: '',
+                    bdMini: '2',
+                    bdMiniList: false,
+                    bdPic: '',
+                    bdStyle: '0',
+                    bdSize: '32'
+                },
+                share: {},
+                image: {
+                    viewList: ['tsina', 'tqq', 'weixin', 'sqq'],
+                    viewSize: '32'
+                }
+            };
+            var domHtml = '<div id="shareBtnCtrl" class="bdsharebuttonbox" style="display:none;"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a></div>',
+                domScript = document.createElement('script');
+            angular.element(document.getElementsByTagName('body')[0]).append(domHtml);
+            domScript.id = 'shareBtnScript';
+            domScript.src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + new Date().getTime();
+            document.getElementsByTagName('head')[0].appendChild(domScript);
+        }
+
         Util.ajaxRequest({
             url: '$server/InternalPurchase/GetProductDetail',
             data: {
@@ -85,46 +110,22 @@ angular.module('EPBUY')
 
         //分享控件
         $scope.shareCtrl = function () {
-            var shareUrl = 'http://www.51mart.com.cn/h5/#/epbuy/';
-
-            if ($scope.isWant) {
-                shareUrl += 'want/' + $scope.product.ProductID;
-            } else {
-                shareUrl += 'detail/' + $scope.product.ProductID + '/' + $scope.product.InnerId;
-            }
-
             if ($scope.isInApp) {
+                var shareUrl = 'http://www.51mart.com.cn/h5/#/epbuy/';
+                if ($scope.isWant) {
+                    shareUrl += 'want/' + $scope.product.ProductID;
+                } else {
+                    shareUrl += 'detail/' + $scope.product.ProductID + '/' + $scope.product.InnerId;
+                }
                 window.plugins.socialsharing.share($scope.product.Name, null, null, shareUrl);
             } else {
                 if ($scope.shareHtml) {
                     $scope.shareHtml = false;
+                    angular.element(document.getElementById('shareBtnCtrl')).css('display', 'none');
                 } else {
                     $scope.shareHtml = true;
+                    angular.element(document.getElementById('shareBtnCtrl')).css('display', 'block');
                 }
-                if (document.getElementById('shareBtnCtrl')) {
-                    return;
-                }
-                window._bd_share_config = {
-                    common: {
-                        bdSnsKey: {},
-                        bdText: '',
-                        bdMini: '2',
-                        bdMiniList: false,
-                        bdPic: '',
-                        bdStyle: '0',
-                        bdSize: '32'
-                    },
-                    share: {},
-                    image: {
-                        viewList: ['tsina', 'tqq', 'weixin', 'sqq'],
-                        viewSize: '32'
-                    }
-                };
-                var domHead = document.getElementsByTagName('head')[0],
-                    domScript = document.createElement('script');
-                domScript.id = 'shareBtnCtrl';
-                domScript.src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + new Date().getTime();
-                domHead.appendChild(domScript);
             }
         };
 

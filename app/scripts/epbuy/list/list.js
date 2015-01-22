@@ -9,12 +9,6 @@ angular.module('EPBUY')
         $scope.pageIndex = 1; //初始化第一页
         $scope.isHeart = $state.is('epbuy.heart');
 
-        $ionicLoading.show({
-            template: '<span class="ion-load-d"></span>'
-        });
-
-        Util.backDrop.retain();
-
         if ($scope.isHeart) { //底部bar高亮判断
             $scope.bottomBarCur = 'heart';
             $scope.searchType = 'want'; //列表页搜索接口类型定义

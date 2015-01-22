@@ -1,6 +1,5 @@
 'use strict';
 
-// var isHybrid = !!navigator.userAgent.match(/AppleWebKit.*Mobile.*/) || !!navigator.userAgent.match(/AppleWebKit/);
 var isHybrid = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
 if (isHybrid) {
     document.getElementById('wrap').className = 'is-hybird';
@@ -35,7 +34,7 @@ angular.module('EPBUY').factory('ENV', function () {
     })();
 
     return {
-        getLocalApi: ENV.getLocalApi,
+        getLocalApi: ENV.getLocalApi, //取本地json模拟数据
         getServerApi: ENV.getServerApi, //取服务器接口domain
         isHybrid: ENV.mobile //是否为移动终端
     };

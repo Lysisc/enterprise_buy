@@ -1,28 +1,58 @@
 'use strict';
 
 angular.module('EPBUY')
-    .controller('LoginCtrl', function ($scope, $state, $window, $ionicLoading, $stateParams, Util, DataCachePool) {
+    .controller('LoginCtrl', function ($scope, $state, $window, $ionicPopup, $ionicLoading, $stateParams, Util, DataCachePool) {
 
         $scope.otherPage = $stateParams.OtherPage;
         $scope.orderId = $stateParams.OrderId;
 
-        if (!$scope.otherPage) {
-            Util.ajaxRequest({
-                noMask: true,
-                url: '$server/Account/CheckLogin',
-                data: {
-                    Auth: DataCachePool.pull('USERAUTH')
-                },
-                success: function (data) {
-                    if (data.IsLogin) {
-                        $state.go('epbuy.home');
+        function getLogin() {
+            if (!$scope.otherPage) {
+                Util.ajaxRequest({
+                    noMask: true,
+                    url: '$server/Account/CheckLogin',
+                    data: {
+                        Auth: DataCachePool.pull('USERAUTH')
+                    },
+                    success: function (data) {
+                        if (data.IsLogin) {
+                            $state.go('epbuy.home');
+                        }
                     }
-                }
-            });
-        } else {
-            Util.backDrop.release();
-            $ionicLoading.hide();
+                });
+            } else {
+                Util.backDrop.release();
+                $ionicLoading.hide();
+            }
         }
+
+        Util.ajaxRequest({
+            noMask: true,
+            isPopup: true,
+            url: '$server/Tools/GetAppInfo',
+            data: {
+                AppType: 'IOS' // IOS || Android
+            },
+            success: function (data) {
+                if (data.state === 200 && data.App) {
+                    if (data.App.Version === '1.0.2') {
+                        getLogin();
+                    } else {
+                        $ionicPopup.confirm({
+                            template: '有新版本更新！',
+                            cancelText: '取消',
+                            okText: '更新'
+                        }).then(function (res) {
+                            if (res) {
+                                window.open(data.App.DownloadUrl);
+                            }
+                        });
+                    }
+                } else {
+                    Util.msgToast(data.msg);
+                }
+            }
+        });
 
         $scope.inputVal = {}; //初始化ng-model
         $scope.inputVal.checked = DataCachePool.pull('REMEMBER_LOGIN') ? true : false;
@@ -57,7 +87,6 @@ angular.module('EPBUY')
             }
 
             Util.ajaxRequest({
-                noMask: true,
                 url: '$server/Account/Login',
                 data: {
                     LoginName: $scope.inputVal.phoneNumber,
@@ -97,9 +126,6 @@ angular.module('EPBUY')
                     } else {
                         Util.msgToast(data.msg || '用户名或密码错误');
                     }
-                },
-                error: function (data) {
-                    Util.msgToast('登录失败请重试');
                 }
             });
 
