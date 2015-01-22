@@ -86,6 +86,18 @@ angular.module('EPBUY')
             $scope.showBrand = false;
             $scope.pageIndex = sort ? 1 : $scope.pageIndex;
 
+            if (sort) { //处理筛选
+                switch (sort) {
+                case 'price':
+                    $scope.priceUp = $scope.priceUp === 'asc' ? 'desc' : 'asc';
+                    break;
+                case 'discount':
+                    $scope.discountUp = $scope.discountUp === 'asc' ? 'desc' : 'asc';
+                    break;
+                }
+                $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
+            }
+
             Util.ajaxRequest({
                 noMask: !sort,
                 url: '$server/' + ($scope.isHeart ? 'Wish/GetWantMoreProductList' : 'InternalPurchase/GetActivityProductList'),
@@ -125,18 +137,7 @@ angular.module('EPBUY')
                     } else {
                         $scope.noResults = true;
                     }
-
-                    if (sort) { //处理筛选
-                        switch (sort) {
-                        case 'price':
-                            $scope.priceUp = $scope.priceUp === 'asc' ? 'desc' : 'asc';
-                            break;
-                        case 'discount':
-                            $scope.discountUp = $scope.discountUp === 'asc' ? 'desc' : 'asc';
-                            break;
-                        }
-                        $ionicScrollDelegate.$getByHandle('listScroll').scrollTo(0, 0); //刷列表后置顶
-                    }
+                    
                 },
                 error: function (data) {
                     $scope.noNetwork = true;

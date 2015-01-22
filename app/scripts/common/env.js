@@ -1,42 +1,46 @@
 'use strict';
 
-var isHybrid = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-if (isHybrid) {
-    document.getElementById('wrap').className = 'is-hybird';
-}
+angular.module('EPBUY').factory('ENV', function ($timeout) {
 
-// var iosVersion = navigator.userAgent.match(/OS \d+/i);
-// if (iosVersion) {
-//     iosVersion = iosVersion[0].replace('OS ', '');
-//     iosVersion = parseInt(iosVersion, 0);
-//     if (iosVersion > 6) {
-//         document.getElementById('wrap').className = 'is-hybird';
-//     }
-// }
+    var isIosDev = !! navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    if (isIosDev) {
+        document.getElementById('wrap').className = 'is-ios';
+    }    
 
-angular.module('EPBUY').factory('ENV', function () {
-
-    var ENV = (function () {
-
-        var u = navigator.userAgent,
-            app = navigator.appVersion;
-
-        return {
-            getLocalApi: '/api/',
-            getServerApi: 'http://www.51mart.com.cn/Service/api/',
-
-            mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
-            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
-        };
-
-    })();
-
-    return {
-        getLocalApi: ENV.getLocalApi, //取本地json模拟数据
-        getServerApi: ENV.getServerApi, //取服务器接口domain
-        isHybrid: ENV.mobile //是否为移动终端
+    var ENV = {
+        iosVersion: '1.0.0',
+        androidVersion: '1.0.0',
+        platform: 'Browser',
+        isHybrid: false,
+        getLocalApi: '/api/',
+        getServerApi: 'http://www.51mart.com.cn/Service/api/',
     };
+
+    var timer = 0;
+
+    var getDevice = function () {
+        if (timer > 3) {
+            return;
+        }
+
+        if (window.device) {
+
+            ENV.isHybrid = !!window.device.platform;
+            ENV.platform = window.device.platform;
+
+            if (ENV.platform === 'iOS') {
+                ENV.platform = ENV.platform.replace('iOS', 'IOS');
+            }
+
+        } else {
+            timer++;
+            $timeout(getDevice, 1000);
+        }
+
+    };
+
+    $timeout(getDevice, 1000);
+
+    return ENV;
 
 });

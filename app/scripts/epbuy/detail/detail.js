@@ -5,7 +5,6 @@ angular.module('EPBUY')
 
         $scope.isWant = $state.is('epbuy.want');
         $scope.tabIndex = 0;
-        $scope.isInApp = ENV.isHybrid && window.plugins && window.plugins.socialsharing;
 
         if ($scope.isWant) { //底部bar高亮判断
             $scope.bottomBarCur = 'heart';
@@ -39,7 +38,7 @@ angular.module('EPBUY')
             $scope.bottomBarCur = 'home';
         }
 
-        if (!$scope.isInApp && !document.getElementById('shareBtnScript')) {
+        if (!ENV.isHybrid && !document.getElementById('shareBtnScript')) {
             window._bd_share_config = {
                 common: {
                     bdSnsKey: {},
@@ -110,7 +109,7 @@ angular.module('EPBUY')
 
         //分享控件
         $scope.shareCtrl = function () {
-            if ($scope.isInApp) {
+            if (ENV.isHybrid) {
                 var shareUrl = 'http://www.51mart.com.cn/h5/#/epbuy/';
                 if ($scope.isWant) {
                     shareUrl += 'want/' + $scope.product.ProductID;
