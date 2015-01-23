@@ -20,6 +20,10 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         }
     };
 
+    $rootScope.$on('$locationChangeStart', function () { //切换页面时隐藏分享条
+        angular.element(document.getElementById('shareBtnCtrl')).css('display', 'none');
+    });
+
     /**
      * toast提示层
      * @param msg, time
