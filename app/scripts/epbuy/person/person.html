@@ -4,7 +4,7 @@
 
         <div class="ep-header-bg">
             <div class="user-cover">
-                <img ng-src="images/header_bg.png"></div>
+                <img ng-src="images/user_img.png"></div>
 
             <a ng-click="toJump('personal-info');" class="user-info icon ion-arrow-right">
                 <span>{{phoneNumber}}</span>
@@ -52,7 +52,7 @@
 
             <a ng-click="goLogout();" class="item logout">退出登录</a>
 
-            <a class="item">企福惠 v1.0.0</a>
+            <a ng-if="isHybrid" ng-click="getVersion();" class="item">企福惠 v{{version}}</a>
 
         </ion-scroll>
 

@@ -4,7 +4,6 @@ angular.module('EPBUY')
     .controller('LoginCtrl', function ($scope, $state, $window, $timeout, $ionicPopup, $ionicLoading, $stateParams, ENV, Util, DataCachePool) {
 
         $scope.otherPage = $stateParams.OtherPage;
-        $scope.orderId = $stateParams.OrderId;
 
         if (!$scope.otherPage) {
             Util.ajaxRequest({
@@ -81,11 +80,6 @@ angular.module('EPBUY')
 
                         DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
                         DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
-
-                        if ($scope.orderId) {
-                            window.location.href = 'http://www.51mart.com.cn/Service/Pay/AliPayPage/Default.aspx?Id=' + $scope.orderId + '&Auth=' + DataCachePool.pull('USERAUTH');
-                            return;
-                        }
 
                         if ($scope.otherPage) {
                             $window.history.back();

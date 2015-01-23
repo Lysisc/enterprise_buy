@@ -100,9 +100,7 @@ angular.module('EPBUY')
                     } else {
                         Util.msgToast(data.msg);
                     }
-
-                },
-                error: function (data) {}
+                }
             });
 
         };
@@ -123,12 +121,12 @@ angular.module('EPBUY')
                 return;
             }
 
-            if (!$scope.inputVal.passWord) {
+            if (!$scope.inputVal.password) {
                 Util.msgToast('请输入密码');
                 return;
             }
 
-            if ($scope.inputVal.passWord.length <= 5) {
+            if ($scope.inputVal.password.length <= 5) {
                 Util.msgToast('密码必须大于或等于6位');
                 return;
             }
@@ -139,7 +137,7 @@ angular.module('EPBUY')
                 url: '$server/Account/Regest',
                 data: {
                     LoginName: $scope.inputVal.phoneNumber, //电话号码
-                    Password: $scope.inputVal.passWord, //密码
+                    Password: $scope.inputVal.password, //密码
                     Code: $scope.inputVal.enterpriseCode || 0, //企业码
                     CheckCode: $scope.inputVal.validationCode //验证码
                 },
@@ -169,27 +167,45 @@ angular.module('EPBUY')
 
                     } else if (data.state === 200) {
 
-                        DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
-                        DataCachePool.push('USERAUTH', data.Auth, 2 / 24); //存入用户Auth，并设置过期时间
-
                         $ionicPopup.alert({
                             template: '<h3>恭喜您，注册成功</h3>',
                             buttons: [{
                                 text: '开始购物吧',
                                 type: 'button-positive',
                                 onTap: function () {
-                                    $state.go('epbuy.home');
+
+                                    Util.ajaxRequest({ //调用登录接口
+                                        url: '$server/Account/Login',
+                                        data: {
+                                            LoginName: $scope.inputVal.phoneNumber,
+                                            Password: $scope.inputVal.password
+                                        },
+                                        success: function (data) {
+                                            if (data.UserEntity) {
+
+                                                DataCachePool.remove('DEFAULT_ADDRESS');
+                                                DataCachePool.remove('DEFAULT_CONSIGNEE');
+                                                DataCachePool.remove('SHOPPING_CART');
+                                                DataCachePool.remove('COLLECTION_GOODS');
+                                                DataCachePool.remove('STATEMENT');
+                                                DataCachePool.push('REMEMBER_LOGIN', 1);
+                                                DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
+                                                DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
+
+                                                $state.go('epbuy.home');
+
+                                            } else {
+                                                Util.msgToast(data.msg);
+                                            }
+                                        }
+                                    });
                                 }
                             }]
                         });
                     }
 
-                },
-                error: function (data) {
-                    Util.msgToast('注册失败请重试或检查网络');
                 }
             });
-
 
         };
 

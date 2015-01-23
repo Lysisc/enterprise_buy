@@ -5,7 +5,7 @@ angular.module('EPBUY').factory('ENV', function ($timeout) {
     var isIosDev = !! navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     if (isIosDev) {
         document.getElementById('wrap').className = 'is-ios';
-    }    
+    }
 
     var ENV = {
         iosVersion: '1.0.0',
@@ -13,7 +13,7 @@ angular.module('EPBUY').factory('ENV', function ($timeout) {
         platform: 'Browser',
         isHybrid: false,
         getLocalApi: '/api/',
-        getServerApi: 'http://www.51mart.com.cn/Service/api/',
+        getServerApi: 'http://www.51mart.com.cn/Service/api/'
     };
 
     var timer = 0;
