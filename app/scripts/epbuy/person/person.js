@@ -133,7 +133,9 @@ angular.module('EPBUY')
                                 okText: '更新'
                             }).then(function (res) {
                                 if (res) {
-                                    window.open(data.App.DownloadUrl);
+                                    navigator.app.loadUrl(data.App.DownloadUrl, {
+                                        openExternal: true 
+                                    });
                                 }
                             });
 
