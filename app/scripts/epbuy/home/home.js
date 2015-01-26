@@ -12,6 +12,7 @@ angular.module('EPBUY')
         //     Util.backDrop.release();
         // } else {
         Util.ajaxRequest({ //取banner区数据
+            isPopup: true,
             url: '$server/Advertisement/GetHomepageSlideList',
             data: {
                 Auth: DataCachePool.pull('USERAUTH')

@@ -20,10 +20,6 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         }
     };
 
-    $rootScope.$on('$locationChangeStart', function () { //切换页面时隐藏分享条
-        angular.element(document.getElementById('shareBtnCtrl')).css('display', 'none');
-    });
-
     /**
      * toast提示层
      * @param msg, time
@@ -125,6 +121,14 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         }
     };
 
+    var loginPopup = null;
+    $rootScope.$on('$locationChangeStart', function () { //切换页面时隐藏分享条&取出弹出层
+        angular.element(document.getElementById('shareBtnCtrl')).css('display', 'none');
+        if (loginPopup) {
+            loginPopup.close();
+        }
+    });
+
     /**
      * 重写angular的param方法，使angular使用jquery一样的数据序列化方式  The workhorse; converts an object to x-www-form-urlencoded serialization.
      * @param {Object} obj
@@ -175,7 +179,6 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         isForm: 请求形式改为形式，增加param方法来封装postData
      }
      */
-    var loginPopupTimer = null;
     var ajaxRequest = function (param) {
         if (!param) {
             return;
@@ -193,7 +196,7 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
                 url: param.url || '',
                 params: /POST/ig.test(param.method) ? null : data,
                 data: /POST/ig.test(param.method) ? (isForm ? paramObj(data) : data) : null,
-                timeout: 15000,
+                timeout: 15000
             },
             effect = function () {
                 if (noLoad) {
@@ -222,22 +225,19 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         $http(configObj).success(function (data) {
             if (data && data.state === -200) { //判断登录
                 $ionicLoading.hide();
-                $timeout.cancel(loginPopupTimer);
-                loginPopupTimer = $timeout(function () {
-                    $ionicPopup.alert({
-                        template: '请重新登录',
-                        buttons: [{
-                            text: '知道了',
-                            type: 'button-positive',
-                            onTap: function () {
-                                localStorage.removeItem('EPBUY_USERAUTH');
-                                $state.go('epbuy.login', {
-                                    OtherPage: 1
-                                });
-                            }
-                        }]
-                    });
-                }, 100);
+                loginPopup = $ionicPopup.alert({
+                    template: '请重新登录',
+                    buttons: [{
+                        text: '知道了',
+                        type: 'button-positive',
+                        onTap: function () {
+                            localStorage.removeItem('EPBUY_USERAUTH');
+                            $state.go('epbuy.login', {
+                                OtherPage: 1
+                            });
+                        }
+                    }]
+                });
                 return;
             }
 

@@ -134,7 +134,7 @@ angular.module('EPBUY')
                             }).then(function (res) {
                                 if (res) {
                                     navigator.app.loadUrl(data.App.DownloadUrl, {
-                                        openExternal: true 
+                                        openExternal: true
                                     });
                                 }
                             });
