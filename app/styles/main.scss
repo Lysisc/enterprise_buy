@@ -355,5 +355,10 @@ input::-webkit-inner-spin-button, select {
         top: 112px;
     }
 }
+//浏览器容器限制
+// .bar, .pane, .loading-container {
+//     max-width: 640px;
+//     margin: 0 auto;
+// }
 //page style
 @import "../scripts/epbuy/epbuy.scss";

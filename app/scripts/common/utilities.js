@@ -126,6 +126,7 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         angular.element(document.getElementById('shareBtnCtrl')).css('display', 'none');
         if (loginPopup) {
             loginPopup.close();
+            loginPopup = null;
         }
     });
 
@@ -225,19 +226,21 @@ angular.module('EPBUY').factory('Util', function ($http, $rootScope, $state, $co
         $http(configObj).success(function (data) {
             if (data && data.state === -200) { //判断登录
                 $ionicLoading.hide();
-                loginPopup = $ionicPopup.alert({
-                    template: '请重新登录',
-                    buttons: [{
-                        text: '知道了',
-                        type: 'button-positive',
-                        onTap: function () {
-                            localStorage.removeItem('EPBUY_USERAUTH');
-                            $state.go('epbuy.login', {
-                                OtherPage: 1
-                            });
-                        }
-                    }]
-                });
+                if (!loginPopup) {
+                    loginPopup = $ionicPopup.alert({
+                        template: '请重新登录',
+                        buttons: [{
+                            text: '知道了',
+                            type: 'button-positive',
+                            onTap: function () {
+                                localStorage.removeItem('EPBUY_USERAUTH');
+                                $state.go('epbuy.login', {
+                                    OtherPage: 1
+                                });
+                            }
+                        }]
+                    });
+                }
                 return;
             }
 
