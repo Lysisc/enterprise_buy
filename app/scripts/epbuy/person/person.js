@@ -133,9 +133,13 @@ angular.module('EPBUY')
                                 okText: '更新'
                             }).then(function (res) {
                                 if (res) {
-                                    navigator.app.loadUrl(data.App.DownloadUrl, {
-                                        openExternal: true
-                                    });
+                                    if (ENV.platform === 'IOS') {
+                                        window.open(data.App.DownloadUrl, '_system');
+                                    } else {
+                                        navigator.app.loadUrl(data.App.DownloadUrl, {
+                                            openExternal: true
+                                        });
+                                    }
                                 }
                             });
 
