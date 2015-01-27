@@ -4,7 +4,7 @@
 
         <dl ng-if="modifiedType == 'phone'" class="modified-ctrl">
             <dd>
-                <label class="item-input">
+                <label class="item-input"> <i class="icon placeholder-icon ion-iphone"></i>
                     <input focus-effect ng-model="inputVal.phoneNumber" type="number" placeholder="请输入新手机号码"></label>
             </dd>
             <dd>
@@ -19,7 +19,7 @@
             </dd>
         </dl>
 
-        <dl ng-if="modifiedType == 'password'" class="modified-ctrl">
+        <dl ng-if="modifiedType == 'password'" class="modified-ctrl f-password">
             <dd>
                 <label class="item-input">
                     <input focus-effect ng-model="inputVal.password" type="password" placeholder="请输入当前密码"></label>

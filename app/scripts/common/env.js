@@ -24,18 +24,18 @@ angular.module('EPBUY').factory('ENV', function ($timeout) {
             ENV.platform = window.device.platform;
 
             if (ENV.platform === 'iOS') {
-                ENV.platform = ENV.platform.replace('iOS', 'IOS');
+                ENV.platform = 'IOS';
                 document.getElementById('wrap').className = 'is-ios';
             }
 
         } else {
             timer++;
-            $timeout(getDevice, 1000);
+            $timeout(getDevice, 500);
         }
 
     };
 
-    $timeout(getDevice, 1000);
+    $timeout(getDevice, 500);
 
     return ENV;
 
