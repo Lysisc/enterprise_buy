@@ -7,13 +7,15 @@ angular.module('EPBUY')
         $scope.tabSwitch = 0;
 
         $scope.addressCheck = function (type) {
-            if (angular.isNumber(type)) {
-                $scope.tabSwitch = type;
-                if (type === $scope.tabIndex) {
-                    $scope.checked = $scope.choicedIndex || 0;
-                } else {
-                    $scope.checked = -1;
-                }
+            if (type === undefined) {
+                return;
+            }
+
+            $scope.tabSwitch = type;
+            if (type === $scope.tabIndex) {
+                $scope.checked = $scope.choicedIndex || 0;
+            } else {
+                $scope.checked = -1;
             }
         };
 
@@ -31,6 +33,14 @@ angular.module('EPBUY')
 
                 //当选择收货地址时，取order页传过来的id，来确定是否企业或是个人的地址索引
                 $scope.addressId = $stateParams.AddressId || 0;
+
+                if ($scope.eList.length === 0) {
+                    $scope.addressCheck(1);
+                }
+
+                if ($scope.pList.length === 0) {
+                    $scope.addressCheck(0);
+                }
 
                 for (var i = 0; i < $scope.eList.length; i++) {
                     if ($scope.eList[i].Id === $scope.addressId) {
@@ -75,12 +85,12 @@ angular.module('EPBUY')
             if ($scope.tabIndex === undefined && isAdd === undefined) {
                 Util.msgToast('请选择一个地址');
                 return;
-            } else {
+            } else if ($scope.tabIndex) {
                 obj = $scope.tabIndex ? $scope.pList[$scope.choicedIndex] : $scope.eList[$scope.choicedIndex];
                 obj.type = $scope.tabIndex;
             }
 
-            if ($scope.isChoice && !angular.isNumber(isAdd)) { // 订单地址选择
+            if ($scope.isChoice && isAdd === undefined) { // 订单地址选择
                 $rootScope.addressObj = obj;
                 $window.history.back();
             } else {

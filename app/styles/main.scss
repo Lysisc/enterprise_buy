@@ -354,11 +354,17 @@ input::-webkit-inner-spin-button, select {
     .ep-list .is-heart .sort-nav, .ep-list .is-heart .sort-brand {
         top: 112px;
     }
+    .ep-list .is-heart .list-box .scroll {
+        padding-bottom: 220px;
+    }
 }
-//浏览器容器限制
-// .bar, .pane, .loading-container {
-//     max-width: 640px;
-//     margin: 0 auto;
-// }
+//浏览器宽度限制
+.bar, .pane, .loading-container, .action-sheet {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+.action-sheet {
+    padding: 0 15px;
+}
 //page style
 @import "../scripts/epbuy/epbuy.scss";

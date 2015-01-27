@@ -137,7 +137,7 @@ angular.module('EPBUY')
                     } else {
                         $scope.noResults = true;
                     }
-                    
+
                 },
                 error: function (data) {
                     $scope.noNetwork = true;

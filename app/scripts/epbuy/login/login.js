@@ -95,7 +95,7 @@ angular.module('EPBUY')
 
         };
 
-        $timeout(function() {
+        $timeout(function () {
             if (ENV.isHybrid) {
                 Util.ajaxRequest({
                     noMask: true,
@@ -115,15 +115,9 @@ angular.module('EPBUY')
                                     template: '有新版本更新！',
                                     cancelText: '取消',
                                     okText: '更新'
-                                }).then(function(res) {
+                                }).then(function (res) {
                                     if (res) {
-                                        if (ENV.platform === 'IOS') {
-                                            window.open(data.App.DownloadUrl, '_system');
-                                        } else {
-                                            navigator.app.loadUrl(data.App.DownloadUrl, {
-                                                openExternal: true
-                                            });
-                                        }
+                                        window.open(data.App.DownloadUrl, '_system');
                                     }
                                 });
 

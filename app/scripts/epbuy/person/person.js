@@ -116,7 +116,6 @@ angular.module('EPBUY')
 
         $scope.getVersion = function () {
             Util.ajaxRequest({
-                noMask: true,
                 isPopup: true,
                 url: '$server/Tools/GetAppInfo',
                 data: {
@@ -133,14 +132,18 @@ angular.module('EPBUY')
                                 okText: '更新'
                             }).then(function (res) {
                                 if (res) {
-                                    if (ENV.platform === 'IOS') {
-                                        window.open(data.App.DownloadUrl, '_system');
-                                    } else {
-                                        navigator.app.loadUrl(data.App.DownloadUrl, {
-                                            openExternal: true
-                                        });
-                                    }
+                                    window.open(data.App.DownloadUrl, '_system');
                                 }
+                            });
+
+                        } else {
+
+                            $ionicPopup.alert({
+                                template: '版本已是最新！',
+                                buttons: [{
+                                    text: '知道了',
+                                    type: 'button-positive'
+                                }]
                             });
 
                         }
