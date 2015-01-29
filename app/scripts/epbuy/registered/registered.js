@@ -192,7 +192,9 @@ angular.module('EPBUY')
                                                 DataCachePool.push('USERNAME', $scope.inputVal.phoneNumber);
                                                 DataCachePool.push('USERAUTH', data.UserEntity.Auth, 2 / 24); //存入用户Auth，并设置过期时间
 
-                                                window.plugins.jPushPlugin.setTagsWithAlias(['测试标签'], $scope.inputVal.phoneNumber); //注册推送信息
+                                                if (window.plugins && window.plugins.jPushPlugin) { //注册推送信息
+                                                    window.plugins.jPushPlugin.setTagsWithAlias(['测试标签'], $scope.inputVal.phoneNumber);
+                                                }
 
                                                 $state.go('epbuy.home');
 
