@@ -160,7 +160,7 @@ angular.module('EPBUY')
                     }
                 },
                 error: function (data) {
-                    $scope.loadFail = true;
+                    $scope.categoryLoadFail = true;
                 }
             });
         };
@@ -179,7 +179,7 @@ angular.module('EPBUY')
                     }
                 },
                 error: function (data) {
-                    $scope.loadFail = true;
+                    $scope.brandLoadFail = true;
                 }
             });
         };

@@ -35,8 +35,8 @@
         </div>
 
         <div class="sort-nav" ng-if="showSort">
-            <p ng-if="!sortPrimary && !loadFail" class="sort-loading">加载中...</p>
-            <button ng-if="loadFail" class="button button-positive button-block" ng-click="getCategoryList();">重新加载</button>
+            <p ng-if="!sortPrimary && !categoryLoadFail" class="sort-loading">加载中...</p>
+            <button ng-if="categoryLoadFail" class="button button-positive button-block" ng-click="getCategoryList();">重新加载</button>
             <ion-scroll class="sort-lvl-1" ng-if="sortPrimary" delegate-handle="sortPrimary">
                 <a class="icon ion-arrow-right" ng-click="sortSelect($index);" ng-class="{active:sortPrimarySelected == $index}" ng-repeat="item in sortPrimary track by $index">{{item.Name}}</a>
             </ion-scroll>
@@ -46,8 +46,8 @@
         </div>
 
         <ion-scroll class="sort-brand" ng-if="showBrand">
-            <p ng-if="!brandList && !loadFail" class="sort-loading">加载中...</p>
-            <button ng-if="loadFail" class="button button-positive button-block" ng-click="getBrandList();">重新加载</button>
+            <p ng-if="!brandList && !brandLoadFail" class="sort-loading">加载中...</p>
+            <button ng-if="brandLoadFail" class="button button-positive button-block" ng-click="getBrandList();">重新加载</button>
             <a ng-if="brandList" ng-click="brandSelect('clear');" ng-class="{active:brandSelected == 'clear'}">全部品牌</a>
             <a ng-click="brandSelect(item.Id, $index);" ng-class="{active:brandSelected == $index}" ng-repeat="item in brandList track by $index">{{item.Name}}</a>
         </ion-scroll>
