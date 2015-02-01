@@ -153,7 +153,7 @@ angular.module('EPBUY')
                     Auth: DataCachePool.pull('USERAUTH')
                 },
                 success: function (data) {
-                    if (data.List.length > 0) {
+                    if (data.List && data.List.length > 0) {
                         $scope.sortPrimary = data.List;
                         $scope.sortPrimarySelected = 0;
                         $scope.sortSecondary = data.List[0].SubCategory;
@@ -173,7 +173,7 @@ angular.module('EPBUY')
                     Auth: DataCachePool.pull('USERAUTH')
                 },
                 success: function (data) {
-                    if (data.List.length > 0) {
+                    if (data.List && data.List.length > 0) {
                         $scope.brandSelected = 'clear';
                         $scope.brandList = data.List;
                     }

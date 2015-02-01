@@ -99,4 +99,11 @@ angular.module('EPBUY')
             });
         };
 
+        // $timeout(function () {
+        //     if(window.plugins && window.plugins.jPushPlugin){
+        //         window.alert(window.plugins.jPushPlugin.resetBadge);
+        //         window.plugins.jPushPlugin.resetBadge();
+        //     }
+        // }, 1000);
+
     });

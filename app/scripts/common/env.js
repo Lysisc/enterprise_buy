@@ -3,8 +3,8 @@
 angular.module('EPBUY').factory('ENV', function ($timeout) {
 
     var ENV = {
-        iosVersion: '1.0.0',
-        androidVersion: '1.0.0',
+        iosVersion: '1.0.1',
+        androidVersion: '1.0.1',
         platform: 'Browser',
         isHybrid: false,
         getLocalApi: '/api/',
