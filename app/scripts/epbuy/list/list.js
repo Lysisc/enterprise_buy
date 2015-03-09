@@ -155,8 +155,8 @@ angular.module('EPBUY')
                 success: function (data) {
                     if (data.List && data.List.length > 0) {
                         $scope.sortPrimary = data.List;
-                        $scope.sortPrimarySelected = 0;
-                        $scope.sortSecondary = data.List[0].SubCategory;
+                        $scope.sortPrimarySelected = 'clear';
+                        // $scope.sortSecondary = data.List[0].SubCategory;
                     }
                 },
                 error: function (data) {
@@ -216,6 +216,7 @@ angular.module('EPBUY')
         $scope.sortSelect = function (index) {
             if (typeof index === 'number') {
                 $scope.sortPrimarySelected = index;
+                // $scope.primaryId = $scope.sortPrimary[index].Id;
 
                 var arr = $scope.sortPrimary[index].SubCategory || [];
                 if (arr.length > 0) {
@@ -226,7 +227,13 @@ angular.module('EPBUY')
 
                 $ionicScrollDelegate.$getByHandle('sortSecondary').scrollTo(0, 0, true);
             } else {
-                $scope.categoryId = index;
+                if (index === 'primaryClear') {
+                    $scope.sortPrimarySelected = 'clear';
+                    $scope.sortSecondary = null;
+                    $scope.categoryId = '';
+                } else {
+                    $scope.categoryId = index;
+                }
                 renderData(true);
             }
         };

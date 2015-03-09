@@ -56,6 +56,12 @@
                 border-color: #4c97d8;
                 box-shadow: 0 0 1px 0 #4c97d8;
             }
+            .ion-iphone:before {
+                content: "\f1fa";
+                font-size: 21px;
+                line-height: 18px;
+                margin-left: -2px;
+            }
         }
         .forget-password {
             text-decoration: underline;

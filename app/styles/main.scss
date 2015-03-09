@@ -357,6 +357,12 @@ input::-webkit-inner-spin-button, select {
     .ep-list .is-heart .list-box .scroll {
         padding-bottom: 220px;
     }
+    .ep-detail .larger-img {
+        padding-top: 64px;
+        .close {
+            top: 79px;
+        }
+    }
 }
 //浏览器宽度限制
 .bar, .pane, .loading-container, .action-sheet {

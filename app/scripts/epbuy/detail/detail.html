@@ -7,7 +7,7 @@
             <div class="goods-no-img" ng-if="!goodsPictureList">抱歉，该商品暂无大图</div>
             <ion-slide-box class="slide-box" ng-if="goodsPictureList" ng-class="{special:specialList}">
                 <ion-slide ng-repeat="item in goodsPictureList track by $index">
-                    <div class="slide-page">
+                    <div class="slide-page" ng-click="showLargerImg(item)">
                         <img ng-src="{{item}}"></div>
                 </ion-slide>
             </ion-slide-box>
@@ -68,6 +68,10 @@
         </div>
 
     </ion-content>
+
+    <div ng-if="largerImg" class="larger-img" style="display:-webkit-box;">
+        <a class="close" ng-click="showLargerImg(null)">×</a>
+        <img ng-src="{{largerImg}}"></div>
 
     <div class="goods-bar">
         <a class="share-btn" ng-class="{current:shareHtml}" ng-click="shareCtrl();">

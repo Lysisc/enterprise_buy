@@ -23,3 +23,9 @@
 //   var script = document.getElementsByTagName('script')[0];
 //   script.parentNode.insertBefore(ga, script);
 // })();
+
+var isChrome = window.chrome;
+
+if (!isChrome) {
+    alert('请使用最新版本的chrome浏览器浏览本站！');
+}

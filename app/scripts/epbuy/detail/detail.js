@@ -99,6 +99,10 @@ angular.module('EPBUY')
             }
         });
 
+        $scope.showLargerImg = function (src) {
+            $scope.largerImg = src;
+        };
+
         $scope.switchTab = function (index) {
             $scope.tabIndex = index;
             $scope.tabSlide = {
