@@ -24,8 +24,8 @@
 //   script.parentNode.insertBefore(ga, script);
 // })();
 
-var isChrome = window.chrome;
+var UA = navigator.userAgent.toLowerCase();
 
-if (!isChrome) {
+if (!/webkit/i.test(UA)) {
     alert('请使用最新版本的chrome浏览器浏览本站！');
 }
