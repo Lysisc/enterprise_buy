@@ -108,9 +108,11 @@
             min-height: 30px;
             line-height: 30px;
             border-radius: 5px;
-            margin: 60px auto;
+            margin: 50px auto;
             padding: 0;
             font-size: 13px;
+            position: relative;
+            left: -5px;
         }
         .sort-lvl-1, .sort-lvl-2 {
             float: left;
@@ -168,9 +170,11 @@
             min-height: 30px;
             line-height: 30px;
             border-radius: 5px;
-            margin: 60px auto;
+            margin: 50px auto;
             padding: 0;
             font-size: 13px;
+            position: relative;
+            left: -5px;
         }
         a {
             display: inline-block;

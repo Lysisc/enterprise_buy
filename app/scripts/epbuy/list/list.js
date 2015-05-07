@@ -166,22 +166,50 @@ angular.module('EPBUY')
         };
 
         $scope.getBrandList = function () {
-            Util.ajaxRequest({ // 品牌接口，参数传来Auth, 返回品牌列表
+
+            if ($scope.isHeart) {
+                brandListShow();
+                return;
+            }
+
+            Util.ajaxRequest({ // 取活动ID
                 noMask: true,
-                url: '$server/InternalPurchase/GetProductBrandList',
+                url: '$server/InternalPurchase/GetCurActivity',
                 data: {
                     Auth: DataCachePool.pull('USERAUTH')
                 },
                 success: function (data) {
-                    if (data.List && data.List.length > 0) {
-                        $scope.brandSelected = 'clear';
-                        $scope.brandList = data.List;
+                    if (data.Activity) {
+                        brandListShow(data.Activity.Id);
+                    } else {
+                        $scope.brandLoadFail = true;
                     }
                 },
                 error: function (data) {
                     $scope.brandLoadFail = true;
                 }
             });
+
+            function brandListShow(id) {
+                Util.ajaxRequest({ // 品牌接口，参数传来Auth, 返回品牌列表
+                    noMask: true,
+                    url: '$server/InternalPurchase/GetProductBrandList',
+                    data: {
+                        Auth: DataCachePool.pull('USERAUTH'),
+                        ActivityId: id
+                    },
+                    success: function (data) {
+                        if (data.List && data.List.length > 0) {
+                            $scope.brandSelected = 'clear';
+                            $scope.brandList = data.List;
+                        }
+                    },
+                    error: function (data) {
+                        $scope.brandLoadFail = true;
+                    }
+                });
+            }
+
         };
 
         $scope.filtersCtrl = function (type) {
