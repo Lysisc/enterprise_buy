@@ -28,6 +28,7 @@ angular.module('EPBUY')
             price += shoppingCart[i].InnerPrice * shoppingCart[i].Count;
         }
         $scope.cartPrice = Math.round(price * 100) / 100;
+        $scope.cartWeight = null;
 
         $scope.checkVal = {};
         $scope.checkVal.receiving = '周一至周日全天';

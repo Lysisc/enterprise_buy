@@ -6,7 +6,7 @@ angular.module('EPBUY')
         $scope.cartNum = 0;
         $scope.cartPrice = 0;
 
-        $scope.totalNumber = function (n, p) { // 计算商品总&总价\
+        $scope.totalNumber = function (n, p) { // 计算商品总&总价
             var price = 0;
             if (angular.isArray(n)) {
                 for (var i = 0; i < n.length; i++) {
