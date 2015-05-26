@@ -85,7 +85,7 @@ angular.module('EPBUY')
             if ($scope.tabIndex === undefined && isAdd === undefined) {
                 Util.msgToast('请选择一个地址');
                 return;
-            } else if ($scope.tabIndex) {
+            } else if ($scope.tabIndex !== undefined) {
                 obj = $scope.tabIndex ? $scope.pList[$scope.choicedIndex] : $scope.eList[$scope.choicedIndex];
                 obj.type = $scope.tabIndex;
             }
