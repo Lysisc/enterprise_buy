@@ -17,9 +17,11 @@ angular.module('EPBUY').factory('ENV', function ($timeout) {
         isAndroid: false //-----是否Android环境
     };
 
-    if (isHybridCreatePhoneApp) { //--是否APP环境
-        ENV.isHybrid = true;
-    }
+    try {
+        if (isHybridCreatePhoneApp) { //--是否APP环境
+            ENV.isHybrid = true;
+        }
+    } catch (e) {}
 
     if (ENV.isHybrid && /android/.test(ua)) { //--是否安卓环境
         ENV.isAndroid = true;
