@@ -14,9 +14,9 @@
 
 angular.module('EPBUY').config(function ($provide, $httpProvider) {
 
-    $provide.factory('gsHttpInterceptor', function ($q, ENV) {
+    $provide.factory('HttpInterceptor', function ($q, ENV) {
 
-        var gsHttpInterceptor = {
+        var HttpInterceptor = {
 
             request: function (config) {
                 var raw = config.url;
@@ -54,8 +54,8 @@ angular.module('EPBUY').config(function ($provide, $httpProvider) {
             }
         };
 
-        return gsHttpInterceptor;
+        return HttpInterceptor;
     });
 
-    $httpProvider.interceptors.push('gsHttpInterceptor');
+    $httpProvider.interceptors.push('HttpInterceptor');
 });

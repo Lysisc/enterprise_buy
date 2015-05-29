@@ -2,40 +2,40 @@
 
 angular.module('EPBUY').factory('ENV', function ($timeout) {
 
+    var ua = navigator.userAgent.toLowerCase();
+
     var ENV = {
-        iosVersion: '1.0.1',
-        androidVersion: '1.0.1',
-        platform: 'Browser',
-        isHybrid: false,
         getLocalApi: '/api/',
-        getServerApi: 'http://www.51mart.com.cn/Service/api/'
+        getServerApi: 'http://www.51mart.com.cn/Service/api/',
+
+        iosVersion: '1.1.0',
+        androidVersion: '1.1.0',
+        platform: 'Browser',
+        isHybrid: false, //-----是否APP环境
+        isWeixin: false, //-----是否微信环境
+        isApple: false, //------是否苹果环境
+        isAndroid: false //-----是否Android环境
     };
 
-    var timer = 0;
+    if (isHybridCreatePhoneApp) { //--是否APP环境
+        ENV.isHybrid = true;
+    }
 
-    var getDevice = function () {
-        if (timer > 3) {
-            return;
-        }
+    if (ENV.isHybrid && /android/.test(ua)) { //--是否安卓环境
+        ENV.isAndroid = true;
+        ENV.platform = 'Android';
+    }
 
-        if (window.device) {
+    if (ENV.isHybrid && /iphone|ipad|ipod/.test(ua)) { //--是否苹果环境
+        ENV.isApple = true;
+        ENV.platform = 'IOS';
+        document.getElementById('wrap').className = 'is-ios';
+    }
 
-            ENV.isHybrid = !!window.device.platform;
-            ENV.platform = window.device.platform;
-
-            if (ENV.platform === 'iOS') {
-                ENV.platform = 'IOS';
-                document.getElementById('wrap').className = 'is-ios';
-            }
-
-        } else {
-            timer++;
-            $timeout(getDevice, 500);
-        }
-
-    };
-
-    $timeout(getDevice, 500);
+    if (/micromessenger/.test(ua)) { //--是否微信环境
+        ENV.isWeixin = true;
+        ENV.platform = 'WeChat';
+    }
 
     return ENV;
 
